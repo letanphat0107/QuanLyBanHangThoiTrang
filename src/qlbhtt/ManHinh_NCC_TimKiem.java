@@ -4,17 +4,30 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_NhaCungCap;
+import entity.NhaCungCap;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author DMX
  */
 public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
-
+    private DefaultTableModel modelNhaCungCap;    
+    private Dao_NhaCungCap daoNhaCungCap;
+    private Connect connect;
     /**
      * Creates new form quanly
      */
-    public ManHinh_NCC_TimKiem() {
+    public ManHinh_NCC_TimKiem() throws SQLException {
+        daoNhaCungCap = new Dao_NhaCungCap();
+        connect = new Connect();
+        connect.connect();
         initComponents();
+        
+//      Lần đầu chạy chương trình, load dữ liệu vào bảng
+        docDuLieuNhaCungCap();
     }
 
     /**
@@ -47,16 +60,9 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        tbl_NhaCungCap.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_NhaCungCap.setForeground(new java.awt.Color(0, 0, 0));
         tbl_NhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"NCC001", "CT TNHH Hades", "0344800808", "hades@gmail.com", "995 Nguyễn Trãi,Phường 4,Quận 5, TP HCM"},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {"", null, null, null, null}
+
             },
             new String [] {
                 "Mã nhà cung cấp", "Tên nhà cung cấp", "SDT", "Email", "Địa chỉ"
@@ -87,8 +93,6 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenNCC.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenNCC.setForeground(new java.awt.Color(0, 0, 0));
         txt_TenNCC.setText("Nguyen Van A");
         txt_TenNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,8 +100,6 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        txt_MaNCC.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MaNCC.setForeground(new java.awt.Color(0, 0, 0));
         txt_MaNCC.setText("KH0001");
         txt_MaNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,23 +107,16 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        lbl_MaNCC.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MaNCC.setText("Mã nhà cung cấp");
 
-        lbl_TenNCC.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenNCC.setText("Tên nhà cung cấp");
 
-        lbl_DiaChi.setForeground(new java.awt.Color(0, 0, 0));
         lbl_DiaChi.setText("Địa chỉ");
 
-        lbl_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         lbl_SoDienThoai.setText("Số điện thoại");
 
-        lbl_Email.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Email.setText("Email");
 
-        txt_SoDienThoai.setBackground(new java.awt.Color(255, 255, 255));
-        txt_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         txt_SoDienThoai.setText("0367494915");
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,8 +124,6 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        txt_Email.setBackground(new java.awt.Color(255, 255, 255));
-        txt_Email.setForeground(new java.awt.Color(0, 0, 0));
         txt_Email.setText("vana@gmail.com");
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,8 +131,6 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        txt_DiaChi.setBackground(new java.awt.Color(255, 255, 255));
-        txt_DiaChi.setForeground(new java.awt.Color(0, 0, 0));
         txt_DiaChi.setText("995 Nguyễn Trãi,Phường 4,Quận 5, TP HCM");
         txt_DiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +190,6 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
         btn_TimKiem.setBackground(new java.awt.Color(199, 210, 213));
-        btn_TimKiem.setForeground(new java.awt.Color(0, 0, 0));
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
 
@@ -264,6 +254,21 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_DiaChiActionPerformed
 
+    /**
+     * Load dữ liệu vào bảng
+     */
+    public void docDuLieuNhaCungCap() {
+        modelNhaCungCap = (DefaultTableModel) tbl_NhaCungCap.getModel();
+        for(NhaCungCap ncc: daoNhaCungCap.getAllNhaCungCap()) {
+            Object[] object = new Object[5];
+            object[0] = ncc.getMaNCC();
+            object[1] = ncc.getTenNCC();
+            object[2] = ncc.getSdt();
+            object[3] = ncc.getEmail();
+            object[4] = ncc.getDiaChi();
+            modelNhaCungCap.addRow(object);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;

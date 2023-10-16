@@ -1,5 +1,7 @@
 package entity;
 
+import dao.Dao_NhaCungCap;
+
 
 public class NhaCungCap {
 	private String maNCC;
@@ -8,6 +10,23 @@ public class NhaCungCap {
     private String sdt;
     private String email;
 
+    private String auto_ID(){
+        Dao_NhaCungCap daoNhaCungCap = new Dao_NhaCungCap();
+        String idPrefix = "NCC";
+        int length = daoNhaCungCap.getAllNhaCungCap().size();
+        System.out.println(length);
+        String finalId = idPrefix + String.format("%03d", length + 1);
+        return finalId;
+    }
+    
+    public NhaCungCap(String tenNhaCungCap, String diaChi, String sdt, String email) {
+        this.maNCC = auto_ID();
+        this.tenNCC = tenNhaCungCap;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.email = email;
+    } 
+        
     public NhaCungCap() {
     }
   
