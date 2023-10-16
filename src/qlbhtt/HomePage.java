@@ -16,6 +16,7 @@ public class HomePage extends javax.swing.JFrame {
      */
     public HomePage() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -30,25 +31,25 @@ public class HomePage extends javax.swing.JFrame {
         pnl_GiaoDienChucNang = new javax.swing.JPanel();
         mnu_ManHinhChinh = new javax.swing.JMenuBar();
         mnu_SanPham = new javax.swing.JMenu();
-        SP_QuanLy_MenuItem = new javax.swing.JMenuItem();
-        SP_timKiem_MenuItem = new javax.swing.JMenuItem();
+        mni_SP_QuanLy = new javax.swing.JMenuItem();
+        mni_SP_TimKiem = new javax.swing.JMenuItem();
         mnu_NhanVien = new javax.swing.JMenu();
-        NV_datHang_menuItem = new javax.swing.JMenuItem();
-        NV_lapHoaDon_menuItem = new javax.swing.JMenuItem();
-        NV_TKDT_menuItem = new javax.swing.JMenuItem();
-        NV_TKSP_menuItem = new javax.swing.JMenuItem();
-        NV_TKTTKH_menuItem = new javax.swing.JMenuItem();
-        NV_XDDHD_menuItem = new javax.swing.JMenuItem();
-        NV_quanLy_menuItem = new javax.swing.JMenuItem();
-        NV_timKiem_menuItem = new javax.swing.JMenuItem();
+        mni_NV_DatHang = new javax.swing.JMenuItem();
+        mni_NV_LapHoaDon = new javax.swing.JMenuItem();
+        mni_NV_ThongKeDoanhThu = new javax.swing.JMenuItem();
+        mni_NV_ThongKeSanPham = new javax.swing.JMenuItem();
+        mni_NV_ThongKeThongTinKH = new javax.swing.JMenuItem();
+        mni_NV_XemDSHoaDon = new javax.swing.JMenuItem();
+        mni_NV_QuanLy = new javax.swing.JMenuItem();
+        mni_NV_TimKiem = new javax.swing.JMenuItem();
         mnu_KhachHang = new javax.swing.JMenu();
-        KH_quanLy_menuItem = new javax.swing.JMenuItem();
-        KH_timKiem_menuItem = new javax.swing.JMenuItem();
+        mni_KH_QuanLy = new javax.swing.JMenuItem();
+        mni_KH_TimKiem = new javax.swing.JMenuItem();
         mnu_TaiKhoan = new javax.swing.JMenu();
-        TK_quanLy_menuItem = new javax.swing.JMenuItem();
+        mni_TK_QuanLy = new javax.swing.JMenuItem();
         mnu_NhaCungCap = new javax.swing.JMenu();
-        NCC_quanLy_menuItem = new javax.swing.JMenuItem();
-        NCC_timKiem_menuItem = new javax.swing.JMenuItem();
+        mni_NCC_QuanLy = new javax.swing.JMenuItem();
+        mni_NCC_TimKiem = new javax.swing.JMenuItem();
         mnu_DangXuat = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,16 +64,21 @@ public class HomePage extends javax.swing.JFrame {
         mnu_SanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mnu_SanPham.setPreferredSize(new java.awt.Dimension(180, 22));
 
-        SP_QuanLy_MenuItem.setText("Quản Lý");
-        SP_QuanLy_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+        mni_SP_QuanLy.setText("Quản Lý");
+        mni_SP_QuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SP_QuanLy_MenuItemActionPerformed(evt);
+                mni_SP_QuanLyActionPerformed(evt);
             }
         });
-        mnu_SanPham.add(SP_QuanLy_MenuItem);
+        mnu_SanPham.add(mni_SP_QuanLy);
 
-        SP_timKiem_MenuItem.setText("Tìm Kiếm");
-        mnu_SanPham.add(SP_timKiem_MenuItem);
+        mni_SP_TimKiem.setText("Tìm Kiếm");
+        mni_SP_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_SP_TimKiemActionPerformed(evt);
+            }
+        });
+        mnu_SanPham.add(mni_SP_TimKiem);
 
         mnu_ManHinhChinh.add(mnu_SanPham);
 
@@ -80,29 +86,69 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mnu_NhanVien.setPreferredSize(new java.awt.Dimension(180, 22));
 
-        NV_datHang_menuItem.setText("Đặt Hàng");
-        mnu_NhanVien.add(NV_datHang_menuItem);
+        mni_NV_DatHang.setText("Đặt Hàng");
+        mni_NV_DatHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_DatHangActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_DatHang);
 
-        NV_lapHoaDon_menuItem.setText("Lập Hóa Đơn");
-        mnu_NhanVien.add(NV_lapHoaDon_menuItem);
+        mni_NV_LapHoaDon.setText("Lập Hóa Đơn");
+        mni_NV_LapHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_LapHoaDonActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_LapHoaDon);
 
-        NV_TKDT_menuItem.setText("Thống Kê Doanh Thu");
-        mnu_NhanVien.add(NV_TKDT_menuItem);
+        mni_NV_ThongKeDoanhThu.setText("Thống Kê Doanh Thu");
+        mni_NV_ThongKeDoanhThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_ThongKeDoanhThuActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_ThongKeDoanhThu);
 
-        NV_TKSP_menuItem.setText("Thống Kê Sản Phẩm");
-        mnu_NhanVien.add(NV_TKSP_menuItem);
+        mni_NV_ThongKeSanPham.setText("Thống Kê Sản Phẩm");
+        mni_NV_ThongKeSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_ThongKeSanPhamActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_ThongKeSanPham);
 
-        NV_TKTTKH_menuItem.setText("Thống Kê Thông Tin Khách Hàng");
-        mnu_NhanVien.add(NV_TKTTKH_menuItem);
+        mni_NV_ThongKeThongTinKH.setText("Thống Kê Thông Tin Khách Hàng");
+        mni_NV_ThongKeThongTinKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_ThongKeThongTinKHActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_ThongKeThongTinKH);
 
-        NV_XDDHD_menuItem.setText("Xem Danh Sách Hóa Đơn");
-        mnu_NhanVien.add(NV_XDDHD_menuItem);
+        mni_NV_XemDSHoaDon.setText("Xem Danh Sách Hóa Đơn");
+        mni_NV_XemDSHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_XemDSHoaDonActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_XemDSHoaDon);
 
-        NV_quanLy_menuItem.setText("Quản Lý");
-        mnu_NhanVien.add(NV_quanLy_menuItem);
+        mni_NV_QuanLy.setText("Quản Lý");
+        mni_NV_QuanLy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_QuanLyActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_QuanLy);
 
-        NV_timKiem_menuItem.setText("Tìm Kiếm");
-        mnu_NhanVien.add(NV_timKiem_menuItem);
+        mni_NV_TimKiem.setText("Tìm Kiếm");
+        mni_NV_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_TimKiemActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_TimKiem);
 
         mnu_ManHinhChinh.add(mnu_NhanVien);
 
@@ -110,21 +156,21 @@ public class HomePage extends javax.swing.JFrame {
         mnu_KhachHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mnu_KhachHang.setPreferredSize(new java.awt.Dimension(180, 22));
 
-        KH_quanLy_menuItem.setText("Quản Lý");
-        KH_quanLy_menuItem.addActionListener(new java.awt.event.ActionListener() {
+        mni_KH_QuanLy.setText("Quản Lý");
+        mni_KH_QuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KH_quanLy_menuItemActionPerformed(evt);
+                mni_KH_QuanLyActionPerformed(evt);
             }
         });
-        mnu_KhachHang.add(KH_quanLy_menuItem);
+        mnu_KhachHang.add(mni_KH_QuanLy);
 
-        KH_timKiem_menuItem.setText("Tìm Kiếm");
-        KH_timKiem_menuItem.addActionListener(new java.awt.event.ActionListener() {
+        mni_KH_TimKiem.setText("Tìm Kiếm");
+        mni_KH_TimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KH_timKiem_menuItemActionPerformed(evt);
+                mni_KH_TimKiemActionPerformed(evt);
             }
         });
-        mnu_KhachHang.add(KH_timKiem_menuItem);
+        mnu_KhachHang.add(mni_KH_TimKiem);
 
         mnu_ManHinhChinh.add(mnu_KhachHang);
 
@@ -132,8 +178,13 @@ public class HomePage extends javax.swing.JFrame {
         mnu_TaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mnu_TaiKhoan.setPreferredSize(new java.awt.Dimension(180, 22));
 
-        TK_quanLy_menuItem.setText("Quản Lý");
-        mnu_TaiKhoan.add(TK_quanLy_menuItem);
+        mni_TK_QuanLy.setText("Quản Lý");
+        mni_TK_QuanLy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_TK_QuanLyActionPerformed(evt);
+            }
+        });
+        mnu_TaiKhoan.add(mni_TK_QuanLy);
 
         mnu_ManHinhChinh.add(mnu_TaiKhoan);
 
@@ -141,16 +192,21 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhaCungCap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mnu_NhaCungCap.setPreferredSize(new java.awt.Dimension(180, 22));
 
-        NCC_quanLy_menuItem.setText("Quản Lý");
-        NCC_quanLy_menuItem.addActionListener(new java.awt.event.ActionListener() {
+        mni_NCC_QuanLy.setText("Quản Lý");
+        mni_NCC_QuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NCC_quanLy_menuItemActionPerformed(evt);
+                mni_NCC_QuanLyActionPerformed(evt);
             }
         });
-        mnu_NhaCungCap.add(NCC_quanLy_menuItem);
+        mnu_NhaCungCap.add(mni_NCC_QuanLy);
 
-        NCC_timKiem_menuItem.setText("Tìm Kiếm");
-        mnu_NhaCungCap.add(NCC_timKiem_menuItem);
+        mni_NCC_TimKiem.setText("Tìm Kiếm");
+        mni_NCC_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NCC_TimKiemActionPerformed(evt);
+            }
+        });
+        mnu_NhaCungCap.add(mni_NCC_TimKiem);
 
         mnu_ManHinhChinh.add(mnu_NhaCungCap);
 
@@ -175,26 +231,126 @@ public class HomePage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SP_QuanLy_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SP_QuanLy_MenuItemActionPerformed
+    private void mni_SP_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_QuanLyActionPerformed
         // TODO add your handling code here:
-        ManHinh_SP_QuanLy jpane_quanLySP = new ManHinh_SP_QuanLy();
+        ManHinh_SP_QuanLy pnl_QuanLySP = new ManHinh_SP_QuanLy();
         pnl_GiaoDienChucNang.removeAll();
-        pnl_GiaoDienChucNang.add(jpane_quanLySP);
+        pnl_GiaoDienChucNang.add(pnl_QuanLySP);
         pnl_GiaoDienChucNang.revalidate();
         pnl_GiaoDienChucNang.repaint();
-    }//GEN-LAST:event_SP_QuanLy_MenuItemActionPerformed
+    }//GEN-LAST:event_mni_SP_QuanLyActionPerformed
 
-    private void NCC_quanLy_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NCC_quanLy_menuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NCC_quanLy_menuItemActionPerformed
+    private void mni_NCC_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NCC_QuanLyActionPerformed
+        ManHinh_NCC_QuanLy pnl_NCC_QuanLy = new ManHinh_NCC_QuanLy();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NCC_QuanLy);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NCC_QuanLyActionPerformed
 
-    private void KH_quanLy_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KH_quanLy_menuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KH_quanLy_menuItemActionPerformed
+    private void mni_KH_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_KH_QuanLyActionPerformed
+        ManHinh_KH_QuanLy pnl_KH_QuanLy = new ManHinh_KH_QuanLy();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_KH_QuanLy);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_KH_QuanLyActionPerformed
 
-    private void KH_timKiem_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KH_timKiem_menuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KH_timKiem_menuItemActionPerformed
+    private void mni_KH_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_KH_TimKiemActionPerformed
+        ManHinh_KH_TimKiem pnl_KH_TimKiem = new ManHinh_KH_TimKiem();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_KH_TimKiem);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_KH_TimKiemActionPerformed
+
+    private void mni_SP_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_TimKiemActionPerformed
+        ManHinh_SP_TimKiem pnl_TimKiemSP = new ManHinh_SP_TimKiem();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_TimKiemSP);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();       // TODO add your handling code here:
+    }//GEN-LAST:event_mni_SP_TimKiemActionPerformed
+
+    private void mni_NV_DatHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_DatHangActionPerformed
+        ManHinh_NV_DatHang pnl_NV_DatHang = new ManHinh_NV_DatHang();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_DatHang);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();        // TODO add your handling code here:
+    }//GEN-LAST:event_mni_NV_DatHangActionPerformed
+
+    private void mni_NV_LapHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_LapHoaDonActionPerformed
+        ManHinh_NV_LapHoaDon pnl_NV_LapHoaDon = new ManHinh_NV_LapHoaDon();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_LapHoaDon);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_LapHoaDonActionPerformed
+
+    private void mni_NV_ThongKeDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_ThongKeDoanhThuActionPerformed
+        ManHinh_NV_ThongKeDoanhThu pnl_NV_ThongKeDoanhThu = new ManHinh_NV_ThongKeDoanhThu();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_ThongKeDoanhThu);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_ThongKeDoanhThuActionPerformed
+
+    private void mni_NV_ThongKeSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_ThongKeSanPhamActionPerformed
+        ManHinh_NV_ThongKeSanPham pnl_NV_ThongKeSanPham = new ManHinh_NV_ThongKeSanPham();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_ThongKeSanPham);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_ThongKeSanPhamActionPerformed
+
+    private void mni_NV_ThongKeThongTinKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_ThongKeThongTinKHActionPerformed
+        ManHinh_NV_ThongKeThongTinKhachHang pnl_NV_ThongKeThongTinKhachHang = new ManHinh_NV_ThongKeThongTinKhachHang();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_ThongKeThongTinKhachHang);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_ThongKeThongTinKHActionPerformed
+
+    private void mni_NV_XemDSHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_XemDSHoaDonActionPerformed
+        ManHinh_NV_XemDSHoaDon pnl_NV_XemDSHoaDon = new ManHinh_NV_XemDSHoaDon();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_XemDSHoaDon);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_XemDSHoaDonActionPerformed
+
+    private void mni_NV_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_QuanLyActionPerformed
+        ManHinh_NV_QuanLy pnl_NV_QuanLy = new ManHinh_NV_QuanLy();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_QuanLy);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_QuanLyActionPerformed
+
+    private void mni_NV_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_TimKiemActionPerformed
+        ManHinh_NV_TimKiem pnl_NV_TimKiem = new ManHinh_NV_TimKiem();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_TimKiem);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_TimKiemActionPerformed
+
+    private void mni_TK_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_TK_QuanLyActionPerformed
+        ManHinh_TaiKhoan_QuanLy pnl_TK_QuanLy = new ManHinh_TaiKhoan_QuanLy();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_TK_QuanLy);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_TK_QuanLyActionPerformed
+
+    private void mni_NCC_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NCC_TimKiemActionPerformed
+        ManHinh_NCC_TimKiem pnl_KH_QuanLy = new ManHinh_NCC_TimKiem();
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_KH_QuanLy);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NCC_TimKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,21 +388,21 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem KH_quanLy_menuItem;
-    private javax.swing.JMenuItem KH_timKiem_menuItem;
-    private javax.swing.JMenuItem NCC_quanLy_menuItem;
-    private javax.swing.JMenuItem NCC_timKiem_menuItem;
-    private javax.swing.JMenuItem NV_TKDT_menuItem;
-    private javax.swing.JMenuItem NV_TKSP_menuItem;
-    private javax.swing.JMenuItem NV_TKTTKH_menuItem;
-    private javax.swing.JMenuItem NV_XDDHD_menuItem;
-    private javax.swing.JMenuItem NV_datHang_menuItem;
-    private javax.swing.JMenuItem NV_lapHoaDon_menuItem;
-    private javax.swing.JMenuItem NV_quanLy_menuItem;
-    private javax.swing.JMenuItem NV_timKiem_menuItem;
-    private javax.swing.JMenuItem SP_QuanLy_MenuItem;
-    private javax.swing.JMenuItem SP_timKiem_MenuItem;
-    private javax.swing.JMenuItem TK_quanLy_menuItem;
+    private javax.swing.JMenuItem mni_KH_QuanLy;
+    private javax.swing.JMenuItem mni_KH_TimKiem;
+    private javax.swing.JMenuItem mni_NCC_QuanLy;
+    private javax.swing.JMenuItem mni_NCC_TimKiem;
+    private javax.swing.JMenuItem mni_NV_DatHang;
+    private javax.swing.JMenuItem mni_NV_LapHoaDon;
+    private javax.swing.JMenuItem mni_NV_QuanLy;
+    private javax.swing.JMenuItem mni_NV_ThongKeDoanhThu;
+    private javax.swing.JMenuItem mni_NV_ThongKeSanPham;
+    private javax.swing.JMenuItem mni_NV_ThongKeThongTinKH;
+    private javax.swing.JMenuItem mni_NV_TimKiem;
+    private javax.swing.JMenuItem mni_NV_XemDSHoaDon;
+    private javax.swing.JMenuItem mni_SP_QuanLy;
+    private javax.swing.JMenuItem mni_SP_TimKiem;
+    private javax.swing.JMenuItem mni_TK_QuanLy;
     private javax.swing.JMenu mnu_DangXuat;
     private javax.swing.JMenu mnu_KhachHang;
     private javax.swing.JMenuBar mnu_ManHinhChinh;

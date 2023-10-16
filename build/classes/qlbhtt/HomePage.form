@@ -21,18 +21,21 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="SP_QuanLy_MenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_SP_QuanLy">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SP_QuanLy_MenuItemActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_SP_QuanLyActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="SP_timKiem_MenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_SP_TimKiem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_SP_TimKiemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -45,45 +48,69 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_datHang_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_DatHang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x110;&#x1eb7;t H&#xe0;ng"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_DatHangActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_lapHoaDon_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_LapHoaDon">
               <Properties>
                 <Property name="text" type="java.lang.String" value="L&#x1ead;p H&#xf3;a &#x110;&#x1a1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_LapHoaDonActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_TKDT_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_ThongKeDoanhThu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Doanh Thu"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_ThongKeDoanhThuActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_TKSP_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_ThongKeSanPham">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; S&#x1ea3;n Ph&#x1ea9;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_ThongKeSanPhamActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_TKTTKH_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_ThongKeThongTinKH">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng K&#xea; Th&#xf4;ng Tin Kh&#xe1;ch H&#xe0;ng"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_ThongKeThongTinKHActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_XDDHD_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_XemDSHoaDon">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Xem Danh S&#xe1;ch H&#xf3;a &#x110;&#x1a1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_XemDSHoaDonActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_quanLy_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_QuanLy">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_QuanLyActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NV_timKiem_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NV_TimKiem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NV_TimKiemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -96,20 +123,20 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="KH_quanLy_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_KH_QuanLy">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KH_quanLy_menuItemActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_KH_QuanLyActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="KH_timKiem_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_KH_TimKiem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KH_timKiem_menuItemActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_KH_TimKiemActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -123,10 +150,13 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="TK_quanLy_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_TK_QuanLy">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_TK_QuanLyActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -139,18 +169,21 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="NCC_quanLy_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NCC_QuanLy">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NCC_quanLy_menuItemActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NCC_QuanLyActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="NCC_timKiem_menuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mni_NCC_TimKiem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_NCC_TimKiemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

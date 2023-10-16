@@ -222,7 +222,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         txt_TenSP.setBackground(new java.awt.Color(255, 255, 255));
         txt_TenSP.setForeground(new java.awt.Color(0, 0, 0));
@@ -393,7 +393,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         btn_LapHoaDon.setBackground(new java.awt.Color(199, 210, 213));
         btn_LapHoaDon.setForeground(new java.awt.Color(0, 0, 0));
         btn_LapHoaDon.setText("Lập hóa đơn");
-        btn_LapHoaDon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_LapHoaDon.setBorder(null);
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -408,7 +408,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(btn_LapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_LapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

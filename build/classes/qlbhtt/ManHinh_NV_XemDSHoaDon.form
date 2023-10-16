@@ -30,22 +30,22 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="1" attributes="0">
-          <Component id="Information" max="32767" attributes="0"/>
-          <Component id="DS_XemHD" alignment="0" max="32767" attributes="0"/>
+          <Component id="pnl_ThongTin" max="32767" attributes="0"/>
+          <Component id="pnl_DanhSachHoaDon" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="DS_XemHD" max="32767" attributes="0"/>
+              <Component id="pnl_DanhSachHoaDon" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="Information" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="DS_XemHD">
+    <Container class="javax.swing.JPanel" name="pnl_DanhSachHoaDon">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -58,28 +58,28 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="500" max="-2" attributes="0"/>
+                  <Component id="scr_DanhSachHoaDon" min="-2" pref="500" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="pnl_DanhSachCTHD" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" pref="325" max="32767" attributes="0"/>
-              <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachHoaDon" pref="325" max="32767" attributes="0"/>
+              <Component id="pnl_DanhSachCTHD" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="scr_DanhSachHoaDon">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="Talbe_HoaDon">
+            <Component class="javax.swing.JTable" name="tbl_HoaDon">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -127,17 +127,17 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title value="T&#xea;n NV"/>
+                      <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title value="Ng&#xe0;y l&#x1ead;p"/>
+                      <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title value="T&#x1ed5;ng ti&#x1ec1;n"/>
+                      <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
@@ -151,7 +151,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="pnl_DanhSachCTHD">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -164,26 +164,26 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jsc" pref="468" max="32767" attributes="0"/>
+                      <Component id="scr_DanhSachCTHD" pref="468" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jsc" alignment="0" pref="302" max="32767" attributes="0"/>
+                  <Component id="scr_DanhSachCTHD" alignment="0" pref="302" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="jsc">
+            <Container class="javax.swing.JScrollPane" name="scr_DanhSachCTHD">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="Table_CTHD">
+                <Component class="javax.swing.JTable" name="tbl_CTHD">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -241,14 +241,14 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="Information">
+    <Container class="javax.swing.JPanel" name="pnl_ThongTin">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder/>
           </Border>
         </Property>
       </Properties>
@@ -259,16 +259,16 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="cb_tatCa" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmb_TatCa" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lb_tuNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lb_denNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_TuNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_DenNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_ngayDen" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="txt_ngayTu" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="txt_DenNgay" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="txt_TuNgay" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -281,23 +281,23 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_ngayTu" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lb_tuNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="txt_TuNgay" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lbl_TuNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_ngayDen" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lb_denNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="txt_DenNgay" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="lbl_DenNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="cb_tatCa" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmb_TatCa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txt_ngayDen">
+        <Component class="javax.swing.JTextField" name="txt_DenNgay">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -307,10 +307,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_ngayDenActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_DenNgayActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_ngayTu">
+        <Component class="javax.swing.JTextField" name="txt_TuNgay">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -320,10 +320,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_ngayTuActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TuNgayActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_tuNgay">
+        <Component class="javax.swing.JLabel" name="lbl_TuNgay">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -331,7 +331,7 @@
             <Property name="text" type="java.lang.String" value="T&#x1eeb; ng&#xe0;y:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_denNgay">
+        <Component class="javax.swing.JLabel" name="lbl_DenNgay">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -339,7 +339,7 @@
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="cb_tatCa">
+        <Component class="javax.swing.JCheckBox" name="cmb_TatCa">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -347,7 +347,7 @@
             <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tatCaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmb_TatCaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -86,7 +86,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         txt_TenKH.setBackground(new java.awt.Color(255, 255, 255));
         txt_TenKH.setForeground(new java.awt.Color(0, 0, 0));
@@ -200,7 +200,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         btn_TimKiem.setBackground(new java.awt.Color(199, 210, 213));
         btn_TimKiem.setForeground(new java.awt.Color(0, 0, 0));
         btn_TimKiem.setText("Tìm kiếm");
-        btn_TimKiem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_TimKiem.setBorder(null);
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -215,7 +215,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

@@ -30,24 +30,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="1" attributes="0">
-          <Component id="DS_SanPham" max="32767" attributes="0"/>
+          <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-              <Component id="information" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="panel_button" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="DS_SanPham" max="32767" attributes="0"/>
+              <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="information" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="panel_button" max="32767" attributes="0"/>
+                      <Component id="pnl_NutChucNang" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -55,29 +55,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="DS_SanPham">
+    <Container class="javax.swing.JPanel" name="pnl_DanhSachSanPham">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachSanPham" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" pref="345" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachSanPham" alignment="0" pref="345" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="scr_DanhSachSanPham">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="Talbe_SanPham">
+            <Component class="javax.swing.JTable" name="tbl_SanPham">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -271,14 +271,14 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="information">
+    <Container class="javax.swing.JPanel" name="pnl_ThongTin">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder/>
           </Border>
         </Property>
       </Properties>
@@ -288,39 +288,39 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="panel_hinhanh" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnl_TongSanPham" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="panel_hinhanh1" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnl_TongDoanhThu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lb_kichThuoc" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lb_mauSac" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="cb_phanLoai" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="lbl_KichThuoc" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_MauSac" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="cmb_PhanLoai" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="cb_mauSac" max="32767" attributes="0"/>
-                              <Component id="cb_kichThuoc" pref="150" max="32767" attributes="0"/>
+                              <Component id="cmb_MauSac" max="32767" attributes="0"/>
+                              <Component id="cmb_KichThuoc" pref="150" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="42" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lb_tuNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lb_denNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_TuNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_DenNgay" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_tuNgay" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="txt_denNgay" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="txt_TuNgay" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="txt_DenNgay" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lb_phanLoai" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="lbl_PhanLoai" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="chk_TatCa" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -331,43 +331,43 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="lb_kichThuoc" min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="lbl_KichThuoc" min="-2" pref="19" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_tuNgay" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="cb_kichThuoc" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lb_tuNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="txt_TuNgay" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="cmb_KichThuoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_TuNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="lb_mauSac" min="-2" pref="19" max="-2" attributes="0"/>
+                          <Component id="lbl_MauSac" min="-2" pref="19" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cb_mauSac" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lb_denNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="txt_denNgay" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="cmb_MauSac" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_DenNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="txt_DenNgay" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lb_phanLoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_PhanLoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="chk_TatCa" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="panel_hinhanh1" alignment="1" max="32767" attributes="0"/>
-                          <Component id="panel_hinhanh" alignment="1" max="32767" attributes="0"/>
+                          <Component id="pnl_TongDoanhThu" alignment="1" max="32767" attributes="0"/>
+                          <Component id="pnl_TongSanPham" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cb_phanLoai" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmb_PhanLoai" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lb_phanLoai">
+        <Component class="javax.swing.JLabel" name="lbl_PhanLoai">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -375,7 +375,7 @@
             <Property name="text" type="java.lang.String" value="Ph&#xe2;n lo&#x1ea1;i"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_kichThuoc">
+        <Component class="javax.swing.JLabel" name="lbl_KichThuoc">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -383,7 +383,7 @@
             <Property name="text" type="java.lang.String" value="K&#xed;ch th&#x1b0;&#x1edb;c"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_mauSac">
+        <Component class="javax.swing.JLabel" name="lbl_MauSac">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -391,7 +391,7 @@
             <Property name="text" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_tuNgay">
+        <Component class="javax.swing.JLabel" name="lbl_TuNgay">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -399,7 +399,7 @@
             <Property name="text" type="java.lang.String" value="T&#x1eeb; ng&#xe0;y:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_tuNgay">
+        <Component class="javax.swing.JTextField" name="txt_TuNgay">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -409,10 +409,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_tuNgayActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TuNgayActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JPanel" name="panel_hinhanh">
+        <Container class="javax.swing.JPanel" name="pnl_TongSanPham">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -431,11 +431,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lb_tongSPBan" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_TongSanPhamBan" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="txt_tongSPBan" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_TongSanPhamBan" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="9" max="32767" attributes="0"/>
@@ -446,16 +446,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lb_tongSPBan" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_TongSanPhamBan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="txt_tongSPBan" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TongSanPhamBan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lb_tongSPBan">
+            <Component class="javax.swing.JLabel" name="lbl_TongSanPhamBan">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -463,7 +463,7 @@
                 <Property name="text" type="java.lang.String" value="T&#x1ed5;ng s&#x1ea3;n ph&#x1ea9;m b&#xe1;n &#x111;&#x1b0;&#x1ee3;c"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_tongSPBan">
+            <Component class="javax.swing.JTextField" name="txt_TongSanPhamBan">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -480,7 +480,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JComboBox" name="cb_phanLoai">
+        <Component class="javax.swing.JComboBox" name="cmb_PhanLoai">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -498,7 +498,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cb_mauSac">
+        <Component class="javax.swing.JComboBox" name="cmb_MauSac">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -516,7 +516,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cb_kichThuoc">
+        <Component class="javax.swing.JComboBox" name="cmb_KichThuoc">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -534,7 +534,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Container class="javax.swing.JPanel" name="panel_hinhanh1">
+        <Container class="javax.swing.JPanel" name="pnl_TongDoanhThu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -551,12 +551,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="lb_tongSPBan1" min="-2" pref="122" max="-2" attributes="0"/>
+                      <Component id="lbl_TongDoanhThu" min="-2" pref="122" max="-2" attributes="0"/>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txt_tongDoanhThu" min="-2" pref="97" max="-2" attributes="0"/>
+                      <Component id="txt_TongDoanhThu" min="-2" pref="97" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -565,16 +565,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lb_tongSPBan1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_TongDoanhThu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="txt_tongDoanhThu" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TongDoanhThu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lb_tongSPBan1">
+            <Component class="javax.swing.JLabel" name="lbl_TongDoanhThu">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -583,7 +583,7 @@
                 <Property name="text" type="java.lang.String" value="T&#x1ed5;ng doanh thu"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_tongDoanhThu">
+            <Component class="javax.swing.JTextField" name="txt_TongDoanhThu">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -600,7 +600,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lb_denNgay">
+        <Component class="javax.swing.JLabel" name="lbl_DenNgay">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -608,7 +608,7 @@
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_denNgay">
+        <Component class="javax.swing.JTextField" name="txt_DenNgay">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -618,10 +618,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_denNgayActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_DenNgayActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="chk_TatCa">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -631,7 +631,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="panel_button">
+    <Container class="javax.swing.JPanel" name="pnl_NutChucNang">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -643,7 +643,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="btn_xuatThongKe" min="-2" pref="99" max="-2" attributes="0"/>
+                  <Component id="btn_XuatThongKe" min="-2" pref="99" max="-2" attributes="0"/>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -652,14 +652,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="btn_xuatThongKe" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="btn_XuatThongKe" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btn_xuatThongKe">
+        <Component class="javax.swing.JButton" name="btn_XuatThongKe">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -669,9 +669,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t th&#x1ed1;ng k&#xea;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
         </Component>

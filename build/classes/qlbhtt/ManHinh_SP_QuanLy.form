@@ -30,24 +30,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="1" attributes="0">
-          <Component id="DS_SanPham" max="32767" attributes="0"/>
+          <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-              <Component id="Information" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="panel_button" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="DS_SanPham" max="32767" attributes="0"/>
+              <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="Information" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="panel_button" max="32767" attributes="0"/>
+                      <Component id="pnl_NutChucNang" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -55,29 +55,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="DS_SanPham">
+    <Container class="javax.swing.JPanel" name="pnl_DanhSachSanPham">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachSanPham" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" pref="348" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachSanPham" alignment="0" pref="348" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="scr_DanhSachSanPham">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="Talbe_SanPham">
+            <Component class="javax.swing.JTable" name="tbl_SanPham">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -243,14 +243,14 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="Information">
+    <Container class="javax.swing.JPanel" name="pnl_ThongTin">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder/>
           </Border>
         </Property>
       </Properties>
@@ -262,41 +262,41 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lb_maSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="lb_phanLoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="lb_tenSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="txt_maSP" max="32767" attributes="0"/>
-                          <Component id="cb_phanLoai" pref="150" max="32767" attributes="0"/>
+                          <Component id="lbl_MaSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="lbl_PhanLoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="lbl_TenSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="txt_MaSP" max="32767" attributes="0"/>
+                          <Component id="cmb_PhanLoai" pref="150" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="txt_tenSP" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="txt_TenSP" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lb_NCC" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lb_mauSac" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lb_chatLieu" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="cb_chatLieu" min="-2" pref="144" max="-2" attributes="0"/>
-                              <Component id="cb_NCC" min="-2" pref="144" max="-2" attributes="0"/>
+                              <Component id="lbl_NCC" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_MauSac" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_ChatLieu" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="cmb_ChatLieu" min="-2" pref="144" max="-2" attributes="0"/>
+                              <Component id="cmb_NCC" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lb_kichThuoc" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_giaBan" alignment="0" pref="150" max="32767" attributes="0"/>
-                              <Component id="lb_giaBan" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lb_giaNhap" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_giaNhap" alignment="0" pref="150" max="32767" attributes="0"/>
-                              <Component id="cb_kichThuoc" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbl_KichThuoc" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="txt_GiaBan" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="lbl_GiaBan" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="lbl_giaNhap" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="txt_GiaNhap" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="cmb_KichThuoc" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txt_soLuong" pref="150" max="32767" attributes="0"/>
-                              <Component id="lb_soLuong" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="panel_hinhanh" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_SoLuong" pref="150" max="32767" attributes="0"/>
+                              <Component id="lbl_SoLuong" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="pnl_HinhAnhSP" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="cb_mauSac" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="cmb_MauSac" min="-2" pref="144" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="116" max="32767" attributes="0"/>
               </Group>
@@ -307,48 +307,48 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lb_maSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="lb_NCC" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="lb_kichThuoc" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="lb_soLuong" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="lbl_MaSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="lbl_NCC" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="lbl_KichThuoc" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="lbl_SoLuong" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_maSP" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="txt_soLuong" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="cb_kichThuoc" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cb_NCC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_MaSP" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="txt_SoLuong" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cmb_KichThuoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmb_NCC" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lb_tenSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lb_mauSac" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lb_giaNhap" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="lbl_TenSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="lbl_MauSac" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="lbl_giaNhap" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_tenSP" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="txt_giaNhap" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="cb_mauSac" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_TenSP" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txt_GiaNhap" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="cmb_MauSac" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lb_phanLoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lb_chatLieu" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lb_giaBan" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="lbl_PhanLoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="lbl_ChatLieu" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="lbl_GiaBan" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_giaBan" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="cb_chatLieu" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cb_phanLoai" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_GiaBan" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="cmb_ChatLieu" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmb_PhanLoai" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="panel_hinhanh" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnl_HinhAnhSP" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -357,7 +357,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txt_tenSP">
+        <Component class="javax.swing.JTextField" name="txt_TenSP">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -368,10 +368,10 @@
             <Property name="text" type="java.lang.String" value="&#xc1;o thun"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_tenSPActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TenSPActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_maSP">
+        <Component class="javax.swing.JTextField" name="txt_MaSP">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -382,10 +382,10 @@
             <Property name="text" type="java.lang.String" value="SP001"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_maSPActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_MaSPActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_maSP">
+        <Component class="javax.swing.JLabel" name="lbl_MaSP">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -393,7 +393,7 @@
             <Property name="text" type="java.lang.String" value="M&#xe3; s&#x1ea3;n ph&#x1ea9;m"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_phanLoai">
+        <Component class="javax.swing.JLabel" name="lbl_PhanLoai">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -401,7 +401,7 @@
             <Property name="text" type="java.lang.String" value="Ph&#xe2;n lo&#x1ea1;i"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_tenSP">
+        <Component class="javax.swing.JLabel" name="lbl_TenSP">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -409,7 +409,7 @@
             <Property name="text" type="java.lang.String" value="T&#xea;n s&#x1ea3;n ph&#x1ea9;m"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_NCC">
+        <Component class="javax.swing.JLabel" name="lbl_NCC">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -417,7 +417,7 @@
             <Property name="text" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_giaBan">
+        <Component class="javax.swing.JLabel" name="lbl_GiaBan">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -425,7 +425,7 @@
             <Property name="text" type="java.lang.String" value="Gi&#xe1; b&#xe1;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_giaNhap">
+        <Component class="javax.swing.JLabel" name="lbl_giaNhap">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -433,7 +433,7 @@
             <Property name="text" type="java.lang.String" value="Gi&#xe1; nh&#x1ead;p"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_kichThuoc">
+        <Component class="javax.swing.JLabel" name="lbl_KichThuoc">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -441,7 +441,7 @@
             <Property name="text" type="java.lang.String" value="K&#xed;ch th&#x1b0;&#x1edb;c"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_mauSac">
+        <Component class="javax.swing.JLabel" name="lbl_MauSac">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -449,7 +449,7 @@
             <Property name="text" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_chatLieu">
+        <Component class="javax.swing.JLabel" name="lbl_ChatLieu">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -457,7 +457,7 @@
             <Property name="text" type="java.lang.String" value="Ch&#x1ea5;t li&#x1ec7;u"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_soLuong">
+        <Component class="javax.swing.JLabel" name="lbl_SoLuong">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -465,7 +465,7 @@
             <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_giaNhap">
+        <Component class="javax.swing.JTextField" name="txt_GiaNhap">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -476,10 +476,10 @@
             <Property name="text" type="java.lang.String" value="275000"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_giaNhapActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_GiaNhapActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_giaBan">
+        <Component class="javax.swing.JTextField" name="txt_GiaBan">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -490,10 +490,10 @@
             <Property name="text" type="java.lang.String" value="250000"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_giaBanActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_GiaBanActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_soLuong">
+        <Component class="javax.swing.JTextField" name="txt_SoLuong">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -504,10 +504,10 @@
             <Property name="text" type="java.lang.String" value="10"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_soLuongActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_SoLuongActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JPanel" name="panel_hinhanh">
+        <Container class="javax.swing.JPanel" name="pnl_HinhAnhSP">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -532,7 +532,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Component class="javax.swing.JComboBox" name="cb_chatLieu">
+        <Component class="javax.swing.JComboBox" name="cmb_ChatLieu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -550,7 +550,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cb_phanLoai">
+        <Component class="javax.swing.JComboBox" name="cmb_PhanLoai">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -568,7 +568,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cb_mauSac">
+        <Component class="javax.swing.JComboBox" name="cmb_MauSac">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -586,7 +586,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cb_kichThuoc">
+        <Component class="javax.swing.JComboBox" name="cmb_KichThuoc">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -604,7 +604,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cb_NCC">
+        <Component class="javax.swing.JComboBox" name="cmb_NCC">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -624,7 +624,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="panel_button">
+    <Container class="javax.swing.JPanel" name="pnl_NutChucNang">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -637,10 +637,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_capNhat" max="32767" attributes="0"/>
-                      <Component id="btn_xoa" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btn_them" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btn_luu" alignment="0" pref="72" max="32767" attributes="0"/>
+                      <Component id="btn_CapNhat" max="32767" attributes="0"/>
+                      <Component id="btn_Xoa" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btn_Them" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btn_Luu" alignment="0" pref="72" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
@@ -650,20 +650,20 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="btn_them" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btn_xoa" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btn_capNhat" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btn_luu" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btn_Them" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_Xoa" min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_CapNhat" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_Luu" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btn_them">
+        <Component class="javax.swing.JButton" name="btn_Them">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -673,13 +673,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_xoa">
+        <Component class="javax.swing.JButton" name="btn_Xoa">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -689,16 +687,14 @@
             </Property>
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_capNhat">
+        <Component class="javax.swing.JButton" name="btn_CapNhat">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -708,16 +704,14 @@
             </Property>
             <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_capNhatActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CapNhatActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_luu">
+        <Component class="javax.swing.JButton" name="btn_Luu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -727,13 +721,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_luuActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LuuActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

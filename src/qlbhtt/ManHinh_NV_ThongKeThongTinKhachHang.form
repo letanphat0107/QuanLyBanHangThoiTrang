@@ -30,24 +30,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="1" attributes="0">
-          <Component id="DS_ThongKe" max="32767" attributes="0"/>
+          <Component id="pnl_DanhSachThongKe" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
-              <Component id="information" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="panel_button" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="DS_ThongKe" max="32767" attributes="0"/>
+              <Component id="pnl_DanhSachThongKe" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="information" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="panel_button" max="32767" attributes="0"/>
+                      <Component id="pnl_NutChucNang" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -55,29 +55,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="DS_ThongKe">
+    <Container class="javax.swing.JPanel" name="pnl_DanhSachThongKe">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachThongKe" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" pref="348" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachThongKe" alignment="0" pref="348" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="scr_DanhSachThongKe">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="Talbe_ThongKe">
+            <Component class="javax.swing.JTable" name="tbl_ThongKe">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -173,14 +173,14 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="information">
+    <Container class="javax.swing.JPanel" name="pnl_ThongTin">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder/>
           </Border>
         </Property>
       </Properties>
@@ -190,11 +190,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                  <Component id="panel_hinhanh" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnl_TongKHDaMua" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lb_tenKH" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="txt_tenKH" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="lbl_TenKH" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="txt_TenKH" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="304" max="32767" attributes="0"/>
               </Group>
@@ -206,12 +206,12 @@
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="lb_tenKH" min="-2" pref="19" max="-2" attributes="0"/>
+                          <Component id="lbl_TenKH" min="-2" pref="19" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txt_tenKH" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="txt_TenKH" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="panel_hinhanh" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnl_TongKHDaMua" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
@@ -219,7 +219,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lb_tenKH">
+        <Component class="javax.swing.JLabel" name="lbl_TenKH">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -227,7 +227,7 @@
             <Property name="text" type="java.lang.String" value="T&#xea;n kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_tenKH">
+        <Component class="javax.swing.JTextField" name="txt_TenKH">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -237,10 +237,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_tenKHActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TenKHActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JPanel" name="panel_hinhanh">
+        <Container class="javax.swing.JPanel" name="pnl_TongKHDaMua">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -259,11 +259,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lb_tongKH" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_TongKHDaMua" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="txt_tongSPBan" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_TongSanPhamBan" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="9" max="32767" attributes="0"/>
@@ -274,16 +274,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lb_tongKH" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_TongKHDaMua" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="txt_tongSPBan" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TongSanPhamBan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lb_tongKH">
+            <Component class="javax.swing.JLabel" name="lbl_TongKHDaMua">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -291,7 +291,7 @@
                 <Property name="text" type="java.lang.String" value="T&#x1ed5;ng kh&#xe1;ch h&#xe0;ng &#x111;&#xe3; mua"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_tongSPBan">
+            <Component class="javax.swing.JTextField" name="txt_TongSanPhamBan">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -310,7 +310,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="panel_button">
+    <Container class="javax.swing.JPanel" name="pnl_NutChucNang">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -323,8 +323,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btn_xuatThongKe" min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="btn_top5KH" min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="btn_XuatThongKe" min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="btn_Top5KH" min="-2" pref="99" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
@@ -334,16 +334,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="btn_top5KH" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_xuatThongKe" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="btn_Top5KH" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btn_XuatThongKe" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btn_top5KH">
+        <Component class="javax.swing.JButton" name="btn_Top5KH">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -353,9 +353,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Top 5 KH"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[107, 18]"/>
@@ -365,7 +363,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_xuatThongKe">
+        <Component class="javax.swing.JButton" name="btn_XuatThongKe">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
@@ -375,9 +373,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t th&#x1ed1;ng k&#xea;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[107, 18]"/>
