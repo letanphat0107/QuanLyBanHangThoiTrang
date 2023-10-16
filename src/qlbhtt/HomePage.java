@@ -4,13 +4,21 @@
  */
 package qlbhtt;
 
+import dao.Dao_NhaCungCap;
+import entity.NhaCungCap;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author DMX
  */
 public class HomePage extends javax.swing.JFrame {
-
-   private ManHinh_SP_QuanLy jpane_quanLySP;
+    
     /**
      * Creates new form HomePage
      */
@@ -52,6 +60,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_DangXuat = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         pnl_GiaoDienChucNang.setPreferredSize(new java.awt.Dimension(746, 423));
         pnl_GiaoDienChucNang.setLayout(new java.awt.BorderLayout());
@@ -150,6 +159,11 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhaCungCap.add(NCC_quanLy_menuItem);
 
         NCC_timKiem_menuItem.setText("Tìm Kiếm");
+        NCC_timKiem_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NCC_timKiem_menuItemActionPerformed(evt);
+            }
+        });
         mnu_NhaCungCap.add(NCC_timKiem_menuItem);
 
         mnu_ManHinhChinh.add(mnu_NhaCungCap);
@@ -186,6 +200,16 @@ public class HomePage extends javax.swing.JFrame {
 
     private void NCC_quanLy_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NCC_quanLy_menuItemActionPerformed
         // TODO add your handling code here:
+        ManHinh_NCC_QuanLy pnl_quanLyNCC = null;
+        try {
+            pnl_quanLyNCC = new ManHinh_NCC_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_quanLyNCC);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
     }//GEN-LAST:event_NCC_quanLy_menuItemActionPerformed
 
     private void KH_quanLy_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KH_quanLy_menuItemActionPerformed
@@ -196,6 +220,27 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_KH_timKiem_menuItemActionPerformed
 
+    private void NCC_timKiem_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NCC_timKiem_menuItemActionPerformed
+        // TODO add your handling code here:
+        ManHinh_NCC_TimKiem pnl_quanLyNCC_TK = null;
+        try {
+            pnl_quanLyNCC_TK = new ManHinh_NCC_TimKiem();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_quanLyNCC_TK);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_NCC_timKiem_menuItemActionPerformed
+    
+    /**
+     * Load dữ liệu data lên bảng danh sách Nhà Cung Cấp
+     */
+    
+   
+    
+    
     /**
      * @param args the command line arguments
      */
