@@ -117,4 +117,35 @@ public class Dao_NhaCungCap {
             }
         }
     }
+    
+    /**
+     * Tìm kiếm nhà cung cấp 
+     */
+    public NhaCungCap timKiemNhaCungCap(String maNCC, String tenNCC, String sdt, String email) {
+        NhaCungCap ncc = null;
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "Select * from NhaCungCap where maNCC = ? or tenNCC = ? or sdt = ? or email = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maNCC);
+            prestmt.setString(2, tenNCC);
+            prestmt.setString(3, sdt);
+            prestmt.setString(4, email);
+            ResultSet rs = prestmt.executeQuery();
+            while(rs.next()){
+                ncc = new NhaCungCap(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ncc;
+    }
+    
 }

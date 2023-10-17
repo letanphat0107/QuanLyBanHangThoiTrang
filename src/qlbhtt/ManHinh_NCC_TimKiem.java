@@ -8,6 +8,7 @@ import connectDB.Connect;
 import dao.Dao_NhaCungCap;
 import entity.NhaCungCap;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -17,6 +18,7 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
     private DefaultTableModel modelNhaCungCap;    
     private Dao_NhaCungCap daoNhaCungCap;
     private Connect connect;
+    
     /**
      * Creates new form quanly
      */
@@ -187,6 +189,11 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         btn_TimKiem.setBackground(new java.awt.Color(199, 210, 213));
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -249,6 +256,18 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_DiaChiActionPerformed
 
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        xuLyTimKiemNhaCungCap();
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
+
+    /**
+     * Xóa các dòng trong table 
+     */    
+    public void xoaDongBang() {
+        modelNhaCungCap = (DefaultTableModel) tbl_NhaCungCap.getModel();
+        modelNhaCungCap.setRowCount(0);                
+    }
+    
     /**
      * Load dữ liệu vào bảng
      */
@@ -265,6 +284,34 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Xử lý tìm kiếm nhà cung cấp theo các tiêu chí
+     */
+    public void xuLyTimKiemNhaCungCap() {
+        String tuKhoaMaNCC = txt_MaNCC.getText();
+        String tuKhoaTenNCC = txt_TenNCC.getText();
+        String tuKhoaSdt = txt_SoDienThoai.getText();
+        String tuKhoaEmail = txt_Email.getText();
+        
+        NhaCungCap ncc = daoNhaCungCap.timKiemNhaCungCap(tuKhoaMaNCC, tuKhoaTenNCC, tuKhoaSdt, tuKhoaEmail);
+        modelNhaCungCap = (DefaultTableModel) tbl_NhaCungCap.getModel();
+         if(ncc!=null) {
+            xoaDongBang();
+            Object[] object = new Object[5];
+            object[0] = ncc.getMaNCC();
+            object[1] = ncc.getTenNCC();
+            object[2] = ncc.getSdt();
+            object[3] = ncc.getEmail();
+            object[4] = ncc.getDiaChi();
+            modelNhaCungCap.addRow(object);
+            JOptionPane.showMessageDialog(this, "Tìm thấy");
+         } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy");
+         }
+         
+       
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JLabel lbl_DiaChi;
