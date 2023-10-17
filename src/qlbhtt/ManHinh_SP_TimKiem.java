@@ -292,7 +292,7 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_TimKiem.setBackground(new java.awt.Color(199, 210, 213));
+        btn_TimKiem.setBackground(new java.awt.Color(255, 255, 255));
         btn_TimKiem.setForeground(new java.awt.Color(0, 0, 0));
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);

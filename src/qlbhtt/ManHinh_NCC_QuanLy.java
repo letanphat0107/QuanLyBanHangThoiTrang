@@ -189,7 +189,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Them.setBackground(new java.awt.Color(199, 210, 213));
+        btn_Them.setBackground(new java.awt.Color(255, 255, 255));
+        btn_Them.setForeground(new java.awt.Color(0, 0, 0));
         btn_Them.setText("Thêm");
         btn_Them.setBorder(null);
         btn_Them.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +199,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_CapNhat.setBackground(new java.awt.Color(199, 210, 213));
+        btn_CapNhat.setBackground(new java.awt.Color(255, 255, 255));
+        btn_CapNhat.setForeground(new java.awt.Color(0, 0, 0));
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
         btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +209,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Luu.setBackground(new java.awt.Color(199, 210, 213));
+        btn_Luu.setBackground(new java.awt.Color(255, 255, 255));
+        btn_Luu.setForeground(new java.awt.Color(0, 0, 0));
         btn_Luu.setText("Lưu");
         btn_Luu.setBorder(null);
         btn_Luu.addActionListener(new java.awt.event.ActionListener() {
@@ -216,7 +219,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Xoa.setBackground(new java.awt.Color(199, 210, 213));
+        btn_Xoa.setBackground(new java.awt.Color(255, 255, 255));
+        btn_Xoa.setForeground(new java.awt.Color(0, 0, 0));
         btn_Xoa.setText("Xóa");
         btn_Xoa.setBorder(null);
         btn_Xoa.setMinimumSize(new java.awt.Dimension(20, 30));

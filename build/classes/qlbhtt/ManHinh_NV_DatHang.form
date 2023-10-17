@@ -240,8 +240,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_NhapSoLuong" min="-2" pref="99" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txt_SoLuongNhap" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+                      <Component id="txt_SoLuongNhap" min="-2" pref="112" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btn_Giam" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_Them" min="-2" pref="72" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbl_TongTienGioHang" min="-2" pref="118" max="-2" attributes="0"/>
@@ -250,13 +252,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_DonViGia" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                          <Component id="btn_Giam" min="-2" pref="72" max="-2" attributes="0"/>
-                          <EmptySpace pref="725" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -271,15 +266,9 @@
                           <Component id="btn_Them" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="txt_TongTienGioHang" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_DonViGia" alignment="3" max="32767" attributes="0"/>
+                          <Component id="btn_Giam" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_Giam" min="-2" pref="24" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -321,9 +310,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder/>
-                  </Border>
+                  <Border info="null"/>
                 </Property>
               </Properties>
             </Component>
@@ -337,9 +324,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder/>
-                  </Border>
+                  <Border info="null"/>
                 </Property>
               </Properties>
             </Component>
@@ -352,6 +337,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="250000"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txt_DonViGia">
@@ -614,7 +600,7 @@
                                       <Component id="txt_MaSP" min="-2" pref="24" max="-2" attributes="0"/>
                                       <Component id="cmb_KichThuoc" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lbl_TenSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                       <Component id="lbl_MauSac" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
@@ -624,7 +610,7 @@
                                       <Component id="txt_TenSP" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                       <Component id="cmb_MauSac" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lbl_PhanLoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                       <Component id="lbl_GiaBan" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
@@ -892,7 +878,7 @@
         <Component class="javax.swing.JButton" name="btn_DatHang">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="d5" green="d2" red="c7" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>

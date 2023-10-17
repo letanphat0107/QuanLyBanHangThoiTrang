@@ -160,14 +160,14 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Top5KH.setBackground(new java.awt.Color(199, 210, 213));
+        btn_Top5KH.setBackground(new java.awt.Color(255, 255, 255));
         btn_Top5KH.setForeground(new java.awt.Color(0, 0, 0));
         btn_Top5KH.setText("Top 5 KH");
         btn_Top5KH.setBorder(null);
         btn_Top5KH.setMinimumSize(new java.awt.Dimension(107, 18));
         btn_Top5KH.setPreferredSize(new java.awt.Dimension(107, 18));
 
-        btn_XuatThongKe.setBackground(new java.awt.Color(199, 210, 213));
+        btn_XuatThongKe.setBackground(new java.awt.Color(255, 255, 255));
         btn_XuatThongKe.setForeground(new java.awt.Color(0, 0, 0));
         btn_XuatThongKe.setText("Xuất thống kê");
         btn_XuatThongKe.setBorder(null);

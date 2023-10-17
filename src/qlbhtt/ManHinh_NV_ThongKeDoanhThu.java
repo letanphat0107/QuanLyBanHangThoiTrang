@@ -135,14 +135,13 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         pnl_TongSanPhamLayout.setHorizontalGroup(
             pnl_TongSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_TongSanPhamLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnl_TongSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_TongSanPhamLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbl_TongSanPhamBan))
-                    .addGroup(pnl_TongSanPhamLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(txt_TongSanPhamBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                        .addComponent(lbl_TongSanPhamBan)
+                        .addGap(0, 3, Short.MAX_VALUE))
+                    .addComponent(txt_TongSanPhamBan, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         pnl_TongSanPhamLayout.setVerticalGroup(
             pnl_TongSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +283,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_XuatThongKe.setBackground(new java.awt.Color(199, 210, 213));
+        btn_XuatThongKe.setBackground(new java.awt.Color(255, 255, 255));
         btn_XuatThongKe.setForeground(new java.awt.Color(0, 0, 0));
         btn_XuatThongKe.setText("Xuất thống kê");
         btn_XuatThongKe.setBorder(null);
@@ -294,15 +293,15 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

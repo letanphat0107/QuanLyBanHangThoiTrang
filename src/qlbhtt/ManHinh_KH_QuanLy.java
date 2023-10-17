@@ -142,6 +142,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         txt_Email.setBackground(new java.awt.Color(255, 255, 255));
         txt_Email.setForeground(new java.awt.Color(0, 0, 0));
         txt_Email.setText("vana@gmail.com");
+        txt_Email.setEnabled(false);
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_EmailActionPerformed(evt);
@@ -203,12 +204,12 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Them.setBackground(new java.awt.Color(199, 210, 213));
+        btn_Them.setBackground(new java.awt.Color(255, 255, 255));
         btn_Them.setForeground(new java.awt.Color(0, 0, 0));
         btn_Them.setText("Thêm");
         btn_Them.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        btn_CapNhat.setBackground(new java.awt.Color(199, 210, 213));
+        btn_CapNhat.setBackground(new java.awt.Color(255, 255, 255));
         btn_CapNhat.setForeground(new java.awt.Color(0, 0, 0));
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
@@ -218,7 +219,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Luu.setBackground(new java.awt.Color(199, 210, 213));
+        btn_Luu.setBackground(new java.awt.Color(255, 255, 255));
         btn_Luu.setForeground(new java.awt.Color(0, 0, 0));
         btn_Luu.setText("Lưu");
         btn_Luu.setBorder(null);
