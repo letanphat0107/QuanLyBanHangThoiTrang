@@ -90,4 +90,31 @@ public class Dao_NhaCungCap {
             }
         }
     }
+    
+    /**
+     * Cập nhật dữ liệu Nhà Cung Cấp trên database
+     * @param ncc 
+     */
+    public void capNhatNhaCungCap(NhaCungCap ncc) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "update NhaCungCap set tenNCC = ?, diaChi = ?, sdt = ?, email = ? where maNCC = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, ncc.getTenNCC());
+            prestmt.setString(2, ncc.getDiaChi());
+            prestmt.setString(3, ncc.getSdt());
+            prestmt.setString(4, ncc.getEmail());
+            prestmt.setString(5, ncc.getMaNCC());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -93,14 +93,12 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenNCC.setText("Nguyen Van A");
         txt_TenNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenNCCActionPerformed(evt);
             }
         });
 
-        txt_MaNCC.setText("KH0001");
         txt_MaNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaNCCActionPerformed(evt);
@@ -117,21 +115,18 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
 
         lbl_Email.setText("Email");
 
-        txt_SoDienThoai.setText("0367494915");
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SoDienThoaiActionPerformed(evt);
             }
         });
 
-        txt_Email.setText("vana@gmail.com");
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_EmailActionPerformed(evt);
             }
         });
 
-        txt_DiaChi.setText("995 Nguyễn Trãi,Phường 4,Quận 5, TP HCM");
         txt_DiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_DiaChiActionPerformed(evt);
