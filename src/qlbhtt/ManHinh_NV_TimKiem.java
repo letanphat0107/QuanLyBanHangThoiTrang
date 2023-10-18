@@ -4,19 +4,101 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_NhanVien;
+import entity.NhanVien;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author DMX
  */
 public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
-
+    private DefaultTableModel modelNhanVien;
+    private Dao_NhanVien daoNhanVien;
+    private Connect connect;
     /**
      * Creates new form quanly
      */
-    public ManHinh_NV_TimKiem() {
+    public ManHinh_NV_TimKiem() throws SQLException {
+        daoNhanVien = new Dao_NhanVien();
+        connect = new Connect();
+        connect.connect();
         initComponents();
+        docDuLieuNhanVien();
     }
 
+     /**
+     * Xóa trắng các Jtext filed
+     */
+    public void xoaTrangTxt() {
+        txt_TenNV.setText("");
+        txt_SoDienThoai.setText("");
+        txt_DiaChi.setText("");
+        txt_Email.setText("");
+        txt_ChucVu.setText("");
+        txt_MaNV.setText("");
+        rad_Nam.setSelected(false);
+        rad_Nu.setSelected(false);
+    } 
+    
+    public void xoaDongBang() {
+        modelNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
+        modelNhanVien.setRowCount(0);                
+    }
+    
+    /**
+     * Load dữ liệu vào bảng
+     */
+     public void docDuLieuNhanVien() {
+        modelNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
+        for(NhanVien nv: daoNhanVien.getAllNhanVien()) {
+            Object[] object = new Object[7];
+            object[0] = nv.getMaNV();
+            object[1] = nv.getHoTen();
+            object[2] = nv.getGioiTinh();
+            object[3] = nv.getChuVu();
+            object[4] = nv.getDiaChi();
+            object[5] = nv.getSdt();
+            object[6] = nv.getEmail();
+            modelNhanVien.addRow(object);
+        }
+    }
+     
+     /**
+      * Xử lý tìm kiếm nhân viên
+      */
+     
+     public void xuLyTimKiemNhanVien() {
+        String tuKhoaMaNV = txt_MaNV.getText();
+        String tuKhoaTenNV = txt_TenNV.getText();        
+        String tuKhoaChucVu = txt_ChucVu.getText();        
+        String tuKhoaSdt = txt_SoDienThoai.getText();
+        String tuKhoaEmail = txt_Email.getText();
+        String tuKhoaDiaChi = txt_DiaChi.getText();
+        
+        modelNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
+         ArrayList<NhanVien> listNhanVien = daoNhanVien.timKiemNhaCungCap(tuKhoaMaNV, tuKhoaTenNV, tuKhoaSdt, tuKhoaEmail, tuKhoaChucVu, tuKhoaDiaChi);
+        if(listNhanVien!=null) {  
+            xoaDongBang();
+            for(NhanVien nv: listNhanVien) {                
+                Object[] object = new Object[7];
+                object[0] = nv.getMaNV();
+                object[1] = nv.getHoTen();
+                object[2] = nv.getGioiTinh();
+                object[3] = nv.getChuVu();
+                object[4] = nv.getDiaChi();
+                object[5] = nv.getSdt();
+                object[6] = nv.getEmail();
+                modelNhanVien.addRow(object);
+                System.out.println(nv.toString());
+            }          
+             
+         }        
+        xoaTrangTxt();
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,6 +108,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnl_DanhSachNhanVien = new javax.swing.JPanel();
         scr_DanhSachNhanVien = new javax.swing.JScrollPane();
         tbl_NhanVien = new javax.swing.JTable();
@@ -52,16 +135,9 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        tbl_NhanVien.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_NhanVien.setForeground(new java.awt.Color(0, 0, 0));
         tbl_NhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"NV0001", "Lê Tấn Phát", "Nam", "Quản lý", "TP HCM", "0367494915", "tanphat0107@gmail.com"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {"", null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Giới tính", "Chức vụ", "Địa chỉ", "Số điện thoại", "Email"
@@ -92,82 +168,57 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenNV.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenNV.setForeground(new java.awt.Color(0, 0, 0));
-        txt_TenNV.setText("Lê Tấn Phát");
         txt_TenNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenNVActionPerformed(evt);
             }
         });
 
-        txt_MaNV.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MaNV.setForeground(new java.awt.Color(0, 0, 0));
-        txt_MaNV.setText("NV0001");
         txt_MaNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaNVActionPerformed(evt);
             }
         });
 
-        lbl_MaNV.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MaNV.setText("Mã nhân viên");
 
-        lbl_ChucVu.setForeground(new java.awt.Color(0, 0, 0));
         lbl_ChucVu.setText("Chức vụ");
 
-        lbl_TenNV.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenNV.setText("Tên nhân viên");
 
-        lbl_DiaChi.setForeground(new java.awt.Color(0, 0, 0));
         lbl_DiaChi.setText("Địa chỉ");
 
-        lbl_GioiTInh.setForeground(new java.awt.Color(0, 0, 0));
         lbl_GioiTInh.setText("Giới tính");
 
-        lbl_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         lbl_SoDienThoai.setText("Số điện thoại");
 
-        lbl_Email.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Email.setText("Email");
 
-        rad_Nam.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rad_Nam);
         rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
 
-        rad_Nu.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rad_Nu);
         rad_Nu.setText("Nữ");
 
-        txt_ChucVu.setBackground(new java.awt.Color(255, 255, 255));
-        txt_ChucVu.setForeground(new java.awt.Color(0, 0, 0));
-        txt_ChucVu.setText("Lê Tấn Phát");
         txt_ChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_ChucVuActionPerformed(evt);
             }
         });
 
-        txt_SoDienThoai.setBackground(new java.awt.Color(255, 255, 255));
-        txt_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
-        txt_SoDienThoai.setText("0367494915");
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SoDienThoaiActionPerformed(evt);
             }
         });
 
-        txt_Email.setBackground(new java.awt.Color(255, 255, 255));
-        txt_Email.setForeground(new java.awt.Color(0, 0, 0));
-        txt_Email.setText("tanphat0107@gmail.com");
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_EmailActionPerformed(evt);
             }
         });
 
-        txt_DiaChi.setBackground(new java.awt.Color(255, 255, 255));
-        txt_DiaChi.setForeground(new java.awt.Color(0, 0, 0));
-        txt_DiaChi.setText("TP HCM");
         txt_DiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_DiaChiActionPerformed(evt);
@@ -241,10 +292,13 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Them.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Them.setForeground(new java.awt.Color(0, 0, 0));
         btn_Them.setText("Tìm kiếm");
         btn_Them.setBorder(null);
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -311,9 +365,14 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_DiaChiActionPerformed
 
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        xuLyTimKiemNhanVien();
+    }//GEN-LAST:event_btn_ThemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Them;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lbl_ChucVu;
     private javax.swing.JLabel lbl_DiaChi;
     private javax.swing.JLabel lbl_Email;

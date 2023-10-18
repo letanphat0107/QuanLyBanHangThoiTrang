@@ -4,19 +4,240 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_NhanVien;
+import entity.NhanVien;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author DMX
  */
 public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
-
+    private DefaultTableModel modelNhanVien;
+    private Dao_NhanVien daoNhanVien;
+    private Connect connect;
+    private boolean kiemTraHoaDongThem = false;
+    private boolean kiemTraHoaDongSua = false;
     /**
      * Creates new form quanly
      */
-    public ManHinh_NV_QuanLy() {
+    public ManHinh_NV_QuanLy() throws SQLException {
+    daoNhanVien = new Dao_NhanVien();
+        connect = new Connect();
+        connect.connect();
         initComponents();
+        docDuLieuNhanVien();
     }
 
+    /**
+     * Load dữ liệu vào bảng
+     */
+     public void docDuLieuNhanVien() {
+        modelNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
+        for(NhanVien nv: daoNhanVien.getAllNhanVien()) {
+            Object[] object = new Object[7];
+            object[0] = nv.getMaNV();
+            object[1] = nv.getHoTen();
+            object[2] = nv.getGioiTinh();
+            object[3] = nv.getChuVu();
+            object[4] = nv.getDiaChi();
+            object[5] = nv.getSdt();
+            object[6] = nv.getEmail();
+            modelNhanVien.addRow(object);
+        }
+    }
+    
+    /**
+     * Kiem tra hoat dong cua cac JtextField
+     */
+    public void kiemTraHoaDongTextNhap(boolean kiemTra) {
+        txt_TenNV.setEditable(kiemTra);
+        txt_SoDienThoai.setEditable(kiemTra);
+        txt_Email.setEditable(kiemTra);
+        txt_ChucVu.setEditable(kiemTra);
+        txt_DiaChi.setEditable(kiemTra);
+        rad_Nam.setEnabled(kiemTra);
+        rad_Nu.setEnabled(kiemTra);
+    }
+    
+    
+    /**
+     * Huy thao tac hoat dong cua componet
+     */
+    public void huyThaoTac() {
+        kiemTraHoaDongThem = false;
+        kiemTraHoaDongSua = false;
+        btn_Them.setEnabled(true);
+        btn_CapNhat.setEnabled(true);
+        btn_Xoa.setEnabled(true);
+        btn_Luu.setEnabled(false);
+        kiemTraHoaDongTextNhap(false);
+        xoaTrangTxt();
+    }
+    /**
+     * Xóa trắng các Jtext filed
+     */
+    public void xoaTrangTxt() {
+        txt_TenNV.setText("");
+        txt_SoDienThoai.setText("");
+        txt_DiaChi.setText("");
+        txt_Email.setText("");
+        txt_ChucVu.setText("");
+        txt_MaNV.setText("");
+        rad_Nam.setSelected(false);
+        rad_Nu.setSelected(false);
+    } 
+    
+    /**
+     * regex thông tin nhập vào khi thêm hoặc sửa nhân viên
+     */
+    public boolean rangBuocDuLieuNhap() {
+        //tạo regex cho các textfield
+        String regexSoDienThoai = "^[0-9]{10}$"; //-> 0123456789
+        String regexEmail = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)$"; // -> abc@abc.abc
+        
+        //lấy giá trị từ các textfield
+        String tenNhanVien = txt_TenNV.getText();
+        String sdt = txt_SoDienThoai.getText();
+        String email = txt_Email.getText();
+        String diaChi = txt_DiaChi.getText();
+        String chuVu = txt_ChucVu.getText();
+        
+        //kiểm tra các giá trị với regex
+        if(txt_TenNV.getText().equals("") || txt_SoDienThoai.getText().equals("") || txt_Email.getText().equals("") || txt_DiaChi.getText().equals("")||txt_ChucVu.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin!");
+            return false;
+        }
+        
+        if(!sdt.matches(regexSoDienThoai)){
+            JOptionPane.showMessageDialog(null, "Số điện thoại đủ 10 số!");
+            txt_SoDienThoai.requestFocus();
+            return false;
+        }
+        
+        if(!email.matches(regexEmail)){
+            JOptionPane.showMessageDialog(null, "Email không hợp lệ!");
+            txt_Email.requestFocus();
+            return false;
+        }
+        
+        if(chuVu.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(this, "Thông tin chức vụ không chứa số!");
+            txt_ChucVu.requestFocus();
+            return false;
+        }
+        
+        if(tenNhanVien.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(this, "Thông tin tên Nhân Viên không chứa số!");
+            txt_TenNV.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Xử lý thêm nhân viên
+     */
+    public void xuLyThemNhanVien() {
+        if(!rangBuocDuLieuNhap()) {
+            return;
+        } 
+        
+        String tenNV = txt_TenNV.getText();
+        String gioiTinh= "";
+        if(rad_Nam.isSelected()) {
+            gioiTinh = "Nam";
+        } else if(rad_Nu.isSelected()) {
+            gioiTinh = "Nữ";
+        }
+        String chucVu = txt_ChucVu.getText();
+        String diaChi = txt_DiaChi.getText();
+        String sdt = txt_SoDienThoai.getText();
+        String email = txt_Email.getText();
+        
+        NhanVien nv = new NhanVien(tenNV, chucVu, email, sdt, diaChi, gioiTinh);
+        
+        daoNhanVien.themNhanVien(nv);
+        
+        modelNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
+        Object[] object = new Object[7];
+            object[0] = nv.getMaNV();
+            object[1] = nv.getHoTen();
+            object[2] = nv.getGioiTinh();
+            object[3] = nv.getChuVu();
+            object[4] = nv.getDiaChi();
+            object[5] = nv.getSdt();
+            object[6] = nv.getEmail();
+        modelNhanVien.addRow(object);
+        xoaTrangTxt();
+        JOptionPane.showMessageDialog(this, "Thêm thành công");
+    }
+    
+    /**
+     * Xử lý xóa nhân viên 
+     */
+    public void xuLyXoaNhanVien() {
+         int row = tbl_NhanVien.getSelectedRow();
+         if(row!=-1) {
+             if(JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                 String maNhanVien = txt_MaNV.getText();
+                 daoNhanVien.xoaNhanVien(maNhanVien);
+                 modelNhanVien.removeRow(row);
+                 JOptionPane.showMessageDialog(this, "Xóa thành công");
+                 xoaTrangTxt();
+             }
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+         }
+         
+    }
+    
+    /**
+     * Xử lý cập nhật nhân viên
+     */ 
+    public void xuLyCapNhatNhanVien() {
+        if(!rangBuocDuLieuNhap()) {
+            return;
+        }
+        
+        String maNV = txt_MaNV.getText();
+        String tenNV = txt_TenNV.getText();
+        String chucVu = txt_ChucVu.getText();
+        String diaChi = txt_DiaChi.getText();
+        String sdt = txt_SoDienThoai.getText();
+        String email = txt_Email.getText();
+        String gioiTinh= "";
+        if(rad_Nam.isSelected()) {
+            gioiTinh = "Nam";
+        } else if(rad_Nu.isSelected()) {
+            gioiTinh = "Nữ";
+        }
+        
+        NhanVien nv = new NhanVien(maNV, tenNV, chucVu, email, sdt, diaChi, gioiTinh);
+        
+        int row = tbl_NhanVien.getSelectedRow();
+        if(row!=-1) {
+            daoNhanVien.capNhatNhanVien(nv);
+            for (int i = 0; i < tbl_NhanVien.getRowCount(); i++) {
+                 String maNV_Update = tbl_NhanVien.getValueAt(row, 0).toString();
+                 if(maNV_Update.equalsIgnoreCase(maNV)) {
+                     tbl_NhanVien.setValueAt(tenNV, row, 1);
+                     tbl_NhanVien.setValueAt(gioiTinh, row, 2);
+                     tbl_NhanVien.setValueAt(chucVu, row, 3);
+                     tbl_NhanVien.setValueAt(diaChi, row, 4);
+                     tbl_NhanVien.setValueAt(sdt, row, 5);
+                     tbl_NhanVien.setValueAt(email, row, 6);
+                 }                 
+            }
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            xoaTrangTxt();
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,6 +247,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnl_DanhSachNhanVien = new javax.swing.JPanel();
         scr_DanhSachNhanVien = new javax.swing.JScrollPane();
         tbl_NhanVien = new javax.swing.JTable();
@@ -55,16 +277,9 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        tbl_NhanVien.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_NhanVien.setForeground(new java.awt.Color(0, 0, 0));
         tbl_NhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"NV0001", "Lê Tấn Phát", "Nam", "Quản lý", "TP HCM", "0367494915", "tanphat0107@gmail.com"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {"", null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Giới tính", "Chức vụ", "Địa chỉ", "Số điện thoại", "Email"
@@ -79,6 +294,11 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
             }
         });
         tbl_NhanVien.setShowGrid(true);
+        tbl_NhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_NhanVienMouseClicked(evt);
+            }
+        });
         scr_DanhSachNhanVien.setViewportView(tbl_NhanVien);
 
         javax.swing.GroupLayout pnl_DanhSachNhanVienLayout = new javax.swing.GroupLayout(pnl_DanhSachNhanVien);
@@ -95,82 +315,65 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenNV.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenNV.setForeground(new java.awt.Color(0, 0, 0));
-        txt_TenNV.setText("Lê Tấn Phát");
+        txt_TenNV.setEditable(false);
         txt_TenNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenNVActionPerformed(evt);
             }
         });
 
-        txt_MaNV.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MaNV.setForeground(new java.awt.Color(0, 0, 0));
-        txt_MaNV.setText("NV0001");
+        txt_MaNV.setEditable(false);
         txt_MaNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaNVActionPerformed(evt);
             }
         });
 
-        lbl_MaNV.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MaNV.setText("Mã nhân viên");
 
-        lbl_ChucVu.setForeground(new java.awt.Color(0, 0, 0));
         lbl_ChucVu.setText("Chức vụ");
 
-        lbl_TenNV.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenNV.setText("Tên nhân viên");
 
-        lbl_DiaChi.setForeground(new java.awt.Color(0, 0, 0));
         lbl_DiaChi.setText("Địa chỉ");
 
-        lbl_GioiTinh.setForeground(new java.awt.Color(0, 0, 0));
         lbl_GioiTinh.setText("Giới tính");
 
-        lbl_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         lbl_SoDienThoai.setText("Số điện thoại");
 
-        lbl_Email.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Email.setText("Email");
 
-        rad_Nam.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rad_Nam);
         rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
+        rad_Nam.setEnabled(false);
 
-        rad_Nu.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rad_Nu);
         rad_Nu.setText("Nữ");
+        rad_Nu.setEnabled(false);
 
-        txt_ChucVu.setBackground(new java.awt.Color(255, 255, 255));
-        txt_ChucVu.setForeground(new java.awt.Color(0, 0, 0));
-        txt_ChucVu.setText("Lê Tấn Phát");
+        txt_ChucVu.setEditable(false);
         txt_ChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_ChucVuActionPerformed(evt);
             }
         });
 
-        txt_SoDienThoai.setBackground(new java.awt.Color(255, 255, 255));
-        txt_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
-        txt_SoDienThoai.setText("0367494915");
+        txt_SoDienThoai.setEditable(false);
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SoDienThoaiActionPerformed(evt);
             }
         });
 
-        txt_Email.setBackground(new java.awt.Color(255, 255, 255));
-        txt_Email.setForeground(new java.awt.Color(0, 0, 0));
-        txt_Email.setText("tanphat0107@gmail.com");
+        txt_Email.setEditable(false);
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_EmailActionPerformed(evt);
             }
         });
 
-        txt_DiaChi.setBackground(new java.awt.Color(255, 255, 255));
-        txt_DiaChi.setForeground(new java.awt.Color(0, 0, 0));
-        txt_DiaChi.setText("TP HCM");
+        txt_DiaChi.setEditable(false);
         txt_DiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_DiaChiActionPerformed(evt);
@@ -244,13 +447,14 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Them.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Them.setForeground(new java.awt.Color(0, 0, 0));
         btn_Them.setText("Thêm");
         btn_Them.setBorder(null);
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
+            }
+        });
 
-        btn_Xoa.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Xoa.setForeground(new java.awt.Color(0, 0, 0));
         btn_Xoa.setText("Xóa");
         btn_Xoa.setBorder(null);
         btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
@@ -259,8 +463,6 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_CapNhat.setBackground(new java.awt.Color(255, 255, 255));
-        btn_CapNhat.setForeground(new java.awt.Color(0, 0, 0));
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
         btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -269,8 +471,6 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Luu.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Luu.setForeground(new java.awt.Color(0, 0, 0));
         btn_Luu.setText("Lưu");
         btn_Luu.setBorder(null);
         btn_Luu.addActionListener(new java.awt.event.ActionListener() {
@@ -339,15 +539,30 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_MaNVActionPerformed
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
-        // TODO add your handling code here:
+        xuLyXoaNhanVien();
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        // TODO add your handling code here:
+        if(btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")) {
+            btn_CapNhat.setText("Hủy");
+            btn_Them.setEnabled(false);
+            btn_Xoa.setEnabled(false);
+            btn_Luu.setEnabled(true);
+            kiemTraHoaDongSua = true;
+            kiemTraHoaDongTextNhap(true);
+            xoaTrangTxt();
+        } else if(btn_CapNhat.getText().equalsIgnoreCase("Hủy")) {
+            btn_CapNhat.setText("Cập nhật");
+            huyThaoTac();
+        }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        // TODO add your handling code here:
+        if(kiemTraHoaDongThem) {
+            xuLyThemNhanVien();
+        } else if(kiemTraHoaDongSua) {
+            xuLyCapNhatNhanVien();
+        }
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void txt_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ChucVuActionPerformed
@@ -366,12 +581,46 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_DiaChiActionPerformed
 
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        if(btn_Them.getText().equalsIgnoreCase("Thêm")) {
+            btn_Them.setText("Hủy");
+            btn_CapNhat.setEnabled(false);
+            btn_Xoa.setEnabled(false);
+            btn_Luu.setEnabled(true);
+            kiemTraHoaDongThem = true;
+            kiemTraHoaDongTextNhap(true);
+            xoaTrangTxt();
+        } else if(btn_Them.getText().equalsIgnoreCase("Hủy")) {
+            btn_Them.setText("Thêm");
+            huyThaoTac();
+        }
+    }//GEN-LAST:event_btn_ThemActionPerformed
+
+    private void tbl_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NhanVienMouseClicked
+       int row = tbl_NhanVien.getSelectedRow();
+        if(row != -1) {
+            txt_MaNV.setText(tbl_NhanVien.getValueAt(row, 0).toString());
+            txt_TenNV.setText(tbl_NhanVien.getValueAt(row, 1).toString());
+            
+            if(tbl_NhanVien.getValueAt(row, 2).toString().equalsIgnoreCase("Nam")) {
+                rad_Nam.setSelected(true);
+            } else if(tbl_NhanVien.getValueAt(row, 2).toString().equalsIgnoreCase("Nữ")) {
+                rad_Nu.setSelected(true);
+            }           
+            txt_ChucVu.setText(tbl_NhanVien.getValueAt(row, 3).toString());
+            txt_DiaChi.setText(tbl_NhanVien.getValueAt(row, 4).toString());
+            txt_SoDienThoai.setText(tbl_NhanVien.getValueAt(row, 5).toString());
+            txt_Email.setText(tbl_NhanVien.getValueAt(row, 6).toString());
+        } 
+    }//GEN-LAST:event_tbl_NhanVienMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_CapNhat;
     private javax.swing.JButton btn_Luu;
     private javax.swing.JButton btn_Them;
     private javax.swing.JButton btn_Xoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lbl_ChucVu;
     private javax.swing.JLabel lbl_DiaChi;
     private javax.swing.JLabel lbl_Email;

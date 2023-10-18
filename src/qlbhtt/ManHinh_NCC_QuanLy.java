@@ -19,6 +19,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
     private DefaultTableModel modelNhaCungCap;    
     private Dao_NhaCungCap daoNhaCungCap;
     private Connect connect;
+    private boolean kiemTraHoaDongThem = false;
+    private boolean kiemTraHoaDongSua = false;
     /**
      * Creates new form quanly
      */
@@ -102,14 +104,14 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenNCC.setText("Nguyen Van A");
+        txt_TenNCC.setEditable(false);
         txt_TenNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenNCCActionPerformed(evt);
             }
         });
 
-        txt_MaNCC.setText("KH0001");
+        txt_MaNCC.setEditable(false);
         txt_MaNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaNCCActionPerformed(evt);
@@ -126,19 +128,21 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
 
         lbl_Email.setText("Email");
 
-        txt_SoDienThoai.setText("0367494915");
+        txt_SoDienThoai.setEditable(false);
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SoDienThoaiActionPerformed(evt);
             }
         });
 
-        txt_Email.setText("vana@gmail.com");
+        txt_Email.setEditable(false);
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_EmailActionPerformed(evt);
             }
         });
+
+        txt_DiaChi.setEditable(false);
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);
         pnl_ThongTin.setLayout(pnl_ThongTinLayout);
@@ -189,8 +193,6 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Them.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Them.setForeground(new java.awt.Color(0, 0, 0));
         btn_Them.setText("Thêm");
         btn_Them.setBorder(null);
         btn_Them.addActionListener(new java.awt.event.ActionListener() {
@@ -199,8 +201,6 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_CapNhat.setBackground(new java.awt.Color(255, 255, 255));
-        btn_CapNhat.setForeground(new java.awt.Color(0, 0, 0));
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
         btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -209,8 +209,6 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Luu.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Luu.setForeground(new java.awt.Color(0, 0, 0));
         btn_Luu.setText("Lưu");
         btn_Luu.setBorder(null);
         btn_Luu.addActionListener(new java.awt.event.ActionListener() {
@@ -219,8 +217,6 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Xoa.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Xoa.setForeground(new java.awt.Color(0, 0, 0));
         btn_Xoa.setText("Xóa");
         btn_Xoa.setBorder(null);
         btn_Xoa.setMinimumSize(new java.awt.Dimension(20, 30));
@@ -291,11 +287,26 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_MaNCCActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        // TODO add your handling code here:
+        if(btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")) {
+            btn_CapNhat.setText("Hủy");
+            btn_Them.setEnabled(false);
+            btn_Xoa.setEnabled(false);
+            btn_Luu.setEnabled(true);
+            kiemTraHoaDongSua= true;
+            kiemTraHoaDongTextNhap(true);
+            xoaTrangTxt();
+        } else if(btn_CapNhat.getText().equalsIgnoreCase("Hủy")) {
+            btn_CapNhat.setText("Cập nhật");
+            huyThaoTac();
+        }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        // TODO add your handling code here:
+        if(kiemTraHoaDongThem) {
+            xuLyThemNhaCungCap();
+        } else if(kiemTraHoaDongSua){
+            xuLyCapNhatNhaCungCap();
+        }
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void txt_SoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoDienThoaiActionPerformed
@@ -312,7 +323,18 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         
-        xuLyThemNhaCungCap();
+        if(btn_Them.getText().equalsIgnoreCase("Thêm")) {
+            btn_Them.setText("Hủy");
+            btn_CapNhat.setEnabled(false);
+            btn_Xoa.setEnabled(false);
+            btn_Luu.setEnabled(true);
+            kiemTraHoaDongThem = true;
+            kiemTraHoaDongTextNhap(true);
+            xoaTrangTxt();
+        } else if(btn_Them.getText().equalsIgnoreCase("Hủy")) {
+            btn_Them.setText("Thêm");
+            huyThaoTac();
+        }
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_NhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NhaCungCapMouseClicked
@@ -327,6 +349,31 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_NhaCungCapMouseClicked
 
     /**
+     * Kiem tra hoat dong cua cac JtextField
+     */
+    public void kiemTraHoaDongTextNhap(boolean kiemTra) {
+        txt_TenNCC.setEditable(kiemTra);
+        txt_DiaChi.setEditable(kiemTra);
+        txt_Email.setEditable(kiemTra);
+        txt_SoDienThoai.setEditable(kiemTra);
+    }
+    
+    
+    /**
+     * Huy thao tac hoat dong cua componet
+     */
+    public void huyThaoTac() {
+        kiemTraHoaDongThem = false;
+        kiemTraHoaDongSua = false;
+        btn_Them.setEnabled(true);
+        btn_CapNhat.setEnabled(true);
+        btn_Xoa.setEnabled(true);
+        btn_Luu.setEnabled(false);
+        kiemTraHoaDongTextNhap(false);
+        xoaTrangTxt();
+    }
+    
+    /**
      * Xóa trắng các Jtext filed
      */
     public void xoaTrangTxt() {
@@ -334,12 +381,13 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         txt_DiaChi.setText("");
         txt_SoDienThoai.setText("");
         txt_Email.setText("");
+        txt_MaNCC.setText("");
     }
     
     /**
      * Regex đầu vào khi thêm hoặc sửa dữ liệu nhà cung cấp
      */
-    public boolean isValidInput() {
+    public boolean rangBuocDuLieuNhap() {
         //tạo regex cho các textfield
         String regexSoDienThoai = "^[0-9]{10}$"; //-> 0123456789
         String regexEmail = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)$"; // -> abc@abc.abc
@@ -358,11 +406,19 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         
         if(!sdt.matches(regexSoDienThoai)){
             JOptionPane.showMessageDialog(null, "Số điện thoại đủ 10 số!");
+            txt_SoDienThoai.requestFocus();
             return false;
         }
         
         if(!email.matches(regexEmail)){
-            JOptionPane.showMessageDialog(null, "Email không hợp lệ!");
+            JOptionPane.showMessageDialog(null, "Email không hợp lệ!");            
+            txt_Email.requestFocus();
+            return false;
+        }
+                       
+        if(tenNhaCungCap.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(this, "Thông tin tên Nhà Cung Cấp không chứa số!");
+            txt_TenNCC.requestFocus();
             return false;
         }
         return true;
@@ -387,7 +443,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
       * Xử lý thêm Nhà Cung Cấp
       */
      public void xuLyThemNhaCungCap() {
-         if(!isValidInput()){
+         if(!rangBuocDuLieuNhap()){
              return;
          }
          
@@ -423,10 +479,48 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
                  daoNhaCungCap.xoaNhaCungCap(maNhaCungCap);
                  modelNhaCungCap.removeRow(row);
                  JOptionPane.showMessageDialog(this, "Xóa thành công");
+                 xoaTrangTxt();
              }
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
          }
      }
 
+     /**
+      * Xử lý cập nhật Nhà Cung Cấp
+      */
+     public void xuLyCapNhatNhaCungCap() {
+         if(!rangBuocDuLieuNhap()){
+             return;
+         }
+         
+         String maNhaCungCap = txt_MaNCC.getText();
+         String tenNhaCungCap = txt_TenNCC.getText();
+         String soDienThoai = txt_SoDienThoai.getText();
+         String diaChi = txt_DiaChi.getText();
+         String email = txt_Email.getText();
+         
+         NhaCungCap ncc = new NhaCungCap(maNhaCungCap,tenNhaCungCap, diaChi,soDienThoai , email);
+         int row = tbl_NhaCungCap.getSelectedRow();
+         if(row!=-1) {
+            daoNhaCungCap.capNhatNhaCungCap(ncc);
+             for (int i = 0; i < tbl_NhaCungCap.getRowCount(); i++) {
+                 String maNCC_Update = tbl_NhaCungCap.getValueAt(row, 0).toString();
+                 if(maNCC_Update.equalsIgnoreCase(maNhaCungCap)) {
+                     tbl_NhaCungCap.setValueAt(tenNhaCungCap, row, 1);
+                     tbl_NhaCungCap.setValueAt(soDienThoai, row, 2);
+                     tbl_NhaCungCap.setValueAt(email, row, 3);
+                     tbl_NhaCungCap.setValueAt(diaChi, row, 4);
+                 }
+                 
+            }
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            xoaTrangTxt();
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
+         }            
+     }
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_CapNhat;
     private javax.swing.JButton btn_Luu;

@@ -46,6 +46,7 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
         txt_GiaBan = new javax.swing.JTextField();
         txt_SoLuong = new javax.swing.JTextField();
         pnl_HinhAnhSanPham = new javax.swing.JPanel();
+        lbl_HinhAnhSP = new javax.swing.JLabel();
         cmb_ChatLieu = new javax.swing.JComboBox<>();
         cmb_PhanLoai = new javax.swing.JComboBox<>();
         cmb_MauSac = new javax.swing.JComboBox<>();
@@ -58,8 +59,6 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        tbl_SanPham.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_SanPham.setForeground(new java.awt.Color(0, 0, 0));
         tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"SP0001", "Áo thun", "Áo", "250000", "275000", "L", "Trắng", "Cotton", "CT TNHH Hades", "10"},
@@ -99,8 +98,6 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenSP.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenSP.setForeground(new java.awt.Color(0, 0, 0));
         txt_TenSP.setText("Áo thun");
         txt_TenSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,8 +105,6 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        txt_MaSP.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MaSP.setForeground(new java.awt.Color(0, 0, 0));
         txt_MaSP.setText("SP001");
         txt_MaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,38 +112,26 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        lbl_MaSP.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MaSP.setText("Mã sản phẩm");
 
-        lbl_PhanLoai.setForeground(new java.awt.Color(0, 0, 0));
         lbl_PhanLoai.setText("Phân loại");
 
-        lbl_TenSP.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenSP.setText("Tên sản phẩm");
 
-        lbl_NCC.setForeground(new java.awt.Color(0, 0, 0));
         lbl_NCC.setText("Nhà cung cấp");
 
-        lbl_GiaBan.setForeground(new java.awt.Color(0, 0, 0));
         lbl_GiaBan.setText("Giá bán");
 
-        lbl_GiaNhap.setForeground(new java.awt.Color(0, 0, 0));
         lbl_GiaNhap.setText("Giá nhập");
 
-        lbl_KichThuoc.setForeground(new java.awt.Color(0, 0, 0));
         lbl_KichThuoc.setText("Kích thước");
 
-        lbl_MauSac.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MauSac.setText("Màu sắc");
 
-        lbl_ChatLieu.setForeground(new java.awt.Color(0, 0, 0));
         lbl_ChatLieu.setText("Chất liệu");
 
-        lbl_SoLuong.setForeground(new java.awt.Color(0, 0, 0));
         lbl_SoLuong.setText("Số lượng");
 
-        txt_GiaNhap.setBackground(new java.awt.Color(255, 255, 255));
-        txt_GiaNhap.setForeground(new java.awt.Color(0, 0, 0));
         txt_GiaNhap.setText("275000");
         txt_GiaNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,8 +139,6 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        txt_GiaBan.setBackground(new java.awt.Color(255, 255, 255));
-        txt_GiaBan.setForeground(new java.awt.Color(0, 0, 0));
         txt_GiaBan.setText("250000");
         txt_GiaBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,8 +146,6 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
             }
         });
 
-        txt_SoLuong.setBackground(new java.awt.Color(255, 255, 255));
-        txt_SoLuong.setForeground(new java.awt.Color(0, 0, 0));
         txt_SoLuong.setText("10");
         txt_SoLuong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,35 +156,34 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
         pnl_HinhAnhSanPham.setBackground(new java.awt.Color(255, 255, 255));
         pnl_HinhAnhSanPham.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
+        lbl_HinhAnhSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_HinhAnhSP.setText("Hình Ảnh");
+
         javax.swing.GroupLayout pnl_HinhAnhSanPhamLayout = new javax.swing.GroupLayout(pnl_HinhAnhSanPham);
         pnl_HinhAnhSanPham.setLayout(pnl_HinhAnhSanPhamLayout);
         pnl_HinhAnhSanPhamLayout.setHorizontalGroup(
             pnl_HinhAnhSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnl_HinhAnhSanPhamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_HinhAnhSanPhamLayout.setVerticalGroup(
             pnl_HinhAnhSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 113, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_HinhAnhSanPhamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        cmb_ChatLieu.setBackground(new java.awt.Color(255, 255, 255));
-        cmb_ChatLieu.setForeground(new java.awt.Color(0, 0, 0));
         cmb_ChatLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cotton" }));
 
-        cmb_PhanLoai.setBackground(new java.awt.Color(255, 255, 255));
-        cmb_PhanLoai.setForeground(new java.awt.Color(0, 0, 0));
         cmb_PhanLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Áo" }));
 
-        cmb_MauSac.setBackground(new java.awt.Color(255, 255, 255));
-        cmb_MauSac.setForeground(new java.awt.Color(0, 0, 0));
         cmb_MauSac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trắng" }));
 
-        cmb_KichThuoc.setBackground(new java.awt.Color(255, 255, 255));
-        cmb_KichThuoc.setForeground(new java.awt.Color(0, 0, 0));
         cmb_KichThuoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L" }));
 
-        cmb_NCC.setBackground(new java.awt.Color(255, 255, 255));
-        cmb_NCC.setForeground(new java.awt.Color(0, 0, 0));
         cmb_NCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CT THHH Hades" }));
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);
@@ -292,8 +270,6 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_TimKiem.setBackground(new java.awt.Color(255, 255, 255));
-        btn_TimKiem.setForeground(new java.awt.Color(0, 0, 0));
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
 
@@ -370,6 +346,7 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_ChatLieu;
     private javax.swing.JLabel lbl_GiaBan;
     private javax.swing.JLabel lbl_GiaNhap;
+    private javax.swing.JLabel lbl_HinhAnhSP;
     private javax.swing.JLabel lbl_KichThuoc;
     private javax.swing.JLabel lbl_MaSP;
     private javax.swing.JLabel lbl_MauSac;

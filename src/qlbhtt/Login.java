@@ -64,8 +64,6 @@ public class Login extends javax.swing.JFrame {
 
         pnl_FormDangNhap.setBackground(new java.awt.Color(204, 204, 204));
 
-        txt_Username.setBackground(new java.awt.Color(255, 255, 255));
-        txt_Username.setForeground(new java.awt.Color(0, 0, 0));
         txt_Username.setText("admin");
         txt_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,8 +71,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txt_Password.setBackground(new java.awt.Color(255, 255, 255));
-        txt_Password.setForeground(new java.awt.Color(0, 0, 0));
         txt_Password.setText("admin");
         txt_Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,9 +78,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btn_Login.setBackground(new java.awt.Color(255, 255, 255));
         btn_Login.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_Login.setForeground(new java.awt.Color(0, 0, 0));
         btn_Login.setText("Đăng nhập");
         btn_Login.setBorder(null);
         btn_Login.addActionListener(new java.awt.event.ActionListener() {

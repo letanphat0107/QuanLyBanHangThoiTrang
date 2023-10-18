@@ -26,6 +26,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnl_DanhSachKhachHang = new javax.swing.JPanel();
         scr_DanhSachKhachHang = new javax.swing.JScrollPane();
         tbl_KhachHang = new javax.swing.JTable();
@@ -48,16 +49,9 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        tbl_KhachHang.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_KhachHang.setForeground(new java.awt.Color(0, 0, 0));
         tbl_KhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"KH0001", "Nguyễn Văn A", "Nam", "vana@gmail.com", "0367494954"},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {"", null, null, null, null}
+
             },
             new String [] {
                 "Mã khách hàng", "Họ tên", "Giới tính", "Email", "SDT"
@@ -88,54 +82,41 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenKH.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenKH.setForeground(new java.awt.Color(0, 0, 0));
         txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenKHActionPerformed(evt);
             }
         });
 
-        txt_MaKH.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MaKH.setForeground(new java.awt.Color(0, 0, 0));
         txt_MaKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaKHActionPerformed(evt);
             }
         });
 
-        lbl_MaKH.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MaKH.setText("Mã khách hàng");
 
-        lbl_TenKH.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenKH.setText("Tên khách hàng");
 
-        lbl_GioiTinh.setForeground(new java.awt.Color(0, 0, 0));
         lbl_GioiTinh.setText("Giới tính");
 
-        lbl_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         lbl_SoDienThoai.setText("Số điện thoại");
 
-        lbl_Email.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Email.setText("Email");
 
-        rad_Nam.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rad_Nam);
         rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
 
-        rad_Nu.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rad_Nu);
         rad_Nu.setText("Nữ");
 
-        txt_SoDienThoai.setBackground(new java.awt.Color(255, 255, 255));
-        txt_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SoDienThoaiActionPerformed(evt);
             }
         });
 
-        txt_Email.setBackground(new java.awt.Color(255, 255, 255));
-        txt_Email.setForeground(new java.awt.Color(0, 0, 0));
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_EmailActionPerformed(evt);
@@ -197,8 +178,6 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_TimKiem.setBackground(new java.awt.Color(255, 255, 255));
-        btn_TimKiem.setForeground(new java.awt.Color(0, 0, 0));
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
 
@@ -262,6 +241,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_GioiTinh;
     private javax.swing.JLabel lbl_MaKH;

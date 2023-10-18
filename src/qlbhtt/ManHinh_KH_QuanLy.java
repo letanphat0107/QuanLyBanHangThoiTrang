@@ -26,6 +26,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnl_DanhSachKhachHang = new javax.swing.JPanel();
         scr_DanhSachKhachHang = new javax.swing.JScrollPane();
         tbl_KhachHang = new javax.swing.JTable();
@@ -50,16 +51,9 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        tbl_KhachHang.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_KhachHang.setForeground(new java.awt.Color(0, 0, 0));
         tbl_KhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"KH0001", "Nguyễn Văn A", "Nam", "vana@gmail.com", "0367494954"},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {"", null, null, null, null}
+
             },
             new String [] {
                 "Mã khách hàng", "Họ tên", "Giới tính", "Email", "SDT"
@@ -90,59 +84,45 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_TenKH.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenKH.setForeground(new java.awt.Color(0, 0, 0));
-        txt_TenKH.setText("Nguyen Van A");
+        txt_TenKH.setEditable(false);
         txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenKHActionPerformed(evt);
             }
         });
 
-        txt_MaKH.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MaKH.setForeground(new java.awt.Color(0, 0, 0));
-        txt_MaKH.setText("KH0001");
+        txt_MaKH.setEditable(false);
         txt_MaKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaKHActionPerformed(evt);
             }
         });
 
-        lbl_MaKH.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MaKH.setText("Mã khách hàng");
 
-        lbl_TenKH.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenKH.setText("Tên khách hàng");
 
-        lbl_GioiTinh.setForeground(new java.awt.Color(0, 0, 0));
         lbl_GioiTinh.setText("Giới tính");
 
-        lbl_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         lbl_SoDienThoai.setText("Số điện thoại");
 
-        lbl_Email.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Email.setText("Email");
 
-        rad_Nam.setForeground(new java.awt.Color(0, 0, 0));
-        rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
+        rad_Nam.setEnabled(false);
 
-        rad_Nu.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rad_Nu);
         rad_Nu.setText("Nữ");
+        rad_Nu.setEnabled(false);
 
-        txt_SoDienThoai.setBackground(new java.awt.Color(255, 255, 255));
-        txt_SoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
-        txt_SoDienThoai.setText("0367494915");
+        txt_SoDienThoai.setEditable(false);
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SoDienThoaiActionPerformed(evt);
             }
         });
 
-        txt_Email.setBackground(new java.awt.Color(255, 255, 255));
-        txt_Email.setForeground(new java.awt.Color(0, 0, 0));
-        txt_Email.setText("vana@gmail.com");
-        txt_Email.setEnabled(false);
+        txt_Email.setEditable(false);
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_EmailActionPerformed(evt);
@@ -204,13 +184,9 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Them.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Them.setForeground(new java.awt.Color(0, 0, 0));
         btn_Them.setText("Thêm");
         btn_Them.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        btn_CapNhat.setBackground(new java.awt.Color(255, 255, 255));
-        btn_CapNhat.setForeground(new java.awt.Color(0, 0, 0));
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
         btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -219,8 +195,6 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Luu.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Luu.setForeground(new java.awt.Color(0, 0, 0));
         btn_Luu.setText("Lưu");
         btn_Luu.setBorder(null);
         btn_Luu.addActionListener(new java.awt.event.ActionListener() {
@@ -306,6 +280,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
     private javax.swing.JButton btn_CapNhat;
     private javax.swing.JButton btn_Luu;
     private javax.swing.JButton btn_Them;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_GioiTinh;
     private javax.swing.JLabel lbl_MaKH;
