@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/qlbhtt/ManHinh_KH_QuanLy.java</file>
+            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/entity/NhanVien.java</file>
             <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/qlbhtt/ManHinh_NCC_QuanLy.java</file>
-            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/dao/Dao_NhaCungCap.java</file>
-            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/qlbhtt/ManHinh_NCC_TimKiem.java</file>
+            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/qlbhtt/HomePage.java</file>
+            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/entity/NhaCungCap.java</file>
+            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/dao/Dao_NhanVien.java</file>
+            <file>file:/E:/Worksapce/Project/PTUD/QuanLyBanHangThoiTrang/src/qlbhtt/ManHinh_NV_QuanLy.java</file>
         </group>
     </open-files>
 </project-private>

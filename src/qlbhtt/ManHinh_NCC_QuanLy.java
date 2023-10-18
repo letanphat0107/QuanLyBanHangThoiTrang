@@ -471,6 +471,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
                  JOptionPane.showMessageDialog(this, "Xóa thành công");
                  xoaTrangTxt();
              }
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
          }
      }
 
@@ -504,7 +506,9 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             xoaTrangTxt();
-         }             
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
+         }            
      }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables

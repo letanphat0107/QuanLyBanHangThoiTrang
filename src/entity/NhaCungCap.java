@@ -14,7 +14,6 @@ public class NhaCungCap {
         Dao_NhaCungCap daoNhaCungCap = new Dao_NhaCungCap();
         String idPrefix = "NCC";
         int length = daoNhaCungCap.getAllNhaCungCap().size();
-        System.out.println(length);
         String finalId = idPrefix + String.format("%03d", length + 1);
         return finalId;
     }
