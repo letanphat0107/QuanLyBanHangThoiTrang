@@ -4,17 +4,32 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_KhachHang;
+import javax.swing.table.DefaultTableModel;
+import entity.KhachHang;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author DMX
  */
 public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
 
+    private Dao_KhachHang dao_KhachHang;
+    private DefaultTableModel modelKhachHang;
+    private Connect connect;
+
     /**
      * Creates new form quanly
      */
-    public ManHinh_KH_TimKiem() {
+    public ManHinh_KH_TimKiem() throws SQLException {
+        dao_KhachHang = new Dao_KhachHang();
+        connect = new Connect();
+        connect.connect();
         initComponents();
+        docDuLieuKhachHang();
     }
 
     /**
@@ -180,6 +195,11 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
 
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -237,6 +257,62 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
     private void txt_EmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_EmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_EmailActionPerformed
+
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        // TODO add your handling code here:
+        xuLyTiemKiemKhachHang();
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
+    private void clearTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tbl_KhachHang.getModel();
+        dtm.setRowCount(0);
+
+    }
+
+    public void xoaTrang() {
+        txt_MaKH.setText("");
+        txt_TenKH.setText("");
+        txt_Email.setText("");
+        txt_SoDienThoai.setText("");
+        rad_Nam.setSelected(false);
+        rad_Nu.setSelected(false);
+    }
+
+    public void docDuLieuKhachHang() {
+        clearTable();
+        modelKhachHang = (DefaultTableModel) tbl_KhachHang.getModel();
+        for (KhachHang kh : dao_KhachHang.getAllKhachHang()) {
+            Object[] object = new Object[5];
+            object[0] = kh.getMaKH();
+            object[1] = kh.getHoTen();
+            object[2] = kh.getGioiTinh();
+            object[4] = kh.getSdt();
+            object[3] = kh.getEmail();
+            modelKhachHang.addRow(object);
+        }
+    }
+
+    private void xuLyTiemKiemKhachHang() {
+        String maKhachHang = txt_MaKH.getText();
+        String tenKhachHang = txt_TenKH.getText();
+        String soDienThoai = txt_SoDienThoai.getText();
+        String email = txt_Email.getText();
+        
+        DefaultTableModel dtm = (DefaultTableModel) tbl_KhachHang.getModel();
+        
+        ArrayList<KhachHang> listKhachHang = dao_KhachHang.timKiemKhachHang(maKhachHang, tenKhachHang, soDienThoai, email);
+        
+        if(listKhachHang!=null){
+            clearTable();
+            for (KhachHang kh : listKhachHang) {
+
+                Object[] dataRow = {kh.getMaKH(), kh.getHoTen(), kh.getGioiTinh(), kh.getEmail(), kh.getSdt()};
+                dtm.addRow(dataRow);
+                System.out.println(kh.toString());
+            }
+        }
+        
+        xoaTrang();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

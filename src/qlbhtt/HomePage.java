@@ -258,7 +258,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_NCC_QuanLyActionPerformed
 
     private void mni_KH_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_KH_QuanLyActionPerformed
-        ManHinh_KH_QuanLy pnl_KH_QuanLy = new ManHinh_KH_QuanLy();
+        ManHinh_KH_QuanLy pnl_KH_QuanLy = null;
+       try {
+           pnl_KH_QuanLy = new ManHinh_KH_QuanLy();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_KH_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -266,7 +271,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_KH_QuanLyActionPerformed
 
     private void mni_KH_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_KH_TimKiemActionPerformed
-        ManHinh_KH_TimKiem pnl_KH_TimKiem = new ManHinh_KH_TimKiem();
+        ManHinh_KH_TimKiem pnl_KH_TimKiem = null;
+       try {
+           pnl_KH_TimKiem = new ManHinh_KH_TimKiem();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_KH_TimKiem);
         pnl_GiaoDienChucNang.revalidate();

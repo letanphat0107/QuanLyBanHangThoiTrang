@@ -1,5 +1,7 @@
 package entity;
 
+import dao.Dao_KhachHang;
+
 public class KhachHang {
 	private String maKH;
 	private String hoTen;
@@ -10,6 +12,20 @@ public class KhachHang {
 	public KhachHang() {
 		// TODO Auto-generated constructor stub
 	}
+	private String auto_ID(){
+        Dao_KhachHang dao_KhachHang = new Dao_KhachHang();
+        String idPrefix = "KH";
+        int length = dao_KhachHang.getAllKhachHang().size();
+        String finalId = idPrefix + String.format("%04d", length + 1);
+        return finalId;
+    }
+        public KhachHang(String hoVaTen, String sdt, String email, String gioiTinh) {
+        this.maKH = auto_ID();
+        this.hoTen = hoVaTen;
+        this.email = email;
+        this.sdt = sdt;
+        this.gioiTinh = gioiTinh;
+    }
 	
 	public KhachHang(String maKH, String hoTen, String email, String sdt, String gioiTinh) {
 		

@@ -3,18 +3,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package qlbhtt;
-
+import connectDB.Connect;
+import dao.Dao_KhachHang;
+import javax.swing.table.DefaultTableModel;
+import entity.KhachHang;
+import java.sql.SQLException;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 /**
  *
  * @author DMX
  */
 public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
-
+    private Dao_KhachHang dao_KhachHang;
+    private DefaultTableModel modelKhachHang;
+    private Connect connect;
+    private boolean kiemTraThem=false;
+    private boolean kiemTraCapNhat=false;
+    
     /**
      * Creates new form quanly
      */
-    public ManHinh_KH_QuanLy() {
+    public ManHinh_KH_QuanLy() throws SQLException {
+        dao_KhachHang = new Dao_KhachHang();
+        connect = new Connect();
+        connect.connect();
         initComponents();
+        
+        docDuLieuKhachHang();
     }
 
     /**
@@ -68,6 +84,11 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
             }
         });
         tbl_KhachHang.setShowGrid(true);
+        tbl_KhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_KhachHangMouseClicked(evt);
+            }
+        });
         scr_DanhSachKhachHang.setViewportView(tbl_KhachHang);
 
         javax.swing.GroupLayout pnl_DanhSachKhachHangLayout = new javax.swing.GroupLayout(pnl_DanhSachKhachHang);
@@ -108,6 +129,8 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
 
         lbl_Email.setText("Email");
 
+        buttonGroup1.add(rad_Nam);
+        rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
         rad_Nam.setEnabled(false);
 
@@ -186,6 +209,11 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
 
         btn_Them.setText("Thêm");
         btn_Them.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
+            }
+        });
 
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
@@ -260,11 +288,26 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_MaKHActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        // TODO add your handling code here:
+        if(btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")){
+            xoaTrang();
+            btn_CapNhat.setText("Hủy");
+            btn_Them.setEnabled(false);
+            btn_Luu.setEnabled(true);
+            kiemTraCapNhat=true;
+            kiemTraTextNhap(true);
+            
+        }else if(btn_CapNhat.getText().equalsIgnoreCase("Hủy")){
+            btn_CapNhat.setText("Cập nhật");
+            huyThaoTacNhap();
+        }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        // TODO add your handling code here:
+        if(kiemTraThem){
+            xuLyThemKhachHang();
+        }else if(kiemTraCapNhat){
+            xuLyCapNhatKhachHang();
+        }
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void txt_SoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoDienThoaiActionPerformed
@@ -275,6 +318,190 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_EmailActionPerformed
 
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        if(btn_Them.getText().equalsIgnoreCase("Thêm")){
+            xoaTrang();
+            btn_Them.setText("Hủy");
+            btn_CapNhat.setEnabled(false);
+            btn_Luu.setEnabled(true);
+            kiemTraThem=true;
+            kiemTraTextNhap(true);
+
+        }else if(btn_Them.getText().equalsIgnoreCase("Hủy")){
+            btn_Them.setText("Thêm");
+            huyThaoTacNhap();   
+        }
+    }//GEN-LAST:event_btn_ThemActionPerformed
+
+    private void tbl_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhachHangMouseClicked
+         int row = tbl_KhachHang.getSelectedRow();
+        if (row != -1) {
+            txt_MaKH.setText(tbl_KhachHang.getValueAt(row, 0).toString());
+            txt_TenKH.setText(tbl_KhachHang.getValueAt(row, 1).toString());
+            if (tbl_KhachHang.getValueAt(row, 2).toString().equalsIgnoreCase("Nam")) {
+                rad_Nam.setSelected(true);
+                rad_Nu.setSelected(false);
+            } else {
+                rad_Nam.setSelected(false);
+                rad_Nu.setSelected(true);
+            }
+            txt_Email.setText(tbl_KhachHang.getValueAt(row, 3).toString());
+            txt_SoDienThoai.setText(tbl_KhachHang.getValueAt(row, 4).toString());
+    } 
+    }//GEN-LAST:event_tbl_KhachHangMouseClicked
+/**
+     * Huy thao tac hoat dong cua componet
+     */
+    private void huyThaoTacNhap(){
+        kiemTraCapNhat=false;
+        kiemTraThem=false;
+        btn_CapNhat.setText("Cập nhật");
+        btn_Them.setText("Thêm");
+        btn_Luu.setEnabled(false);
+        btn_CapNhat.setEnabled(true);
+        btn_Them.setEnabled(true);
+        kiemTraTextNhap(false);
+        xoaTrang();
+    }
+    /**
+     * Kiem tra hoat dong cua cac JtextField
+     */
+    public void kiemTraTextNhap(boolean kiemTra){
+        txt_TenKH.setEditable(kiemTra);
+        txt_Email.setEditable(kiemTra);
+        txt_SoDienThoai.setEditable(kiemTra);
+        rad_Nam.setEnabled(kiemTra);
+        rad_Nu.setEnabled(kiemTra);
+    }
+   
+    public void xoaTrang() {
+        txt_MaKH.setText("");
+        txt_TenKH.setText("");
+        txt_Email.setText("");
+        txt_SoDienThoai.setText("");
+        rad_Nam.setSelected(false);
+        rad_Nu.setSelected(false);
+    }
+
+    public void docDuLieuKhachHang() {
+        modelKhachHang = (DefaultTableModel) tbl_KhachHang.getModel();
+        for (KhachHang kh : dao_KhachHang.getAllKhachHang()) {
+            Object[] object = new Object[5];
+            object[0] = kh.getMaKH();
+            object[1] = kh.getHoTen();
+            object[2] = kh.getGioiTinh();
+            object[3] = kh.getEmail();
+            object[4] = kh.getSdt();
+            
+            modelKhachHang.addRow(object);
+        }
+    }
+
+    public boolean isValidateData() {
+        String gt="";
+        String tenKhachHang=txt_TenKH.getText();
+        if(rad_Nam.isSelected()){
+            gt=rad_Nam.getText();
+        }
+        if(rad_Nu.isSelected()){
+            gt=rad_Nu.getText();
+        }
+        String email = txt_Email.getText();
+        String sdt = txt_SoDienThoai.getText();
+
+        String regexSDT = "^[0-9]{10}$"; //0367494954
+        String regexEmail = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)$"; //vana@gmail.com
+
+        if (txt_TenKH.getText().equals("") || txt_Email.getText().equals("") || txt_SoDienThoai.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin.");
+            return false;
+
+        }
+        if (!email.matches(regexEmail)) {
+            JOptionPane.showMessageDialog(null, "Email không đúng định dạng!");
+            return false;
+        }
+        if (!sdt.matches(regexSDT)) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại phải đủ 10 số!");
+            return false;
+        }
+        
+        if (tenKhachHang.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(null, "Tên Khách hàng không chứa số!");
+            return false;
+        }
+        return true;
+    }
+
+    public void xuLyThemKhachHang() {
+        if (!isValidateData()) {
+            return;
+        }
+        String gt = "";
+        String maKH = txt_MaKH.getText();
+        String tenKhachHang = txt_TenKH.getText();
+        if (rad_Nam.isSelected()) {
+            gt = rad_Nam.getText();
+        }
+        if (rad_Nu.isSelected()) {
+            gt = rad_Nu.getText();
+        }
+        String email = txt_Email.getText();
+        String sdt = txt_SoDienThoai.getText();
+
+        KhachHang kh = new KhachHang(tenKhachHang,sdt, email,  gt);
+        dao_KhachHang.themKhachHang(kh);
+
+        modelKhachHang =(DefaultTableModel) tbl_KhachHang.getModel();
+        Object[] object = new Object[5];
+        object[0] = kh.getMaKH();
+        object[1] = kh.getHoTen();
+        object[2] = kh.getGioiTinh();
+        object[3] = kh.getEmail();
+        object[4] = kh.getSdt();
+        
+        modelKhachHang.addRow(object);
+        xoaTrang();
+        JOptionPane.showMessageDialog(this, "Thêm thành công");
+    }
+    public void xuLyCapNhatKhachHang(){
+        if (!isValidateData()) {
+            return;
+        }
+        String gt="";
+        if (rad_Nam.isSelected()) {
+            gt = rad_Nam.getText();
+        }
+        if (rad_Nu.isSelected()) {
+            gt = rad_Nu.getText();
+        }
+        String maKH=txt_MaKH.getText();
+        String hoTen=txt_TenKH.getText();
+        String email=txt_Email.getText();
+        String soDienThoai=txt_SoDienThoai.getText();
+        
+        KhachHang kh=new KhachHang(maKH, hoTen, email,soDienThoai, gt);
+       
+        int row=tbl_KhachHang.getSelectedRow();
+        if(row!=0){
+            dao_KhachHang.capNhatKhachHang(kh);
+            for (int i = 0; i < tbl_KhachHang.getRowCount(); i++) {
+                String maKH_update=tbl_KhachHang.getValueAt(row, 0).toString();
+                if(maKH_update.equalsIgnoreCase(maKH)){
+                    tbl_KhachHang.setValueAt(hoTen, row, 1);
+                    tbl_KhachHang.setValueAt(gt, row, 2);
+                    tbl_KhachHang.setValueAt(email, row, 3);
+                    tbl_KhachHang.setValueAt(soDienThoai, row, 4);
+                }
+                
+            }
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
+            xoaTrang();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Cập nhật không thành công");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_CapNhat;
