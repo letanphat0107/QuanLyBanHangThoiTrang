@@ -68,6 +68,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbl_TaiKhoan.setRowHeight(28);
         tbl_TaiKhoan.setShowGrid(true);
         scr_DanhSachTaiKhoan.setViewportView(tbl_TaiKhoan);
 
@@ -176,7 +177,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_DoiMatKhau.setBackground(new java.awt.Color(255, 255, 255));
         btn_DoiMatKhau.setForeground(new java.awt.Color(0, 0, 0));
         btn_DoiMatKhau.setText("Đổi mật khẩu");
         btn_DoiMatKhau.setBorder(null);

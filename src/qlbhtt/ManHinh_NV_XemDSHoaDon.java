@@ -67,6 +67,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbl_HoaDon.setRowHeight(28);
         tbl_HoaDon.setShowGrid(true);
         scr_DanhSachHoaDon.setViewportView(tbl_HoaDon);
 
@@ -94,6 +95,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbl_CTHD.setRowHeight(28);
         tbl_CTHD.setShowGrid(true);
         scr_DanhSachCTHD.setViewportView(tbl_CTHD);
 

@@ -62,6 +62,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         btn_Them = new javax.swing.JButton();
         btn_CapNhat = new javax.swing.JButton();
         btn_Luu = new javax.swing.JButton();
+        btn_XoaTrang = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(199, 210, 213));
         setMinimumSize(new java.awt.Dimension(1000, 550));
@@ -83,6 +84,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbl_KhachHang.setRowHeight(28);
         tbl_KhachHang.setShowGrid(true);
         tbl_KhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -231,6 +233,14 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
             }
         });
 
+        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setBorder(null);
+        btn_XoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaTrangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
         pnl_NutChucNangLayout.setHorizontalGroup(
@@ -240,19 +250,22 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+                    .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -349,6 +362,10 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
             txt_SoDienThoai.setText(tbl_KhachHang.getValueAt(row, 4).toString());
     } 
     }//GEN-LAST:event_tbl_KhachHangMouseClicked
+
+    private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_XoaTrangActionPerformed
 /**
      * Huy thao tac hoat dong cua componet
      */
@@ -507,6 +524,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
     private javax.swing.JButton btn_CapNhat;
     private javax.swing.JButton btn_Luu;
     private javax.swing.JButton btn_Them;
+    private javax.swing.JButton btn_XoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_GioiTinh;

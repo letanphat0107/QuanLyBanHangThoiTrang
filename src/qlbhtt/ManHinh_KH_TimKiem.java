@@ -59,6 +59,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         txt_Email = new javax.swing.JTextField();
         pnl_NutChucNang = new javax.swing.JPanel();
         btn_TimKiem = new javax.swing.JButton();
+        btn_XoaTrang = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(199, 210, 213));
         setMinimumSize(new java.awt.Dimension(1000, 550));
@@ -80,6 +81,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbl_KhachHang.setRowHeight(28);
         tbl_KhachHang.setShowGrid(true);
         scr_DanhSachKhachHang.setViewportView(tbl_KhachHang);
 
@@ -201,13 +203,23 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
             }
         });
 
+        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setBorder(null);
+        btn_XoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaTrangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -215,6 +227,8 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -262,6 +276,10 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         // TODO add your handling code here:
         xuLyTiemKiemKhachHang();
     }//GEN-LAST:event_btn_TimKiemActionPerformed
+
+    private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_XoaTrangActionPerformed
     private void clearTable() {
         DefaultTableModel dtm = (DefaultTableModel) tbl_KhachHang.getModel();
         dtm.setRowCount(0);
@@ -317,6 +335,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;
+    private javax.swing.JButton btn_XoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_GioiTinh;

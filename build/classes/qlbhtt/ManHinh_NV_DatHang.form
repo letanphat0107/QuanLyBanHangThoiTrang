@@ -32,11 +32,9 @@
       <Group type="103" groupAlignment="1" attributes="0">
           <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="pnl_ThongTin" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,11 +42,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="pnl_ThongTin" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="pnl_NutChucNang" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -61,14 +59,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="scr_DanhSachSanPham" max="32767" attributes="0"/>
+              <Component id="pnl_DieuChinhGioHang" alignment="0" max="32767" attributes="0"/>
               <Component id="pnl_GioHang" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="pnl_DieuChinhGioHang" max="32767" attributes="0"/>
-                      <Component id="scr_DanhSachSanPham" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -218,6 +211,7 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
+                <Property name="rowHeight" type="int" value="28"/>
                 <Property name="showGrid" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -241,16 +235,16 @@
                       <Component id="lbl_NhapSoLuong" min="-2" pref="99" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_SoLuongNhap" min="-2" pref="112" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="btn_Giam" min="-2" pref="72" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="btn_Them" min="-2" pref="72" max="-2" attributes="0"/>
-                      <EmptySpace pref="294" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbl_TongTienGioHang" min="-2" pref="118" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_TongTienGioHang" min="-2" pref="105" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txt_DonViGia" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lbl_DonViGia" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -265,7 +259,7 @@
                           <Component id="txt_SoLuongNhap" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_Them" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="txt_TongTienGioHang" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_DonViGia" alignment="3" max="32767" attributes="0"/>
+                          <Component id="lbl_DonViGia" alignment="3" max="32767" attributes="0"/>
                           <Component id="btn_Giam" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -314,7 +308,7 @@
                 <Property name="text" type="java.lang.String" value="250000"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="txt_DonViGia">
+            <Component class="javax.swing.JLabel" name="lbl_DonViGia">
               <Properties>
                 <Property name="text" type="java.lang.String" value="vnd"/>
               </Properties>
@@ -331,10 +325,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="scr_GioHang" min="-2" pref="1000" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="scr_GioHang" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -481,6 +472,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="rowHeight" type="int" value="28"/>
                     <Property name="showGrid" type="boolean" value="true"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -509,31 +501,31 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lbl_MaSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="lbl_PhanLoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="lbl_TenSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="txt_MaSP" max="32767" attributes="0"/>
-                          <Component id="cmb_PhanLoai" pref="150" max="32767" attributes="0"/>
+                          <Component id="cmb_PhanLoai" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txt_TenSP" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="cmb_KichThuoc" pref="144" max="32767" attributes="0"/>
+                      <Component id="cmb_KichThuoc" max="32767" attributes="0"/>
                       <Component id="lbl_KichThuoc" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="lbl_MauSac" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="lbl_GiaBan" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="cmb_MauSac" max="32767" attributes="0"/>
-                      <Component id="txt_GiaBan" max="32767" attributes="0"/>
+                      <Component id="txt_GiaBan" min="-2" pref="144" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Component id="pnl_HinhAnhSanPham" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="pnl_KhuVucTTKhachHang" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -541,7 +533,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                           <Component id="pnl_HinhAnhSanPham" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -583,7 +575,7 @@
                       </Group>
                       <Component id="pnl_KhuVucTTKhachHang" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="107" max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -715,6 +707,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_GiaBan">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="SP001"/>
           </Properties>
           <Events>
@@ -728,8 +721,14 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="T&#xec;m ki&#x1ebf;m kh&#xe1;ch h&#xe0;ng"/>
+                <TitledBorder title="Th&#xf4;ng tin kh&#xe1;ch h&#xe0;ng">
+                  <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
+                  <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
+                </TitledBorder>
               </Border>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
           </Properties>
 
@@ -739,11 +738,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_TenKH" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="lbl_TenKH" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="txt_SoDienThoai" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="lbl_SoDienThoai" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_TenKH" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="lbl_TenKH" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="txt_SoDienThoai" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="lbl_SoDienThoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_ThemKhachHang" min="-2" max="-2" attributes="0"/>
@@ -753,20 +752,20 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="lbl_SoDienThoai" min="-2" pref="19" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="txt_SoDienThoai" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_TenKH" min="-2" pref="19" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="txt_TenKH" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_ThemKhachHang" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -826,8 +825,8 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="btn_DatHang" min="-2" pref="84" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="btn_LapHoaDon" min="-2" pref="95" max="-2" attributes="0"/>
                   <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -836,14 +835,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                  <Component id="btn_DatHang" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="124" max="32767" attributes="0"/>
+                  <Component id="btn_LapHoaDon" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btn_DatHang">
+        <Component class="javax.swing.JButton" name="btn_LapHoaDon">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1eb7;t h&#xe0;ng"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

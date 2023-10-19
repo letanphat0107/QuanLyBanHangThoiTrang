@@ -82,6 +82,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbl_NhaCungCap.setRowHeight(28);
         tbl_NhaCungCap.setShowGrid(true);
         tbl_NhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

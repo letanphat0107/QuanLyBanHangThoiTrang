@@ -77,6 +77,7 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbl_NhaCungCap.setRowHeight(28);
         tbl_NhaCungCap.setShowGrid(true);
         scr_DanhSachNCC.setViewportView(tbl_NhaCungCap);
 

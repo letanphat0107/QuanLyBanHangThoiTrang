@@ -32,8 +32,8 @@
       <Group type="103" groupAlignment="1" attributes="0">
           <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-              <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnl_ThongTin" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -60,7 +60,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="scr_DanhSachSanPham" alignment="0" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachSanPham" alignment="0" pref="1000" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -80,7 +80,7 @@
             <Component class="javax.swing.JTable" name="tbl_SanPham">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="10" rowCount="7">
+                  <Table columnCount="10" rowCount="11">
                     <Column editable="true" title="M&#xe3; s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String">
                       <Data value="SP0001"/>
                       <Data value="null"/>
@@ -89,9 +89,17 @@
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value=""/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String">
                       <Data value="&#xc1;o thun"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -107,9 +115,17 @@
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="Gi&#xe1; b&#xe1;n " type="java.lang.String">
                       <Data value="250000"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -125,9 +141,17 @@
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="K&#xed;ch c&#x1ee1;" type="java.lang.String">
                       <Data value="L"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -143,9 +167,17 @@
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="Ch&#x1ea5;t li&#x1ec7;u" type="java.lang.String">
                       <Data value="Cotton"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -161,9 +193,17 @@
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n" type="java.lang.String">
                       <Data value="10"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -227,6 +267,7 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
+                <Property name="rowHeight" type="int" value="28"/>
                 <Property name="showGrid" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -253,20 +294,20 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lbl_MaSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="lbl_PhanLoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="lbl_TenSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="txt_MaSP" max="32767" attributes="0"/>
-                          <Component id="cmb_PhanLoai" pref="150" max="32767" attributes="0"/>
+                          <Component id="cmb_PhanLoai" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txt_TenSP" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_NCC" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="lbl_MauSac" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
@@ -277,29 +318,29 @@
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lbl_KichThuoc" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_GiaBan" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="txt_GiaBan" alignment="0" max="32767" attributes="0"/>
                               <Component id="lbl_GiaBan" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="lbl_GiaNhap" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_GiaNhap" alignment="0" pref="150" max="32767" attributes="0"/>
-                              <Component id="cmb_KichThuoc" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_GiaNhap" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cmb_KichThuoc" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txt_SoLuong" pref="150" max="32767" attributes="0"/>
+                              <Component id="txt_SoLuong" max="32767" attributes="0"/>
                               <Component id="lbl_SoLuong" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="pnl_HinhAnhSanPham" alignment="0" max="32767" attributes="0"/>
+                              <Component id="pnl_HinhAnhSanPham" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="cmb_MauSac" min="-2" pref="144" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="116" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_MaSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="lbl_NCC" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
@@ -314,7 +355,7 @@
                       <Component id="cmb_NCC" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbl_TenSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
@@ -345,7 +386,7 @@
                           <Component id="pnl_HinhAnhSanPham" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -458,7 +499,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbl_HinhAnhSP" max="32767" attributes="0"/>
+                      <Component id="lbl_HinhAnhSP" pref="138" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -556,7 +597,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="btn_TimKiem" min="-2" pref="72" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btn_XoaTrang" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="btn_TimKiem" min="-2" pref="72" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -566,6 +610,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btn_TimKiem" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_XoaTrang" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -575,6 +621,14 @@
         <Component class="javax.swing.JButton" name="btn_TimKiem">
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_XoaTrang">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="X&#xf3;a tr&#x1eaf;ng"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
