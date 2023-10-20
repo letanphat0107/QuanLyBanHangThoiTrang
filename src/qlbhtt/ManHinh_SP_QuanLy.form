@@ -31,11 +31,12 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="1" attributes="0">
           <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
+              <Component id="pnl_ThongTin" min="-2" pref="834" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,8 +46,8 @@
               <Component id="pnl_DanhSachSanPham" max="32767" attributes="0"/>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
                   <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -58,7 +59,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="scr_DanhSachSanPham" alignment="0" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachSanPham" alignment="0" pref="1000" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -276,29 +277,29 @@
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lbl_KichThuoc" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_GiaBan" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="txt_GiaBan" alignment="0" max="32767" attributes="0"/>
                               <Component id="lbl_GiaBan" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="lbl_giaNhap" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_GiaNhap" alignment="0" pref="150" max="32767" attributes="0"/>
-                              <Component id="cmb_KichThuoc" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_GiaNhap" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cmb_KichThuoc" alignment="0" pref="150" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="cmb_MauSac" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="lbl_SoLuong" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_SoLuong" pref="150" max="32767" attributes="0"/>
-                              <Component id="pnl_HinhAnhSP" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txt_SoLuong" alignment="0" pref="133" max="32767" attributes="0"/>
+                              <Component id="pnl_HinhAnhSP" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_ChonAnh" pref="62" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btn_ChonAnh" min="-2" pref="96" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -308,16 +309,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lbl_MaSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="lbl_NCC" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="lbl_KichThuoc" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="lbl_SoLuong" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btn_ChonAnh" min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_MaSP" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lbl_NCC" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lbl_KichThuoc" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lbl_SoLuong" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txt_MaSP" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="txt_SoLuong" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
@@ -357,6 +357,7 @@
                               </Group>
                           </Group>
                       </Group>
+                      <Component id="btn_ChonAnh" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
@@ -561,12 +562,18 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_ChonAnh">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-picture-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n &#x1ea2;nh"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ChonAnhMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ChonAnhMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ChonAnhActionPerformed"/>
           </Events>
         </Component>
@@ -583,14 +590,13 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_CapNhat" max="32767" attributes="0"/>
-                      <Component id="btn_Xoa" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btn_Them" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btn_Luu" alignment="0" pref="72" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="btn_CapNhat" pref="90" max="32767" attributes="0"/>
+                      <Component id="btn_Xoa" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btn_Them" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btn_Luu" alignment="1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -613,42 +619,65 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btn_Them">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-add-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemMouseExited"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Xoa">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-delete-document-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_XoaMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_XoaMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_CapNhat">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-update-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_CapNhatMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_CapNhatMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CapNhatActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Luu">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-save-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LuuMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LuuMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LuuActionPerformed"/>
           </Events>
         </Component>

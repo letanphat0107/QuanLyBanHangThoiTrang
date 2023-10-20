@@ -4,6 +4,9 @@
  */
 package qlbhtt;
 
+import java.awt.Color;
+import javax.swing.UIManager;
+
 /**
  *
  * @author DMX
@@ -93,7 +96,7 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
         pnl_DanhSachSanPham.setLayout(pnl_DanhSachSanPhamLayout);
         pnl_DanhSachSanPhamLayout.setHorizontalGroup(
             pnl_DanhSachSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachSanPham)
+            .addComponent(scr_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         pnl_DanhSachSanPhamLayout.setVerticalGroup(
             pnl_DanhSachSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,8 +198,18 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
 
         cmb_NCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CT THHH Hades" }));
 
+        btn_ChonAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-picture-30.png"))); // NOI18N
         btn_ChonAnh.setText("Chọn Ảnh");
         btn_ChonAnh.setBorder(null);
+        btn_ChonAnh.setEnabled(false);
+        btn_ChonAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_ChonAnhMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_ChonAnhMouseExited(evt);
+            }
+        });
         btn_ChonAnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ChonAnhActionPerformed(evt);
@@ -229,11 +242,11 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
                         .addGap(46, 46, 46)
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbl_KichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_GiaBan, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txt_GiaBan)
                             .addComponent(lbl_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_giaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_GiaNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(cmb_KichThuoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txt_GiaNhap)
+                            .addComponent(cmb_KichThuoc, 0, 150, Short.MAX_VALUE)))
                     .addComponent(cmb_MauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,26 +254,25 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
                         .addComponent(lbl_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
-                        .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_ChonAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                        .addGap(67, 67, 67))))
+                        .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_SoLuong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_ChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127))))
         );
         pnl_ThongTinLayout.setVerticalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
+                .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_NCC, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_KichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_ChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
-                        .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_NCC, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_KichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,33 +302,71 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
                                     .addComponent(cmb_PhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                                .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                    .addComponent(btn_ChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
+        btn_Them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-add-30.png"))); // NOI18N
         btn_Them.setText("Thêm");
         btn_Them.setBorder(null);
+        btn_Them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_ThemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_ThemMouseExited(evt);
+            }
+        });
 
+        btn_Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
         btn_Xoa.setText("Xóa");
         btn_Xoa.setBorder(null);
+        btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_XoaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_XoaMouseExited(evt);
+            }
+        });
         btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_XoaActionPerformed(evt);
             }
         });
 
+        btn_CapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-update-30.png"))); // NOI18N
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
+        btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_CapNhatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_CapNhatMouseExited(evt);
+            }
+        });
         btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CapNhatActionPerformed(evt);
             }
         });
 
+        btn_Luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-save-30.png"))); // NOI18N
         btn_Luu.setText("Lưu");
         btn_Luu.setBorder(null);
+        btn_Luu.setEnabled(false);
+        btn_Luu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_LuuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_LuuMouseExited(evt);
+            }
+        });
         btn_Luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_LuuActionPerformed(evt);
@@ -328,13 +378,12 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,11 +404,12 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(pnl_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,8 +417,8 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
                 .addComponent(pnl_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -409,6 +459,72 @@ public class ManHinh_SP_QuanLy extends javax.swing.JPanel {
     private void btn_ChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonAnhActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ChonAnhActionPerformed
+
+    private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered
+         if(btn_Them.isEnabled()) {
+            btn_Them.setBackground(new Color(0x9EDDFF));
+            btn_Them.setForeground(new Color(0x141E46));
+       }
+    }//GEN-LAST:event_btn_ThemMouseEntered
+
+    private void btn_ThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseExited
+        if(btn_Them.isEnabled()) {
+            btn_Them.setBackground(UIManager.getColor("Menu.background"));
+            btn_Them.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_ThemMouseExited
+
+    private void btn_XoaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseEntered
+        if(btn_Xoa.isEnabled()) {
+            btn_Xoa.setBackground(new Color(0x9EDDFF));
+            btn_Xoa.setForeground(new Color(0x141E46));
+       }
+    }//GEN-LAST:event_btn_XoaMouseEntered
+
+    private void btn_XoaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseExited
+        if(btn_Xoa.isEnabled()) {
+            btn_Xoa.setBackground(UIManager.getColor("Menu.background"));
+            btn_Xoa.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_XoaMouseExited
+
+    private void btn_CapNhatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseEntered
+        if(btn_CapNhat.isEnabled()) {
+        btn_CapNhat.setBackground(new Color(0x9EDDFF));
+       btn_CapNhat.setForeground(new Color(0x141E46));}
+    }//GEN-LAST:event_btn_CapNhatMouseEntered
+
+    private void btn_CapNhatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseExited
+        if(btn_CapNhat.isEnabled()) {
+        btn_CapNhat.setBackground(UIManager.getColor("Menu.background"));
+        btn_CapNhat.setForeground(UIManager.getColor("Menu.foreground"));}
+    }//GEN-LAST:event_btn_CapNhatMouseExited
+
+    private void btn_LuuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseEntered
+        if(btn_Luu.isEnabled()) {
+        btn_Luu.setBackground(new Color(0x9EDDFF));
+       btn_Luu.setForeground(new Color(0x141E46));}
+    }//GEN-LAST:event_btn_LuuMouseEntered
+
+    private void btn_LuuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseExited
+        if(btn_Luu.isEnabled()) {
+        btn_Luu.setBackground(UIManager.getColor("Menu.background"));
+        btn_Luu.setForeground(UIManager.getColor("Menu.foreground"));}
+    }//GEN-LAST:event_btn_LuuMouseExited
+
+    private void btn_ChonAnhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ChonAnhMouseEntered
+        if(btn_ChonAnh.isEnabled()) {
+            btn_ChonAnh.setBackground(new Color(0x9EDDFF));
+            btn_ChonAnh.setForeground(new Color(0x141E46));
+       }
+    }//GEN-LAST:event_btn_ChonAnhMouseEntered
+
+    private void btn_ChonAnhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ChonAnhMouseExited
+        if(btn_ChonAnh.isEnabled()) {
+            btn_ChonAnh.setBackground(UIManager.getColor("Menu.background"));
+            btn_ChonAnh.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_ChonAnhMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

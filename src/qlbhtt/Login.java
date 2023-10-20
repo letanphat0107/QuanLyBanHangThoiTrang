@@ -62,8 +62,9 @@ public class Login extends javax.swing.JFrame {
         pnl_ManHinhDangNhap.setMaximumSize(new java.awt.Dimension(870, 521));
         pnl_ManHinhDangNhap.setMinimumSize(new java.awt.Dimension(870, 521));
 
-        pnl_FormDangNhap.setBackground(new java.awt.Color(204, 204, 204));
+        pnl_FormDangNhap.setBackground(new java.awt.Color(216, 217, 218));
 
+        txt_Username.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         txt_Username.setText("admin");
         txt_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +72,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        txt_Password.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         txt_Password.setText("admin");
         txt_Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +80,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btn_Login.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_Login.setBackground(new java.awt.Color(97, 103, 122));
+        btn_Login.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        btn_Login.setForeground(new java.awt.Color(242, 242, 242));
         btn_Login.setText("Đăng nhập");
         btn_Login.setBorder(null);
         btn_Login.addActionListener(new java.awt.event.ActionListener() {
@@ -87,17 +91,21 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        lbl_Password.setForeground(new java.awt.Color(51, 51, 51));
+        lbl_Password.setBackground(new java.awt.Color(216, 217, 218));
+        lbl_Password.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lbl_Password.setForeground(new java.awt.Color(97, 103, 122));
         lbl_Password.setText("Mật khẩu");
 
-        lbl_Title.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbl_Title.setForeground(new java.awt.Color(51, 51, 51));
+        lbl_Title.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
+        lbl_Title.setForeground(new java.awt.Color(97, 103, 122));
         lbl_Title.setText("Đăng nhập");
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8_Secure_50px.png"))); // NOI18N
 
-        lbl_Password1.setForeground(new java.awt.Color(51, 51, 51));
+        lbl_Password1.setBackground(new java.awt.Color(216, 217, 218));
+        lbl_Password1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lbl_Password1.setForeground(new java.awt.Color(97, 103, 122));
         lbl_Password1.setText("Tài khoản");
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));

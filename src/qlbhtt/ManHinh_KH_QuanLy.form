@@ -37,7 +37,7 @@
           <Component id="pnl_DanhSachKhachHang" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Component id="pnl_ThongTin" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -48,10 +48,7 @@
               <Component id="pnl_DanhSachKhachHang" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="pnl_ThongTin" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="pnl_NutChucNang" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="pnl_NutChucNang" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -177,7 +174,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="349" max="32767" attributes="0"/>
+                  <EmptySpace pref="342" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -231,33 +228,54 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_MaKH">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="M&#xe3; kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_TenKH">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="T&#xea;n kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_GioiTinh">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gi&#x1edb;i t&#xed;nh"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_SoDienThoai">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_Email">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Email"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rad_Nam">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="d5" green="d2" red="c7" type="rgb"/>
+            </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f2" green="f2" red="f2" type="rgb"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Nam"/>
@@ -266,8 +284,14 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="rad_Nu">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="d5" green="d2" red="c7" type="rgb"/>
+            </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f2" green="f2" red="f2" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="N&#x1eef;"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -306,10 +330,10 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btn_CapNhat" max="32767" attributes="0"/>
                       <Component id="btn_Them" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btn_Luu" alignment="0" pref="72" max="32767" attributes="0"/>
-                      <Component id="btn_XoaTrang" alignment="0" pref="72" max="32767" attributes="0"/>
+                      <Component id="btn_Luu" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btn_XoaTrang" alignment="0" pref="95" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -332,6 +356,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btn_Them">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-add-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -340,39 +367,57 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_CapNhat">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-update-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_CapNhatMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_CapNhatMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CapNhatActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Luu">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-save-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LuuMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LuuMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LuuActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_XoaTrang">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-delete-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="X&#xf3;a tr&#x1eaf;ng"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_XoaTrangMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_XoaTrangMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaTrangActionPerformed"/>
           </Events>
         </Component>

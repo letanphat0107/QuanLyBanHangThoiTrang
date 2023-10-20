@@ -223,7 +223,7 @@
         <Container class="javax.swing.JPanel" name="pnl_DieuChinhGioHang">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
           </Properties>
 
@@ -236,9 +236,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_SoLuongNhap" min="-2" pref="112" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="btn_Giam" min="-2" pref="72" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="btn_Them" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="btn_Giam" min="-2" pref="72" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbl_TongTienGioHang" min="-2" pref="118" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -257,10 +257,10 @@
                           <Component id="lbl_NhapSoLuong" alignment="3" max="32767" attributes="0"/>
                           <Component id="lbl_TongTienGioHang" alignment="3" max="32767" attributes="0"/>
                           <Component id="txt_SoLuongNhap" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_Them" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="btn_Giam" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="txt_TongTienGioHang" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_DonViGia" alignment="3" max="32767" attributes="0"/>
-                          <Component id="btn_Giam" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="btn_Them" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -280,27 +280,35 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txt_SoLuongNhap">
             </Component>
-            <Component class="javax.swing.JButton" name="btn_Them">
+            <Component class="javax.swing.JButton" name="btn_Giam">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="d5" green="d2" red="c7" type="rgb"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imageGD/icons8-delete-cart-25.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_GiamMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_GiamMouseExited"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_Giam">
+            <Component class="javax.swing.JButton" name="btn_Them">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="d5" green="d2" red="c7" type="rgb"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imageGD/icons8-buy-cart-27.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_TongTienGioHang">
               <Properties>
@@ -673,6 +681,7 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="cmb_KichThuoc">
           <Properties>
+            <Property name="editable" type="boolean" value="true"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
                 <StringItem index="0" value="L"/>
@@ -723,12 +732,8 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Th&#xf4;ng tin kh&#xe1;ch h&#xe0;ng">
                   <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
-                  <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
                 </TitledBorder>
               </Border>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
           </Properties>
 
@@ -738,15 +743,26 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_TenKH" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="lbl_TenKH" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="txt_SoDienThoai" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="lbl_SoDienThoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="btn_TimKH" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btn_ThemKhachHang" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lbl_TenKH" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="lbl_SoDienThoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txt_TenKH" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_SoDienThoai" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btn_ThemKhachHang" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -754,16 +770,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lbl_SoDienThoai" min="-2" pref="19" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="txt_SoDienThoai" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txt_SoDienThoai" min="-2" pref="26" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_TenKH" min="-2" pref="19" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="txt_TenKH" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TenKH" min="-2" pref="26" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_ThemKhachHang" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btn_TimKH" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
@@ -784,12 +800,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TenKHActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btn_TimKH">
               <Properties>
-                <Property name="text" type="java.lang.String" value="T&#xec;m Kh&#xe1;ch H&#xe0;ng"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imageGD/icons8-search-client-30.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#xec;m "/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_TimKHMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_TimKHMouseExited"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_TimKHActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_SoDienThoai">
@@ -804,9 +825,14 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_ThemKhachHang">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imageGD/icons8-add-30.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemKhachHangMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemKhachHangMouseExited"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemKhachHangActionPerformed"/>
               </Events>
             </Component>
@@ -844,11 +870,18 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btn_LapHoaDon">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imageGD/icons8-order-30.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1eb7;t h&#xe0;ng"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LapHoaDonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LapHoaDonMouseExited"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

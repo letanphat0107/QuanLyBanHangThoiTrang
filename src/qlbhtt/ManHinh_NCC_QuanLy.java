@@ -7,8 +7,10 @@ package qlbhtt;
 import connectDB.Connect;
 import dao.Dao_NhaCungCap;
 import entity.NhaCungCap;
+import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -194,34 +196,71 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
+        btn_Them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-add-30.png"))); // NOI18N
         btn_Them.setText("Thêm");
         btn_Them.setBorder(null);
+        btn_Them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_ThemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_ThemMouseExited(evt);
+            }
+        });
         btn_Them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ThemActionPerformed(evt);
             }
         });
 
+        btn_CapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-update-30.png"))); // NOI18N
         btn_CapNhat.setText("Cập nhật");
         btn_CapNhat.setBorder(null);
+        btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_CapNhatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_CapNhatMouseExited(evt);
+            }
+        });
         btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CapNhatActionPerformed(evt);
             }
         });
 
+        btn_Luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-save-30.png"))); // NOI18N
         btn_Luu.setText("Lưu");
         btn_Luu.setBorder(null);
+        btn_Luu.setEnabled(false);
+        btn_Luu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_LuuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_LuuMouseExited(evt);
+            }
+        });
         btn_Luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_LuuActionPerformed(evt);
             }
         });
 
+        btn_Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
         btn_Xoa.setText("Xóa");
         btn_Xoa.setBorder(null);
         btn_Xoa.setMinimumSize(new java.awt.Dimension(20, 30));
         btn_Xoa.setPreferredSize(new java.awt.Dimension(20, 30));
+        btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_XoaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_XoaMouseExited(evt);
+            }
+        });
         btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_XoaActionPerformed(evt);
@@ -235,11 +274,11 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                    .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,8 +290,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -348,6 +387,62 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
            txt_DiaChi.setText(tbl_NhaCungCap.getValueAt(row, 4).toString());           
        }
     }//GEN-LAST:event_tbl_NhaCungCapMouseClicked
+
+    private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered
+        if(btn_Them.isEnabled()){
+            btn_Them.setBackground(new Color(0x9EDDFF));
+            btn_Them.setForeground(new Color(0x141E46));
+        }
+    }//GEN-LAST:event_btn_ThemMouseEntered
+
+    private void btn_ThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseExited
+        if(btn_Them.isEnabled()){
+            btn_Them.setBackground(UIManager.getColor("Menu.background"));
+            btn_Them.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_ThemMouseExited
+
+    private void btn_XoaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseEntered
+         if(btn_Xoa.isEnabled()) {
+            btn_Xoa.setBackground(new Color(0x9EDDFF));
+            btn_Xoa.setForeground(new Color(0x141E46));
+        }
+    }//GEN-LAST:event_btn_XoaMouseEntered
+
+    private void btn_XoaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseExited
+        if(btn_Xoa.isEnabled()) {
+            btn_Xoa.setBackground(UIManager.getColor("Menu.background"));
+            btn_Xoa.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_XoaMouseExited
+
+    private void btn_CapNhatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseEntered
+        if(btn_CapNhat.isEnabled()) {
+            btn_CapNhat.setBackground(new Color(0x9EDDFF));
+            btn_CapNhat.setForeground(new Color(0x141E46));
+        }
+    }//GEN-LAST:event_btn_CapNhatMouseEntered
+
+    private void btn_CapNhatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseExited
+        if(btn_CapNhat.isEnabled()) {
+            btn_CapNhat.setBackground(UIManager.getColor("Menu.background"));
+            btn_CapNhat.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_CapNhatMouseExited
+
+    private void btn_LuuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseEntered
+        if(btn_Luu.isEnabled()) {
+            btn_Luu.setBackground(new Color(0x9EDDFF));
+            btn_Luu.setForeground(new Color(0x141E46));
+        }
+    }//GEN-LAST:event_btn_LuuMouseEntered
+
+    private void btn_LuuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseExited
+        if(btn_Luu.isEnabled()) {
+            btn_Luu.setBackground(UIManager.getColor("Menu.background"));
+            btn_Luu.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_LuuMouseExited
 
     /**
      * Kiem tra hoat dong cua cac JtextField

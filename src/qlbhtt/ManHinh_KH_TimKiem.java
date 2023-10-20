@@ -8,8 +8,10 @@ import connectDB.Connect;
 import dao.Dao_KhachHang;
 import javax.swing.table.DefaultTableModel;
 import entity.KhachHang;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.UIManager;
 
 /**
  *
@@ -195,16 +197,34 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
+        btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-search-30.png"))); // NOI18N
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
+        btn_TimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseExited(evt);
+            }
+        });
         btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_TimKiemActionPerformed(evt);
             }
         });
 
+        btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
         btn_XoaTrang.setText("Xóa trắng");
         btn_XoaTrang.setBorder(null);
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseExited(evt);
+            }
+        });
         btn_XoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_XoaTrangActionPerformed(evt);
@@ -216,10 +236,10 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_TimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -280,6 +300,26 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
+
+    private void btn_TimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseEntered
+        btn_TimKiem.setBackground(new Color(0x9EDDFF));
+        btn_TimKiem.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_TimKiemMouseEntered
+
+    private void btn_TimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseExited
+        btn_TimKiem.setBackground(UIManager.getColor("Menu.background"));
+        btn_TimKiem.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_TimKiemMouseExited
+
+    private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
+        btn_XoaTrang.setBackground(new Color(0x9EDDFF));
+        btn_XoaTrang.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_XoaTrangMouseEntered
+
+    private void btn_XoaTrangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseExited
+        btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
+        btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_XoaTrangMouseExited
     private void clearTable() {
         DefaultTableModel dtm = (DefaultTableModel) tbl_KhachHang.getModel();
         dtm.setRowCount(0);

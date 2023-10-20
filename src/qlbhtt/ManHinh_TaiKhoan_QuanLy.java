@@ -4,6 +4,9 @@
  */
 package qlbhtt;
 
+import java.awt.Color;
+import javax.swing.UIManager;
+
 /**
  *
  * @author DMX
@@ -45,8 +48,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        tbl_TaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_TaiKhoan.setForeground(new java.awt.Color(0, 0, 0));
         tbl_TaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"admin", "admin", "Le Tan Phat", "Quan Ly"},
@@ -86,8 +87,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txt_MatKhau.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MatKhau.setForeground(new java.awt.Color(0, 0, 0));
         txt_MatKhau.setText("admin");
         txt_MatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,8 +94,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        txt_TenTK.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenTK.setForeground(new java.awt.Color(0, 0, 0));
         txt_TenTK.setText("admin");
         txt_TenTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,20 +101,14 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        lbl_TenTK.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenTK.setText("Tên tài khoản");
 
-        lbl_MatKhau.setForeground(new java.awt.Color(0, 0, 0));
         lbl_MatKhau.setText("Mật khẩu");
 
-        lbl_TenNV.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenNV.setText("Tên nhân viên");
 
-        lbl_ChucVu.setForeground(new java.awt.Color(0, 0, 0));
         lbl_ChucVu.setText("Chức vụ");
 
-        txt_TenNV.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenNV.setForeground(new java.awt.Color(0, 0, 0));
         txt_TenNV.setText("Le Tan Phat");
         txt_TenNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,8 +116,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        txt_ChucVu.setBackground(new java.awt.Color(255, 255, 255));
-        txt_ChucVu.setForeground(new java.awt.Color(0, 0, 0));
         txt_ChucVu.setText("Quan Ly");
         txt_ChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,18 +166,26 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_DoiMatKhau.setForeground(new java.awt.Color(0, 0, 0));
+        btn_DoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-password-30.png"))); // NOI18N
         btn_DoiMatKhau.setText("Đổi mật khẩu");
         btn_DoiMatKhau.setBorder(null);
+        btn_DoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_DoiMatKhauMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_DoiMatKhauMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btn_DoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btn_DoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,6 +234,16 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
     private void txt_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ChucVuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_ChucVuActionPerformed
+
+    private void btn_DoiMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DoiMatKhauMouseEntered
+         btn_DoiMatKhau.setBackground(new Color(0x9EDDFF));
+       btn_DoiMatKhau.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_DoiMatKhauMouseEntered
+
+    private void btn_DoiMatKhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DoiMatKhauMouseExited
+        btn_DoiMatKhau.setBackground(UIManager.getColor("Menu.background"));
+        btn_DoiMatKhau.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_DoiMatKhauMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

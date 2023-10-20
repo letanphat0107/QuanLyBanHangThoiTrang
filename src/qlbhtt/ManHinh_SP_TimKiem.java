@@ -4,6 +4,9 @@
  */
 package qlbhtt;
 
+import java.awt.Color;
+import javax.swing.UIManager;
+
 /**
  *
  * @author DMX
@@ -276,21 +279,39 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
+        btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-search-30.png"))); // NOI18N
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
+        btn_TimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseExited(evt);
+            }
+        });
 
+        btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
         btn_XoaTrang.setText("Xóa trắng");
         btn_XoaTrang.setBorder(null);
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -347,6 +368,26 @@ public class ManHinh_SP_TimKiem extends javax.swing.JPanel {
     private void txt_SoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoLuongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_SoLuongActionPerformed
+
+    private void btn_TimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseEntered
+        btn_TimKiem.setBackground(new Color(0x9EDDFF));
+       btn_TimKiem.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_TimKiemMouseEntered
+
+    private void btn_TimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseExited
+        btn_TimKiem.setBackground(UIManager.getColor("Menu.background"));
+        btn_TimKiem.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_TimKiemMouseExited
+
+    private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
+        btn_XoaTrang.setBackground(new Color(0x9EDDFF));
+       btn_XoaTrang.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_XoaTrangMouseEntered
+
+    private void btn_XoaTrangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseExited
+        btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
+        btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_XoaTrangMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

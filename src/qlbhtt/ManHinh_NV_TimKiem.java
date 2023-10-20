@@ -7,9 +7,11 @@ package qlbhtt;
 import connectDB.Connect;
 import dao.Dao_NhanVien;
 import entity.NhanVien;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -129,7 +131,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         txt_Email = new javax.swing.JTextField();
         txt_DiaChi = new javax.swing.JTextField();
         pnl_NutChucNang = new javax.swing.JPanel();
-        btn_Them = new javax.swing.JButton();
+        btn_TimKiem = new javax.swing.JButton();
         btn_XoaTrang = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(199, 210, 213));
@@ -196,10 +198,12 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
 
         lbl_Email.setText("Email");
 
+        rad_Nam.setBackground(new java.awt.Color(199, 210, 213));
         buttonGroup1.add(rad_Nam);
         rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
 
+        rad_Nu.setBackground(new java.awt.Color(199, 210, 213));
         buttonGroup1.add(rad_Nu);
         rad_Nu.setText("Nữ");
 
@@ -294,16 +298,34 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
-        btn_Them.setText("Tìm kiếm");
-        btn_Them.setBorder(null);
-        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+        btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-search-30.png"))); // NOI18N
+        btn_TimKiem.setText("Tìm kiếm");
+        btn_TimKiem.setBorder(null);
+        btn_TimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseExited(evt);
+            }
+        });
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ThemActionPerformed(evt);
+                btn_TimKiemActionPerformed(evt);
             }
         });
 
+        btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
         btn_XoaTrang.setText("Xóa trắng");
         btn_XoaTrang.setBorder(null);
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseExited(evt);
+            }
+        });
         btn_XoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_XoaTrangActionPerformed(evt);
@@ -315,17 +337,17 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -379,17 +401,37 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_DiaChiActionPerformed
 
-    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
         xuLyTimKiemNhanVien();
-    }//GEN-LAST:event_btn_ThemActionPerformed
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
+    private void btn_TimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseEntered
+        btn_TimKiem.setBackground(new Color(0x9EDDFF));
+       btn_TimKiem.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_TimKiemMouseEntered
+
+    private void btn_TimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseExited
+        btn_TimKiem.setBackground(UIManager.getColor("Menu.background"));
+        btn_TimKiem.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_TimKiemMouseExited
+
+    private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
+        btn_XoaTrang.setBackground(new Color(0x9EDDFF));
+       btn_XoaTrang.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_XoaTrangMouseEntered
+
+    private void btn_XoaTrangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseExited
+         btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
+        btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_XoaTrangMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Them;
+    private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_XoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lbl_ChucVu;
