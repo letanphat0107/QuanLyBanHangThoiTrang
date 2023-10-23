@@ -238,7 +238,12 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_SP_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_QuanLyActionPerformed
         // TODO add your handling code here:
-        ManHinh_SP_QuanLy pnl_QuanLySP = new ManHinh_SP_QuanLy();
+        ManHinh_SP_QuanLy pnl_QuanLySP = null;
+       try {
+           pnl_QuanLySP = new ManHinh_SP_QuanLy();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_QuanLySP);
         pnl_GiaoDienChucNang.revalidate();
