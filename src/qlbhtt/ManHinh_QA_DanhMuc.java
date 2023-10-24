@@ -4,12 +4,11 @@
  */
 package qlbhtt;
 import connectDB.Connect;
-import dao.Dao_KhachHang;
+import dao.Dao_PhanLoai;
 import javax.swing.table.DefaultTableModel;
-import entity.KhachHang;
+import entity.PhanLoai;
 import java.awt.Color;
 import java.sql.SQLException;
-import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 /**
@@ -17,8 +16,8 @@ import javax.swing.UIManager;
  * @author DMX
  */
 public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
-    private Dao_KhachHang dao_KhachHang;
-    private DefaultTableModel modelKhachHang;
+    private Dao_PhanLoai dao_PhanLoai;
+    private DefaultTableModel modelPhanLoai;
     private Connect connect;
     private boolean kiemTraThem=false;
     private boolean kiemTraCapNhat=false;
@@ -27,14 +26,12 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
      * Creates new form quanly
      */
     public ManHinh_QA_DanhMuc() throws SQLException {
-        dao_KhachHang = new Dao_KhachHang();
+        dao_PhanLoai = new Dao_PhanLoai();
         connect = new Connect();
         connect.connect();
         initComponents();
-        
-    }
-
-    
+        docDuLieuLenBang();
+    }   
     
     /**
      * Huy thao tac hoat dong cua componet
@@ -47,15 +44,18 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
         btn_Luu.setEnabled(false);
         btn_CapNhat.setEnabled(true);
         btn_Them.setEnabled(true);
-        kiemTraTextNhap(false);
+        kiemTraTextNhap(true);
         xoaTrang();
     }
     /**
      * Kiem tra hoat dong cua cac JtextField
      */
     public void kiemTraTextNhap(boolean kiemTra){
-        txt_MaDanhMuc.setEditable(kiemTra);
-        txt_TenDanhMuc.setEditable(kiemTra);        
+        if(kiemTraCapNhat || kiemTraThem) {
+            txt_MaDanhMuc.setEditable(!kiemTra);    
+        } else {
+            txt_MaDanhMuc.setEditable(kiemTra);    
+        }       
     }
     
     /**
@@ -64,6 +64,19 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
     public void xoaTrang() {
         txt_MaDanhMuc.setText("");
         txt_TenDanhMuc.setText(""); 
+    }
+    
+    /**
+     * Đọc dữ liệu và load dữ liệu lên table
+     */
+    public void docDuLieuLenBang() {
+        modelPhanLoai = (DefaultTableModel) tbl_DanhMuc.getModel();
+        for(PhanLoai phanLoai: dao_PhanLoai.getAllPhanLoai()) {
+            Object[] o = new Object[2];
+            o[0] = phanLoai.getMaPhanLoai();
+            o[1] = phanLoai.getLoaiSanPham();
+            modelPhanLoai.addRow(o);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,7 +180,6 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin danh mục", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnl_ThongTin.setPreferredSize(new java.awt.Dimension(945, 285));
 
-        txt_MaDanhMuc.setEditable(false);
         txt_MaDanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_MaDanhMuc.setMinimumSize(new java.awt.Dimension(64, 30));
         txt_MaDanhMuc.setPreferredSize(new java.awt.Dimension(64, 30));
@@ -183,7 +195,6 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
         lbl_TenDanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenDanhMuc.setText("Tên danh mục");
 
-        txt_TenDanhMuc.setEditable(false);
         txt_TenDanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenDanhMuc.setMinimumSize(new java.awt.Dimension(64, 30));
         txt_TenDanhMuc.setPreferredSize(new java.awt.Dimension(64, 30));
@@ -284,7 +295,7 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
 
         btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
-        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setText("Xóa");
         btn_XoaTrang.setBorder(null);
         btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

@@ -1,9 +1,25 @@
 package entity;
 
+import dao.Dao_MauSac;
 
 public class MauSac {
-	private String maMauSac;
+
+    private String maMauSac;
     private String mauSac;
+
+    private String auto_ID() {
+        Dao_MauSac daoMauSac = new Dao_MauSac();
+        String idPrefix = "MS";
+        int length = daoMauSac.getAllMauSac().size();
+        String finalId = idPrefix + String.format("%04d", length + 1);
+        return finalId;
+    }
+
+    public MauSac(String mauSac) {
+        this.maMauSac = auto_ID();
+        this.mauSac = mauSac;
+
+    }
 
     public MauSac() {
     }
@@ -12,9 +28,7 @@ public class MauSac {
         this.maMauSac = maMauSac;
         this.mauSac = mauSac;
     }
-    public MauSac(String maMauSacc) {
-        this.maMauSac = maMauSac;
-    }
+
     public String getMaMauSac() {
         return maMauSac;
     }

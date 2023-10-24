@@ -1,16 +1,28 @@
 package entity;
 
+import dao.Dao_PhanLoai;
 
 public class PhanLoai {
-	private String maPhanLoai;
+
+    private String maPhanLoai;
     private String loaiSanPham;
 
+    private String auto_ID(){
+        Dao_PhanLoai daoPhanLoai = new Dao_PhanLoai();
+        String idPrefix = "PL";
+        int length = daoPhanLoai.getAllPhanLoai().size();
+        String finalId = idPrefix + String.format("%04d", length + 1);
+        return finalId;
+    }
+    
     public PhanLoai() {
     }
-     public PhanLoai(String maPhanLoai) {
-         this.maPhanLoai = maPhanLoai;
 
+    public PhanLoai(String loaiSanPham) {
+        this.maPhanLoai = auto_ID();
+        this.loaiSanPham = loaiSanPham;
     }
+
     public PhanLoai(String maPhanLoai, String loaiSanPham) {
         this.maPhanLoai = maPhanLoai;
         this.loaiSanPham = loaiSanPham;

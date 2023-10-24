@@ -3,68 +3,92 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package qlbhtt;
+
 import connectDB.Connect;
 import dao.Dao_KhachHang;
+import dao.Dao_MauSac;
 import javax.swing.table.DefaultTableModel;
 import entity.KhachHang;
+import entity.MauSac;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
 /**
  *
  * @author DMX
  */
 public class ManHinh_QA_MauSac extends javax.swing.JPanel {
-    private Dao_KhachHang dao_KhachHang;
-    private DefaultTableModel modelKhachHang;
+
+    private Dao_MauSac dao_MauSac;
+    private DefaultTableModel modelMauSac;
     private Connect connect;
-    private boolean kiemTraThem=false;
-    private boolean kiemTraCapNhat=false;
-    
+    private boolean kiemTraThem = false;
+    private boolean kiemTraCapNhat = false;
+
     /**
      * Creates new form quanly
      */
     public ManHinh_QA_MauSac() throws SQLException {
-        dao_KhachHang = new Dao_KhachHang();
+        dao_MauSac = new Dao_MauSac();
         connect = new Connect();
         connect.connect();
         initComponents();
-        
+        docDuLieuLenBang();
     }
 
-    
-    
     /**
      * Huy thao tac hoat dong cua componet
      */
-    private void huyThaoTacNhap(){
-        kiemTraCapNhat=false;
-        kiemTraThem=false;
+    private void huyThaoTacNhap() {
+        kiemTraCapNhat = false;
+        kiemTraThem = false;
         btn_CapNhat.setText("Cập nhật");
         btn_Them.setText("Thêm");
         btn_Luu.setEnabled(false);
         btn_CapNhat.setEnabled(true);
         btn_Them.setEnabled(true);
-        kiemTraTextNhap(false);
+        kiemTraTextNhap(true);
         xoaTrang();
     }
+
     /**
      * Kiem tra hoat dong cua cac JtextField
      */
-    public void kiemTraTextNhap(boolean kiemTra){
-        txt_MaMauSac.setEditable(kiemTra);
-        txt_TenMauSac.setEditable(kiemTra);        
+    public void kiemTraTextNhap(boolean kiemTra) {
+        if (kiemTraCapNhat || kiemTraThem) {
+            txt_MaMauSac.setEditable(!kiemTra);
+
+        } else {
+            txt_MaMauSac.setEditable(kiemTra);
+
+        }
+
     }
-    
+
     /**
      * Xóa trắng text field
      */
     public void xoaTrang() {
         txt_MaMauSac.setText("");
-        txt_TenMauSac.setText(""); 
+        txt_TenMauSac.setText("");
     }
+
+    /**
+     * Đọc dữ liệu và load dữ liệu lên table
+     */
+    public void docDuLieuLenBang() {
+        modelMauSac = (DefaultTableModel) tbl_MauSac.getModel();
+        for (MauSac mauSac : dao_MauSac.getAllMauSac()) {
+            Object[] o = new Object[2];
+            o[0] = mauSac.getMaMauSac();
+            o[1] = mauSac.getMauSac();
+            modelMauSac.addRow(o);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,7 +191,6 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin màu sắc", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnl_ThongTin.setPreferredSize(new java.awt.Dimension(945, 285));
 
-        txt_MaMauSac.setEditable(false);
         txt_MaMauSac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_MaMauSac.setMinimumSize(new java.awt.Dimension(64, 30));
         txt_MaMauSac.setPreferredSize(new java.awt.Dimension(64, 30));
@@ -183,7 +206,6 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
         lbl_TenMauSac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenMauSac.setText("Tên màu sắc");
 
-        txt_TenMauSac.setEditable(false);
         txt_TenMauSac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenMauSac.setMinimumSize(new java.awt.Dimension(64, 30));
         txt_TenMauSac.setPreferredSize(new java.awt.Dimension(64, 30));
@@ -284,7 +306,7 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
 
         btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
-        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setText("Xóa");
         btn_XoaTrang.setBorder(null);
         btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -361,21 +383,21 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_MaMauSacActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        if(btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")){
+        if (btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")) {
             btn_CapNhat.setText("Hủy");
             btn_Them.setEnabled(false);
             btn_Luu.setEnabled(true);
-            kiemTraCapNhat=true;
+            kiemTraCapNhat = true;
             kiemTraTextNhap(true);
             xoaTrang();
-        }else if(btn_CapNhat.getText().equalsIgnoreCase("Hủy")){
+        } else if (btn_CapNhat.getText().equalsIgnoreCase("Hủy")) {
             btn_CapNhat.setText("Cập nhật");
             huyThaoTacNhap();
         }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        
+
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void txt_TenMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TenMauSacActionPerformed
@@ -383,21 +405,21 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_TenMauSacActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        if(btn_Them.getText().equalsIgnoreCase("Thêm")){
+        if (btn_Them.getText().equalsIgnoreCase("Thêm")) {
             btn_Them.setText("Hủy");
             btn_CapNhat.setEnabled(false);
             btn_Luu.setEnabled(true);
-            kiemTraThem=true;
+            kiemTraThem = true;
             kiemTraTextNhap(true);
             xoaTrang();
-        }else if(btn_Them.getText().equalsIgnoreCase("Hủy")){
+        } else if (btn_Them.getText().equalsIgnoreCase("Hủy")) {
             btn_Them.setText("Thêm");
             huyThaoTacNhap();
         }
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_MauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_MauSacMouseClicked
-        
+
     }//GEN-LAST:event_tbl_MauSacMouseClicked
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
@@ -405,49 +427,49 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered
-        if(btn_Them.isEnabled()){
+        if (btn_Them.isEnabled()) {
             btn_Them.setBackground(new Color(0x9EDDFF));
             btn_Them.setForeground(new Color(0x141E46));
         }
     }//GEN-LAST:event_btn_ThemMouseEntered
 
     private void btn_ThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseExited
-        if(btn_Them.isEnabled()){
+        if (btn_Them.isEnabled()) {
             btn_Them.setBackground(UIManager.getColor("Menu.background"));
             btn_Them.setForeground(UIManager.getColor("Menu.foreground"));
         }
     }//GEN-LAST:event_btn_ThemMouseExited
 
     private void btn_CapNhatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseEntered
-        if(btn_CapNhat.isEnabled()) {
+        if (btn_CapNhat.isEnabled()) {
             btn_CapNhat.setBackground(new Color(0x9EDDFF));
             btn_CapNhat.setForeground(new Color(0x141E46));
         }
-        
+
     }//GEN-LAST:event_btn_CapNhatMouseEntered
 
     private void btn_CapNhatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseExited
-        if(btn_CapNhat.isEnabled()) {
+        if (btn_CapNhat.isEnabled()) {
             btn_CapNhat.setBackground(UIManager.getColor("Menu.background"));
             btn_CapNhat.setForeground(UIManager.getColor("Menu.foreground"));
         }
-        
+
     }//GEN-LAST:event_btn_CapNhatMouseExited
 
     private void btn_LuuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseEntered
-        if(btn_Luu.isEnabled()) {
+        if (btn_Luu.isEnabled()) {
             btn_Luu.setBackground(new Color(0x9EDDFF));
             btn_Luu.setForeground(new Color(0x141E46));
         }
-        
+
     }//GEN-LAST:event_btn_LuuMouseEntered
 
     private void btn_LuuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseExited
-        if(btn_Luu.isEnabled()) {
+        if (btn_Luu.isEnabled()) {
             btn_Luu.setBackground(UIManager.getColor("Menu.background"));
             btn_Luu.setForeground(UIManager.getColor("Menu.foreground"));
         }
-        
+
     }//GEN-LAST:event_btn_LuuMouseExited
 
     private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
@@ -481,5 +503,4 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TenMauSac;
     // End of variables declaration//GEN-END:variables
 
-    
 }

@@ -4,7 +4,8 @@
  */
 package qlbhtt;
 import connectDB.Connect;
-import dao.Dao_KhachHang;
+import dao.Dao_ChatLieu;
+import entity.ChatLieu;
 import javax.swing.table.DefaultTableModel;
 import entity.KhachHang;
 import java.awt.Color;
@@ -17,8 +18,8 @@ import javax.swing.UIManager;
  * @author DMX
  */
 public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
-    private Dao_KhachHang dao_KhachHang;
-    private DefaultTableModel modelKhachHang;
+    private Dao_ChatLieu dao_ChatLieu;
+    private DefaultTableModel modelChatLieu;
     private Connect connect;
     private boolean kiemTraThem=false;
     private boolean kiemTraCapNhat=false;
@@ -27,11 +28,11 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
      * Creates new form quanly
      */
     public ManHinh_QA_ChatLieu() throws SQLException {
-        dao_KhachHang = new Dao_KhachHang();
+        dao_ChatLieu = new Dao_ChatLieu();
         connect = new Connect();
         connect.connect();
         initComponents();
-        
+        docDuLieuLenBang();
     }
 
     
@@ -47,15 +48,20 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         btn_Luu.setEnabled(false);
         btn_CapNhat.setEnabled(true);
         btn_Them.setEnabled(true);
-        kiemTraTextNhap(false);
+        btn_TimKiem.setEnabled(true);
+        kiemTraTextNhap(true);
         xoaTrang();
     }
     /**
      * Kiem tra hoat dong cua cac JtextField
      */
     public void kiemTraTextNhap(boolean kiemTra){
-        txt_MaChatLieu.setEditable(kiemTra);
-        txt_TenChatLieu.setEditable(kiemTra);        
+        if(kiemTraCapNhat || kiemTraThem) {
+            txt_MaChatLieu.setEditable(!kiemTra);    
+        } else {
+            txt_MaChatLieu.setEditable(kiemTra);    
+        }       
+                
     }
     
     /**
@@ -65,6 +71,91 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         txt_MaChatLieu.setText("");
         txt_TenChatLieu.setText(""); 
     }
+    
+    /**
+     * Đọc dữ liệu và load dữ liệu lên table
+     */
+    public void docDuLieuLenBang() {
+        modelChatLieu = (DefaultTableModel) tbl_ChatLieu.getModel();
+        for(ChatLieu chatLieu: dao_ChatLieu.getAllChatLieu()) {
+            Object[] o = new Object[2];
+            o[0] = chatLieu.getMaChatLieu();
+            o[1] = chatLieu.getChatLieu();
+            modelChatLieu.addRow(o);
+        }
+    }
+    
+    /**
+     * Xử lý thêm Chất Liệu
+      */
+     public void xuLyThemChatLieu() {
+//         if(!rangBuocDuLieuNhap()){
+//             return;
+//         }
+         
+         String tenChatLieu = txt_TenChatLieu.getText();  
+         
+         ChatLieu chatLieu = new ChatLieu(tenChatLieu);
+         dao_ChatLieu.themDLChatLieu(chatLieu);
+         
+         modelChatLieu = (DefaultTableModel) tbl_ChatLieu.getModel();
+         Object[] object = new Object[2];
+            object[0] = chatLieu.getMaChatLieu();
+            object[1] = chatLieu.getChatLieu();
+            
+        modelChatLieu.addRow(object);
+        xoaTrang();
+        JOptionPane.showMessageDialog(this, "Thêm thành công");
+     }
+     
+     /**
+      * Xử lý xóa Chất Liệu
+      */
+     public void xuLyXoaChatLieu() {
+         int row = tbl_ChatLieu.getSelectedRow();
+         if(row!=-1) {
+             if(JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                 String maChatLieu = txt_MaChatLieu.getText();
+                 dao_ChatLieu.xoaDLChatLieu(maChatLieu);
+                 modelChatLieu.removeRow(row);
+                 JOptionPane.showMessageDialog(this, "Xóa thành công");
+                 xoaTrang();
+             }
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+         }
+     }
+     
+     /**
+     * Xử lý cập nhật Chất Liệu
+      */
+     public void xuLyCapNhatChatLieu() {
+//         if(!rangBuocDuLieuNhap()){
+//             return;
+//         }
+         String maChatLieu = txt_MaChatLieu.getText();
+         String tenChatLieu = txt_TenChatLieu.getText();  
+         
+         ChatLieu chatLieu = new ChatLieu(tenChatLieu);
+         int row = tbl_ChatLieu.getSelectedRow();
+         if(row != -1) {
+            dao_ChatLieu.themDLChatLieu(chatLieu);
+             for (int i = 0; i < tbl_ChatLieu.getRowCount(); i++) {
+                 String maChatLieuTable = tbl_ChatLieu.getValueAt(row, 0).toString();
+                 if(maChatLieuTable.equalsIgnoreCase(maChatLieu)) {
+                     tbl_ChatLieu.setValueAt(tenChatLieu, row, 1);
+                 }
+                 
+             }
+             xoaTrang();
+             JOptionPane.showMessageDialog(this, "Thêm thành công");
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
+         }
+        
+        
+     }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,7 +258,6 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin chất liệu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnl_ThongTin.setPreferredSize(new java.awt.Dimension(945, 285));
 
-        txt_MaChatLieu.setEditable(false);
         txt_MaChatLieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_MaChatLieu.setMinimumSize(new java.awt.Dimension(64, 30));
         txt_MaChatLieu.setPreferredSize(new java.awt.Dimension(64, 30));
@@ -183,7 +273,6 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         lbl_TenChatLieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenChatLieu.setText("Tên chất liệu");
 
-        txt_TenChatLieu.setEditable(false);
         txt_TenChatLieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenChatLieu.setMinimumSize(new java.awt.Dimension(64, 30));
         txt_TenChatLieu.setPreferredSize(new java.awt.Dimension(64, 30));
@@ -284,7 +373,7 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
 
         btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
-        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setText("Xóa ");
         btn_XoaTrang.setBorder(null);
         btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -303,6 +392,14 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-search-30.png"))); // NOI18N
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
+        btn_TimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -365,6 +462,7 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
             btn_CapNhat.setText("Hủy");
             btn_Them.setEnabled(false);
             btn_Luu.setEnabled(true);
+            btn_TimKiem.setEnabled(false);
             kiemTraCapNhat=true;
             kiemTraTextNhap(true);
             xoaTrang();
@@ -375,7 +473,11 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        
+        if(kiemTraThem) {
+            xuLyThemChatLieu();
+        } else if(kiemTraCapNhat) {
+            xuLyCapNhatChatLieu();
+        }
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void txt_TenChatLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TenChatLieuActionPerformed
@@ -387,6 +489,7 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
             btn_Them.setText("Hủy");
             btn_CapNhat.setEnabled(false);
             btn_Luu.setEnabled(true);
+            btn_TimKiem.setEnabled(false);
             kiemTraThem=true;
             kiemTraTextNhap(true);
             xoaTrang();
@@ -397,11 +500,15 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_ChatLieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ChatLieuMouseClicked
-        
+        int row = tbl_ChatLieu.getSelectedRow();
+        if(row!=-1) {
+            txt_MaChatLieu.setText(tbl_ChatLieu.getValueAt(row, 0).toString() );
+            txt_TenChatLieu.setText(tbl_ChatLieu.getValueAt(row, 1).toString() );
+        }
     }//GEN-LAST:event_tbl_ChatLieuMouseClicked
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
-        // TODO add your handling code here:
+        xuLyXoaChatLieu();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered
@@ -459,6 +566,20 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
         btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
     }//GEN-LAST:event_btn_XoaTrangMouseExited
+
+    private void btn_TimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseEntered
+        if(btn_TimKiem.isEnabled()) {
+            btn_TimKiem.setBackground(new Color(0x9EDDFF));
+            btn_TimKiem.setForeground(new Color(0x141E46));
+        }
+    }//GEN-LAST:event_btn_TimKiemMouseEntered
+
+    private void btn_TimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseExited
+        if(btn_TimKiem.isEnabled()) {
+            btn_TimKiem.setBackground(UIManager.getColor("Menu.background"));
+            btn_TimKiem.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_TimKiemMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
