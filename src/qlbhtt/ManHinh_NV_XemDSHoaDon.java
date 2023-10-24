@@ -32,6 +32,8 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         pnl_DanhSachCTHD = new javax.swing.JPanel();
         scr_DanhSachCTHD = new javax.swing.JScrollPane();
         tbl_CTHD = new javax.swing.JTable();
+        pnl_NV_TieuDe = new javax.swing.JPanel();
+        lbl_TieuDe = new javax.swing.JLabel();
         pnl_ThongTin = new javax.swing.JPanel();
         lbl_TuNgay = new javax.swing.JLabel();
         lbl_DenNgay = new javax.swing.JLabel();
@@ -42,8 +44,6 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         setBackground(new java.awt.Color(199, 210, 213));
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
-
-        pnl_DanhSachHoaDon.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         tbl_HoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
@@ -102,12 +102,32 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         pnl_DanhSachCTHDLayout.setHorizontalGroup(
             pnl_DanhSachCTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_DanhSachCTHDLayout.createSequentialGroup()
-                .addComponent(scr_DanhSachCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addComponent(scr_DanhSachCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnl_DanhSachCTHDLayout.setVerticalGroup(
             pnl_DanhSachCTHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+            .addComponent(scr_DanhSachCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+        );
+
+        lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TieuDe.setText("XEM DANH SÁCH HÓA ĐƠN");
+        lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
+
+        javax.swing.GroupLayout pnl_NV_TieuDeLayout = new javax.swing.GroupLayout(pnl_NV_TieuDe);
+        pnl_NV_TieuDe.setLayout(pnl_NV_TieuDeLayout);
+        pnl_NV_TieuDeLayout.setHorizontalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NV_TieuDeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnl_NV_TieuDeLayout.setVerticalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnl_DanhSachHoaDonLayout = new javax.swing.GroupLayout(pnl_DanhSachHoaDon);
@@ -118,11 +138,16 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
                 .addComponent(scr_DanhSachHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_DanhSachCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachHoaDonLayout.setVerticalGroup(
             pnl_DanhSachHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-            .addComponent(pnl_DanhSachCTHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnl_DanhSachHoaDonLayout.createSequentialGroup()
+                .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_DanhSachHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnl_DanhSachCTHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scr_DanhSachHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
@@ -213,9 +238,11 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser dch_DenNgay;
     private com.toedter.calendar.JDateChooser dch_TuNgay;
     private javax.swing.JLabel lbl_DenNgay;
+    private javax.swing.JLabel lbl_TieuDe;
     private javax.swing.JLabel lbl_TuNgay;
     private javax.swing.JPanel pnl_DanhSachCTHD;
     private javax.swing.JPanel pnl_DanhSachHoaDon;
+    private javax.swing.JPanel pnl_NV_TieuDe;
     private javax.swing.JPanel pnl_ThongTin;
     private javax.swing.JScrollPane scr_DanhSachCTHD;
     private javax.swing.JScrollPane scr_DanhSachHoaDon;

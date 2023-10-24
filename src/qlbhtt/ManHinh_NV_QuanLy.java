@@ -253,6 +253,8 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         pnl_DanhSachNhanVien = new javax.swing.JPanel();
         scr_DanhSachNhanVien = new javax.swing.JScrollPane();
         tbl_NhanVien = new javax.swing.JTable();
+        pnl_NV_TieuDe = new javax.swing.JPanel();
+        lbl_TieuDe = new javax.swing.JLabel();
         pnl_ThongTin = new javax.swing.JPanel();
         txt_TenNV = new javax.swing.JTextField();
         txt_MaNV = new javax.swing.JTextField();
@@ -307,15 +309,39 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         });
         scr_DanhSachNhanVien.setViewportView(tbl_NhanVien);
 
+        lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TieuDe.setText("QUẢN LÝ NHÂN VIÊN");
+        lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
+
+        javax.swing.GroupLayout pnl_NV_TieuDeLayout = new javax.swing.GroupLayout(pnl_NV_TieuDe);
+        pnl_NV_TieuDe.setLayout(pnl_NV_TieuDeLayout);
+        pnl_NV_TieuDeLayout.setHorizontalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NV_TieuDeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnl_NV_TieuDeLayout.setVerticalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnl_DanhSachNhanVienLayout = new javax.swing.GroupLayout(pnl_DanhSachNhanVien);
         pnl_DanhSachNhanVien.setLayout(pnl_DanhSachNhanVienLayout);
         pnl_DanhSachNhanVienLayout.setHorizontalGroup(
             pnl_DanhSachNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachNhanVien)
+            .addComponent(scr_DanhSachNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
+            .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachNhanVienLayout.setVerticalGroup(
             pnl_DanhSachNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DanhSachNhanVienLayout.createSequentialGroup()
+                .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scr_DanhSachNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
@@ -744,7 +770,9 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_MaNV;
     private javax.swing.JLabel lbl_SoDienThoai;
     private javax.swing.JLabel lbl_TenNV;
+    private javax.swing.JLabel lbl_TieuDe;
     private javax.swing.JPanel pnl_DanhSachNhanVien;
+    private javax.swing.JPanel pnl_NV_TieuDe;
     private javax.swing.JPanel pnl_NutChucNang;
     private javax.swing.JPanel pnl_ThongTin;
     private javax.swing.JRadioButton rad_Nam;

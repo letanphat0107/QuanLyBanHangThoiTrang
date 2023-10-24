@@ -127,4 +127,25 @@ public class Dao_ChatLieu {
         }
         return null;
     }
+    
+    public ChatLieu getChatLieuTheoTen(String tenChatLieu){
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        
+        try {
+            String sql = "select * from ChatLieu where tenChatLieu = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, tenChatLieu);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                ChatLieu chatLieu = new ChatLieu();
+                chatLieu.setMaChatLieu(rs.getString(1));
+                chatLieu.setChatLieu(rs.getString(2));
+                return chatLieu;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

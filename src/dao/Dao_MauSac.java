@@ -58,4 +58,23 @@ public class Dao_MauSac {
         }
         return null;
     }
+    
+    public MauSac getMauSacTheoTen(String tenMauSac){
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        
+        try {
+            String sql = "select * from MauSac where tenMauSac = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, tenMauSac);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                MauSac mauSac = new MauSac(rs.getString(1), rs.getString(2));
+                return mauSac;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

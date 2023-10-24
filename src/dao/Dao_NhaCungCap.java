@@ -148,4 +148,22 @@ public class Dao_NhaCungCap {
         return ncc;
     }
     
+    public NhaCungCap getNhaCungCapTheoTen(String tenNhaCungCap){
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        
+        try {
+            String sql = "select * from NhaCungCap where tenNCC = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, tenNhaCungCap);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                NhaCungCap nhaCungCap = new NhaCungCap(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                return nhaCungCap;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

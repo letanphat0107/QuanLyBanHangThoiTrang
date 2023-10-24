@@ -32,6 +32,8 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         pnl_DanhSachPhuKien = new javax.swing.JPanel();
         scr_DanhSachPhuKien = new javax.swing.JScrollPane();
         tbl_PhuKien = new javax.swing.JTable();
+        pnl_PK_TieuDe = new javax.swing.JPanel();
+        lbl_TieuDe = new javax.swing.JLabel();
         pnl_ThongTin = new javax.swing.JPanel();
         txt_TenPK = new javax.swing.JTextField();
         txt_MaPK = new javax.swing.JTextField();
@@ -96,20 +98,44 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         tbl_PhuKien.setShowGrid(true);
         scr_DanhSachPhuKien.setViewportView(tbl_PhuKien);
 
+        lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TieuDe.setText("QUẢN LÝ PHỤ KIỆN");
+        lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
+
+        javax.swing.GroupLayout pnl_PK_TieuDeLayout = new javax.swing.GroupLayout(pnl_PK_TieuDe);
+        pnl_PK_TieuDe.setLayout(pnl_PK_TieuDeLayout);
+        pnl_PK_TieuDeLayout.setHorizontalGroup(
+            pnl_PK_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_PK_TieuDeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnl_PK_TieuDeLayout.setVerticalGroup(
+            pnl_PK_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnl_DanhSachPhuKienLayout = new javax.swing.GroupLayout(pnl_DanhSachPhuKien);
         pnl_DanhSachPhuKien.setLayout(pnl_DanhSachPhuKienLayout);
         pnl_DanhSachPhuKienLayout.setHorizontalGroup(
             pnl_DanhSachPhuKienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scr_DanhSachPhuKien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_PK_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachPhuKienLayout.setVerticalGroup(
             pnl_DanhSachPhuKienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachPhuKien, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DanhSachPhuKienLayout.createSequentialGroup()
+                .addComponent(pnl_PK_TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scr_DanhSachPhuKien, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin phụ kiện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-        pnl_ThongTin.setPreferredSize(new java.awt.Dimension(1438, 300));
+        pnl_ThongTin.setPreferredSize(new java.awt.Dimension(1300, 300));
 
         txt_TenPK.setEditable(false);
         txt_TenPK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -247,7 +273,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         pnl_ThongTinLayout.setHorizontalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ThongTinLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(50, 50, 50)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,10 +618,12 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_PhanLoai;
     private javax.swing.JLabel lbl_SoLuong;
     private javax.swing.JLabel lbl_TenPK;
+    private javax.swing.JLabel lbl_TieuDe;
     private javax.swing.JLabel lbl_giaNhap;
     private javax.swing.JPanel pnl_DanhSachPhuKien;
     private javax.swing.JPanel pnl_HinhAnhSP;
     private javax.swing.JPanel pnl_NutChucNang;
+    private javax.swing.JPanel pnl_PK_TieuDe;
     private javax.swing.JPanel pnl_ThongTin;
     private javax.swing.JScrollPane scr_DanhSachPhuKien;
     private javax.swing.JTable tbl_PhuKien;

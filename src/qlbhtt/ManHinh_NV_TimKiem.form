@@ -63,12 +63,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="scr_DanhSachNhanVien" alignment="0" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachNhanVien" max="32767" attributes="0"/>
+              <Component id="pnl_NV_TieuDe" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="scr_DanhSachNhanVien" alignment="0" pref="217" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="pnl_NV_TieuDe" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="scr_DanhSachNhanVien" pref="171" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -139,6 +144,42 @@
                 <Property name="showGrid" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pnl_NV_TieuDe">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_TieuDe" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lbl_TieuDe" alignment="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lbl_TieuDe">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI Variable" size="18" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="T&#xcc;M KI&#x1ebe;M NH&#xc2;N VI&#xca;N"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[32767, 32767]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[181, 40]"/>
                 </Property>
               </Properties>
             </Component>

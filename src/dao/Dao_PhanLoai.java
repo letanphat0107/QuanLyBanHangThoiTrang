@@ -58,4 +58,23 @@ public class Dao_PhanLoai {
         }
         return null;
     }
+    
+    public PhanLoai getPhanLoaiTheoTen(String tenPhanLoai){
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        
+        try {
+            String sql = "select * from PhanLoai where tenPhanLoai = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, tenPhanLoai);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                PhanLoai phanLoai = new PhanLoai(rs.getString(1), rs.getString(2));
+                return phanLoai;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

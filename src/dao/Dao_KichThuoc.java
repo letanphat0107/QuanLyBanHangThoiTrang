@@ -56,5 +56,24 @@ public class Dao_KichThuoc {
             e.printStackTrace();
         } 
         return null;
-    } 
+    }
+    
+    public KichThuoc getKichThuocTheoTen(String tenKichThuoc){
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        
+        try {
+            String sql = "select * from KichThuoc where tenKichThuoc = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, tenKichThuoc);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                KichThuoc kichThuoc = new KichThuoc(rs.getString(1), rs.getString(2));
+                return kichThuoc;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

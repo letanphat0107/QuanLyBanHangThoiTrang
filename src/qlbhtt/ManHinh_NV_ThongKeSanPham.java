@@ -32,6 +32,8 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         pnl_DanhSachSanPham = new javax.swing.JPanel();
         scr_DanhSachSanPham = new javax.swing.JScrollPane();
         tbl_SanPham = new javax.swing.JTable();
+        pnl_NV_TieuDe = new javax.swing.JPanel();
+        lbl_TieuDe = new javax.swing.JLabel();
         pnl_ThongTin = new javax.swing.JPanel();
         lbl_PhanLoai = new javax.swing.JLabel();
         lbl_KichThuoc = new javax.swing.JLabel();
@@ -83,15 +85,39 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         tbl_SanPham.setShowGrid(true);
         scr_DanhSachSanPham.setViewportView(tbl_SanPham);
 
+        lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TieuDe.setText("THỐNG KÊ SẢN PHẨM");
+        lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
+
+        javax.swing.GroupLayout pnl_NV_TieuDeLayout = new javax.swing.GroupLayout(pnl_NV_TieuDe);
+        pnl_NV_TieuDe.setLayout(pnl_NV_TieuDeLayout);
+        pnl_NV_TieuDeLayout.setHorizontalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NV_TieuDeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnl_NV_TieuDeLayout.setVerticalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnl_DanhSachSanPhamLayout = new javax.swing.GroupLayout(pnl_DanhSachSanPham);
         pnl_DanhSachSanPham.setLayout(pnl_DanhSachSanPhamLayout);
         pnl_DanhSachSanPhamLayout.setHorizontalGroup(
             pnl_DanhSachSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachSanPham)
+            .addComponent(scr_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 1348, Short.MAX_VALUE)
+            .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachSanPhamLayout.setVerticalGroup(
             pnl_DanhSachSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DanhSachSanPhamLayout.createSequentialGroup()
+                .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scr_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
@@ -203,7 +229,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_TopSPBanChạm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_TopSPBanChay, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         pnl_ThongTinLayout.setVerticalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,8 +353,10 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_KichThuoc;
     private javax.swing.JLabel lbl_MauSac;
     private javax.swing.JLabel lbl_PhanLoai;
+    private javax.swing.JLabel lbl_TieuDe;
     private javax.swing.JLabel lbl_TongSanPham;
     private javax.swing.JPanel pnl_DanhSachSanPham;
+    private javax.swing.JPanel pnl_NV_TieuDe;
     private javax.swing.JPanel pnl_NutChucNang;
     private javax.swing.JPanel pnl_ThongTin;
     private javax.swing.JPanel pnl_TongSanPham;

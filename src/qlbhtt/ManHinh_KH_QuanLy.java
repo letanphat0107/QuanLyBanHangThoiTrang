@@ -73,6 +73,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
         pnl_DanhSachKhachHang.setPreferredSize(new java.awt.Dimension(2000, 324));
+        pnl_DanhSachKhachHang.setVerifyInputWhenFocusTarget(false);
 
         scr_DanhSachKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách khách hàng"));
 
@@ -374,10 +375,10 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(pnl_DanhSachKhachHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1045, Short.MAX_VALUE)
+            .addComponent(pnl_DanhSachKhachHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

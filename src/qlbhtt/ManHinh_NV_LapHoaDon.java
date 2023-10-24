@@ -43,6 +43,8 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         pnl_GioHang = new javax.swing.JPanel();
         scr_GioHang = new javax.swing.JScrollPane();
         tbl_GioHang = new javax.swing.JTable();
+        pnl_NV_TieuDe = new javax.swing.JPanel();
+        lbl_TieuDe = new javax.swing.JLabel();
         pnl_ThongTin = new javax.swing.JPanel();
         txt_TenSP = new javax.swing.JTextField();
         txt_MaSP = new javax.swing.JTextField();
@@ -161,7 +163,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_Giam, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 530, Short.MAX_VALUE)
                 .addComponent(lbl_TongTienGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_TongTienGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,8 +229,28 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         pnl_GioHangLayout.setVerticalGroup(
             pnl_GioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_GioHangLayout.createSequentialGroup()
-                .addComponent(scr_GioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scr_GioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TieuDe.setText("LẶP HÓA ĐƠN");
+        lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
+
+        javax.swing.GroupLayout pnl_NV_TieuDeLayout = new javax.swing.GroupLayout(pnl_NV_TieuDe);
+        pnl_NV_TieuDe.setLayout(pnl_NV_TieuDeLayout);
+        pnl_NV_TieuDeLayout.setHorizontalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NV_TieuDeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnl_NV_TieuDeLayout.setVerticalGroup(
+            pnl_NV_TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnl_DanhSachSanPhamLayout = new javax.swing.GroupLayout(pnl_DanhSachSanPham);
@@ -238,12 +260,15 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             .addComponent(scr_DanhSachSanPham)
             .addComponent(pnl_DieuChinhGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 1420, Short.MAX_VALUE)
             .addComponent(pnl_GioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachSanPhamLayout.setVerticalGroup(
             pnl_DanhSachSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_DanhSachSanPhamLayout.createSequentialGroup()
-                .addComponent(scr_DanhSachSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scr_DanhSachSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_DieuChinhGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnl_GioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -466,7 +491,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                             .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
+                                        .addGap(6, 6, 6)
                                         .addComponent(lbl_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ThongTinLayout.createSequentialGroup()
                                         .addContainerGap()
@@ -475,7 +500,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmb_KichThuoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(42, 42, 42)
+                                .addGap(30, 30, 30)
                                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lbl_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbl_MauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -493,7 +518,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                             .addComponent(cmb_PhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(pnl_KhuVucTTKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
@@ -648,12 +673,14 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_SoDienThoai;
     private javax.swing.JLabel lbl_TenKH;
     private javax.swing.JLabel lbl_TenSP;
+    private javax.swing.JLabel lbl_TieuDe;
     private javax.swing.JLabel lbl_TongTienGioHang;
     private javax.swing.JPanel pnl_DanhSachSanPham;
     private javax.swing.JPanel pnl_DieuChinhGioHang;
     private javax.swing.JPanel pnl_GioHang;
     private javax.swing.JPanel pnl_HinhAnhSanPham;
     private javax.swing.JPanel pnl_KhuVucTTKhachHang;
+    private javax.swing.JPanel pnl_NV_TieuDe;
     private javax.swing.JPanel pnl_NutChucNang;
     private javax.swing.JPanel pnl_ThongTin;
     private javax.swing.JScrollPane scr_DanhSachSanPham;

@@ -47,6 +47,8 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         pnl_DanhSachNCC = new javax.swing.JPanel();
         scr_DanhSachNCC = new javax.swing.JScrollPane();
         tbl_NhaCungCap = new javax.swing.JTable();
+        pnl_NCC_QuanLy = new javax.swing.JPanel();
+        lbl_TieuDe = new javax.swing.JLabel();
         pnl_ThongTin = new javax.swing.JPanel();
         txt_TenNCC = new javax.swing.JTextField();
         txt_MaNCC = new javax.swing.JTextField();
@@ -94,15 +96,39 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         });
         scr_DanhSachNCC.setViewportView(tbl_NhaCungCap);
 
+        lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TieuDe.setText("QUẢN LÝ NHÀ CUNG CẤP");
+        lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
+
+        javax.swing.GroupLayout pnl_NCC_QuanLyLayout = new javax.swing.GroupLayout(pnl_NCC_QuanLy);
+        pnl_NCC_QuanLy.setLayout(pnl_NCC_QuanLyLayout);
+        pnl_NCC_QuanLyLayout.setHorizontalGroup(
+            pnl_NCC_QuanLyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_NCC_QuanLyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnl_NCC_QuanLyLayout.setVerticalGroup(
+            pnl_NCC_QuanLyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnl_DanhSachNCCLayout = new javax.swing.GroupLayout(pnl_DanhSachNCC);
         pnl_DanhSachNCC.setLayout(pnl_DanhSachNCCLayout);
         pnl_DanhSachNCCLayout.setHorizontalGroup(
             pnl_DanhSachNCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scr_DanhSachNCC)
+            .addComponent(pnl_NCC_QuanLy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachNCCLayout.setVerticalGroup(
             pnl_DanhSachNCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DanhSachNCCLayout.createSequentialGroup()
+                .addComponent(pnl_NCC_QuanLy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scr_DanhSachNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
@@ -286,10 +312,9 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                    .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                        .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(87, 87, 87))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -639,7 +664,9 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_MaNCC;
     private javax.swing.JLabel lbl_SoDienThoai;
     private javax.swing.JLabel lbl_TenNCC;
+    private javax.swing.JLabel lbl_TieuDe;
     private javax.swing.JPanel pnl_DanhSachNCC;
+    private javax.swing.JPanel pnl_NCC_QuanLy;
     private javax.swing.JPanel pnl_NutChucNang;
     private javax.swing.JPanel pnl_ThongTin;
     private javax.swing.JScrollPane scr_DanhSachNCC;
