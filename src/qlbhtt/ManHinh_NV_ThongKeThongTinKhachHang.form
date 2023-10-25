@@ -59,7 +59,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="scr_DanhSachThongKe" pref="1449" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachThongKe" max="32767" attributes="0"/>
               <Component id="pnl_NV_TieuDe" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>

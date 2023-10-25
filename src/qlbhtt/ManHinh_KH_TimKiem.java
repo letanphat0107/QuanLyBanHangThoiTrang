@@ -69,6 +69,8 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
+        scr_DanhSachKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
         tbl_KhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_KhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,11 +133,11 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DanhSachKhachHangLayout.createSequentialGroup()
                 .addComponent(pnl_KH_TieuDeTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scr_DanhSachKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                .addComponent(scr_DanhSachKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         txt_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +244,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         );
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
+        pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         btn_TimKiem.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-search-30.png"))); // NOI18N

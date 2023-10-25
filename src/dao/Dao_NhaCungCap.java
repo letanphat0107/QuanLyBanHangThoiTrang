@@ -166,4 +166,34 @@ public class Dao_NhaCungCap {
         }
         return null;
     }
+    
+    /**
+     * Lấy dữ liệu nhà cung cấp theo mã nhà cung cấp
+     * @param maNCC
+     * @return 
+     */
+    public NhaCungCap getNhaCungCapTheoMa(String maNCC) {
+        NhaCungCap ncc = null;
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "Select * from NhaCungCap where maNCC = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maNCC);
+            ResultSet rs = prestmt.executeQuery();
+            
+            while(rs.next()){
+                ncc = new NhaCungCap(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ncc;
+    }
 }

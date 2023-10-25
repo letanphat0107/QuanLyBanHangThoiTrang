@@ -59,7 +59,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="scr_DanhSachNCC" pref="1203" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachNCC" max="32767" attributes="0"/>
               <Component id="pnl_NCC_TimKiem" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -68,13 +68,22 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="pnl_NCC_TimKiem" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scr_DanhSachNCC" pref="182" max="32767" attributes="0"/>
+                  <Component id="scr_DanhSachNCC" pref="157" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JScrollPane" name="scr_DanhSachNCC">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Danh s&#xe1;ch nh&#xe0; cung c&#x1ea5;p">
+                  <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+                </TitledBorder>
+              </Border>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -158,7 +167,7 @@
                   <Font name="Segoe UI Variable" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xdd; NH&#xc0; CUNG C&#x1ea4;P"/>
+                <Property name="text" type="java.lang.String" value="T&#xcc;M KI&#x1ebe;M NH&#xc0; CUNG C&#x1ea4;P"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[32767, 32767]"/>
                 </Property>
@@ -177,8 +186,10 @@
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-            <EmptyBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Th&#xf4;ng tin nh&#xe0; cung c&#x1ea5;p">
+              <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -189,10 +200,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_MaNCC" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="lbl_TenNCC" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="txt_MaNCC" min="-2" pref="242" max="-2" attributes="0"/>
                       <Component id="txt_TenNCC" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                      <Component id="lbl_MaNCC" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_TenNCC" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -341,6 +352,13 @@
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Ch&#x1ee9;c n&#x103;ng">
+              <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+            </TitledBorder>
+          </Border>
         </Property>
       </Properties>
 

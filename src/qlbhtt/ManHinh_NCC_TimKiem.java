@@ -66,6 +66,8 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
+        scr_DanhSachNCC.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
         tbl_NhaCungCap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_NhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,7 +91,7 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
 
         lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_TieuDe.setText("QUẢN LÝ NHÀ CUNG CẤP");
+        lbl_TieuDe.setText("TÌM KIẾM NHÀ CUNG CẤP");
         lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
         lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
 
@@ -111,7 +113,7 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         pnl_DanhSachNCC.setLayout(pnl_DanhSachNCCLayout);
         pnl_DanhSachNCCLayout.setHorizontalGroup(
             pnl_DanhSachNCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 1203, Short.MAX_VALUE)
+            .addComponent(scr_DanhSachNCC)
             .addComponent(pnl_NCC_TimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachNCCLayout.setVerticalGroup(
@@ -119,11 +121,11 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DanhSachNCCLayout.createSequentialGroup()
                 .addComponent(pnl_NCC_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scr_DanhSachNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                .addComponent(scr_DanhSachNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         txt_TenNCC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenNCC.addActionListener(new java.awt.event.ActionListener() {
@@ -182,10 +184,10 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
             .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_MaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_TenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_MaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_TenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_TenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_MaNCC)
+                    .addComponent(lbl_TenNCC))
                 .addGap(50, 50, 50)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,6 +227,7 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         );
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
+        pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         btn_TimKiem.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-search-30.png"))); // NOI18N

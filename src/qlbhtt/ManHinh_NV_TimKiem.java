@@ -40,7 +40,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         txt_SoDienThoai.setText("");
         txt_DiaChi.setText("");
         txt_Email.setText("");
-        txt_ChucVu.setText("");
+        cmb_ChucVu.setSelectedIndex(0);
         txt_MaNV.setText("");
         rad_Nam.setSelected(false);
         rad_Nu.setSelected(false);
@@ -76,7 +76,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
      public void xuLyTimKiemNhanVien() {
         String tuKhoaMaNV = txt_MaNV.getText();
         String tuKhoaTenNV = txt_TenNV.getText();        
-        String tuKhoaChucVu = txt_ChucVu.getText();        
+        String tuKhoaChucVu = cmb_ChucVu.getSelectedItem().toString();        
         String tuKhoaSdt = txt_SoDienThoai.getText();
         String tuKhoaEmail = txt_Email.getText();
         String tuKhoaDiaChi = txt_DiaChi.getText();
@@ -128,10 +128,10 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         lbl_Email = new javax.swing.JLabel();
         rad_Nam = new javax.swing.JRadioButton();
         rad_Nu = new javax.swing.JRadioButton();
-        txt_ChucVu = new javax.swing.JTextField();
         txt_SoDienThoai = new javax.swing.JTextField();
         txt_Email = new javax.swing.JTextField();
         txt_DiaChi = new javax.swing.JTextField();
+        cmb_ChucVu = new javax.swing.JComboBox<>();
         pnl_NutChucNang = new javax.swing.JPanel();
         btn_TimKiem = new javax.swing.JButton();
         btn_XoaTrang = new javax.swing.JButton();
@@ -238,18 +238,13 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         buttonGroup1.add(rad_Nam);
         rad_Nam.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_Nam.setText("Nam");
+        rad_Nam.setEnabled(false);
 
         rad_Nu.setBackground(new java.awt.Color(199, 210, 213));
         buttonGroup1.add(rad_Nu);
         rad_Nu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_Nu.setText("Nữ");
-
-        txt_ChucVu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ChucVu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ChucVuActionPerformed(evt);
-            }
-        });
+        rad_Nu.setEnabled(false);
 
         txt_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
@@ -269,6 +264,14 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         txt_DiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_DiaChiActionPerformed(evt);
+            }
+        });
+
+        cmb_ChucVu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmb_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cmb_ChucVu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_ChucVuItemStateChanged(evt);
             }
         });
 
@@ -299,7 +302,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
                             .addComponent(lbl_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmb_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(60, 60, 60)
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,7 +340,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmb_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -431,10 +434,6 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_MaNVActionPerformed
 
-    private void txt_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ChucVuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_ChucVuActionPerformed
-
     private void txt_SoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoDienThoaiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_SoDienThoaiActionPerformed
@@ -475,11 +474,16 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
     }//GEN-LAST:event_btn_XoaTrangMouseExited
 
+    private void cmb_ChucVuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_ChucVuItemStateChanged
+
+    }//GEN-LAST:event_cmb_ChucVuItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_XoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cmb_ChucVu;
     private javax.swing.JLabel lbl_ChucVu;
     private javax.swing.JLabel lbl_DiaChi;
     private javax.swing.JLabel lbl_Email;
@@ -496,7 +500,6 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
     private javax.swing.JRadioButton rad_Nu;
     private javax.swing.JScrollPane scr_DanhSachNhanVien;
     private javax.swing.JTable tbl_NhanVien;
-    private javax.swing.JTextField txt_ChucVu;
     private javax.swing.JTextField txt_DiaChi;
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_MaNV;

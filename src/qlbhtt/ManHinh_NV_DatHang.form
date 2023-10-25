@@ -100,7 +100,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="9" rowCount="8">
-                    <Column editable="true" title="M&#xe3; s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String">
+                    <Column editable="true" title="M&#xe3; qu&#x1ea7;n &#xe1;o" type="java.lang.String">
                       <Data value="SP0001"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -110,7 +110,7 @@
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String">
+                    <Column editable="true" title="T&#xea;n qu&#x1ea7;n &#xe1;o" type="java.lang.String">
                       <Data value="&#xc1;o thun"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -247,7 +247,7 @@
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[675, 300]"/>
                 </Property>
-                <Property name="rowHeight" type="int" value="35"/>
+                <Property name="rowHeight" type="int" value="30"/>
                 <Property name="showGrid" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -278,7 +278,7 @@
                       <Component id="btn_Them" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btn_Giam" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace pref="508" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbl_TongTienGioHang" min="-2" pref="118" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_TongTienGioHang" min="-2" pref="105" max="-2" attributes="0"/>
@@ -442,7 +442,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="9" rowCount="6">
-                        <Column editable="true" title="M&#xe3; s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String">
+                        <Column editable="true" title="M&#xe3; qu&#x1ea7;n &#xe1;o" type="java.lang.String">
                           <Data value="SP0001"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -450,7 +450,7 @@
                           <Data value="null"/>
                           <Data value="null"/>
                         </Column>
-                        <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String">
+                        <Column editable="true" title="T&#xea;n qu&#x1ea7;n &#xe1;o" type="java.lang.String">
                           <Data value="&#xc1;o thun"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -565,7 +565,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
-                    <Property name="rowHeight" type="int" value="35"/>
+                    <Property name="rowHeight" type="int" value="30"/>
                     <Property name="showGrid" type="boolean" value="true"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -622,7 +622,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Th&#xf4;ng tin s&#x1ea3;n ph&#x1ea9;m">
-              <Font PropertyName="font" name="Segoe UI" size="14" style="0"/>
+              <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -666,7 +666,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Component id="pnl_HinhAnhSanPham" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                   <Component id="pnl_KhuVucTTKhachHang" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -677,8 +677,7 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="pnl_HinhAnhSanPham" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -705,13 +704,16 @@
                                       <Component id="txt_TenSP" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       <Component id="cmb_MauSac" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_PhanLoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Component id="lbl_GiaBan" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbl_PhanLoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lbl_GiaBan" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="pnl_HinhAnhSanPham" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -799,7 +801,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbl_HinhAnhSanPham" pref="230" max="32767" attributes="0"/>
+                      <Component id="lbl_HinhAnhSanPham" pref="180" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -808,7 +810,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbl_HinhAnhSanPham" pref="129" max="32767" attributes="0"/>
+                      <Component id="lbl_HinhAnhSanPham" pref="154" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -905,7 +907,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Th&#xf4;ng tin kh&#xe1;ch h&#xe0;ng">
-                  <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
+                  <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
                 </TitledBorder>
               </Border>
             </Property>

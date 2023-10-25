@@ -7,13 +7,16 @@ package qlbhtt;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 /**
  *
  * @author DMX
  */
 public class Login extends javax.swing.JFrame {
-
+    Boolean hoatDongIconShow = true;
+        Boolean hoatDongIconClose = true;
     /**
      * Creates new form Login
      */
@@ -36,14 +39,14 @@ public class Login extends javax.swing.JFrame {
         pnl_ManHinhDangNhap = new javax.swing.JPanel();
         pnl_FormDangNhap = new javax.swing.JPanel();
         txt_Username = new javax.swing.JTextField();
-        txt_Password = new javax.swing.JTextField();
         btn_Login = new javax.swing.JButton();
         lbl_Password = new javax.swing.JLabel();
         lbl_Title = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lbl_Password1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_TaiKhoan = new javax.swing.JLabel();
+        pwd_MatKhau = new javax.swing.JPasswordField();
+        lbl_IconPWClose = new javax.swing.JLabel();
+        lbl_IconUser = new javax.swing.JLabel();
+        lbl_ImageLogin = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -73,16 +76,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txt_Password.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        txt_Password.setText("admin");
-        txt_Password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_PasswordActionPerformed(evt);
-            }
-        });
-
         btn_Login.setBackground(new java.awt.Color(97, 103, 122));
-        btn_Login.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        btn_Login.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         btn_Login.setForeground(new java.awt.Color(242, 242, 242));
         btn_Login.setText("Đăng nhập");
         btn_Login.setBorder(null);
@@ -93,24 +88,39 @@ public class Login extends javax.swing.JFrame {
         });
 
         lbl_Password.setBackground(new java.awt.Color(216, 217, 218));
-        lbl_Password.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lbl_Password.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_Password.setForeground(new java.awt.Color(97, 103, 122));
         lbl_Password.setText("Mật khẩu");
 
-        lbl_Title.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
+        lbl_Title.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
         lbl_Title.setForeground(new java.awt.Color(97, 103, 122));
         lbl_Title.setText("Đăng nhập");
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8_Secure_50px.png"))); // NOI18N
+        lbl_TaiKhoan.setBackground(new java.awt.Color(216, 217, 218));
+        lbl_TaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_TaiKhoan.setForeground(new java.awt.Color(97, 103, 122));
+        lbl_TaiKhoan.setText("Tài khoản");
 
-        lbl_Password1.setBackground(new java.awt.Color(216, 217, 218));
-        lbl_Password1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lbl_Password1.setForeground(new java.awt.Color(97, 103, 122));
-        lbl_Password1.setText("Tài khoản");
+        pwd_MatKhau.setText("admin");
+        pwd_MatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwd_MatKhauActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8_Account_50px.png"))); // NOI18N
+        lbl_IconPWClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-password-30-1.png"))); // NOI18N
+        lbl_IconPWClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_IconPWCloseMouseClicked(evt);
+            }
+        });
+
+        lbl_IconUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-user-30.png"))); // NOI18N
+        lbl_IconUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_IconUserMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_FormDangNhapLayout = new javax.swing.GroupLayout(pnl_FormDangNhap);
         pnl_FormDangNhap.setLayout(pnl_FormDangNhapLayout);
@@ -120,18 +130,16 @@ public class Login extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
-                        .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pwd_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
+                        .addComponent(lbl_IconPWClose))
+                    .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
-                        .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Password1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lbl_IconUser))
+                    .addComponent(lbl_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FormDangNhapLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,42 +156,38 @@ public class Login extends javax.swing.JFrame {
                 .addGap(86, 86, 86)
                 .addComponent(lbl_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
-                        .addComponent(lbl_Password1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0)
+                .addComponent(lbl_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel3))
-                    .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21)
+                    .addComponent(txt_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_IconUser))
+                .addGap(18, 18, 18)
+                .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pwd_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_IconPWClose))
+                .addGap(39, 39, 39)
                 .addComponent(btn_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Login1.jpg"))); // NOI18N
+        lbl_ImageLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Login1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout pnl_ManHinhDangNhapLayout = new javax.swing.GroupLayout(pnl_ManHinhDangNhap);
         pnl_ManHinhDangNhap.setLayout(pnl_ManHinhDangNhapLayout);
         pnl_ManHinhDangNhapLayout.setHorizontalGroup(
             pnl_ManHinhDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ManHinhDangNhapLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(lbl_ImageLogin)
                 .addGap(0, 0, 0)
-                .addComponent(pnl_FormDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnl_FormDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         pnl_ManHinhDangNhapLayout.setVerticalGroup(
             pnl_ManHinhDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnl_FormDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lbl_ImageLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,7 +210,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
         String user = txt_Username.getText();
-        String pass = txt_Password.getText();
+        String pass = pwd_MatKhau.getText();
 
         if(user.equals("admin")){
             if(pass.equals("admin")){
@@ -235,9 +239,26 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_LoginActionPerformed
 
-    private void txt_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PasswordActionPerformed
+    private void pwd_MatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwd_MatKhauActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_PasswordActionPerformed
+    }//GEN-LAST:event_pwd_MatKhauActionPerformed
+
+    private void lbl_IconPWCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_IconPWCloseMouseClicked
+        
+        if(hoatDongIconShow){
+           lbl_IconPWClose.setIcon(new ImageIcon(getClass().getResource("/imageGD/icons8-show-password-30.png"))); 
+           pwd_MatKhau.setEchoChar((char)0);
+           hoatDongIconShow = false;
+        } else if(hoatDongIconClose){
+            pwd_MatKhau.setEchoChar('*');
+           lbl_IconPWClose.setIcon(new ImageIcon(getClass().getResource("/imageGD/icons8-password-30-1.png")));
+           hoatDongIconShow = true;
+        }
+    }//GEN-LAST:event_lbl_IconPWCloseMouseClicked
+
+    private void lbl_IconUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_IconUserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_IconUserMouseClicked
 
     /**
      * @param args the command line arguments
@@ -276,16 +297,16 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Login;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel lbl_IconPWClose;
+    private javax.swing.JLabel lbl_IconUser;
+    private javax.swing.JLabel lbl_ImageLogin;
     private javax.swing.JLabel lbl_Password;
-    private javax.swing.JLabel lbl_Password1;
+    private javax.swing.JLabel lbl_TaiKhoan;
     private javax.swing.JLabel lbl_Title;
     private javax.swing.JPanel pnl_FormDangNhap;
     private javax.swing.JPanel pnl_ManHinhDangNhap;
-    private javax.swing.JTextField txt_Password;
+    private javax.swing.JPasswordField pwd_MatKhau;
     private javax.swing.JTextField txt_Username;
     // End of variables declaration//GEN-END:variables
 }

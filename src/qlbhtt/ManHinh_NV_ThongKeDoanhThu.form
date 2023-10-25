@@ -178,8 +178,8 @@
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="Doanh thu" type="java.lang.String">
-                      <Data value="10"/>
+                    <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng &#x111;&#xe3; b&#xe1;n" type="java.lang.String">
+                      <Data value="500000"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -187,8 +187,8 @@
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng &#x111;&#xe3; b&#xe1;n" type="java.lang.String">
-                      <Data value="500000"/>
+                    <Column editable="true" title="Doanh thu" type="java.lang.String">
+                      <Data value="10"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>

@@ -42,7 +42,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         lbl_TenNV = new javax.swing.JLabel();
         lbl_ChucVu = new javax.swing.JLabel();
         txt_TenNV = new javax.swing.JTextField();
-        txt_ChucVu = new javax.swing.JTextField();
+        cmb_ChucVu = new javax.swing.JComboBox<>();
         pnl_NutChucNang = new javax.swing.JPanel();
         btn_DoiMatKhau = new javax.swing.JButton();
 
@@ -152,11 +152,16 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        txt_ChucVu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ChucVu.setText("Quan Ly");
-        txt_ChucVu.addActionListener(new java.awt.event.ActionListener() {
+        cmb_ChucVu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmb_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cmb_ChucVu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_ChucVuItemStateChanged(evt);
+            }
+        });
+        cmb_ChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ChucVuActionPerformed(evt);
+                cmb_ChucVuActionPerformed(evt);
             }
         });
 
@@ -173,11 +178,11 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
                     .addComponent(txt_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(132, Short.MAX_VALUE))
+                    .addComponent(txt_TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_ThongTinLayout.setVerticalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +202,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmb_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
@@ -269,10 +274,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_TenNVActionPerformed
 
-    private void txt_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ChucVuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_ChucVuActionPerformed
-
     private void btn_DoiMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DoiMatKhauMouseEntered
          btn_DoiMatKhau.setBackground(new Color(0x9EDDFF));
        btn_DoiMatKhau.setForeground(new Color(0x141E46));
@@ -283,9 +284,18 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         btn_DoiMatKhau.setForeground(UIManager.getColor("Menu.foreground"));
     }//GEN-LAST:event_btn_DoiMatKhauMouseExited
 
+    private void cmb_ChucVuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_ChucVuItemStateChanged
+
+    }//GEN-LAST:event_cmb_ChucVuItemStateChanged
+
+    private void cmb_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_ChucVuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_ChucVuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DoiMatKhau;
+    private javax.swing.JComboBox<String> cmb_ChucVu;
     private javax.swing.JLabel lbl_ChucVu;
     private javax.swing.JLabel lbl_MatKhau;
     private javax.swing.JLabel lbl_TenNV;
@@ -297,7 +307,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_ThongTin;
     private javax.swing.JScrollPane scr_DanhSachTaiKhoan;
     private javax.swing.JTable tbl_TaiKhoan;
-    private javax.swing.JTextField txt_ChucVu;
     private javax.swing.JTextField txt_MatKhau;
     private javax.swing.JTextField txt_TenNV;
     private javax.swing.JTextField txt_TenTK;

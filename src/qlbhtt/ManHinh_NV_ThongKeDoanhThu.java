@@ -64,7 +64,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         tbl_SanPham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"SP0001", "Áo thun", "Áo", "250000", "275000", "L", "Trắng", "Cotton", "CT TNHH Hades", "10", "500000", "12"},
+                {"SP0001", "Áo thun", "Áo", "250000", "275000", "L", "Trắng", "Cotton", "CT TNHH Hades", "500000", "10", "12"},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
@@ -73,7 +73,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
                 {"", null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Phân loại", "Giá bán ", "Giá nhập", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Doanh thu", "Số lượng đã bán", "Tỷ lệ doanh thu"
+                "Mã sản phẩm", "Tên sản phẩm", "Phân loại", "Giá bán ", "Giá nhập", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng đã bán", "Doanh thu", "Tỷ lệ doanh thu"
             }
         ) {
             Class[] types = new Class [] {

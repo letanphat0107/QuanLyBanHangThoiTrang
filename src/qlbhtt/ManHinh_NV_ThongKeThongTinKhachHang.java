@@ -110,7 +110,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         pnl_DanhSachThongKe.setLayout(pnl_DanhSachThongKeLayout);
         pnl_DanhSachThongKeLayout.setHorizontalGroup(
             pnl_DanhSachThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 1449, Short.MAX_VALUE)
+            .addComponent(scr_DanhSachThongKe)
             .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_DanhSachThongKeLayout.setVerticalGroup(

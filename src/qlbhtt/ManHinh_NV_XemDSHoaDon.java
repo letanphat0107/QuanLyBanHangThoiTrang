@@ -48,18 +48,18 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         tbl_HoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {"", null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {"", null, null, null, null}
             },
             new String [] {
-                "Mã HD", "Mã KH", "Tên KH", "Mã NV", "Tên NV", "Ngày lập", "Tổng tiền"
+                "Mã hóa đơn", "Tên khách hàng", "Tên nhân viên", "Ngày lập", "Tổng tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -161,6 +161,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
 
         cmb_TatCa.setBackground(new java.awt.Color(199, 210, 213));
         cmb_TatCa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmb_TatCa.setSelected(true);
         cmb_TatCa.setText("Tất cả");
         cmb_TatCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

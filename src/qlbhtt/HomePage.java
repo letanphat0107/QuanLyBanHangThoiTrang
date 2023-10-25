@@ -524,7 +524,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_NV_ThongKeDoanhThuActionPerformed
 
     private void mni_NV_ThongKeSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_ThongKeSanPhamActionPerformed
-        ManHinh_NV_ThongKeSanPham pnl_NV_ThongKeSanPham = new ManHinh_NV_ThongKeSanPham();
+        ManHinh_NV_ThongKeSanPham pnl_NV_ThongKeSanPham = null;
+       try {
+           pnl_NV_ThongKeSanPham = new ManHinh_NV_ThongKeSanPham();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NV_ThongKeSanPham);
         pnl_GiaoDienChucNang.revalidate();
