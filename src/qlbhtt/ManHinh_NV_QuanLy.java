@@ -74,7 +74,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
             object[6] = nv.getEmail();
             String trangThai = "";
             if(nv.isTrangThai()) {
-                trangThai = "Còn hoạt động";
+                trangThai = "Đang làm";
             } else {
                  trangThai = "Nghỉ làm";
             }
@@ -283,7 +283,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
                     tbl_NhanVien.setValueAt(diaChi, row, 4);
                     tbl_NhanVien.setValueAt(sdt, row, 5);
                     tbl_NhanVien.setValueAt(email, row, 6);
-                    tbl_NhanVien.setValueAt(trangThai ? "Còn hoạt động" : "Nghỉ làm", row, 7);
+                    tbl_NhanVien.setValueAt(trangThai ? "Đang làm" : "Nghỉ làm", row, 7);
                 }
             }
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
@@ -509,7 +509,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         rad_TrangThai.setBackground(new java.awt.Color(199, 210, 213));
         rad_TrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_TrangThai.setSelected(true);
-        rad_TrangThai.setText("Hoạt động");
+        rad_TrangThai.setText("Đang làm");
         rad_TrangThai.setEnabled(false);
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);

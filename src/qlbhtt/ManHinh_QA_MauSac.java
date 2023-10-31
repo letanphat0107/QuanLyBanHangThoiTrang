@@ -108,23 +108,23 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Thêm thành công");
     }
 
-    /**
-     * Xử lý xóa Màu sắc
-     */
-    public void xuLyXoaMauSac() {
-        int row = tbl_MauSac.getSelectedRow();
-        if (row != -1) {
-            if (JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                String maMauSac = txt_MaMauSac.getText();
-                dao_MauSac.xoaDLMauSac(maMauSac);
-                modelMauSac.removeRow(row);
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-                xoaTrang();
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
-        }
-    }
+//    /**
+//     * Xử lý xóa Màu sắc
+//     */
+//    public void xuLyXoaMauSac() {
+//        int row = tbl_MauSac.getSelectedRow();
+//        if (row != -1) {
+//            if (JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                String maMauSac = txt_MaMauSac.getText();
+//                dao_MauSac.xoaDLMauSac(maMauSac);
+//                modelMauSac.removeRow(row);
+//                JOptionPane.showMessageDialog(this, "Xóa thành công");
+//                xoaTrang();
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+//        }
+//    }
 
     /**
      * Xử lý cập nhật Màu sắc
@@ -400,7 +400,7 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
 
         btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
-        btn_XoaTrang.setText("Xóa");
+        btn_XoaTrang.setText("Xóa trắng");
         btn_XoaTrang.setBorder(null);
         btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -530,7 +530,7 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_MauSacMouseClicked
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
-        xuLyXoaMauSac();
+        xoaTrang();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered

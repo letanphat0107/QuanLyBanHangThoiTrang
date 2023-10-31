@@ -38,6 +38,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.text.NumberFormat;
 import javax.swing.UIManager;
 
 /**
@@ -45,7 +46,8 @@ import javax.swing.UIManager;
  * @author DMX
  */
 public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
-    private DefaultTableModel modelSanPham;    
+
+    private DefaultTableModel modelSanPham;
     private Dao_SanPham dao_SanPham;
     private Dao_ChatLieu dao_ChatLieu;
     private Dao_KichThuoc dao_KichThuoc;
@@ -54,6 +56,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
     private Dao_NhaCungCap dao_NhaCungCap;
     private File file = null;
     private Connect connect;
+
     /**
      * Creates new form quanly
      */
@@ -64,7 +67,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
         dao_MauSac = new Dao_MauSac();
         dao_PhanLoai = new Dao_PhanLoai();
         dao_NhaCungCap = new Dao_NhaCungCap();
-        
+
         connect = new Connect();
         connect.connect();
         initComponents();
@@ -510,7 +513,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
 
     private void btn_TimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseEntered
         btn_TimKiem.setBackground(new Color(0x9EDDFF));
-       btn_TimKiem.setForeground(new Color(0x141E46));
+        btn_TimKiem.setForeground(new Color(0x141E46));
     }//GEN-LAST:event_btn_TimKiemMouseEntered
 
     private void btn_TimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseExited
@@ -520,7 +523,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
 
     private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
         btn_XoaTrang.setBackground(new Color(0x9EDDFF));
-       btn_XoaTrang.setForeground(new Color(0x141E46));
+        btn_XoaTrang.setForeground(new Color(0x141E46));
     }//GEN-LAST:event_btn_XoaTrangMouseEntered
 
     private void btn_XoaTrangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseExited
@@ -534,44 +537,42 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
 
     private void tbl_PhuKienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_PhuKienMouseClicked
         // TODO add your handling code here:
-        int row =  tbl_PhuKien.getSelectedRow();
-       if(row!=-1) {
-           //Load thong tin vao txt, combobox        
-           SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-           Date ngayNhap = null;
+        int row = tbl_PhuKien.getSelectedRow();
+        if (row != -1) {
+            //Load thong tin vao txt, combobox        
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date ngayNhap = null;
             try {
                 ngayNhap = sdf.parse(tbl_PhuKien.getValueAt(row, 5).toString());
             } catch (ParseException ex) {
                 Logger.getLogger(ManHinh_QA_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
-           String maSanPham = tbl_PhuKien.getValueAt(row, 0).toString();
-           SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
-           
-           txt_MaPK.setText(tbl_PhuKien.getValueAt(row, 0).toString());
-           txt_TenPK.setText(tbl_PhuKien.getValueAt(row, 1).toString());
-           cmb_PhanLoai.setSelectedItem(tbl_PhuKien.getValueAt(row, 2).toString());
-           txt_GiaBan.setText(tbl_PhuKien.getValueAt(row, 3).toString());
-           txt_GiaNhap.setText(tbl_PhuKien.getValueAt(row, 4).toString()); 
-           dch_NgayNhap.setDate(ngayNhap);
-           cmb_KichThuoc.setSelectedItem(tbl_PhuKien.getValueAt(row, 6).toString());
-           cmb_MauSac.setSelectedItem(tbl_PhuKien.getValueAt(row, 7).toString());
-           cmb_ChatLieu.setSelectedItem(tbl_PhuKien.getValueAt(row, 8).toString());
-           cmb_NCC.setSelectedItem(tbl_PhuKien.getValueAt(row, 9).toString());
-           txt_SoLuong.setText(tbl_PhuKien.getValueAt(row, 10).toString());
-           //Load hinh anh
-           
-           
-           File file = new File("");
-           String path= file.getAbsolutePath();
-           String imagePath = path + "/data/" + sanPham.getHinhAnh();
-           File imageFile = new File(imagePath);
 
-           //ImageIcon imageIcon = new ImageIcon(imagePath);
-           //imageIcon.setDescription("" + sanPham.getHinhAnh()); // Đặt mô tả cho ImageIcon
+            String maSanPham = tbl_PhuKien.getValueAt(row, 0).toString();
+            SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
 
+            txt_MaPK.setText(tbl_PhuKien.getValueAt(row, 0).toString());
+            txt_TenPK.setText(tbl_PhuKien.getValueAt(row, 1).toString());
+            cmb_PhanLoai.setSelectedItem(tbl_PhuKien.getValueAt(row, 2).toString());
+            txt_GiaBan.setText(tbl_PhuKien.getValueAt(row, 3).toString());
+            txt_GiaNhap.setText(tbl_PhuKien.getValueAt(row, 4).toString());
+            dch_NgayNhap.setDate(ngayNhap);
+            cmb_KichThuoc.setSelectedItem(tbl_PhuKien.getValueAt(row, 6).toString());
+            cmb_MauSac.setSelectedItem(tbl_PhuKien.getValueAt(row, 7).toString());
+            cmb_ChatLieu.setSelectedItem(tbl_PhuKien.getValueAt(row, 8).toString());
+            cmb_NCC.setSelectedItem(tbl_PhuKien.getValueAt(row, 9).toString());
+            txt_SoLuong.setText(tbl_PhuKien.getValueAt(row, 10).toString());
+            //Load hinh anh
+
+            File file = new File("");
+            String path = file.getAbsolutePath();
+            String imagePath = path + "/data/" + sanPham.getHinhAnh();
+            File imageFile = new File(imagePath);
+
+            //ImageIcon imageIcon = new ImageIcon(imagePath);
+            //imageIcon.setDescription("" + sanPham.getHinhAnh()); // Đặt mô tả cho ImageIcon
             lbl_HinhAnhSP.setIcon(ResizeImage(imagePath, sanPham.getHinhAnh()));
-       }
+        }
     }//GEN-LAST:event_tbl_PhuKienMouseClicked
 
     private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
@@ -583,7 +584,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
         xoaTrang();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
-    public ImageIcon ResizeImage(String imgPath, String desc){
+    public ImageIcon ResizeImage(String imgPath, String desc) {
         ImageIcon myImage = new ImageIcon(imgPath);
         Image img = myImage.getImage();
         Image newImg = img.getScaledInstance(pnl_HinhAnhSanPham.getWidth(), pnl_HinhAnhSanPham.getHeight(), Image.SCALE_SMOOTH);
@@ -591,6 +592,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
         image.setDescription(desc);
         return image;
     }
+
     public void xoaTrang() {
         txt_MaPK.setText("");
         txt_TenPK.setText("");
@@ -604,7 +606,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
         cmb_PhanLoai.setSelectedIndex(0);
         cmb_NCC.setSelectedIndex(0);
     }
-    
+
     private void xuLyTiemKiemPhuKien() {
         String maSP = txt_MaPK.getText();
         String tenSP = txt_TenPK.getText();
@@ -613,20 +615,20 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
         String tenMauSac = cmb_MauSac.getSelectedItem().toString();
         String tenChatLieu = cmb_ChatLieu.getSelectedItem().toString();
         String tenKichThuoc = cmb_KichThuoc.getSelectedItem().toString();
-        
+
         DefaultTableModel model = (DefaultTableModel) tbl_PhuKien.getModel();
-        
+
         ArrayList<SanPham> listSanPham = dao_SanPham.timKiemPhuKien(maSP, tenSP, tenPhanLoai, tenNCC, tenMauSac, tenChatLieu, tenKichThuoc);
-        
-        if(listSanPham!=null){
+
+        if (listSanPham != null) {
             model.setRowCount(0);
             for (SanPham qa : listSanPham) {
                 Object[] object = new Object[11];
                 object[0] = qa.getMaSP();
                 object[1] = qa.getTenSP();
                 object[2] = qa.getPhanLoai().getLoaiSanPham();
-                object[3] = qa.getGiaBan();
-                object[4] = qa.getGiaNhap();
+                object[3] = NumberFormat.getInstance().format(qa.getGiaBan());
+                object[4] = NumberFormat.getInstance().format(qa.getGiaNhap());
                 object[5] = qa.getNgayNhap();
                 object[6] = qa.getKichThuoc().getKichThuoc();
                 object[7] = qa.getMauSac().getMauSac();
@@ -635,21 +637,22 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
                 object[10] = qa.getSoLuong();
                 model.addRow(object);
             }
-        }else
+        } else {
             docDuLieuQuanAo();
-        
+        }
+
         xoaTrang();
     }
-    
-    public void docDuLieuQuanAo() {    
+
+    public void docDuLieuQuanAo() {
         modelSanPham = (DefaultTableModel) tbl_PhuKien.getModel();
-        for(SanPham pk: dao_SanPham.getAllPhuKien()) {
+        for (SanPham pk : dao_SanPham.getAllPhuKien()) {
             Object[] object = new Object[11];
             object[0] = pk.getMaSP();
             object[1] = pk.getTenSP();
             object[2] = pk.getPhanLoai().getLoaiSanPham();
-            object[3] = pk.getGiaBan();
-            object[4] = pk.getGiaNhap();
+            object[3] = NumberFormat.getInstance().format(pk.getGiaBan());
+            object[4] = NumberFormat.getInstance().format(pk.getGiaNhap());
             object[5] = pk.getNgayNhap();
             object[6] = pk.getKichThuoc().getKichThuoc();
             object[7] = pk.getMauSac().getMauSac();
@@ -659,58 +662,58 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
             modelSanPham.addRow(object);
         }
     }
-    
-    public void docDuLieuCMB(){
+
+    public void docDuLieuCMB() {
         //Doc du lieu ComboBox chat lieu
         ArrayList<ChatLieu> ds_ChatLieu = new ArrayList<>();
         ds_ChatLieu = dao_ChatLieu.getAllChatLieu();
-        
+
         cmb_ChatLieu.removeAllItems();
         cmb_ChatLieu.addItem("");
         for (ChatLieu chatLieu : ds_ChatLieu) {
             cmb_ChatLieu.addItem(chatLieu.getChatLieu());
         }
-        
+
         //Doc du lieu ComboBox kich thuoc
         ArrayList<KichThuoc> ds_KichThuoc = new ArrayList<>();
         ds_KichThuoc = dao_KichThuoc.getAllKichThuoc();
-        
+
         cmb_KichThuoc.removeAllItems();
         cmb_KichThuoc.addItem("");
         for (KichThuoc kichThuoc : ds_KichThuoc) {
             cmb_KichThuoc.addItem(kichThuoc.getKichThuoc());
         }
-        
+
         //Doc du lieu ComboBox mau sac
         ArrayList<MauSac> ds_MauSac = new ArrayList<>();
         ds_MauSac = dao_MauSac.getAllMauSac();
-        
+
         cmb_MauSac.removeAllItems();
         cmb_MauSac.addItem("");
         for (MauSac mauSac : ds_MauSac) {
             cmb_MauSac.addItem(mauSac.getMauSac());
         }
-        
+
         //Doc du lieu ComboBox phan loai
         ArrayList<PhanLoai> ds_PhanLoai = new ArrayList<>();
         ds_PhanLoai = dao_PhanLoai.getAllPhanLoaiCuaPhuKien();
-        
+
         cmb_PhanLoai.removeAllItems();
         cmb_PhanLoai.addItem("");
         for (PhanLoai phanLoai : ds_PhanLoai) {
             cmb_PhanLoai.addItem(phanLoai.getLoaiSanPham());
         }
-        
+
         //Doc du lieu ComboBox nha cung cap
         ArrayList<NhaCungCap> ds_NhaCungCap = new ArrayList<>();
         ds_NhaCungCap = dao_NhaCungCap.getAllNhaCungCap();
-        
+
         cmb_NCC.removeAllItems();
         cmb_NCC.addItem("");
         for (NhaCungCap nhaCungCap : ds_NhaCungCap) {
             cmb_NCC.addItem(nhaCungCap.getTenNCC());
         }
-    } 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_XoaTrang;

@@ -89,7 +89,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
             object[4] = nv.getDiaChi();
             object[5] = nv.getSdt();
             object[6] = nv.getEmail();
-            object[7] = nv.isTrangThai() ? "Còn hoạt động" : "Nghỉ làm";
+            object[7] = nv.isTrangThai() ? "Đang làm" : "Nghỉ làm";
             modelNhanVien.addRow(object);
         }
     }
@@ -526,6 +526,11 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
             txt_DiaChi.setText(tbl_NhanVien.getValueAt(row, 4).toString());
             txt_SoDienThoai.setText(tbl_NhanVien.getValueAt(row, 5).toString());
             txt_Email.setText(tbl_NhanVien.getValueAt(row, 6).toString());
+            if(tbl_NhanVien.getValueAt(row, 7).toString().equalsIgnoreCase("Đang làm")) {
+                rad_TrangThai.setSelected(true);
+            } else if(tbl_NhanVien.getValueAt(row, 7).toString().equalsIgnoreCase("Nghỉ làm")) {
+                rad_TrangThai.setSelected(false);
+            } 
         }
     }//GEN-LAST:event_tbl_NhanVienMouseClicked
 

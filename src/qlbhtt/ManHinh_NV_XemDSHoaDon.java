@@ -393,9 +393,12 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
     private void chk_TatCaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chk_TatCaItemStateChanged
         if (chk_TatCa.isSelected()) {
             docDuLieuLenBangDsHoaDon();
+            
         } else if (!chk_TatCa.isSelected()) {
             docDuLieuDanhSachHoaDonTheoNgay();
         }
+        modelCTHD.setRowCount(0);
+
     }//GEN-LAST:event_chk_TatCaItemStateChanged
 
     private void dch_DenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_DenNgayPropertyChange

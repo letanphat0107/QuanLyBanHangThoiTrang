@@ -464,7 +464,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_KhachHangMouseClicked
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
-        // TODO add your handling code here:
+        xoaTrang();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered

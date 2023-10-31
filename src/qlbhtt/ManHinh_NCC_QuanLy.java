@@ -64,7 +64,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         btn_Them = new javax.swing.JButton();
         btn_CapNhat = new javax.swing.JButton();
         btn_Luu = new javax.swing.JButton();
-        btn_Xoa = new javax.swing.JButton();
+        btn_XoaTrang = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(199, 210, 213));
         setMinimumSize(new java.awt.Dimension(1000, 550));
@@ -288,22 +288,22 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
-        btn_Xoa.setText("Xóa");
-        btn_Xoa.setBorder(null);
-        btn_Xoa.setMinimumSize(new java.awt.Dimension(20, 30));
-        btn_Xoa.setPreferredSize(new java.awt.Dimension(20, 30));
-        btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
+        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setBorder(null);
+        btn_XoaTrang.setMinimumSize(new java.awt.Dimension(20, 30));
+        btn_XoaTrang.setPreferredSize(new java.awt.Dimension(20, 30));
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_XoaMouseEntered(evt);
+                btn_XoaTrangMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_XoaMouseExited(evt);
+                btn_XoaTrangMouseExited(evt);
             }
         });
-        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
+        btn_XoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_XoaActionPerformed(evt);
+                btn_XoaTrangActionPerformed(evt);
             }
         });
 
@@ -317,7 +317,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
                     .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                     .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                     .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(87, 87, 87))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -326,7 +326,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -370,7 +370,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         if(btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")) {
             btn_CapNhat.setText("Hủy");
             btn_Them.setEnabled(false);
-            btn_Xoa.setEnabled(false);
+            btn_XoaTrang.setEnabled(false);
             btn_Luu.setEnabled(true);
             kiemTraHoaDongSua= true;
             kiemTraHoatDongTextNhap(true);
@@ -397,16 +397,16 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_EmailActionPerformed
 
-    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
-        xuLyXoaNhaCungCap();
-    }//GEN-LAST:event_btn_XoaActionPerformed
+    private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
+        xoaTrangTxt();
+    }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         
         if(btn_Them.getText().equalsIgnoreCase("Thêm")) {
             btn_Them.setText("Hủy");
             btn_CapNhat.setEnabled(false);
-            btn_Xoa.setEnabled(false);
+            btn_XoaTrang.setEnabled(false);
             btn_Luu.setEnabled(true);
             kiemTraHoaDongThem = true;
             kiemTraHoatDongTextNhap(true);
@@ -442,19 +442,19 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_ThemMouseExited
 
-    private void btn_XoaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseEntered
-         if(btn_Xoa.isEnabled()) {
-            btn_Xoa.setBackground(new Color(0x9EDDFF));
-            btn_Xoa.setForeground(new Color(0x141E46));
+    private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
+         if(btn_XoaTrang.isEnabled()) {
+            btn_XoaTrang.setBackground(new Color(0x9EDDFF));
+            btn_XoaTrang.setForeground(new Color(0x141E46));
         }
-    }//GEN-LAST:event_btn_XoaMouseEntered
+    }//GEN-LAST:event_btn_XoaTrangMouseEntered
 
-    private void btn_XoaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseExited
-        if(btn_Xoa.isEnabled()) {
-            btn_Xoa.setBackground(UIManager.getColor("Menu.background"));
-            btn_Xoa.setForeground(UIManager.getColor("Menu.foreground"));
+    private void btn_XoaTrangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseExited
+        if(btn_XoaTrang.isEnabled()) {
+            btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
+            btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
         }
-    }//GEN-LAST:event_btn_XoaMouseExited
+    }//GEN-LAST:event_btn_XoaTrangMouseExited
 
     private void btn_CapNhatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseEntered
         if(btn_CapNhat.isEnabled()) {
@@ -503,7 +503,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         kiemTraHoaDongSua = false;
         btn_Them.setEnabled(true);
         btn_CapNhat.setEnabled(true);
-        btn_Xoa.setEnabled(true);
+        btn_XoaTrang.setEnabled(true);
         btn_Luu.setEnabled(false);
         kiemTraHoatDongTextNhap(false);
         xoaTrangTxt();
@@ -661,7 +661,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
     private javax.swing.JButton btn_CapNhat;
     private javax.swing.JButton btn_Luu;
     private javax.swing.JButton btn_Them;
-    private javax.swing.JButton btn_Xoa;
+    private javax.swing.JButton btn_XoaTrang;
     private javax.swing.JLabel lbl_DiaChi;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_MaNCC;

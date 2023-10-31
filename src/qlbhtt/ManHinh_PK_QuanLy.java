@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -115,7 +116,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         dch_NgayNhap = new com.toedter.calendar.JDateChooser();
         pnl_NutChucNang = new javax.swing.JPanel();
         btn_Them = new javax.swing.JButton();
-        btn_Xoa = new javax.swing.JButton();
+        btn_XoaTrang = new javax.swing.JButton();
         btn_CapNhat = new javax.swing.JButton();
         btn_Luu = new javax.swing.JButton();
 
@@ -284,7 +285,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         );
         pnl_HinhAnhSPLayout.setVerticalGroup(
             pnl_HinhAnhSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
         );
 
         cmb_ChatLieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -455,22 +456,22 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
             }
         });
 
-        btn_Xoa.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btn_Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
-        btn_Xoa.setText("Xóa");
-        btn_Xoa.setBorder(null);
-        btn_Xoa.setPreferredSize(new java.awt.Dimension(80, 30));
-        btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btn_XoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
+        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setBorder(null);
+        btn_XoaTrang.setPreferredSize(new java.awt.Dimension(80, 30));
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_XoaMouseEntered(evt);
+                btn_XoaTrangMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_XoaMouseExited(evt);
+                btn_XoaTrangMouseExited(evt);
             }
         });
-        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
+        btn_XoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_XoaActionPerformed(evt);
+                btn_XoaTrangActionPerformed(evt);
             }
         });
 
@@ -518,7 +519,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Luu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -529,7 +530,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_XoaTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -581,10 +582,6 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_SoLuongActionPerformed
 
-    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
-        xuLyXoaSanPham();
-    }//GEN-LAST:event_btn_XoaActionPerformed
-
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
         int row = tbl_PhuKien.getSelectedRow();
         if(row!=-1){
@@ -593,7 +590,6 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
                 // Vo hieu or kich hoat chuc nang
                 btn_CapNhat.setText("Hủy");
                 btn_Them.setEnabled(false);
-                btn_Xoa.setEnabled(false);
                 btn_Luu.setEnabled(true);
                 // Kich hoat chinh sua
                 txt_TenPK.setEditable(true);
@@ -613,7 +609,6 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
                 btn_CapNhat.setText("Cập nhật");
                 btn_Them.setEnabled(true);
                 btn_CapNhat.setEnabled(true);
-                btn_Xoa.setEnabled(true);
                 btn_Luu.setEnabled(false);
                 xoaTrang();
                 // Vo hieu chinh sua
@@ -723,7 +718,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
                     btn_Them.setText("Thêm");
                     btn_Them.setEnabled(true);
                     btn_CapNhat.setEnabled(true);
-                    btn_Xoa.setEnabled(true);
+                    btn_XoaTrang.setEnabled(false);
                     btn_Luu.setEnabled(false);
                     xoaTrang();
                     // Vo hieu chinh sua
@@ -754,7 +749,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
                     btn_CapNhat.setText("Cập nhật");
                     btn_Them.setEnabled(true);
                     btn_CapNhat.setEnabled(true);
-                    btn_Xoa.setEnabled(true);
+                    btn_XoaTrang.setEnabled(true);
                     btn_Luu.setEnabled(false);
                     xoaTrang();
                     // Vo hieu chinh sua
@@ -804,20 +799,6 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_ThemMouseExited
 
-    private void btn_XoaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseEntered
-        if(btn_Xoa.isEnabled()) {
-            btn_Xoa.setBackground(new Color(0x9EDDFF));
-            btn_Xoa.setForeground(new Color(0x141E46));
-       }
-    }//GEN-LAST:event_btn_XoaMouseEntered
-
-    private void btn_XoaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseExited
-        if(btn_Xoa.isEnabled()) {
-            btn_Xoa.setBackground(UIManager.getColor("Menu.background"));
-            btn_Xoa.setForeground(UIManager.getColor("Menu.foreground"));
-        }
-    }//GEN-LAST:event_btn_XoaMouseExited
-
     private void btn_CapNhatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseEntered
         if(btn_CapNhat.isEnabled()) {
         btn_CapNhat.setBackground(new Color(0x9EDDFF));
@@ -862,7 +843,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
             // Vo hieu or kich hoat chuc nang
             btn_Them.setText("Hủy");
             btn_CapNhat.setEnabled(false);
-            btn_Xoa.setEnabled(false);
+            btn_XoaTrang.setEnabled(false);
             btn_Luu.setEnabled(true);
             // Kich hoat chinh sua
             txt_TenPK.setEditable(true);
@@ -884,7 +865,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
             btn_Them.setText("Thêm");
             btn_Them.setEnabled(true);
             btn_CapNhat.setEnabled(true);
-            btn_Xoa.setEnabled(true);
+            btn_XoaTrang.setEnabled(true);
             btn_Luu.setEnabled(false);
             xoaTrang();
             // Vo hieu chinh sua
@@ -945,6 +926,24 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_tbl_PhuKienMouseClicked
 
+    private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
+        xoaTrang();
+    }//GEN-LAST:event_btn_XoaTrangActionPerformed
+
+    private void btn_XoaTrangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseExited
+        if(btn_XoaTrang.isEnabled()) {
+            btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
+            btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
+        }
+    }//GEN-LAST:event_btn_XoaTrangMouseExited
+
+    private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
+        if(btn_XoaTrang.isEnabled()) {
+            btn_XoaTrang.setBackground(new Color(0x9EDDFF));
+            btn_XoaTrang.setForeground(new Color(0x141E46));
+        }
+    }//GEN-LAST:event_btn_XoaTrangMouseEntered
+
     public ImageIcon ResizeImage(String imgPath, String desc){
         ImageIcon myImage = new ImageIcon(imgPath);
         Image img = myImage.getImage();
@@ -979,8 +978,8 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
             object[0] = sanPham.getMaSP();
             object[1] = sanPham.getTenSP();
             object[2] = sanPham.getPhanLoai().getLoaiSanPham();
-            object[3] = sanPham.getGiaBan();
-            object[4] = sanPham.getGiaNhap();
+            object[3] = NumberFormat.getInstance().format( sanPham.getGiaBan());
+            object[4] = NumberFormat.getInstance().format( sanPham.getGiaNhap());
             object[5] = ngayNhapString;
             object[6] = sanPham.getKichThuoc().getKichThuoc();
             object[7] = sanPham.getMauSac().getMauSac();
@@ -1069,8 +1068,8 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
             object[0] = pk.getMaSP();
             object[1] = pk.getTenSP();
             object[2] = pk.getPhanLoai().getLoaiSanPham();
-            object[3] = pk.getGiaBan();
-            object[4] = pk.getGiaNhap();
+            object[3] = NumberFormat.getInstance().format( pk.getGiaBan());
+            object[4] = NumberFormat.getInstance().format( pk.getGiaNhap());
             object[5] = pk.getNgayNhap();
             object[6] = pk.getKichThuoc().getKichThuoc();
             object[7] = pk.getMauSac().getMauSac();
@@ -1133,7 +1132,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
     private javax.swing.JButton btn_ChonAnh;
     private javax.swing.JButton btn_Luu;
     private javax.swing.JButton btn_Them;
-    private javax.swing.JButton btn_Xoa;
+    private javax.swing.JButton btn_XoaTrang;
     private javax.swing.JComboBox<String> cmb_ChatLieu;
     private javax.swing.JComboBox<String> cmb_KichThuoc;
     private javax.swing.JComboBox<String> cmb_MauSac;
