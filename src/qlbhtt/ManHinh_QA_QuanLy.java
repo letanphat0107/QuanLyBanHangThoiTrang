@@ -4,7 +4,38 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_SanPham;
+import dao.Dao_ChatLieu;
+import dao.Dao_KichThuoc;
+import dao.Dao_MauSac;
+import dao.Dao_PhanLoai;
+import dao.Dao_NhaCungCap;
+import entity.ChatLieu;
+import entity.KichThuoc;
+import entity.MauSac;
+import entity.NhaCungCap;
+import entity.PhanLoai;
+import entity.SanPham;
+import java.io.File;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.awt.Image;
+import java.awt.Label;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -12,12 +43,34 @@ import javax.swing.UIManager;
  * @author DMX
  */
 public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
-
+    private DefaultTableModel modelSanPham;    
+    private Dao_SanPham dao_SanPham;
+    private Dao_ChatLieu dao_ChatLieu;
+    private Dao_KichThuoc dao_KichThuoc;
+    private Dao_MauSac dao_MauSac;
+    private Dao_PhanLoai dao_PhanLoai;
+    private Dao_NhaCungCap dao_NhaCungCap;
+    private File file = null;
+    private Connect connect;
+    
+    private boolean trangThaiThem = false;
+    private boolean trangThaiSua = false;
     /**
      * Creates new form quanly
      */
-    public ManHinh_QA_QuanLy() {
+    public ManHinh_QA_QuanLy() throws SQLException {
+        dao_SanPham = new Dao_SanPham();
+        dao_ChatLieu = new Dao_ChatLieu();
+        dao_KichThuoc = new Dao_KichThuoc();
+        dao_MauSac = new Dao_MauSac();
+        dao_PhanLoai = new Dao_PhanLoai();
+        dao_NhaCungCap = new Dao_NhaCungCap();
+        
+        connect = new Connect();
+        connect.connect();
         initComponents();
+        docDuLieuQuanAo();
+        docDuLieuCMB();
     }
 
     /**
@@ -76,13 +129,7 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         tbl_QuanAo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_QuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"SP0001", "Áo thun", "Áo", "250000", "275000", null, "L", "Trắng", "Cotton", "CT TNHH Hades", "10"},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {"", null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã quần áo", "Tên quần áo", "Phân loại", "Giá bán ", "Giá nhập", "Ngày nhập", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
@@ -98,6 +145,11 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         });
         tbl_QuanAo.setRowHeight(35);
         tbl_QuanAo.setShowGrid(true);
+        tbl_QuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_QuanAoMouseClicked(evt);
+            }
+        });
         scr_DanhSachQuanAo.setViewportView(tbl_QuanAo);
 
         lbl_TieuDe1.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
@@ -141,7 +193,6 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
 
         txt_TenQA.setEditable(false);
         txt_TenQA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_TenQA.setText("Áo thun");
         txt_TenQA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenQAActionPerformed(evt);
@@ -188,7 +239,6 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
 
         txt_GiaNhap.setEditable(false);
         txt_GiaNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_GiaNhap.setText("275000");
         txt_GiaNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_GiaNhapActionPerformed(evt);
@@ -197,7 +247,6 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
 
         txt_GiaBan.setEditable(false);
         txt_GiaBan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_GiaBan.setText("250000");
         txt_GiaBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_GiaBanActionPerformed(evt);
@@ -206,7 +255,6 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
 
         txt_SoLuong.setEditable(false);
         txt_SoLuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_SoLuong.setText("10");
         txt_SoLuong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SoLuongActionPerformed(evt);
@@ -215,25 +263,27 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
 
         pnl_HinhAnhSP.setBackground(new java.awt.Color(255, 255, 255));
         pnl_HinhAnhSP.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        pnl_HinhAnhSP.setMaximumSize(new java.awt.Dimension(175, 141));
+        pnl_HinhAnhSP.setMinimumSize(new java.awt.Dimension(175, 141));
+        pnl_HinhAnhSP.setPreferredSize(new java.awt.Dimension(175, 141));
 
         lbl_HinhAnhSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_HinhAnhSP.setText("Hình Ảnh");
+        lbl_HinhAnhSP.setMaximumSize(new java.awt.Dimension(175, 141));
+        lbl_HinhAnhSP.setMinimumSize(new java.awt.Dimension(175, 141));
+        lbl_HinhAnhSP.setPreferredSize(new java.awt.Dimension(175, 141));
 
         javax.swing.GroupLayout pnl_HinhAnhSPLayout = new javax.swing.GroupLayout(pnl_HinhAnhSP);
         pnl_HinhAnhSP.setLayout(pnl_HinhAnhSPLayout);
         pnl_HinhAnhSPLayout.setHorizontalGroup(
             pnl_HinhAnhSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_HinhAnhSPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnl_HinhAnhSPLayout.setVerticalGroup(
             pnl_HinhAnhSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_HinhAnhSPLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lbl_HinhAnhSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
         );
 
         cmb_ChatLieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -272,6 +322,11 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
 
         lbl_NgapNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_NgapNhap.setText("Ngày nhập");
+
+        dch_NgayNhap.setAutoscrolls(true);
+        dch_NgayNhap.setDateFormatString("dd-MM-yyyy");
+        dch_NgayNhap.setMaxSelectableDate(new java.util.Date(253370743268000L));
+        dch_NgayNhap.setMinSelectableDate(new java.util.Date(-62135791132000L));
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);
         pnl_ThongTin.setLayout(pnl_ThongTinLayout);
@@ -320,8 +375,8 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txt_SoLuong)
+                    .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ThongTinLayout.createSequentialGroup()
@@ -378,7 +433,7 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
                             .addComponent(btn_ChonAnh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pnl_HinhAnhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -398,6 +453,11 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_ThemMouseExited(evt);
+            }
+        });
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
             }
         });
 
@@ -528,19 +588,213 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_SoLuongActionPerformed
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
-        // TODO add your handling code here:
+        xuLyXoaSanPham();
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        // TODO add your handling code here:
+        int row = tbl_QuanAo.getSelectedRow();
+        if(row!=-1){
+            if(btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")) {
+                trangThaiSua = true;
+                // Vo hieu or kich hoat chuc nang
+                btn_CapNhat.setText("Hủy");
+                btn_Them.setEnabled(false);
+                btn_Xoa.setEnabled(false);
+                btn_Luu.setEnabled(true);
+                // Kich hoat chinh sua
+                txt_TenQA.setEditable(true);
+                txt_SoLuong.setEditable(true);
+                txt_GiaBan.setEditable(true);
+                txt_GiaNhap.setEditable(true);
+                btn_ChonAnh.setEnabled(true);            
+                cmb_ChatLieu.setEditable(true);
+                cmb_KichThuoc.setEditable(true);
+                cmb_MauSac.setEditable(true);
+                cmb_PhanLoai.setEditable(true);
+                cmb_NCC.setEditable(true);
+            } else if(btn_CapNhat.getText().equalsIgnoreCase("Hủy")) {
+                trangThaiThem = false;
+                trangThaiSua = false;
+                // Vo hieu or kich hoat chuc nang
+                btn_CapNhat.setText("Cập nhật");
+                btn_Them.setEnabled(true);
+                btn_CapNhat.setEnabled(true);
+                btn_Xoa.setEnabled(true);
+                btn_Luu.setEnabled(false);
+                xoaTrang();
+                // Vo hieu chinh sua
+                txt_TenQA.setEditable(false);
+                txt_SoLuong.setEditable(false);
+                txt_GiaBan.setEditable(false);
+                txt_GiaNhap.setEditable(false);
+                cmb_ChatLieu.setEditable(false);
+                cmb_KichThuoc.setEditable(false);
+                cmb_MauSac.setEditable(false);
+                cmb_PhanLoai.setEditable(false);
+                cmb_NCC.setEditable(false);
+            }
+        }else
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
     }//GEN-LAST:event_btn_CapNhatActionPerformed
-
+    
+    //chuyen tu co dau sang khong dau 
+    private static String removeAccent(String s) { 
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD); 
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+"); 
+        return pattern.matcher(temp).replaceAll(""); 
+    } 
+    
+    private boolean validData() { 
+        String tenSP = txt_TenQA.getText().trim();
+        String soLuong = txt_SoLuong.getText().trim(); 
+        String giaNhap = txt_GiaNhap.getText().trim();
+        String giaBan = txt_GiaBan.getText().trim();
+        if (file == null) {
+            if(trangThaiSua == false){                
+                // kiem tra da co anh chua 
+                JOptionPane.showMessageDialog(this, "Phải chọn ảnh cho sản phẩm"); 
+                return false; 
+            }
+        } 
+        if (!(tenSP.length() > 0 && removeAccent(tenSP).matches("^[A-Z][A-Za-z]*((\\s)[A-Za-z]*)*$"))) { 
+            // Chu cai dau phai viet hoa va khong duoc rong 
+            JOptionPane.showMessageDialog(this, "Tên sản phẩm không hợp lệ"); 
+            txt_TenQA.requestFocus(); 
+            return false; 
+        } 
+        if (soLuong.length() > 0) {
+            // khong duoc rong 
+            try { 
+                int sl = Integer.parseInt(soLuong);
+                if (sl < 0) { 
+                    JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
+                    txt_SoLuong.requestFocus(); 
+                    return false; 
+                } 
+            } catch (NumberFormatException ex) { // phai la ky tu so 
+                JOptionPane.showMessageDialog(this, "Số lượng phải là số"); 
+                return false; 
+            } 
+        } else { 
+            JOptionPane.showMessageDialog(this, "Số lượng không được rỗng");
+            txt_SoLuong.requestFocus(); 
+            return false; 
+        } 
+        if (giaNhap.length() > 0) { // khong duoc rong 
+            try { 
+                Double gn = Double.parseDouble(giaNhap);
+                if (gn <= 0) { 
+                    JOptionPane.showMessageDialog(this, "Giá nhập phải lớn hơn 0");
+                    txt_GiaNhap.requestFocus(); 
+                    return false; 
+                } 
+            } catch (NumberFormatException ex) { // phai la ky tu so 
+                JOptionPane.showMessageDialog(this, "Giá nhập phải là số"); 
+                return false; 
+            } 
+        } else { 
+            JOptionPane.showMessageDialog(this, "Giá nhập không được rỗng"); 
+            txt_GiaNhap.requestFocus(); 
+            return false; 
+        }
+        if (giaBan.length() > 0) { // khong duoc rong 
+            try { 
+                Double gb = Double.parseDouble(giaBan);
+                if (gb <= 0) { 
+                    JOptionPane.showMessageDialog(this, "Giá bán phải lớn hơn 0");
+                    txt_GiaBan.requestFocus(); 
+                    return false; 
+                } 
+            } catch (NumberFormatException ex) { // phai la ky tu so 
+                JOptionPane.showMessageDialog(this, "Giá bán phải là số"); 
+                return false; 
+            } 
+        } else { 
+            JOptionPane.showMessageDialog(this, "Giá bán không được rỗng"); 
+            txt_GiaBan.requestFocus(); 
+            return false; 
+        } 
+        return true; 
+    }
+    
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        // TODO add your handling code here:
+        if(trangThaiThem) {
+            if (validData()) {
+                try {
+                    xuLyThemSanPham();
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                    
+                    trangThaiThem = false;
+                    trangThaiSua = false;
+                    // Vo hieu or kich hoat chuc nang
+                    btn_Them.setText("Thêm");
+                    btn_Them.setEnabled(true);
+                    btn_CapNhat.setEnabled(true);
+                    btn_Xoa.setEnabled(true);
+                    btn_Luu.setEnabled(false);
+                    xoaTrang();
+                    // Vo hieu chinh sua
+                    txt_TenQA.setEditable(false);
+                    txt_SoLuong.setEditable(false);
+                    txt_GiaBan.setEditable(false);
+                    txt_GiaNhap.setEditable(false);
+                    dch_NgayNhap.setEnabled(false);
+                    btn_ChonAnh.setEnabled(false);
+                    cmb_ChatLieu.setEditable(false);
+                    cmb_KichThuoc.setEditable(false);
+                    cmb_MauSac.setEditable(false);
+                    cmb_PhanLoai.setEditable(false);
+                    cmb_NCC.setEditable(false);
+                } catch (ParseException ex) {
+                    Logger.getLogger(ManHinh_QA_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else if(trangThaiSua){
+            if (validData()) {
+                try {
+                    xuLyCapNhatSanPham();
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                    
+                    trangThaiThem = false;
+                    trangThaiSua = false;
+                    // Vo hieu or kich hoat chuc nang
+                    btn_CapNhat.setText("Cập nhật");
+                    btn_Them.setEnabled(true);
+                    btn_CapNhat.setEnabled(true);
+                    btn_Xoa.setEnabled(true);
+                    btn_Luu.setEnabled(false);
+                    xoaTrang();
+                    // Vo hieu chinh sua
+                    txt_TenQA.setEditable(false);
+                    txt_SoLuong.setEditable(false);
+                    txt_GiaBan.setEditable(false);
+                    txt_GiaNhap.setEditable(false);
+                    dch_NgayNhap.setEnabled(false);
+                    btn_ChonAnh.setEnabled(false);
+                    cmb_ChatLieu.setEditable(false);
+                    cmb_KichThuoc.setEditable(false);
+                    cmb_MauSac.setEditable(false);
+                    cmb_PhanLoai.setEditable(false);
+                    cmb_NCC.setEditable(false);
+                } catch (ParseException ex) {
+                    Logger.getLogger(ManHinh_QA_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void btn_ChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonAnhActionPerformed
-        // TODO add your handling code here:
+        JFileChooser filechoose = new JFileChooser("data/picture");
+        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("hinh anh", "jpg", "png");
+        filechoose.setFileFilter(imageFilter);
+        filechoose.setMultiSelectionEnabled(false);
+
+        int x = filechoose.showDialog(this, "Chọn Ảnh");
+        if (x == JFileChooser.APPROVE_OPTION) {
+            file = filechoose.getSelectedFile();
+            lbl_HinhAnhSP.setText("");
+            lbl_HinhAnhSP.setIcon(ResizeImage(file.getAbsolutePath(), file.getName()));
+        }
     }//GEN-LAST:event_btn_ChonAnhActionPerformed
 
     private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered
@@ -609,6 +863,279 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_ChonAnhMouseExited
 
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        if(btn_Them.getText().equalsIgnoreCase("Thêm")) {
+            trangThaiThem = true;
+            // Vo hieu or kich hoat chuc nang
+            btn_Them.setText("Hủy");
+            btn_CapNhat.setEnabled(false);
+            btn_Xoa.setEnabled(false);
+            btn_Luu.setEnabled(true);
+            // Kich hoat chinh sua
+            txt_TenQA.setEditable(true);
+            txt_SoLuong.setEditable(true);
+            txt_GiaBan.setEditable(true);
+            txt_GiaNhap.setEditable(true);
+            dch_NgayNhap.setEnabled(true);
+            btn_ChonAnh.setEnabled(true);            
+            cmb_ChatLieu.setEditable(true);
+            cmb_KichThuoc.setEditable(true);
+            cmb_MauSac.setEditable(true);
+            cmb_PhanLoai.setEditable(true);
+            cmb_NCC.setEditable(true);
+            xoaTrang();
+        } else if(btn_Them.getText().equalsIgnoreCase("Hủy")) {
+            trangThaiThem = false;
+            trangThaiSua = false;
+            // Vo hieu or kich hoat chuc nang
+            btn_Them.setText("Thêm");
+            btn_Them.setEnabled(true);
+            btn_CapNhat.setEnabled(true);
+            btn_Xoa.setEnabled(true);
+            btn_Luu.setEnabled(false);
+            xoaTrang();
+            // Vo hieu chinh sua
+            txt_TenQA.setEditable(false);
+            txt_SoLuong.setEditable(false);
+            txt_GiaBan.setEditable(false);
+            txt_GiaNhap.setEditable(false);
+            dch_NgayNhap.setEnabled(false);
+            btn_ChonAnh.setEnabled(false);
+            cmb_ChatLieu.setEditable(false);
+            cmb_KichThuoc.setEditable(false);
+            cmb_MauSac.setEditable(false);
+            cmb_PhanLoai.setEditable(false);
+            cmb_NCC.setEditable(false);
+        }
+    }//GEN-LAST:event_btn_ThemActionPerformed
+
+    public ImageIcon ResizeImage(String imgPath, String desc){
+        ImageIcon myImage = new ImageIcon(imgPath);
+        Image img = myImage.getImage();
+        Image newImg = img.getScaledInstance(pnl_HinhAnhSP.getWidth(), pnl_HinhAnhSP.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        image.setDescription(desc);
+        return image;
+    }
+    
+    private void tbl_QuanAoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_QuanAoMouseClicked
+        int row =  tbl_QuanAo.getSelectedRow();
+        if(row!=-1) {
+           //Load thong tin vao txt, combobox        
+           SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+           Date ngayNhap = null;
+            try {
+                ngayNhap = sdf.parse(tbl_QuanAo.getValueAt(row, 5).toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(ManHinh_QA_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+           String maSanPham = tbl_QuanAo.getValueAt(row, 0).toString();
+           SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
+           
+           txt_MaQA.setText(tbl_QuanAo.getValueAt(row, 0).toString());
+           txt_TenQA.setText(tbl_QuanAo.getValueAt(row, 1).toString());
+           cmb_PhanLoai.setSelectedItem(tbl_QuanAo.getValueAt(row, 2).toString());
+           txt_GiaBan.setText(tbl_QuanAo.getValueAt(row, 3).toString());
+           txt_GiaNhap.setText(tbl_QuanAo.getValueAt(row, 4).toString()); 
+           dch_NgayNhap.setDate(ngayNhap);
+           cmb_KichThuoc.setSelectedItem(tbl_QuanAo.getValueAt(row, 6).toString());
+           cmb_MauSac.setSelectedItem(tbl_QuanAo.getValueAt(row, 7).toString());
+           cmb_ChatLieu.setSelectedItem(tbl_QuanAo.getValueAt(row, 8).toString());
+           cmb_NCC.setSelectedItem(tbl_QuanAo.getValueAt(row, 9).toString());
+           txt_SoLuong.setText(tbl_QuanAo.getValueAt(row, 10).toString());
+           //Load hinh anh
+           
+           
+           File file = new File("");
+           String path= file.getAbsolutePath();
+           String imagePath = path + "/data/" + sanPham.getHinhAnh();
+           File imageFile = new File(imagePath);
+
+           //ImageIcon imageIcon = new ImageIcon(imagePath);
+           //imageIcon.setDescription("" + sanPham.getHinhAnh()); // Đặt mô tả cho ImageIcon
+
+            lbl_HinhAnhSP.setIcon(ResizeImage(imagePath, sanPham.getHinhAnh()));
+           //System.out.println("Path: " + path);
+           //lbl_HinhAnhSP.setIcon(ResizeImage(path + "/data/"+sanPham.getHinhAnh()));
+       }
+    }//GEN-LAST:event_tbl_QuanAoMouseClicked
+    
+    private void xuLyThemSanPham() throws ParseException {
+        //Get and add data
+        String tenQA = txt_TenQA.getText();
+        String soLuong = txt_SoLuong.getText();
+        String giaBan = txt_GiaBan.getText();
+        String giaNhap = txt_GiaNhap.getText();
+        
+        Date ngayNhap = dch_NgayNhap.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayNhapString = sdf.format(ngayNhap);
+
+        String hinhAnh = file.getName();
+        ChatLieu chatLieu = dao_ChatLieu.getChatLieuTheoTen(cmb_ChatLieu.getSelectedItem().toString());
+        KichThuoc kichThuoc = dao_KichThuoc.getKichThuocTheoTen(cmb_KichThuoc.getSelectedItem().toString());
+        MauSac mauSac = dao_MauSac.getMauSacTheoTen(cmb_MauSac.getSelectedItem().toString());
+        PhanLoai phanLoai = dao_PhanLoai.getPhanLoaiTheoTen(cmb_PhanLoai.getSelectedItem().toString());
+        NhaCungCap nhaCungCap = dao_NhaCungCap.getNhaCungCapTheoTen( cmb_NCC.getSelectedItem().toString());
+        SanPham sanPham = new SanPham(tenQA, Integer.parseInt(soLuong), Double.parseDouble(giaBan), Double.parseDouble(giaNhap), sdf.parse(ngayNhapString), hinhAnh, chatLieu, kichThuoc, mauSac, phanLoai, nhaCungCap);
+        dao_SanPham.themSanPham(sanPham);
+        //Add vao model tren giao dien
+        modelSanPham = (DefaultTableModel) tbl_QuanAo.getModel();
+        Object[] object = new Object[11];
+            object[0] = sanPham.getMaSP();
+            object[1] = sanPham.getTenSP();
+            object[2] = sanPham.getPhanLoai().getLoaiSanPham();
+            object[3] = sanPham.getGiaBan();
+            object[4] = sanPham.getGiaNhap();
+            object[5] = ngayNhapString;
+            object[6] = sanPham.getKichThuoc().getKichThuoc();
+            object[7] = sanPham.getMauSac().getMauSac();
+            object[8] = sanPham.getChatLieu().getChatLieu();
+            object[9] = sanPham.getNhaCungCap().getTenNCC();
+            object[10] = sanPham.getSoLuong();
+        modelSanPham.addRow(object);
+    }
+
+    private void xuLyCapNhatSanPham() throws ParseException {
+        int row = tbl_QuanAo.getSelectedRow();
+        if(row!=-1){
+            //Get and update data
+            String maQA = txt_MaQA.getText();
+            String tenQA = txt_TenQA.getText();
+            String soLuong = txt_SoLuong.getText();
+            String giaBan = txt_GiaBan.getText();
+            String giaNhap = txt_GiaNhap.getText();
+
+            Date ngayNhap = dch_NgayNhap.getDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayNhapString = sdf.format(ngayNhap);
+
+            Icon labelIcon = lbl_HinhAnhSP.getIcon();
+            String hinhAnh = ((ImageIcon) labelIcon).getDescription();
+            System.out.println("Tên hình ảnh: " + hinhAnh);
+            
+            //String hinhAnh = file.getName();
+            ChatLieu chatLieu = dao_ChatLieu.getChatLieuTheoTen(cmb_ChatLieu.getSelectedItem().toString());
+            KichThuoc kichThuoc = dao_KichThuoc.getKichThuocTheoTen(cmb_KichThuoc.getSelectedItem().toString());
+            MauSac mauSac = dao_MauSac.getMauSacTheoTen(cmb_MauSac.getSelectedItem().toString());
+            PhanLoai phanLoai = dao_PhanLoai.getPhanLoaiTheoTen(cmb_PhanLoai.getSelectedItem().toString());
+            NhaCungCap nhaCungCap = dao_NhaCungCap.getNhaCungCapTheoTen( cmb_NCC.getSelectedItem().toString());
+            SanPham sanPham = new SanPham(maQA ,tenQA, Integer.parseInt(soLuong), Double.parseDouble(giaBan), Double.parseDouble(giaNhap), sdf.parse(ngayNhapString), hinhAnh, chatLieu, kichThuoc, mauSac, phanLoai, nhaCungCap);
+            dao_SanPham.capNhatSanPham(sanPham);
+            //Chỉnh sửa trên model
+            tbl_QuanAo.setValueAt(sanPham.getTenSP(), row, 1);
+            tbl_QuanAo.setValueAt(phanLoai.getLoaiSanPham(), row, 2);
+            tbl_QuanAo.setValueAt(sanPham.getGiaBan(), row, 3);
+            tbl_QuanAo.setValueAt(sanPham.getGiaNhap(), row, 4);
+            tbl_QuanAo.setValueAt(ngayNhapString, row, 5);
+            tbl_QuanAo.setValueAt(kichThuoc.getKichThuoc(), row, 6);
+            tbl_QuanAo.setValueAt(mauSac.getMauSac(), row, 7);
+            tbl_QuanAo.setValueAt(chatLieu.getChatLieu(), row, 8);
+            tbl_QuanAo.setValueAt(nhaCungCap.getTenNCC(), row, 9);
+            tbl_QuanAo.setValueAt(sanPham.getSoLuong(), row, 10);
+        }else
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
+    }
+    
+    private void xuLyXoaSanPham(){
+        int row = tbl_QuanAo.getSelectedRow();
+        if(row!=-1){
+             if(JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                 String maSP = txt_MaQA.getText();
+                 dao_SanPham.xoaSanPham(maSP);
+                 modelSanPham.removeRow(row);
+                 JOptionPane.showMessageDialog(this, "Xóa thành công");
+                 xoaTrang();
+             }
+         } else {
+             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+         }
+    }
+    
+    public void xoaTrang() {
+        txt_MaQA.setText("");
+        txt_TenQA.setText("");
+        txt_GiaBan.setText("");
+        txt_GiaNhap.setText("");
+        lbl_HinhAnhSP.setIcon(null);
+        txt_SoLuong.setText("");
+        cmb_ChatLieu.setSelectedIndex(0);
+        cmb_KichThuoc.setSelectedIndex(0);
+        cmb_MauSac.setSelectedIndex(0);
+        cmb_PhanLoai.setSelectedIndex(0);
+        cmb_NCC.setSelectedIndex(0);
+        file = null;
+    }
+    
+    public void docDuLieuQuanAo() {
+        
+        modelSanPham = (DefaultTableModel) tbl_QuanAo.getModel();
+        for(SanPham qa: dao_SanPham.getAllQuanAo()) {
+            Object[] object = new Object[11];
+            object[0] = qa.getMaSP();
+            object[1] = qa.getTenSP();
+            object[2] = qa.getPhanLoai().getLoaiSanPham();
+            object[3] = qa.getGiaBan();
+            object[4] = qa.getGiaNhap();
+            object[5] = qa.getNgayNhap();
+            object[6] = qa.getKichThuoc().getKichThuoc();
+            object[7] = qa.getMauSac().getMauSac();
+            object[8] = qa.getChatLieu().getChatLieu();
+            object[9] = qa.getNhaCungCap().getTenNCC();
+            object[10] = qa.getSoLuong();
+            modelSanPham.addRow(object);
+        }
+    }
+    
+    public void docDuLieuCMB(){
+        //Doc du lieu ComboBox chat lieu
+        ArrayList<ChatLieu> ds_ChatLieu = new ArrayList<>();
+        ds_ChatLieu = dao_ChatLieu.getAllChatLieu();
+        
+        cmb_ChatLieu.removeAllItems();
+        for (ChatLieu chatLieu : ds_ChatLieu) {
+            cmb_ChatLieu.addItem(chatLieu.getChatLieu());
+        }
+        
+        //Doc du lieu ComboBox kich thuoc
+        ArrayList<KichThuoc> ds_KichThuoc = new ArrayList<>();
+        ds_KichThuoc = dao_KichThuoc.getAllKichThuoc();
+        
+        cmb_KichThuoc.removeAllItems();
+        for (KichThuoc kichThuoc : ds_KichThuoc) {
+            cmb_KichThuoc.addItem(kichThuoc.getKichThuoc());
+        }
+        
+        //Doc du lieu ComboBox mau sac
+        ArrayList<MauSac> ds_MauSac = new ArrayList<>();
+        ds_MauSac = dao_MauSac.getAllMauSac();
+        
+        cmb_MauSac.removeAllItems();
+        for (MauSac mauSac : ds_MauSac) {
+            cmb_MauSac.addItem(mauSac.getMauSac());
+        }
+        
+        //Doc du lieu ComboBox phan loai
+            //ArrayList<PhanLoai> ds_PhanLoai = new ArrayList<>();
+            //ds_PhanLoai = dao_PhanLoai.getAllPhanLoai();
+
+        cmb_PhanLoai.removeAllItems();
+            //for (PhanLoai phanLoai : ds_PhanLoai) {
+            //    cmb_PhanLoai.addItem(phanLoai.getLoaiSanPham());
+            //}
+        cmb_PhanLoai.addItem("Áo");
+        cmb_PhanLoai.addItem("Quần");
+        
+        //Doc du lieu ComboBox nha cung cap
+        ArrayList<NhaCungCap> ds_NhaCungCap = new ArrayList<>();
+        ds_NhaCungCap = dao_NhaCungCap.getAllNhaCungCap();
+        
+        cmb_NCC.removeAllItems();
+        for (NhaCungCap nhaCungCap : ds_NhaCungCap) {
+            cmb_NCC.addItem(nhaCungCap.getTenNCC());
+        }
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_CapNhat;

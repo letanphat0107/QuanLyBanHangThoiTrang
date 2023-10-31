@@ -445,7 +445,12 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_SP_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_QuanLyActionPerformed
         // TODO add your handling code here:
-        ManHinh_QA_QuanLy pnl_QuanLySP = new ManHinh_QA_QuanLy();
+        ManHinh_QA_QuanLy pnl_QuanLySP = null;
+       try {
+           pnl_QuanLySP = new ManHinh_QA_QuanLy();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_QuanLySP);
         pnl_GiaoDienChucNang.revalidate();
@@ -492,7 +497,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_KH_TimKiemActionPerformed
 
     private void mni_SP_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_TimKiemActionPerformed
-        ManHinh_QA_TimKiem pnl_TimKiemSP = new ManHinh_QA_TimKiem();
+        ManHinh_QA_TimKiem pnl_TimKiemSP = null;
+       try {
+           pnl_TimKiemSP = new ManHinh_QA_TimKiem();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_TimKiemSP);
         pnl_GiaoDienChucNang.revalidate();
@@ -653,7 +663,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_PK_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_PK_QuanLyActionPerformed
         ManHinh_PK_QuanLy pnl_PK_QuanLy = null;
-        pnl_PK_QuanLy = new ManHinh_PK_QuanLy();
+       try {
+           pnl_PK_QuanLy = new ManHinh_PK_QuanLy();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_PK_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -662,7 +676,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_PK_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_PK_TimKiemActionPerformed
         ManHinh_PK_TimKiem pnl_PK_TimKiem = null;
-        pnl_PK_TimKiem = new ManHinh_PK_TimKiem();
+       try {
+           pnl_PK_TimKiem = new ManHinh_PK_TimKiem();
+       } catch (SQLException ex) {
+           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+       }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_PK_TimKiem);
         pnl_GiaoDienChucNang.revalidate();

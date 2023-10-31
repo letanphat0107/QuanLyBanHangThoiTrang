@@ -1,5 +1,6 @@
 package entity;
 
+import dao.Dao_SanPham;
 import java.util.Date;
 
 public class SanPham {
@@ -16,12 +17,20 @@ public class SanPham {
     private MauSac mauSac;
     private PhanLoai phanLoai;
     private NhaCungCap nhaCungCap;
+    
+    private String auto_ID(){
+            Dao_SanPham dao_SanPham = new Dao_SanPham();
+            String idPrefix = "SP";
+            int length = dao_SanPham.getAllSanPham().size();
+            String finalId = idPrefix + String.format("%04d", length + 1);
+            return finalId;
+        }
 
     public SanPham() {
         // TODO Auto-generated constructor stub
     }
 
-    public SanPham(String maSP, String tenSP, int soLuong, double giaNhap, double giaBan, Date ngayNhap, String hinhAnh, ChatLieu chatLieu, KichThuoc kichThuoc, MauSac mauSac, PhanLoai phanLoai, NhaCungCap nhaCungCap) {
+    public SanPham(String maSP, String tenSP, int soLuong, double giaBan, double giaNhap, Date ngayNhap, String hinhAnh, ChatLieu chatLieu, KichThuoc kichThuoc, MauSac mauSac, PhanLoai phanLoai, NhaCungCap nhaCungCap) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
@@ -34,6 +43,22 @@ public class SanPham {
         this.mauSac = mauSac;
         this.phanLoai = phanLoai;
         this.nhaCungCap = nhaCungCap;
+    }
+    
+    public SanPham(String tenSP, int soLuong, double giaBan, double giaNhap,Date ngayNhap, String hinhAnh,
+			ChatLieu chatLieu, KichThuoc kichThuoc, MauSac mauSac, PhanLoai phanLoai, NhaCungCap nhaCungCap) {
+		this.maSP = auto_ID();
+		this.tenSP = tenSP;
+		this.soLuong = soLuong;
+		this.giaNhap = giaNhap;
+		this.giaBan = giaBan;
+                this.ngayNhap = ngayNhap;
+		this.hinhAnh = hinhAnh;
+		this.chatLieu = chatLieu;
+		this.kichThuoc = kichThuoc;
+		this.mauSac = mauSac;
+		this.phanLoai = phanLoai;
+		this.nhaCungCap = nhaCungCap;
     }
 
     public String getMaSP() {

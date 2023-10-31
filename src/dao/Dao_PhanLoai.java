@@ -37,6 +37,25 @@ public class Dao_PhanLoai {
         return listPhanLoai;
     }
     
+    public ArrayList<PhanLoai> getAllPhanLoaiCuaPhuKien() {
+        ArrayList<PhanLoai> listPhanLoai = new ArrayList<>();
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        String url = "Select * from PhanLoai WHERE maPhanLoai NOT IN ('PL0001', 'PL0002')";
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            while (rs.next()) {                
+                listPhanLoai.add(new PhanLoai(rs.getString(1), rs.getString(2)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listPhanLoai;
+    }
+    
+    
+    
     public PhanLoai getDLPhanLoaiSPTheoMa(String maPL) {
         Connect.getInstance();
         Connection con = Connect.getConnection();
