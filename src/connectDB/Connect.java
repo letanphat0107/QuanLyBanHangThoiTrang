@@ -11,8 +11,8 @@ public class Connect {
 		return instance;
 	}
 	
-	public void connect() throws SQLException {
-		
+	public void connect() throws SQLException {	
+
 		String url = "jdbc:sqlserver://localhost:1433;databasename = QLBHTT_new1";
 		String user ="sa";
 		String password ="sapassword";

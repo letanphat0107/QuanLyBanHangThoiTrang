@@ -230,14 +230,22 @@ public class Login extends javax.swing.JFrame {
         
         if(taiKhoan!=null) {
             nhanVien = daoNhanVien.getNhanVienTheoMa(taiKhoan.getNhanVien().getMaNV());
-            HomePage home =null;            
             try {
-                home = new HomePage();
+                //            HomePage home =null;
+//            try {
+//                home = new HomePage();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            home.setVisible(true);
+//            this.setVisible(false);
+                HomePage homePage  = new HomePage();
+                homePage.setVisible(true);
+                this.setVisible(false);
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            home.setVisible(true);
-            this.setVisible(false);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu sai!");
         }
