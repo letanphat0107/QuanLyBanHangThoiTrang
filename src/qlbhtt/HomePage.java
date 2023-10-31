@@ -40,14 +40,14 @@ public class HomePage extends javax.swing.JFrame {
      */
     public void setRole() {
         if (nhanVien.getChuVu().equalsIgnoreCase("Nhân Viên")) {
-            mni_SP_ChatLieu.setVisible(false);
-            mni_SP_MauSac.setVisible(false);
-            mni_SP_KichThuoc.setVisible(false);
-            mni_SP_DanhMuc.setVisible(false);
+            //mni_SP_ChatLieu.setVisible(false);
+            //mni_SP_MauSac.setVisible(false);
+           // mni_SP_KichThuoc.setVisible(false);
+            //mni_SP_DanhMuc.setVisible(false);
             mni_NV_QuanLy.setVisible(false);
-            mni_NV_TimKiem.setVisible(false);
+            //mni_NV_TimKiem.setVisible(false);
             mnu_TaiKhoan.setVisible(false);
-            mnu_NhaCungCap.setVisible(false);
+            //mnu_NhaCungCap.setVisible(false);
 
             anThanhNgang(false);
         }
@@ -57,13 +57,13 @@ public class HomePage extends javax.swing.JFrame {
      * Ẩn thanh ngang
      */
     public void anThanhNgang(boolean kiemTra) {
-        spr_SP_ThanhNgang1.setVisible(kiemTra);
-        spr_SP_ThanhNgang2.setVisible(kiemTra);
-        spr_SP_ThanhNgang3.setVisible(kiemTra);
-        spr_SP_ThanhNgang4.setVisible(kiemTra);
+        //spr_SP_ThanhNgang1.setVisible(kiemTra);
+        //spr_SP_ThanhNgang2.setVisible(kiemTra);
+        //spr_SP_ThanhNgang3.setVisible(kiemTra);
+        //spr_SP_ThanhNgang4.setVisible(kiemTra);
 
         spr_NV_ThanhNgang6.setVisible(kiemTra);
-        spr_NV_ThanhNgang7.setVisible(kiemTra);
+        //spr_NV_ThanhNgang7.setVisible(kiemTra);
 
     }
 
@@ -142,7 +142,7 @@ public class HomePage extends javax.swing.JFrame {
         pnl_GiaoDienChucNang.setPreferredSize(new java.awt.Dimension(746, 423));
         pnl_GiaoDienChucNang.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Ảnh nền chính-sua1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Ảnh nền chính-KTMay125%.png"))); // NOI18N
         pnl_GiaoDienChucNang.add(jLabel1, java.awt.BorderLayout.LINE_START);
 
         mnu_ManHinhChinh.setBackground(new java.awt.Color(206, 230, 243));
