@@ -294,6 +294,10 @@ public class Dao_SanPham {
         return listSanPham;
     }
     
+    /**
+     * Lấy danh sách sản phẩm bán chạy
+     * @return 
+     */
     public ArrayList<SanPham> getSanPhamBanChay() {
         ArrayList<SanPham> listSanPham = new ArrayList<>();
         Connect.getInstance();
@@ -317,4 +321,33 @@ public class Dao_SanPham {
         }
         return listSanPham;
     }
+    
+    /**
+     * Lấy danh sách sản phẩm bán chậm
+     * @return 
+     */
+    public ArrayList<SanPham> getSanPhamBanCham() {
+        ArrayList<SanPham> listSanPham = new ArrayList<>();
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        String url = "select top 5 sp.maSP, SUM(cthd.soLuong) as tongSoLuongBan from SanPham sp "
+                                    + "JOIN CTHD cthd ON sp.maSP = cthd.maSP\n" +
+                                      "JOIN HoaDon hd ON cthd.maHD = hd.maHD\n" +
+                    "group by sp.maSP\n" +
+                    "order by tongSoLuongBan asc";
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            while(rs.next()) {
+                SanPham sp = this.getSanPhamTheoMa(rs.getString(1)); //Lấy dữ liệu thông sản phẩm theo mã đã lấy trong sql
+                sp.setSoLuong(rs.getInt(2)); //set tổng số lượng
+                listSanPham.add(sp);
+                        
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+    
 }

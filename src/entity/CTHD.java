@@ -1,7 +1,8 @@
 package entity;
 
 public class CTHD {
-	private SanPham sanPham;
+
+    private SanPham sanPham;
     private HoaDon hoaDon;
     private int soLuong;
 
@@ -11,7 +12,8 @@ public class CTHD {
     public CTHD(SanPham sanPham, HoaDon hoaDon, int soLuong) {
         this.sanPham = sanPham;
         this.hoaDon = hoaDon;
-        this.soLuong = soLuong;    }
+        this.soLuong = soLuong;
+    }
 
     public SanPham getSanPham() {
         return sanPham;
@@ -36,5 +38,5 @@ public class CTHD {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
- 
+
 }

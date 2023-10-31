@@ -20,7 +20,7 @@ public class SanPham {
     public SanPham() {
         // TODO Auto-generated constructor stub
     }
-
+    
     public SanPham(String maSP, String tenSP, int soLuong, double giaNhap, double giaBan, Date ngayNhap, String hinhAnh, ChatLieu chatLieu, KichThuoc kichThuoc, MauSac mauSac, PhanLoai phanLoai, NhaCungCap nhaCungCap) {
         this.maSP = maSP;
         this.tenSP = tenSP;

@@ -9,10 +9,8 @@ public class MauSac {
 
     private String auto_ID() {
         Dao_MauSac daoMauSac = new Dao_MauSac();
-        String idPrefix = "MS";
-        int length = daoMauSac.getAllMauSac().size();
-        String finalId = idPrefix + String.format("%04d", length + 1);
-        return finalId;
+        String idPrefix = daoMauSac.taoMaMauSac();
+        return idPrefix;
     }
 
     public MauSac(String mauSac) {

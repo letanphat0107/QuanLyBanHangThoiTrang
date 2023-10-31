@@ -9,10 +9,9 @@ public class KichThuoc {
 
     private String auto_ID() {
         Dao_KichThuoc daoKichThuoc = new Dao_KichThuoc();
-        String idPrefix = "KT";
-        int length = daoKichThuoc.getAllKichThuoc().size();
-        String finalId = idPrefix + String.format("%04d", length + 1);
-        return finalId;
+        String idPrefix = daoKichThuoc.taoMaKichThuoc();
+        return idPrefix;
+                
     }
 
     public KichThuoc(String kichThuoc) {

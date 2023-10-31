@@ -1,6 +1,6 @@
-﻿create database QLBHTT_new
+﻿create database QLBHTT_new1
 go
-use QLBHTT_new
+use QLBHTT_new1
 go
 
 create table NhanVien (
@@ -10,7 +10,8 @@ create table NhanVien (
 	email nvarchar(30) not null unique,
 	sdt nvarchar(12) not null unique,
 	diaChi nvarchar(200) not null,
-	gioiTinh nvarchar(10) not null
+	gioiTinh nvarchar(10) not null,
+	trangThai bit --1: con hoat dong --0: da nghi viec
 
 	primary key (maNV)
 )
@@ -105,7 +106,8 @@ create table TaiKhoan (
 	tenTaiKhoan nvarchar(20) not null,
 	matKhau nvarchar(20) not null,
 	phanQuyen nvarchar(20) not null,
-	maNV nvarchar(10) not null
+	maNV nvarchar(10) not null,
+	trangThai bit --1: con hoat dong --0: da nghi viec
 
 	primary key (tenTaiKhoan)
 )
@@ -221,14 +223,15 @@ insert into NhaCungCap values ('NCC006',N'Công Ty TNHH HADES',N'45 Phan Chu Tri
 go
 
 --Nhân Viên
-insert into NhanVien values ('NV001',N'Lê Tấn Phát',N'Quản Lý','letanphat@gmail.com','0925365999',N'Long An', N'Nam');
-insert into NhanVien values ('NV002',N'Phan Tiên Sinh',N'Nhân Viên','zatos1232@gmail.com','0367494904',N'Phú Yên', N'Nam');
-insert into NhanVien values ('NV003',N'Ngô Văn Toàn',N'Nhân Viên','ngovantoan@gmail.com','0364581248',N'Phú Yên', N'Nam');
+insert into NhanVien values ('NV001',N'Lê Tấn Phát',N'Quản Lý','letanphat@gmail.com','0925365999',N'Long An', N'Nam',1);
+insert into NhanVien values ('NV002',N'Phan Tiên Sinh',N'Nhân Viên','zatos1232@gmail.com','0367494904',N'Phú Yên', N'Nam',1);
+insert into NhanVien values ('NV003',N'Ngô Văn Toàn',N'Nhân Viên','ngovantoan@gmail.com','0364581248',N'Phú Yên', N'Nam',1);
 go
 -- Tài khoản
-insert into TaiKhoan values ('Admin','1111', N'Quản Lý','NV001');
-insert into TaiKhoan values ('NV002','1111', N'Nhân Viên','NV002');
-insert into TaiKhoan values ('NV003','1111', N'Nhân Viên','NV003');
+insert into TaiKhoan values ('Admin','admin', N'Quản Lý','NV001',1);
+
+insert into TaiKhoan values ('NV002','1111', N'Nhân Viên','NV002',1);
+insert into TaiKhoan values ('NV003','1111', N'Nhân Viên','NV003',1);
 go
 --Sản phẩm
 insert into sanPham values ('SP0001',N'Áo Hoodie Unisex',10,650000,700000,'2023-10-01','SP0001.jpg','CL0005','KT0002','MS0001','PL0001','NCC006');
@@ -247,6 +250,35 @@ insert into sanPham values ('SP0013',N'Á Thun Cotton K1',17,130000,140000,'2023
 insert into sanPham values ('SP0014',N'Quần Jean Nam trơn cá tính',10,220000,210000,'2023-10-10','SP0014.jpg','CL0006','KT0002','MS0004','PL0002','NCC005');
 insert into sanPham values ('SP0015',N'Áo sơ mi nam dài tay',10,200000,190000,'2023-10-10','SP0015.jpg','CL0004','KT0002','MS0002','PL0001','NCC001');
 
+----Them gia tri vao table hoa don
+insert into HoaDon values ('HD0001','KH0001','NV001','2023-10-12');
+insert into HoaDon values ('HD0002','KH0002','NV002','2023-10-22');
+insert into HoaDon values ('HD0003','KH0003','NV003','2023-10-05');
+insert into HoaDon values ('HD0004','KH0004','NV001','2023-10-11');
+insert into HoaDon values ('HD0005','KH0005','NV001','2023-09-02');
+insert into HoaDon values ('HD0006','KH0001','NV001','2023-10-06');
+insert into HoaDon values ('HD0007','KH0005','NV001','2023-10-10');
+insert into HoaDon values ('HD0008','KH0003','NV001','2023-10-25');
+insert into HoaDon values ('HD0009','KH0002','NV001','2023-10-07');
+insert into HoaDon values ('HD0010','KH0001','NV001','2023-10-30');
+
+
+
+----Them gia tri vao table chi tiet hoa don
+insert into CTHD values ('HD0001','SP0004',2);
+insert into CTHD values ('HD0001','SP0002',1);
+insert into CTHD values ('HD0001','SP0003',1);
+
+insert into CTHD values ('HD0002','SP0005',1);
+insert into CTHD values ('HD0002','SP0004',1);
+insert into CTHD values ('HD0002','SP0008',1);
+
+insert into CTHD values ('HD0003','SP0008',1);
+insert into CTHD values ('HD0003','SP0010',1);
+
+insert into CTHD values ('HD0004','SP0007',1);
+
+insert into CTHD values ('HD0005','SP0010',1);
 go
 
 select * from SanPham
@@ -256,6 +288,9 @@ select * from KichThuoc
 select * from MauSac
 select * from PhanLoai
 select * from ChatLieu
+
+
+Select * from NhanVien where maNV like '%%' and hoTen like '%%' and sdt like '%%' and email like '%%' and chucVu like '%%' and diaChi like '%%' and trangThai = 0
 
 --Lấy sản phẩm theo các tiêu chí
 select * from SanPham sp JOIN PhanLoai pl ON sp.maPhanLoai = pl.maPhanLoai 
@@ -277,3 +312,22 @@ select top 5 sp.maSP, SUM(cthd.soLuong) as tongSoLuongBan from SanPham sp
                                       JOIN HoaDon hd ON cthd.maHD = hd.maHD
                     group by sp.maSP
                     order by tongSoLuongBan desc
+--Lấy hóa đơn theo mã
+select * from CTHD cthd  JOIN SanPham sp ON cthd.maSP = sp.maSP
+where cthd.maHD = 'HD00001'
+
+--Tính thành tiền của từng sản phẩm ứng với mỗi hóa đơn
+select sp.maSP, sp.tenSP, cthd.soLuong, cthd.soLuong*sp.giaBan as thanhTien from CTHD cthd  JOIN SanPham sp ON cthd.maSP = sp.maSP
+where cthd.maHD = 'HD00003' and cthd.maSP = 'SP0001'
+
+--Tính tổng tiền của hóa đơn 
+select hd.maHD, SUM( cthd.soLuong*sp.giaBan) as tongTien from HoaDon hd 
+				JOIN  CTHD cthd ON hd.maHD = cthd.maHD 
+				JOIN SanPham sp ON cthd.maSP = sp.maSP
+where hd.maHD = 'HD00001'
+group by hd.maHD
+
+--lấy danh sách hóa đơn từ ngày này đến ngày kia
+Select * from HoaDon where ngayLap >='04-04-2023' and ngayLap <= '05-04-2023'
+
+select * from TaiKhoan

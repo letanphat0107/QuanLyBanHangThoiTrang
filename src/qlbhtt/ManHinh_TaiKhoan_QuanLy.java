@@ -7,19 +7,99 @@ package qlbhtt;
 import java.awt.Color;
 import javax.swing.UIManager;
 
+import javax.swing.table.DefaultTableModel;
+import connectDB.Connect;
+import dao.Dao_NhanVien;
+import dao.Dao_TaiKhoan;
+import entity.NhanVien;
+import entity.TaiKhoan;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author DMX
  */
 public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
-
+    private Dao_TaiKhoan daoTaiKhoan;
+    private Dao_NhanVien daoNhanVien;
+    private Connect connect;
+    private DefaultTableModel modelTaiKhoan;
     /**
      * Creates new form quanly
      */
-    public ManHinh_TaiKhoan_QuanLy() {
+    public ManHinh_TaiKhoan_QuanLy() throws SQLException {
+        daoTaiKhoan = new Dao_TaiKhoan();
+        daoNhanVien = new Dao_NhanVien();
+        connect = new Connect();
+        connect.connect();
         initComponents();
+        
+        loadDuLieuChucVu();
+        docDuLieuLenBang();
     }
+    
+    /**
+     * Load dữ liệu comboBox chức vụ
+     */ 
+    public void loadDuLieuChucVu() {
+        String giaTriKiemTa = null;
+       for (TaiKhoan tk : daoTaiKhoan.getAllTaiKhoan()) {
+          if(giaTriKiemTa!=null && giaTriKiemTa.equals(tk.getPhanQuyen())) {
+               continue;
+           }
+           giaTriKiemTa = tk.getPhanQuyen();
+           cmb_ChucVu.addItem(tk.getPhanQuyen());           
+        } 
+       
+    }
+     /**
+     * Xóa trắng text field
+     */
+//    public void xoaTrang() {
+//        txt_MaChatLieu.setText("");
+//        txt_TenChatLieu.setText("");
+//    }
 
+    /**
+     * Đọc dữ liệu và load dữ liệu lên table
+     */
+    public void docDuLieuLenBang() {
+        modelTaiKhoan = (DefaultTableModel) tbl_TaiKhoan.getModel();
+        for (TaiKhoan taiKhoan : daoTaiKhoan.getAllTaiKhoanConHoatDong()) {
+            Object[] o = new Object[4];
+            o[0] = taiKhoan.getTenTaiKhoan();
+            o[1] = taiKhoan.getMatKhau();
+            o[2] = taiKhoan.getNhanVien().getHoTen();
+            o[3] = taiKhoan.getPhanQuyen();
+            modelTaiKhoan.addRow(o);
+        }
+    }
+    
+    /**
+     * Xử lý đổi mật khẩu
+     */
+    
+    public void xuLyDoiMatKhau() {
+        String tenTaiKhoan = txt_TenTK.getText();
+        String matKhau= txt_MatKhau.getText();
+        NhanVien nhanVien = daoNhanVien.getNhanVienTheoTen(txt_TenNV.getText());
+        String phanQuyen = cmb_ChucVu.getSelectedItem().toString();
+        
+        int row = tbl_TaiKhoan.getSelectedRow();
+        if(row != -1) {
+            TaiKhoan tk = new TaiKhoan(tenTaiKhoan, matKhau, phanQuyen, nhanVien,true);
+            daoTaiKhoan.doiMatKhauTaiKhoan(tk);
+            for (int i = 0; i < tbl_TaiKhoan.getRowCount(); i++) {
+                if(tenTaiKhoan.equalsIgnoreCase(tbl_TaiKhoan.getValueAt(row, 0).toString())) {
+                    tbl_TaiKhoan.setValueAt(matKhau, row, 1);
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!");            
+        } else {
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu không thành công!");            
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,12 +135,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         tbl_TaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_TaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"admin", "admin", "Le Tan Phat", "Quan Ly"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {"", null, null, null}
+
             },
             new String [] {
                 "Tên tài khoản", "Mật khẩu", "Tên nhân viên", "Chức vụ"
@@ -76,6 +151,11 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         });
         tbl_TaiKhoan.setRowHeight(35);
         tbl_TaiKhoan.setShowGrid(true);
+        tbl_TaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_TaiKhoanMouseClicked(evt);
+            }
+        });
         scr_DanhSachTaiKhoan.setViewportView(tbl_TaiKhoan);
 
         lbl_TieuDe1.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
@@ -117,7 +197,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         txt_MatKhau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_MatKhau.setText("admin");
         txt_MatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MatKhauActionPerformed(evt);
@@ -125,7 +204,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         });
 
         txt_TenTK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_TenTK.setText("admin");
         txt_TenTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenTKActionPerformed(evt);
@@ -145,7 +223,6 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         lbl_ChucVu.setText("Chức vụ");
 
         txt_TenNV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_TenNV.setText("Le Tan Phat");
         txt_TenNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenNVActionPerformed(evt);
@@ -220,6 +297,11 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
                 btn_DoiMatKhauMouseExited(evt);
             }
         });
+        btn_DoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DoiMatKhauActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -291,6 +373,21 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
     private void cmb_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_ChucVuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_ChucVuActionPerformed
+
+    private void tbl_TaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_TaiKhoanMouseClicked
+        int row = tbl_TaiKhoan.getSelectedRow();
+        if(row!=-1) {
+            txt_TenTK.setText(tbl_TaiKhoan.getValueAt(row, 0).toString());
+            txt_MatKhau.setText(tbl_TaiKhoan.getValueAt(row, 1).toString());
+            txt_TenNV.setText(tbl_TaiKhoan.getValueAt(row, 2).toString());
+            cmb_ChucVu.setSelectedItem(tbl_TaiKhoan.getValueAt(row, 3).toString());            
+        }
+        
+    }//GEN-LAST:event_tbl_TaiKhoanMouseClicked
+
+    private void btn_DoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DoiMatKhauActionPerformed
+        xuLyDoiMatKhau();
+    }//GEN-LAST:event_btn_DoiMatKhauActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

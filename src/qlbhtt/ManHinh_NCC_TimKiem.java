@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DMX
@@ -87,6 +88,11 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         });
         tbl_NhaCungCap.setRowHeight(35);
         tbl_NhaCungCap.setShowGrid(true);
+        tbl_NhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_NhaCungCapMouseClicked(evt);
+            }
+        });
         scr_DanhSachNCC.setViewportView(tbl_NhaCungCap);
 
         lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
@@ -128,18 +134,8 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         txt_TenNCC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_TenNCC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_TenNCCActionPerformed(evt);
-            }
-        });
 
         txt_MaNCC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_MaNCC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_MaNCCActionPerformed(evt);
-            }
-        });
 
         lbl_MaNCC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_MaNCC.setText("Mã nhà cung cấp");
@@ -157,25 +153,10 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         lbl_Email.setText("Email");
 
         txt_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_SoDienThoaiActionPerformed(evt);
-            }
-        });
 
         txt_Email.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_Email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_EmailActionPerformed(evt);
-            }
-        });
 
         txt_DiaChi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_DiaChi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_DiaChiActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);
         pnl_ThongTin.setLayout(pnl_ThongTinLayout);
@@ -310,26 +291,6 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_TenNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TenNCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_TenNCCActionPerformed
-
-    private void txt_MaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_MaNCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_MaNCCActionPerformed
-
-    private void txt_SoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoDienThoaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_SoDienThoaiActionPerformed
-
-    private void txt_EmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_EmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_EmailActionPerformed
-
-    private void txt_DiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DiaChiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_DiaChiActionPerformed
-
     private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
         xuLyTimKiemNhaCungCap();
     }//GEN-LAST:event_btn_TimKiemActionPerformed
@@ -356,7 +317,19 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
         xoaTrangTxt();
+        docDuLieuNhaCungCap();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
+
+    private void tbl_NhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NhaCungCapMouseClicked
+        int row =  tbl_NhaCungCap.getSelectedRow();
+        if(row!=-1) {
+           txt_MaNCC.setText(tbl_NhaCungCap.getValueAt(row, 0).toString());
+           txt_TenNCC.setText(tbl_NhaCungCap.getValueAt(row, 1).toString());
+           txt_SoDienThoai.setText(tbl_NhaCungCap.getValueAt(row, 2).toString());
+           txt_Email.setText(tbl_NhaCungCap.getValueAt(row, 3).toString());
+           txt_DiaChi.setText(tbl_NhaCungCap.getValueAt(row, 4).toString());           
+        }
+    }//GEN-LAST:event_tbl_NhaCungCapMouseClicked
 
     /**
      * Xóa trắng các Jtext filed
@@ -367,6 +340,7 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         txt_SoDienThoai.setText("");
         txt_Email.setText("");
         txt_MaNCC.setText("");
+        
     }
     
     /**

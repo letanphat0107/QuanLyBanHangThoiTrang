@@ -4,6 +4,8 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import entity.NhanVien;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,17 +18,68 @@ import javax.swing.JFrame;
  */
 public class HomePage extends javax.swing.JFrame {
 
-   private ManHinh_QA_QuanLy jpane_quanLySP;
+    private final NhanVien nhanVien = Login.nhanVien;
+
+    private Connect connect;
+
     /**
      * Creates new form HomePage
      */
-    public HomePage() {
+    public HomePage() throws SQLException {
+        connect = new Connect();
+
+        connect.connect();
         initComponents();
-        setTitle("Quản Lý Bán Quần Áo Thời Trang");
+        setTitle("Nhóm 10 - Quản Lý Bán Quần Áo Thời Trang");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setRole();
     }
-    
-    
+
+    /**
+     * Cài đặt role khi nhân viên đăng nhập
+     */
+    public void setRole() {
+        if (nhanVien.getChuVu().equalsIgnoreCase("Nhân Viên")) {
+            mni_SP_ChatLieu.setVisible(false);
+            mni_SP_MauSac.setVisible(false);
+            mni_SP_KichThuoc.setVisible(false);
+            mni_SP_DanhMuc.setVisible(false);
+            mni_NV_QuanLy.setVisible(false);
+            mni_NV_TimKiem.setVisible(false);
+            mnu_TaiKhoan.setVisible(false);
+            mnu_NhaCungCap.setVisible(false);
+
+            anThanhNgang(false);
+        }
+    }
+
+    /**
+     * Ẩn thanh ngang
+     */
+    public void anThanhNgang(boolean kiemTra) {
+        spr_SP_ThanhNgang1.setVisible(kiemTra);
+        spr_SP_ThanhNgang2.setVisible(kiemTra);
+        spr_SP_ThanhNgang3.setVisible(kiemTra);
+        spr_SP_ThanhNgang4.setVisible(kiemTra);
+
+        spr_NV_ThanhNgang6.setVisible(kiemTra);
+        spr_NV_ThanhNgang7.setVisible(kiemTra);
+
+    }
+
+   //tạo hàm mở tab quản lý nhân viên
+    public static void activeQLNVForm(){
+        ManHinh_NV_QuanLy pnl_NV_QuanLy = null;
+        try {
+            pnl_NV_QuanLy = new ManHinh_NV_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnl_NV_QuanLy);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,6 +91,7 @@ public class HomePage extends javax.swing.JFrame {
     private void initComponents() {
 
         pnl_GiaoDienChucNang = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         mnu_ManHinhChinh = new javax.swing.JMenuBar();
         mnu_SanPham = new javax.swing.JMenu();
         mni_SP_QuanLy = new javax.swing.JMenuItem();
@@ -57,19 +111,19 @@ public class HomePage extends javax.swing.JFrame {
         mni_PK_TimKiem = new javax.swing.JMenuItem();
         mnu_NhanVien = new javax.swing.JMenu();
         mni_NV_DatHang = new javax.swing.JMenuItem();
-        spr_ThanhNgang2 = new javax.swing.JPopupMenu.Separator();
+        spr_NV_ThanhNgang1 = new javax.swing.JPopupMenu.Separator();
         mni_NV_LapHoaDon = new javax.swing.JMenuItem();
-        spr_ThanhNgang3 = new javax.swing.JPopupMenu.Separator();
+        spr_NV_ThanhNgang2 = new javax.swing.JPopupMenu.Separator();
         mni_NV_ThongKeDoanhThu = new javax.swing.JMenuItem();
-        spr_ThanhNgang4 = new javax.swing.JPopupMenu.Separator();
+        spr_NV_ThanhNgang3 = new javax.swing.JPopupMenu.Separator();
         mni_NV_ThongKeSanPham = new javax.swing.JMenuItem();
-        spr_ThanhNgang5 = new javax.swing.JPopupMenu.Separator();
+        spr_NV_ThanhNgang4 = new javax.swing.JPopupMenu.Separator();
         mni_NV_ThongKeThongTinKH = new javax.swing.JMenuItem();
-        spr_ThanhNgang6 = new javax.swing.JPopupMenu.Separator();
+        spr_NV_ThanhNgang5 = new javax.swing.JPopupMenu.Separator();
         mni_NV_XemDSHoaDon = new javax.swing.JMenuItem();
-        spr_ThanhNgang7 = new javax.swing.JPopupMenu.Separator();
+        spr_NV_ThanhNgang6 = new javax.swing.JPopupMenu.Separator();
         mni_NV_QuanLy = new javax.swing.JMenuItem();
-        spr_ThanhNgang8 = new javax.swing.JPopupMenu.Separator();
+        spr_NV_ThanhNgang7 = new javax.swing.JPopupMenu.Separator();
         mni_NV_TimKiem = new javax.swing.JMenuItem();
         mnu_KhachHang = new javax.swing.JMenu();
         mni_KH_QuanLy = new javax.swing.JMenuItem();
@@ -88,6 +142,9 @@ public class HomePage extends javax.swing.JFrame {
         pnl_GiaoDienChucNang.setPreferredSize(new java.awt.Dimension(746, 423));
         pnl_GiaoDienChucNang.setLayout(new java.awt.BorderLayout());
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Ảnh nền chính-sua1.png"))); // NOI18N
+        pnl_GiaoDienChucNang.add(jLabel1, java.awt.BorderLayout.LINE_START);
+
         mnu_ManHinhChinh.setBackground(new java.awt.Color(206, 230, 243));
         mnu_ManHinhChinh.setMinimumSize(new java.awt.Dimension(383, 50));
         mnu_ManHinhChinh.setPreferredSize(new java.awt.Dimension(383, 50));
@@ -104,6 +161,7 @@ public class HomePage extends javax.swing.JFrame {
         mni_SP_QuanLy.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_SP_QuanLy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/document-paper (1).png"))); // NOI18N
         mni_SP_QuanLy.setText("Quản Lý");
+        mni_SP_QuanLy.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mni_SP_QuanLy.setPreferredSize(new java.awt.Dimension(160, 35));
         mni_SP_QuanLy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +292,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_NhanVien.add(mni_NV_DatHang);
-        mnu_NhanVien.add(spr_ThanhNgang2);
+        mnu_NhanVien.add(spr_NV_ThanhNgang1);
 
         mni_NV_LapHoaDon.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_LapHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -247,7 +305,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_NhanVien.add(mni_NV_LapHoaDon);
-        mnu_NhanVien.add(spr_ThanhNgang3);
+        mnu_NhanVien.add(spr_NV_ThanhNgang2);
 
         mni_NV_ThongKeDoanhThu.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_ThongKeDoanhThu.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -260,7 +318,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_NhanVien.add(mni_NV_ThongKeDoanhThu);
-        mnu_NhanVien.add(spr_ThanhNgang4);
+        mnu_NhanVien.add(spr_NV_ThanhNgang3);
 
         mni_NV_ThongKeSanPham.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_ThongKeSanPham.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -273,7 +331,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_NhanVien.add(mni_NV_ThongKeSanPham);
-        mnu_NhanVien.add(spr_ThanhNgang5);
+        mnu_NhanVien.add(spr_NV_ThanhNgang4);
 
         mni_NV_ThongKeThongTinKH.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_ThongKeThongTinKH.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -286,7 +344,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_NhanVien.add(mni_NV_ThongKeThongTinKH);
-        mnu_NhanVien.add(spr_ThanhNgang6);
+        mnu_NhanVien.add(spr_NV_ThanhNgang5);
 
         mni_NV_XemDSHoaDon.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_XemDSHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -299,7 +357,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_NhanVien.add(mni_NV_XemDSHoaDon);
-        mnu_NhanVien.add(spr_ThanhNgang7);
+        mnu_NhanVien.add(spr_NV_ThanhNgang6);
 
         mni_NV_QuanLy.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_QuanLy.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -312,7 +370,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_NhanVien.add(mni_NV_QuanLy);
-        mnu_NhanVien.add(spr_ThanhNgang8);
+        mnu_NhanVien.add(spr_NV_ThanhNgang7);
 
         mni_NV_TimKiem.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -425,6 +483,16 @@ public class HomePage extends javax.swing.JFrame {
         mnu_DangXuat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mnu_DangXuat.setMinimumSize(new java.awt.Dimension(120, 22));
         mnu_DangXuat.setPreferredSize(new java.awt.Dimension(250, 30));
+        mnu_DangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnu_DangXuatMouseClicked(evt);
+            }
+        });
+        mnu_DangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_DangXuatActionPerformed(evt);
+            }
+        });
         mnu_ManHinhChinh.add(mnu_DangXuat);
 
         setJMenuBar(mnu_ManHinhChinh);
@@ -433,11 +501,11 @@ public class HomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_GiaoDienChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(pnl_GiaoDienChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 1992, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_GiaoDienChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(pnl_GiaoDienChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE)
         );
 
         pack();
@@ -454,11 +522,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_NCC_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NCC_QuanLyActionPerformed
         ManHinh_NCC_QuanLy pnl_NCC_QuanLy = null;
-       try {
-           pnl_NCC_QuanLy = new ManHinh_NCC_QuanLy();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_NCC_QuanLy = new ManHinh_NCC_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NCC_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -467,11 +535,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_KH_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_KH_QuanLyActionPerformed
         ManHinh_KH_QuanLy pnl_KH_QuanLy = null;
-       try {
-           pnl_KH_QuanLy = new ManHinh_KH_QuanLy();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_KH_QuanLy = new ManHinh_KH_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_KH_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -480,11 +548,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_KH_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_KH_TimKiemActionPerformed
         ManHinh_KH_TimKiem pnl_KH_TimKiem = null;
-       try {
-           pnl_KH_TimKiem = new ManHinh_KH_TimKiem();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_KH_TimKiem = new ManHinh_KH_TimKiem();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_KH_TimKiem);
         pnl_GiaoDienChucNang.revalidate();
@@ -525,11 +593,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_NV_ThongKeSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_ThongKeSanPhamActionPerformed
         ManHinh_NV_ThongKeSanPham pnl_NV_ThongKeSanPham = null;
-       try {
-           pnl_NV_ThongKeSanPham = new ManHinh_NV_ThongKeSanPham();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_NV_ThongKeSanPham = new ManHinh_NV_ThongKeSanPham();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NV_ThongKeSanPham);
         pnl_GiaoDienChucNang.revalidate();
@@ -545,7 +613,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_NV_ThongKeThongTinKHActionPerformed
 
     private void mni_NV_XemDSHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_XemDSHoaDonActionPerformed
-        ManHinh_NV_XemDSHoaDon pnl_NV_XemDSHoaDon = new ManHinh_NV_XemDSHoaDon();
+        ManHinh_NV_XemDSHoaDon pnl_NV_XemDSHoaDon = null;
+        try {
+            pnl_NV_XemDSHoaDon = new ManHinh_NV_XemDSHoaDon();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NV_XemDSHoaDon);
         pnl_GiaoDienChucNang.revalidate();
@@ -554,11 +627,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_NV_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_QuanLyActionPerformed
         ManHinh_NV_QuanLy pnl_NV_QuanLy = null;
-       try {
-           pnl_NV_QuanLy = new ManHinh_NV_QuanLy();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_NV_QuanLy = new ManHinh_NV_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NV_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -567,11 +640,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_NV_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_TimKiemActionPerformed
         ManHinh_NV_TimKiem pnl_NV_TimKiem = null;
-       try {
-           pnl_NV_TimKiem = new ManHinh_NV_TimKiem();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_NV_TimKiem = new ManHinh_NV_TimKiem();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NV_TimKiem);
         pnl_GiaoDienChucNang.revalidate();
@@ -579,7 +652,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_NV_TimKiemActionPerformed
 
     private void mni_TK_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_TK_QuanLyActionPerformed
-        ManHinh_TaiKhoan_QuanLy pnl_TK_QuanLy = new ManHinh_TaiKhoan_QuanLy();
+        ManHinh_TaiKhoan_QuanLy pnl_TK_QuanLy = null;
+        try {
+            pnl_TK_QuanLy = new ManHinh_TaiKhoan_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_TK_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -588,11 +666,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_NCC_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NCC_TimKiemActionPerformed
         ManHinh_NCC_TimKiem pnl_KH_QuanLy = null;
-       try {
-           pnl_KH_QuanLy = new ManHinh_NCC_TimKiem();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_KH_QuanLy = new ManHinh_NCC_TimKiem();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_KH_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -601,11 +679,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_SP_KichThuocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_KichThuocActionPerformed
         ManHinh_QA_KichThuoc pnl_QA_KichThuoc = null;
-       try {
-           pnl_QA_KichThuoc = new ManHinh_QA_KichThuoc();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_QA_KichThuoc = new ManHinh_QA_KichThuoc();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_QA_KichThuoc);
         pnl_GiaoDienChucNang.revalidate();
@@ -614,24 +692,25 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_SP_ChatLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_ChatLieuActionPerformed
         ManHinh_QA_ChatLieu pnl_QA_ChatLieu = null;
-       try {
-           pnl_QA_ChatLieu = new ManHinh_QA_ChatLieu();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_QA_ChatLieu = new ManHinh_QA_ChatLieu();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_QA_ChatLieu);
         pnl_GiaoDienChucNang.revalidate();
         pnl_GiaoDienChucNang.repaint();
+
     }//GEN-LAST:event_mni_SP_ChatLieuActionPerformed
 
     private void mni_SP_MauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_MauSacActionPerformed
         ManHinh_QA_MauSac pnl_QA_MauSac = null;
-       try {
-           pnl_QA_MauSac = new ManHinh_QA_MauSac();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_QA_MauSac = new ManHinh_QA_MauSac();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_QA_MauSac);
         pnl_GiaoDienChucNang.revalidate();
@@ -640,11 +719,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_SP_DanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_DanhMucActionPerformed
         ManHinh_QA_DanhMuc pnl_QA_DanhMuc = null;
-       try {
-           pnl_QA_DanhMuc = new ManHinh_QA_DanhMuc();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_QA_DanhMuc = new ManHinh_QA_DanhMuc();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_QA_DanhMuc);
         pnl_GiaoDienChucNang.revalidate();
@@ -669,6 +748,22 @@ public class HomePage extends javax.swing.JFrame {
         pnl_GiaoDienChucNang.repaint();
     }//GEN-LAST:event_mni_PK_TimKiemActionPerformed
 
+    private void mnu_DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_DangXuatActionPerformed
+
+
+    }//GEN-LAST:event_mnu_DangXuatActionPerformed
+
+    private void mnu_DangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnu_DangXuatMouseClicked
+
+        try {
+            new Login().setVisible(true);
+            this.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnu_DangXuatMouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
@@ -699,12 +794,17 @@ public class HomePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomePage().setVisible(true);
+                try {
+                    new HomePage().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem mni_KH_QuanLy;
     private javax.swing.JMenuItem mni_KH_TimKiem;
     private javax.swing.JMenuItem mni_NCC_QuanLy;
@@ -734,7 +834,14 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenu mnu_PhuKien;
     private javax.swing.JMenu mnu_SanPham;
     private javax.swing.JMenu mnu_TaiKhoan;
-    private javax.swing.JPanel pnl_GiaoDienChucNang;
+    public static javax.swing.JPanel pnl_GiaoDienChucNang;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang1;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang2;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang3;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang4;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang5;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang6;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang7;
     private javax.swing.JPopupMenu.Separator spr_PK_ThanhNgang;
     private javax.swing.JPopupMenu.Separator spr_SP_ThanhNgang;
     private javax.swing.JPopupMenu.Separator spr_SP_ThanhNgang1;
@@ -742,13 +849,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator spr_SP_ThanhNgang3;
     private javax.swing.JPopupMenu.Separator spr_SP_ThanhNgang4;
     private javax.swing.JPopupMenu.Separator spr_ThanhNgang10;
-    private javax.swing.JPopupMenu.Separator spr_ThanhNgang2;
-    private javax.swing.JPopupMenu.Separator spr_ThanhNgang3;
-    private javax.swing.JPopupMenu.Separator spr_ThanhNgang4;
-    private javax.swing.JPopupMenu.Separator spr_ThanhNgang5;
-    private javax.swing.JPopupMenu.Separator spr_ThanhNgang6;
-    private javax.swing.JPopupMenu.Separator spr_ThanhNgang7;
-    private javax.swing.JPopupMenu.Separator spr_ThanhNgang8;
     private javax.swing.JPopupMenu.Separator spr_ThanhNgang9;
     // End of variables declaration//GEN-END:variables
 }

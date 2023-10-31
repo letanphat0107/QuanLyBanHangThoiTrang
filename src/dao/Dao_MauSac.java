@@ -37,9 +37,13 @@ public class Dao_MauSac {
         return listMauSac;
     }
     
+    /**
+     * Lấy dữ liệu màu sắc theo mã
+     * @param maMS
+     * @return 
+     */
     public MauSac getDLMauSacTheoMa(String maMS) {
-        Connect.getInstance();
-        Connection con = Connect.getConnection();
+        Connection con = Connect.getInstance().getConnection();
         PreparedStatement prestmt = null;
         String url = "select * from MauSac where maMauSac = ?";
         
@@ -59,9 +63,13 @@ public class Dao_MauSac {
         return null;
     }
     
+    /**
+     * Lấy dữ liệu màu sắc theo tên
+     * @param tenMauSac
+     * @return 
+     */
     public MauSac getMauSacTheoTen(String tenMauSac){
-        Connect.getInstance();
-        Connection con = Connect.getConnection();
+        Connection con = Connect.getInstance().getConnection();
         
         try {
             String sql = "select * from MauSac where tenMauSac = ?";
@@ -71,6 +79,107 @@ public class Dao_MauSac {
             while(rs.next()){
                 MauSac mauSac = new MauSac(rs.getString(1), rs.getString(2));
                 return mauSac;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    /**
+     * Thêm màu sắc vào database
+     * @param mauSac 
+     */
+    public void themDLMauSac(MauSac mauSac) {
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "insert into MauSac values (?, ?)";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, mauSac.getMaMauSac());
+            prestmt.setString(2, mauSac.getMauSac());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Xóa dữ liệu mau Sac trên database
+     * @param mauSac 
+     */
+    public void xoaDLMauSac(String maMauSac) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "delete from MauSac where maMauSac = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maMauSac);
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Cập nhật dữ liệu Màu sắc trên database
+     * @param mauSac 
+     */
+    public void catNhatDLMauSac(MauSac mauSac) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "Update MauSac set tenMauSac = ? where maMauSac = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, mauSac.getMauSac());
+            prestmt.setString(2, mauSac.getMaMauSac());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Tạo tự động mã
+     * @return 
+     */
+    public String taoMaMauSac() {
+        Connection con = Connect.getInstance().getConnection();
+        String url = "select top 1 maMauSac from MauSac order by maMauSac desc";
+        
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            if(rs.next()) {
+                String maMauSac = rs.getString(1);
+                int so = Integer.parseInt(maMauSac.substring(4));
+                so++;
+                String maMauSacMoi = so + "";
+                while(maMauSacMoi.length() < 4) {
+                    maMauSacMoi = "0" +maMauSacMoi;
+                    
+                }
+                return "MS" + maMauSacMoi;
+            } else {
+                return "MS0001";
             }
         } catch (SQLException e) {
             e.printStackTrace();

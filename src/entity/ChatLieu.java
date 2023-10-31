@@ -12,10 +12,8 @@ public class ChatLieu {
     
     private String auto_ID(){
         Dao_ChatLieu daoChatLieu = new Dao_ChatLieu();
-        String idPrefix = "CL";
-        int length = daoChatLieu.getAllChatLieu().size();
-        String finalId = idPrefix + String.format("%04d", length + 1);
-        return finalId;
+        String idPrefix = daoChatLieu.taoMaChatLieu();
+        return idPrefix;
     }
 
     public ChatLieu(String chatLieu) {

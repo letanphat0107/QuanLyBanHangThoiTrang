@@ -37,6 +37,11 @@ public class Dao_PhanLoai {
         return listPhanLoai;
     }
     
+    /**
+     * lấy thông tin phân loại sản phảm theo mã
+     * @param maPL
+     * @return 
+     */
     public PhanLoai getDLPhanLoaiSPTheoMa(String maPL) {
         Connect.getInstance();
         Connection con = Connect.getConnection();
@@ -59,6 +64,11 @@ public class Dao_PhanLoai {
         return null;
     }
     
+    /**
+     * lấy thông tin phân loại sản phảm theo tên
+     * @param tenPhanLoai
+     * @return 
+     */
     public PhanLoai getPhanLoaiTheoTen(String tenPhanLoai){
         Connect.getInstance();
         Connection con = Connect.getConnection();
@@ -71,6 +81,109 @@ public class Dao_PhanLoai {
             while(rs.next()){
                 PhanLoai phanLoai = new PhanLoai(rs.getString(1), rs.getString(2));
                 return phanLoai;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    /**
+     * Thêm loai sản phẩm
+     * @param phanLoai 
+     */
+    public void themLoaiSanPham(PhanLoai phanLoai) {
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            String sql = "insert into PhanLoai values(?, ?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, phanLoai.getMaPhanLoai());
+            stmt.setString(2, phanLoai.getLoaiSanPham());
+            stmt.executeUpdate();
+          
+             
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    /**
+     * Xóa dữ liệu loại sản phẩm trên database
+     * @param chatLieu 
+     */
+    public void xoaPhanLoaiSanPham(String maPhanLoai) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "delete from PhanLoai where maPhanLoai = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maPhanLoai);
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Cập nhật dữ liệu phân loại trên database
+     * @param chatLieu 
+     */
+    public void catNhatLoaiSanPham(PhanLoai phanLoai) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "Update PhanLoai set tenPhanLoai = ? where maPhanLoai = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, phanLoai.getLoaiSanPham());
+            prestmt.setString(2, phanLoai.getMaPhanLoai());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Tạo tự động mã
+     * @return 
+     */
+    public String taoMaPhanLoai() {
+        Connection con = Connect.getInstance().getConnection();
+        String url = "select top 1 maPhanLoai from PhanLoai order by maPhanLoai desc";
+        
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            if(rs.next()) {
+                String maPhanLoai = rs.getString(1);
+                int so = Integer.parseInt(maPhanLoai.substring(4));
+                so++;
+                String maPhanLoaiMoi = so + "";
+                while(maPhanLoaiMoi.length() < 4) {
+                    maPhanLoaiMoi = "0" +maPhanLoaiMoi;
+                    
+                }
+                return "PL" + maPhanLoaiMoi;
+            } else {
+                return "PL0001";
             }
         } catch (SQLException e) {
             e.printStackTrace();

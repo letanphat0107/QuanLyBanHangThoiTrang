@@ -132,8 +132,8 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
             pnl_DanhSachKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DanhSachKhachHangLayout.createSequentialGroup()
                 .addComponent(pnl_KH_TieuDeTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scr_DanhSachKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(scr_DanhSachKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
@@ -167,11 +167,13 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         lbl_Email.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_Email.setText("Email");
 
+        rad_Nam.setBackground(new java.awt.Color(199, 210, 213));
         buttonGroup1.add(rad_Nam);
         rad_Nam.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
 
+        rad_Nu.setBackground(new java.awt.Color(199, 210, 213));
         buttonGroup1.add(rad_Nu);
         rad_Nu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_Nu.setText("Nữ");

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package qlbhtt;
+
 import connectDB.Connect;
 import dao.Dao_ChatLieu;
 import entity.ChatLieu;
@@ -13,17 +14,19 @@ import java.sql.SQLException;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
 /**
  *
  * @author DMX
  */
 public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
+
     private Dao_ChatLieu dao_ChatLieu;
     private DefaultTableModel modelChatLieu;
     private Connect connect;
-    private boolean kiemTraThem=false;
-    private boolean kiemTraCapNhat=false;
-    
+    private boolean kiemTraThem = false;
+    private boolean kiemTraCapNhat = false;
+
     /**
      * Creates new form quanly
      */
@@ -35,14 +38,12 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         docDuLieuLenBang();
     }
 
-    
-    
     /**
      * Huy thao tac hoat dong cua componet
      */
-    private void huyThaoTacNhap(){
-        kiemTraCapNhat=false;
-        kiemTraThem=false;
+    private void huyThaoTacNhap() {
+        kiemTraCapNhat = false;
+        kiemTraThem = false;
         btn_CapNhat.setText("Cập nhật");
         btn_Them.setText("Thêm");
         btn_Luu.setEnabled(false);
@@ -52,110 +53,134 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         kiemTraTextNhap(true);
         xoaTrang();
     }
+
     /**
      * Kiem tra hoat dong cua cac JtextField
      */
-    public void kiemTraTextNhap(boolean kiemTra){
-        if(kiemTraCapNhat || kiemTraThem) {
-            txt_MaChatLieu.setEditable(!kiemTra);    
+    public void kiemTraTextNhap(boolean kiemTra) {
+        if (kiemTraCapNhat || kiemTraThem) {
+            txt_MaChatLieu.setEditable(!kiemTra);
         } else {
-            txt_MaChatLieu.setEditable(kiemTra);    
-        }       
-                
+            txt_MaChatLieu.setEditable(kiemTra);
+        }
+
     }
-    
+
     /**
      * Xóa trắng text field
      */
     public void xoaTrang() {
         txt_MaChatLieu.setText("");
-        txt_TenChatLieu.setText(""); 
+        txt_TenChatLieu.setText("");
     }
-    
+
     /**
      * Đọc dữ liệu và load dữ liệu lên table
      */
     public void docDuLieuLenBang() {
         modelChatLieu = (DefaultTableModel) tbl_ChatLieu.getModel();
-        for(ChatLieu chatLieu: dao_ChatLieu.getAllChatLieu()) {
+        for (ChatLieu chatLieu : dao_ChatLieu.getAllChatLieu()) {
             Object[] o = new Object[2];
             o[0] = chatLieu.getMaChatLieu();
             o[1] = chatLieu.getChatLieu();
             modelChatLieu.addRow(o);
         }
     }
-    
+
     /**
      * Xử lý thêm Chất Liệu
-      */
-     public void xuLyThemChatLieu() {
-//         if(!rangBuocDuLieuNhap()){
-//             return;
-//         }
-         
-         String tenChatLieu = txt_TenChatLieu.getText();  
-         
-         ChatLieu chatLieu = new ChatLieu(tenChatLieu);
-         dao_ChatLieu.themDLChatLieu(chatLieu);
-         
-         modelChatLieu = (DefaultTableModel) tbl_ChatLieu.getModel();
-         Object[] object = new Object[2];
-            object[0] = chatLieu.getMaChatLieu();
-            object[1] = chatLieu.getChatLieu();
-            
+     */
+    public void xuLyThemChatLieu() {
+        String tenChatLieu = txt_TenChatLieu.getText();
+
+        ChatLieu chatLieu = new ChatLieu(tenChatLieu);
+        dao_ChatLieu.themDLChatLieu(chatLieu);
+
+        modelChatLieu = (DefaultTableModel) tbl_ChatLieu.getModel();
+        Object[] object = new Object[2];
+        object[0] = chatLieu.getMaChatLieu();
+        object[1] = chatLieu.getChatLieu();
+
         modelChatLieu.addRow(object);
         xoaTrang();
         JOptionPane.showMessageDialog(this, "Thêm thành công");
-     }
-     
-     /**
-      * Xử lý xóa Chất Liệu
-      */
-     public void xuLyXoaChatLieu() {
-         int row = tbl_ChatLieu.getSelectedRow();
-         if(row!=-1) {
-             if(JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                 String maChatLieu = txt_MaChatLieu.getText();
-                 dao_ChatLieu.xoaDLChatLieu(maChatLieu);
-                 modelChatLieu.removeRow(row);
-                 JOptionPane.showMessageDialog(this, "Xóa thành công");
-                 xoaTrang();
-             }
-         } else {
-             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
-         }
-     }
-     
-     /**
+    }
+
+    /**
+     * Xử lý xóa Chất Liệu
+     */
+    public void xuLyXoaChatLieu() {
+        int row = tbl_ChatLieu.getSelectedRow();
+        if (row != -1) {
+            if (JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                String maChatLieu = txt_MaChatLieu.getText();
+                dao_ChatLieu.xoaDLChatLieu(maChatLieu);
+                modelChatLieu.removeRow(row);
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                xoaTrang();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+        }
+    }
+
+    /**
      * Xử lý cập nhật Chất Liệu
-      */
-     public void xuLyCapNhatChatLieu() {
-//         if(!rangBuocDuLieuNhap()){
-//             return;
-//         }
-         String maChatLieu = txt_MaChatLieu.getText();
-         String tenChatLieu = txt_TenChatLieu.getText();  
-         
-         ChatLieu chatLieu = new ChatLieu(tenChatLieu);
-         int row = tbl_ChatLieu.getSelectedRow();
-         if(row != -1) {
-            dao_ChatLieu.themDLChatLieu(chatLieu);
-             for (int i = 0; i < tbl_ChatLieu.getRowCount(); i++) {
-                 String maChatLieuTable = tbl_ChatLieu.getValueAt(row, 0).toString();
-                 if(maChatLieuTable.equalsIgnoreCase(maChatLieu)) {
-                     tbl_ChatLieu.setValueAt(tenChatLieu, row, 1);
-                 }
-                 
-             }
-             xoaTrang();
-             JOptionPane.showMessageDialog(this, "Thêm thành công");
-         } else {
-             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
-         }
-        
-        
-     }
-     
+     */
+    public void xuLyCapNhatChatLieu() {
+        String maChatLieu = txt_MaChatLieu.getText();
+        String tenChatLieu = txt_TenChatLieu.getText();
+
+        ChatLieu chatLieu = new ChatLieu(maChatLieu,tenChatLieu);
+        int row = tbl_ChatLieu.getSelectedRow();
+        if (row != -1) {
+            dao_ChatLieu.catNhatDLChatLieu(chatLieu);
+            for (int i = 0; i < tbl_ChatLieu.getRowCount(); i++) {
+                String maChatLieuTable = tbl_ChatLieu.getValueAt(row, 0).toString();
+                if (maChatLieuTable.equalsIgnoreCase(maChatLieu)) {
+                    tbl_ChatLieu.setValueAt(tenChatLieu, row, 1);
+                }
+
+            }
+            xoaTrang();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
+        }
+
+    }
+
+    /**
+     * Tìm kiếm chất liệu
+     */
+    public void xuLyTimKiemChatLieu() {
+        String tuKhoaMaChatLieu = txt_MaChatLieu.getText();
+        String tuKhoaTenChatLieu = txt_TenChatLieu.getText();
+
+        modelChatLieu = (DefaultTableModel) tbl_ChatLieu.getModel();
+        if (tuKhoaTenChatLieu.equals("")) {
+            ChatLieu chatLieu = dao_ChatLieu.getDLChatLieuTheoMa(tuKhoaMaChatLieu);
+            if (chatLieu != null) {
+                modelChatLieu.setRowCount(0);
+                Object[] object = new Object[2];
+                object[0] = chatLieu.getMaChatLieu();
+                object[1] = chatLieu.getChatLieu();
+                modelChatLieu.addRow(object);
+                xoaTrang();
+            }
+        } else if (tuKhoaMaChatLieu.equals("")) {
+            ChatLieu chatLieu = dao_ChatLieu.getChatLieuTheoTen(tuKhoaTenChatLieu);
+            if (chatLieu != null) {
+                modelChatLieu.setRowCount(0);
+                Object[] object = new Object[2];
+                object[0] = chatLieu.getMaChatLieu();
+                object[1] = chatLieu.getChatLieu();
+                modelChatLieu.addRow(object);
+                xoaTrang();
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -400,6 +425,11 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
                 btn_TimKiemMouseExited(evt);
             }
         });
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -458,24 +488,24 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_MaChatLieuActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        if(btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")){
+        if (btn_CapNhat.getText().equalsIgnoreCase("Cập nhật")) {
             btn_CapNhat.setText("Hủy");
             btn_Them.setEnabled(false);
             btn_Luu.setEnabled(true);
             btn_TimKiem.setEnabled(false);
-            kiemTraCapNhat=true;
+            kiemTraCapNhat = true;
             kiemTraTextNhap(true);
             xoaTrang();
-        }else if(btn_CapNhat.getText().equalsIgnoreCase("Hủy")){
+        } else if (btn_CapNhat.getText().equalsIgnoreCase("Hủy")) {
             btn_CapNhat.setText("Cập nhật");
             huyThaoTacNhap();
         }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        if(kiemTraThem) {
+        if (kiemTraThem) {
             xuLyThemChatLieu();
-        } else if(kiemTraCapNhat) {
+        } else if (kiemTraCapNhat) {
             xuLyCapNhatChatLieu();
         }
     }//GEN-LAST:event_btn_LuuActionPerformed
@@ -485,15 +515,15 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_TenChatLieuActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        if(btn_Them.getText().equalsIgnoreCase("Thêm")){
+        if (btn_Them.getText().equalsIgnoreCase("Thêm")) {
             btn_Them.setText("Hủy");
             btn_CapNhat.setEnabled(false);
             btn_Luu.setEnabled(true);
             btn_TimKiem.setEnabled(false);
-            kiemTraThem=true;
+            kiemTraThem = true;
             kiemTraTextNhap(true);
             xoaTrang();
-        }else if(btn_Them.getText().equalsIgnoreCase("Hủy")){
+        } else if (btn_Them.getText().equalsIgnoreCase("Hủy")) {
             btn_Them.setText("Thêm");
             huyThaoTacNhap();
         }
@@ -501,9 +531,9 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
 
     private void tbl_ChatLieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ChatLieuMouseClicked
         int row = tbl_ChatLieu.getSelectedRow();
-        if(row!=-1) {
-            txt_MaChatLieu.setText(tbl_ChatLieu.getValueAt(row, 0).toString() );
-            txt_TenChatLieu.setText(tbl_ChatLieu.getValueAt(row, 1).toString() );
+        if (row != -1) {
+            txt_MaChatLieu.setText(tbl_ChatLieu.getValueAt(row, 0).toString());
+            txt_TenChatLieu.setText(tbl_ChatLieu.getValueAt(row, 1).toString());
         }
     }//GEN-LAST:event_tbl_ChatLieuMouseClicked
 
@@ -512,49 +542,49 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered
-        if(btn_Them.isEnabled()){
+        if (btn_Them.isEnabled()) {
             btn_Them.setBackground(new Color(0x9EDDFF));
             btn_Them.setForeground(new Color(0x141E46));
         }
     }//GEN-LAST:event_btn_ThemMouseEntered
 
     private void btn_ThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseExited
-        if(btn_Them.isEnabled()){
+        if (btn_Them.isEnabled()) {
             btn_Them.setBackground(UIManager.getColor("Menu.background"));
             btn_Them.setForeground(UIManager.getColor("Menu.foreground"));
         }
     }//GEN-LAST:event_btn_ThemMouseExited
 
     private void btn_CapNhatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseEntered
-        if(btn_CapNhat.isEnabled()) {
+        if (btn_CapNhat.isEnabled()) {
             btn_CapNhat.setBackground(new Color(0x9EDDFF));
             btn_CapNhat.setForeground(new Color(0x141E46));
         }
-        
+
     }//GEN-LAST:event_btn_CapNhatMouseEntered
 
     private void btn_CapNhatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseExited
-        if(btn_CapNhat.isEnabled()) {
+        if (btn_CapNhat.isEnabled()) {
             btn_CapNhat.setBackground(UIManager.getColor("Menu.background"));
             btn_CapNhat.setForeground(UIManager.getColor("Menu.foreground"));
         }
-        
+
     }//GEN-LAST:event_btn_CapNhatMouseExited
 
     private void btn_LuuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseEntered
-        if(btn_Luu.isEnabled()) {
+        if (btn_Luu.isEnabled()) {
             btn_Luu.setBackground(new Color(0x9EDDFF));
             btn_Luu.setForeground(new Color(0x141E46));
         }
-        
+
     }//GEN-LAST:event_btn_LuuMouseEntered
 
     private void btn_LuuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseExited
-        if(btn_Luu.isEnabled()) {
+        if (btn_Luu.isEnabled()) {
             btn_Luu.setBackground(UIManager.getColor("Menu.background"));
             btn_Luu.setForeground(UIManager.getColor("Menu.foreground"));
         }
-        
+
     }//GEN-LAST:event_btn_LuuMouseExited
 
     private void btn_XoaTrangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseEntered
@@ -568,18 +598,22 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_XoaTrangMouseExited
 
     private void btn_TimKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseEntered
-        if(btn_TimKiem.isEnabled()) {
+        if (btn_TimKiem.isEnabled()) {
             btn_TimKiem.setBackground(new Color(0x9EDDFF));
             btn_TimKiem.setForeground(new Color(0x141E46));
         }
     }//GEN-LAST:event_btn_TimKiemMouseEntered
 
     private void btn_TimKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseExited
-        if(btn_TimKiem.isEnabled()) {
+        if (btn_TimKiem.isEnabled()) {
             btn_TimKiem.setBackground(UIManager.getColor("Menu.background"));
             btn_TimKiem.setForeground(UIManager.getColor("Menu.foreground"));
         }
     }//GEN-LAST:event_btn_TimKiemMouseExited
+
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        xuLyTimKiemChatLieu();
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -602,5 +636,4 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TenChatLieu;
     // End of variables declaration//GEN-END:variables
 
-    
 }

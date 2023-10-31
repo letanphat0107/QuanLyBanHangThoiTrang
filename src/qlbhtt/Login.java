@@ -4,23 +4,39 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_NhanVien;
+import dao.Dao_TaiKhoan;
+import entity.NhanVien;
+import entity.TaiKhoan;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author DMX
  */
 public class Login extends javax.swing.JFrame {
-    Boolean hoatDongIconShow = true;
-        Boolean hoatDongIconClose = true;
+    private Dao_TaiKhoan daoTaiKhoan;
+    private Dao_NhanVien daoNhanVien;
+    private Connect connect;
+    private Boolean hoatDongIconShow = true;
+    private Boolean hoatDongIconClose = true;
+    public static NhanVien nhanVien = null;
+    
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login() throws SQLException {
+        daoNhanVien = new Dao_NhanVien();
+        daoTaiKhoan = new Dao_TaiKhoan();
+        connect = new Connect();
+        connect.connect();
+        
         setTitle("Quản Lý Bán Quần Áo Thời Trang");
         initComponents();
         setLocationRelativeTo(null);
@@ -60,16 +76,15 @@ public class Login extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(980, 521));
         setMinimumSize(new java.awt.Dimension(970, 521));
 
         pnl_ManHinhDangNhap.setMaximumSize(new java.awt.Dimension(870, 521));
         pnl_ManHinhDangNhap.setMinimumSize(new java.awt.Dimension(870, 521));
 
-        pnl_FormDangNhap.setBackground(new java.awt.Color(216, 217, 218));
+        pnl_FormDangNhap.setBackground(new java.awt.Color(208, 212, 202));
 
         txt_Username.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        txt_Username.setText("admin");
+        txt_Username.setText("Admin");
         txt_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_UsernameActionPerformed(evt);
@@ -210,33 +225,23 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
         String user = txt_Username.getText();
-        String pass = pwd_MatKhau.getText();
-
-        if(user.equals("admin")){
-            if(pass.equals("admin")){
-                HomePage home =new HomePage();
-                home.setVisible(true);
-                this.setVisible(false);
+        String pass = String.valueOf(pwd_MatKhau.getText());        
+        TaiKhoan taiKhoan = daoTaiKhoan.dangNhapTaiKhoan(user, pass);
+        
+        if(taiKhoan!=null) {
+            nhanVien = daoNhanVien.getNhanVienTheoMa(taiKhoan.getNhanVien().getMaNV());
+            HomePage home =null;            
+            try {
+                home = new HomePage();
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else{
-                JOptionPane.showMessageDialog(this, "Sai mật khẩu");
-            }
-
+            home.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu sai!");
         }
-        else if(user.equals("NV0001")){
-            if(pass.equals("123")){
-                HomePage home =new HomePage();
-                home.setVisible(true);
-                this.setVisible(false);
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "sai mật khẩu");
-            }
 
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại");
-        }
     }//GEN-LAST:event_btn_LoginActionPerformed
 
     private void pwd_MatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwd_MatKhauActionPerformed
@@ -244,15 +249,15 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_pwd_MatKhauActionPerformed
 
     private void lbl_IconPWCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_IconPWCloseMouseClicked
-        
-        if(hoatDongIconShow){
-           lbl_IconPWClose.setIcon(new ImageIcon(getClass().getResource("/imageGD/icons8-show-password-30.png"))); 
-           pwd_MatKhau.setEchoChar((char)0);
-           hoatDongIconShow = false;
-        } else if(hoatDongIconClose){
+
+        if (hoatDongIconShow) {
+            lbl_IconPWClose.setIcon(new ImageIcon(getClass().getResource("/imageGD/icons8-show-password-30.png")));
+            pwd_MatKhau.setEchoChar((char) 0);
+            hoatDongIconShow = false;
+        } else if (hoatDongIconClose) {
             pwd_MatKhau.setEchoChar('*');
-           lbl_IconPWClose.setIcon(new ImageIcon(getClass().getResource("/imageGD/icons8-password-30-1.png")));
-           hoatDongIconShow = true;
+            lbl_IconPWClose.setIcon(new ImageIcon(getClass().getResource("/imageGD/icons8-password-30-1.png")));
+            hoatDongIconShow = true;
         }
     }//GEN-LAST:event_lbl_IconPWCloseMouseClicked
 
@@ -290,7 +295,11 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }

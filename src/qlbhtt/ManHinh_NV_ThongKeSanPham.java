@@ -4,6 +4,21 @@
  */
 package qlbhtt;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.VerticalPositionMark;
+
 import connectDB.Connect;
 import dao.Dao_ChatLieu;
 import dao.Dao_KichThuoc;
@@ -11,32 +26,56 @@ import dao.Dao_MauSac;
 import dao.Dao_NhaCungCap;
 import dao.Dao_PhanLoai;
 import dao.Dao_SanPham;
+import entity.ChatLieu;
 import entity.KichThuoc;
 import entity.MauSac;
+import entity.NhaCungCap;
+import entity.NhanVien;
 import entity.PhanLoai;
 import entity.SanPham;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author DMX
  */
 public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
+    
     private Dao_SanPham daoSanPham;
     private Dao_KichThuoc daoKichThuoc;
     private Dao_MauSac daoMauSac;
     private Dao_ChatLieu daoChatLieu;
     private Dao_PhanLoai daoPhanLoai;
     private Dao_NhaCungCap daoNhaCungCap;
-    
+
     private Connect connect;
     private DefaultTableModel model_SP;
+
+    private static Boolean activeTatCa = false;
+    private static Boolean activeHangMoiNhap = false;
+    private static Boolean activeHetHang = false;
+    private static Boolean activeBanChay = false;
+    private static Boolean activeBanCham = false;
+    
+    private final NhanVien nhanVien = Login.nhanVien;
     /**
      * Creates new form quanly
      */
@@ -47,16 +86,17 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         daoChatLieu = new Dao_ChatLieu();
         daoPhanLoai = new Dao_PhanLoai();
         daoNhaCungCap = new Dao_NhaCungCap();
-        
+
         connect = new Connect();
         connect.connect();
-        
+
         initComponents();
         model_SP = (DefaultTableModel) tbl_SanPham.getModel();
         docDuLieuSanPham();
         khoiTaoGiaTriCombobox();
+        
     }
-    
+
     /**
      * Khởi tạo, load giá trị vào combobox
      */
@@ -64,22 +104,22 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         for (KichThuoc kt : daoKichThuoc.getAllKichThuoc()) {
             cmb_KichThuoc.addItem(kt.getKichThuoc());
         }
-        
+
         for (MauSac ms : daoMauSac.getAllMauSac()) {
             cmb_MauSac.addItem(ms.getMauSac());
         }
-        
+
         for (PhanLoai pl : daoPhanLoai.getAllPhanLoai()) {
             cmb_PhanLoai.addItem(pl.getLoaiSanPham());
         }
     }
-    
+
     /**
      * Đọc dữ liệu sản phẩm và load vào bảng
      */
     public void docDuLieuSanPham() {
-        
-        for(SanPham sp: daoSanPham.getAllSanPham()){
+
+        for (SanPham sp : daoSanPham.getAllSanPham()) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             String ngayNhapForMat = formatter.format(sp.getNgayNhap());
             Object[] o = new Object[11];
@@ -94,133 +134,528 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             o[8] = sp.getChatLieu().getChatLieu();
             o[9] = sp.getNhaCungCap().getTenNCC();
             o[10] = sp.getSoLuong();
-             model_SP.addRow(o);
-             
+            model_SP.addRow(o);
+
         }
+        int soLuongSP = daoSanPham.getAllSanPham().size();
+        thongKeTongSanPham(soLuongSP);
     }
-    
+
     /**
      * Tổng số lượng sản phẩm
      */
-    public void thongKeTongSanPham() {
-        int soLuongSP = daoSanPham.getAllSanPham().size();        
-        txt_TongSanPham.setText(soLuongSP+"");
+    public void thongKeTongSanPham(int soLuongSP) {         
+        txt_TongSanPham.setText(soLuongSP + "");
     }
-    
+
     /**
      * Thông kê danh sách sản phẩm hết hàng trong kho
      */
     public void thongKeDsSanPhamHetHang() {
         model_SP.setRowCount(0);
-        
+
         String phanLoai = cmb_PhanLoai.getSelectedItem().toString();
         String ktPhanLoai = cmb_PhanLoai.getSelectedItem().toString();
-        if(ktPhanLoai.equalsIgnoreCase("Tất cả")){
+        if (ktPhanLoai.equalsIgnoreCase("Tất cả")) {
             phanLoai = "";
-        }        
-        
+        }
+
         String mauSac = cmb_MauSac.getSelectedItem().toString();
         String ktMauSac = cmb_MauSac.getSelectedItem().toString();
-        if(ktMauSac.equalsIgnoreCase("Tất cả")){
+        if (ktMauSac.equalsIgnoreCase("Tất cả")) {
             mauSac = "";
         }
-        
+
         String kichThuoc = cmb_KichThuoc.getSelectedItem().toString();
         String ktKichThuoc = cmb_KichThuoc.getSelectedItem().toString();
-        if(ktKichThuoc.equalsIgnoreCase("Tất cả")){
+        if (ktKichThuoc.equalsIgnoreCase("Tất cả")) {
             kichThuoc = "";
         }
-        
+
         ArrayList<SanPham> listSanPham = daoSanPham.getAllSanPhamHetHang(phanLoai, mauSac, kichThuoc);
-        for(SanPham sp: listSanPham) {
+        for (SanPham sp : listSanPham) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             String ngayNhapForMat = formatter.format(sp.getNgayNhap());
             Object[] o = new Object[11];
-                o[0] = sp.getMaSP();
-                o[1] = sp.getTenSP();
-                o[2] = sp.getPhanLoai().getLoaiSanPham();
-                o[3] = sp.getGiaBan();
-                o[4] = sp.getGiaNhap();
-                o[5] = ngayNhapForMat;
-                o[6] = sp.getKichThuoc().getKichThuoc();
-                o[7] = sp.getMauSac().getMauSac();
-                o[8] = sp.getChatLieu().getChatLieu();
-                o[9] = sp.getNhaCungCap().getTenNCC();
-                o[10] = sp.getSoLuong();
-             model_SP.addRow(o);
+            o[0] = sp.getMaSP();
+            o[1] = sp.getTenSP();
+            o[2] = sp.getPhanLoai().getLoaiSanPham();
+            o[3] = sp.getGiaBan();
+            o[4] = sp.getGiaNhap();
+            o[5] = ngayNhapForMat;
+            o[6] = sp.getKichThuoc().getKichThuoc();
+            o[7] = sp.getMauSac().getMauSac();
+            o[8] = sp.getChatLieu().getChatLieu();
+            o[9] = sp.getNhaCungCap().getTenNCC();
+            o[10] = sp.getSoLuong();
+            model_SP.addRow(o);
         }
-    }    
-    
+        
+        int soLuongSP = listSanPham.size();
+        thongKeTongSanPham(soLuongSP);
+    }
+
     /**
      * Thông kê danh sách sản phẩm theo các tiêu chí
      */
     public void thongKeDsSanPhamTheoTieuChi() {
         model_SP.setRowCount(0);
-        
+
         String phanLoai = cmb_PhanLoai.getSelectedItem().toString();
         String ktPhanLoai = cmb_PhanLoai.getSelectedItem().toString();
-        if(ktPhanLoai.equalsIgnoreCase("Tất cả")){
+        if (ktPhanLoai.equalsIgnoreCase("Tất cả")) {
             phanLoai = "";
-        }        
+        }
+
+        String mauSac = cmb_MauSac.getSelectedItem().toString();
+        String ktMauSac = cmb_MauSac.getSelectedItem().toString();
+        if (ktMauSac.equalsIgnoreCase("Tất cả")) {
+            mauSac = "";
+        }
+
+        String kichThuoc = cmb_KichThuoc.getSelectedItem().toString();
+        String ktKichThuoc = cmb_KichThuoc.getSelectedItem().toString();
+        if (ktKichThuoc.equalsIgnoreCase("Tất cả")) {
+            kichThuoc = "";
+        }
+
+        ArrayList<SanPham> listSanPham = daoSanPham.getAllSanPhamTheoTieuChi(phanLoai, mauSac, kichThuoc);
+        for (SanPham sp : listSanPham) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            String ngayNhapForMat = formatter.format(sp.getNgayNhap());
+            Object[] o = new Object[11];
+            o[0] = sp.getMaSP();
+            o[1] = sp.getTenSP();
+            o[2] = sp.getPhanLoai().getLoaiSanPham();
+            o[3] = sp.getGiaBan();
+            o[4] = sp.getGiaNhap();
+            o[5] = ngayNhapForMat;
+            o[6] = sp.getKichThuoc().getKichThuoc();
+            o[7] = sp.getMauSac().getMauSac();
+            o[8] = sp.getChatLieu().getChatLieu();
+            o[9] = sp.getNhaCungCap().getTenNCC();
+            o[10] = sp.getSoLuong();
+            model_SP.addRow(o);
+
+        }
+        
+        int soLuongSP = listSanPham.size();
+        thongKeTongSanPham(soLuongSP);
+    }
+
+    /**
+     * Thông kê danh sách sản phẩm mới nhập
+     */
+    public void thongKeDsSanPhamMoiNhap() {
+        model_SP.setRowCount(0);
+
+        String phanLoai = cmb_PhanLoai.getSelectedItem().toString();
+        String ktPhanLoai = cmb_PhanLoai.getSelectedItem().toString();
+        if (ktPhanLoai.equalsIgnoreCase("Tất cả")) {
+            phanLoai = "";
+        }
         
         String mauSac = cmb_MauSac.getSelectedItem().toString();
         String ktMauSac = cmb_MauSac.getSelectedItem().toString();
-        if(ktMauSac.equalsIgnoreCase("Tất cả")){
+        if (ktMauSac.equalsIgnoreCase("Tất cả")) {
             mauSac = "";
         }
         
         String kichThuoc = cmb_KichThuoc.getSelectedItem().toString();
         String ktKichThuoc = cmb_KichThuoc.getSelectedItem().toString();
-        if(ktKichThuoc.equalsIgnoreCase("Tất cả")){
+        if (ktKichThuoc.equalsIgnoreCase("Tất cả")) {
             kichThuoc = "";
         }
-        
+
+        Date ngayHienTai = new Date();
+        //Điều kiện trước ngày hiện tại 1 ngày
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(ngayHienTai);
+        calendar.add(Calendar.DAY_OF_YEAR, -2);
+
+        Date ngayTruoc1Ngay = calendar.getTime();
+        int count = 0;
         ArrayList<SanPham> listSanPham = daoSanPham.getAllSanPhamTheoTieuChi(phanLoai, mauSac, kichThuoc);
-        for(SanPham sp: listSanPham) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            String ngayNhapForMat = formatter.format(sp.getNgayNhap());
-            Object[] o = new Object[11];
+        for (SanPham sp : listSanPham) {
+            Date ngayNhap = sp.getNgayNhap();
+
+            if (ngayNhap.before(ngayHienTai) && ngayNhap.after(ngayTruoc1Ngay)) {
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                String ngayNhapFormat = formatter.format(sp.getNgayNhap());
+                Object[] o = new Object[11];
                 o[0] = sp.getMaSP();
                 o[1] = sp.getTenSP();
                 o[2] = sp.getPhanLoai().getLoaiSanPham();
                 o[3] = sp.getGiaBan();
                 o[4] = sp.getGiaNhap();
-                o[5] = ngayNhapForMat;
+                o[5] = ngayNhapFormat;
                 o[6] = sp.getKichThuoc().getKichThuoc();
                 o[7] = sp.getMauSac().getMauSac();
                 o[8] = sp.getChatLieu().getChatLieu();
                 o[9] = sp.getNhaCungCap().getTenNCC();
                 o[10] = sp.getSoLuong();
-             model_SP.addRow(o);
+                model_SP.addRow(o);
+                count++;
+            }
+
         }
+        
+        thongKeTongSanPham(count);
     }
-    
+
     /**
      * Thống kê top sản phẩm bán chạy
      */
     public void thongKeSanPhamBanChay() {
         model_SP.setRowCount(0);
-        System.out.println("ss");
-        for(SanPham sp: daoSanPham.getSanPhamBanChay()) {
+        for (SanPham sp : daoSanPham.getSanPhamBanChay()) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             String ngayNhapForMat = formatter.format(sp.getNgayNhap());
             Object[] o = new Object[11];
-                o[0] = sp.getMaSP();
-                o[1] = sp.getTenSP();
-                o[2] = sp.getPhanLoai().getLoaiSanPham();
-                o[3] = sp.getGiaBan();
-                o[4] = sp.getGiaNhap();
-                o[5] = ngayNhapForMat;
-                o[6] = sp.getKichThuoc().getKichThuoc();
-                o[7] = sp.getMauSac().getMauSac();
-                o[8] = sp.getChatLieu().getChatLieu();
-                o[9] = sp.getNhaCungCap().getTenNCC();
-                o[10] = sp.getSoLuong();
-             model_SP.addRow(o);
-             
+            o[0] = sp.getMaSP();
+            o[1] = sp.getTenSP();
+            o[2] = sp.getPhanLoai().getLoaiSanPham();
+            o[3] = sp.getGiaBan();
+            o[4] = sp.getGiaNhap();
+            o[5] = ngayNhapForMat;
+            o[6] = sp.getKichThuoc().getKichThuoc();
+            o[7] = sp.getMauSac().getMauSac();
+            o[8] = sp.getChatLieu().getChatLieu();
+            o[9] = sp.getNhaCungCap().getTenNCC();
+            o[10] = sp.getSoLuong();
+            model_SP.addRow(o);
+
+        }
+        
+        int soLuongSP = daoSanPham.getSanPhamBanChay().size();
+        thongKeTongSanPham(soLuongSP);
+    }
+
+    /**
+     * Thống kê top sản phẩm bán chậm
+     */
+    public void thongKeSanPhamBanCham() {
+        model_SP.setRowCount(0);
+        System.out.println("ss");
+        for (SanPham sp : daoSanPham.getSanPhamBanCham()) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            String ngayNhapForMat = formatter.format(sp.getNgayNhap());
+            Object[] o = new Object[11];
+            o[0] = sp.getMaSP();
+            o[1] = sp.getTenSP();
+            o[2] = sp.getPhanLoai().getLoaiSanPham();
+            o[3] = sp.getGiaBan();
+            o[4] = sp.getGiaNhap();
+            o[5] = ngayNhapForMat;
+            o[6] = sp.getKichThuoc().getKichThuoc();
+            o[7] = sp.getMauSac().getMauSac();
+            o[8] = sp.getChatLieu().getChatLieu();
+            o[9] = sp.getNhaCungCap().getTenNCC();
+            o[10] = sp.getSoLuong();
+            model_SP.addRow(o);
+
+        }
+        
+        int soLuongSP = daoSanPham.getSanPhamBanCham().size();
+        thongKeTongSanPham(soLuongSP);
+    }
+
+    /**
+     *  Lấy giá trị trên bảng add vào ArrayList
+     */
+    public ArrayList<SanPham> getGiaTriTrongBang() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        ArrayList<SanPham> listSanPham = new ArrayList<>();
+        for (int i = 0; i < tbl_SanPham.getRowCount(); i++) {
+            String maSP = tbl_SanPham.getValueAt(i, 0).toString();
+            String tenSP = tbl_SanPham.getValueAt(i, 1).toString();
+            PhanLoai phanLoai = daoPhanLoai.getPhanLoaiTheoTen(tbl_SanPham.getValueAt(i, 2).toString());
+            Double giaBan = Double.parseDouble(tbl_SanPham.getValueAt(i, 3).toString());
+            Double giaNhap = Double.parseDouble(tbl_SanPham.getValueAt(i, 4).toString());
+
+            Date ngayNhap = formatter.parse(tbl_SanPham.getValueAt(i, 5).toString());
+
+            KichThuoc kichThuoc = daoKichThuoc.getKichThuocTheoTen(tbl_SanPham.getValueAt(i, 6).toString());
+            MauSac mauSac = daoMauSac.getMauSacTheoTen(tbl_SanPham.getValueAt(i, 7).toString());
+            ChatLieu chatLieu = daoChatLieu.getChatLieuTheoTen(tbl_SanPham.getValueAt(i, 8).toString());
+            NhaCungCap nhaCungCap = daoNhaCungCap.getNhaCungCapTheoTen(tbl_SanPham.getValueAt(i, 9).toString());
+            int soLuong = Integer.parseInt(tbl_SanPham.getValueAt(i, 10).toString());
+
+            SanPham sp = new SanPham(maSP, tenSP, soLuong, giaNhap, giaBan, ngayNhap, "", chatLieu, kichThuoc, mauSac, phanLoai, nhaCungCap);
+            listSanPham.add(sp);
+        }
+        return listSanPham;
+    }
+
+    /**
+     * Xuất bảng PDF báo cáo thông kê sản phẩm
+     *
+     * @param listSP
+     */
+    public void xuatBaoCaoThongKe(ArrayList<SanPham> listSP) {
+        try {
+            
+            Font fontMain = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
+            Font fontTD = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            fontTD.setSize(22);
+            fontTD.setFamily(Font.BOLD + "");
+
+            String pathFull = null;
+
+            if (activeTatCa) {
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPham" + ".pdf";
+            } else if (activeBanCham) {
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamBanCham" + ".pdf";
+            } else if (activeBanChay) {
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamBanChay" + ".pdf";
+            } else if (activeHangMoiNhap) {
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamHangMoiNhap" + ".pdf";
+            } else if (activeHetHang) {
+                pathFull = "data/BaoCaoTKSP/" + "TBaoCaoSanPhamHetHang" + ".pdf";
+            }
+
+            Document document = new Document(PageSize.A4.rotate()); //Add page khổ ngang
+            PdfWriter.getInstance(document, new FileOutputStream(pathFull)); //Tạo ra đối tượng ghi dữ liệu vào tài liệu PDF
+            document.open();
+            
+            //Tiêu đề 
+            Paragraph paragraph = null;
+            if (activeTatCa) {
+                paragraph = new Paragraph("Danh Sách Sản Phẩm", fontTD);
+            } else if (activeBanCham) {
+                paragraph = new Paragraph("Top Sản Phẩm Bán Chạm", fontTD);
+            } else if (activeBanChay) {
+                paragraph = new Paragraph("Top Sản Phẩm Bán Chạy", fontTD);
+            } else if (activeHangMoiNhap) {
+                paragraph = new Paragraph("Danh Sách Sản Phẩm Hàng Mới Nhập", fontTD);
+            } else if (activeHetHang) {
+                paragraph = new Paragraph("Danh Sách Sản Phẩm Hết Hàng", fontTD);
+            }
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph);
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph(" "));
+
+            //Tạo Mục
+            PdfPTable tableMuc = new PdfPTable(2);
+            tableMuc.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
+            tableMuc.setSpacingBefore(10f); //Đặt khoảng cách là 10
+            tableMuc.setSpacingAfter(10f);
+
+            float[] chieuRongCot = {1f, 1f};
+            tableMuc.setWidths(chieuRongCot);
+
+            //Mục mã nhân viên
+            PdfPCell cellMaNV = new PdfPCell(new Paragraph("Mã nhân viên: " + nhanVien.getMaNV(), fontMain));
+            cellMaNV.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellMaNV);
+
+            //Mục ngày in
+            Date ngayIn = new Date();
+            SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy");
+            String ngayInformat = fomatter.format(ngayIn);
+            PdfPCell cellNgayIn = new PdfPCell(new Paragraph("Ngày in: " + ngayInformat, fontMain));
+            cellNgayIn.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellNgayIn);
+
+            //Mục ngày in
+            PdfPCell cellTenNV = new PdfPCell(new Paragraph("Tên Nhân viên: "+ nhanVien.getHoTen(), fontMain));
+            cellTenNV.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellTenNV);
+
+            //Mục chức vụ
+            PdfPCell cellChucVu = new PdfPCell(new Paragraph("Chức vụ: " + nhanVien.getChuVu(), fontMain));
+            cellChucVu.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellChucVu);
+
+            document.add(tableMuc);
+
+            //Tạo bảng sản phẩm
+            PdfPTable tableDsSP = new PdfPTable(11);
+            tableDsSP.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
+            tableDsSP.setSpacingBefore(10f); //Đặt khoảng cách là 10
+            tableDsSP.setSpacingAfter(10f);
+
+            //Tiêu đề bảng
+                float[] chieuRongCotSP = {2f, 4f, 2f, 3f, 3f, 3f, 2f, 2f, 2f, 4f, 2f};
+                tableDsSP.setWidths(chieuRongCotSP);
+
+                //Mã sản phẩm
+                PdfPCell cellTblSP_maSP = new PdfPCell(new Paragraph("Mã sản phẩm ", fontMain));
+                cellTblSP_maSP.setBorderColor(BaseColor.BLACK);
+                cellTblSP_maSP.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
+                cellTblSP_maSP.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
+                tableDsSP.addCell(cellTblSP_maSP);
+
+                //Tên sản phẩm
+                PdfPCell cellTblSP_tenSP = new PdfPCell(new Paragraph("Tên sản phẩm ", fontMain));
+                cellTblSP_tenSP.setBorderColor(BaseColor.BLACK);
+                cellTblSP_tenSP.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_tenSP.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_tenSP);
+
+                //Phân loại
+                PdfPCell cellTblSP_PL = new PdfPCell(new Paragraph("Phân loại ", fontMain));
+                cellTblSP_PL.setBorderColor(BaseColor.BLACK);
+                cellTblSP_PL.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_PL.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_PL);
+
+                //Giá bán
+                PdfPCell cellTblSP_giaBan = new PdfPCell(new Paragraph("Giá bán ", fontMain));
+                cellTblSP_giaBan.setBorderColor(BaseColor.BLACK);
+                cellTblSP_giaBan.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_giaBan.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_giaBan);
+
+                //Giá nhập
+                PdfPCell cellTblSP_giaNhap = new PdfPCell(new Paragraph("Giá nhập ", fontMain));
+                cellTblSP_giaNhap.setBorderColor(BaseColor.BLACK);
+                cellTblSP_giaNhap.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_giaNhap.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_giaNhap);
+
+                //Ngày nhập
+                PdfPCell cellTblSP_ngayNhap = new PdfPCell(new Paragraph("Ngày nhập ", fontMain));
+                cellTblSP_ngayNhap.setBorderColor(BaseColor.BLACK);
+                cellTblSP_ngayNhap.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_ngayNhap.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_ngayNhap);
+
+                //Kích thước
+                PdfPCell cellTblSP_KT = new PdfPCell(new Paragraph("Kích cỡ ", fontMain));
+                cellTblSP_KT.setBorderColor(BaseColor.BLACK);
+                cellTblSP_KT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_KT.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_KT);
+
+                //Màu sắc
+                PdfPCell cellTblSP_MS = new PdfPCell(new Paragraph("Màu sắc", fontMain));
+                cellTblSP_MS.setBorderColor(BaseColor.BLACK);
+                cellTblSP_MS.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_MS.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_MS);
+
+                //Chất liệu
+                PdfPCell cellTblSP_CL = new PdfPCell(new Paragraph("Chất liệu ", fontMain));
+                cellTblSP_CL.setBorderColor(BaseColor.BLACK);
+                cellTblSP_CL.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_CL.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_CL);
+
+                // Nhà cung cấp
+                PdfPCell cellTblSP_NCC = new PdfPCell(new Paragraph("Nhà cung cấp ", fontMain));
+                cellTblSP_NCC.setBorderColor(BaseColor.BLACK);
+                cellTblSP_NCC.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_NCC.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_NCC);
+                //Số lượng
+                PdfPCell cellTblSP_SL = new PdfPCell(new Paragraph("Số lượng ", fontMain));
+                cellTblSP_SL.setBorderColor(BaseColor.BLACK);
+                cellTblSP_SL.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_SL.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_SL);
+
+            //Thong tin san pham
+            for (SanPham sp : listSP) {
+                //Mã sản phẩm
+                PdfPCell cellTblSP_maSP_giaTri = new PdfPCell(new Paragraph(sp.getMaSP(), fontMain));
+                cellTblSP_maSP_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_maSP_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblSP_maSP_giaTri);
+
+                //Tên sản phẩm
+                PdfPCell cellTblSP_tenSP_giaTri = new PdfPCell(new Paragraph(sp.getTenSP(), fontMain));
+                cellTblSP_tenSP_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_tenSP_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblSP_tenSP_giaTri);
+
+                //Phân loại
+                PdfPCell cellTblSP_PL_giaTri = new PdfPCell(new Paragraph(sp.getPhanLoai().getLoaiSanPham(), fontMain));
+                cellTblSP_PL_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_PL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_PL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_PL_giaTri);
+
+                //Giá bán
+                
+                PdfPCell cellTblSP_giaBan_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(sp.getGiaBan()) + "", fontMain));
+                cellTblSP_giaBan_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_giaBan_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_giaBan_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_giaBan_giaTri);
+
+                //Giá nhập
+                PdfPCell cellTblSP_giaNhap_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(sp.getGiaNhap()) + "", fontMain));
+                cellTblSP_giaNhap_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_giaNhap_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_giaNhap_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_giaNhap_giaTri);
+
+                //Ngày nhập
+                PdfPCell cellTblSP_ngayNhap_giaTri = new PdfPCell(new Paragraph(fomatter.format(sp.getNgayNhap()), fontMain));
+                cellTblSP_ngayNhap_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_ngayNhap_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_ngayNhap_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_ngayNhap_giaTri);
+
+                //Kích thước
+                PdfPCell cellTblSP_KT_giaTri = new PdfPCell(new Paragraph(sp.getKichThuoc().getKichThuoc(), fontMain));
+                cellTblSP_KT_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_KT_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_KT_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_KT_giaTri);
+
+                //Màu sắc
+                PdfPCell cellTblSP_MS_giaTri = new PdfPCell(new Paragraph(sp.getMauSac().getMauSac(), fontMain));
+                cellTblSP_MS_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_MS_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_MS_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_MS_giaTri);
+
+                //Chất liệu
+                PdfPCell cellTblSP_CL_giaTri = new PdfPCell(new Paragraph(sp.getChatLieu().getChatLieu(), fontMain));
+                cellTblSP_CL_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_CL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_CL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_CL_giaTri);
+
+                // Nhà cung cấp
+                PdfPCell cellTblSP_NCC_giaTri = new PdfPCell(new Paragraph(sp.getNhaCungCap().getTenNCC(), fontMain));
+                cellTblSP_NCC_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_NCC_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblSP_NCC_giaTri);
+
+                //Số lượng
+                PdfPCell cellTblSP_SL_giaTri = new PdfPCell(new Paragraph(sp.getSoLuong() + "", fontMain));
+                cellTblSP_SL_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_SL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_SL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_SL_giaTri);
+            }
+
+            document.add(tableDsSP);
+
+            document.close();
+
+            // mở file pdf
+            try {
+                File file = new File(pathFull);
+                //Kiểm tra xem tệp có tồn tại hay không
+                if (file.exists()) {                    
+                        Desktop.getDesktop().open(file); //Mở file trên ứng dụng mặc định của tệp                
+                } else {
+                    System.out.println("File này không tồn tại!");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException | DocumentException e) {
+            e.printStackTrace();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -265,7 +700,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Phân loại", "Giá bán ", "Giá nhập", "Ngày nhập", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
+                "Mã sản phẩm", "Tên sản phẩm", "Phân loại", "Giá bán ", "Giá nhập", "Ngày nhập", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng"
             }
         ) {
             Class[] types = new Class [] {
@@ -398,6 +833,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             }
         });
 
+        rad_HangMoiNhap.setBackground(new java.awt.Color(199, 210, 213));
         rad_HangMoiNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_HangMoiNhap.setText("Hàng mới nhập");
         rad_HangMoiNhap.addItemListener(new java.awt.event.ItemListener() {
@@ -406,6 +842,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             }
         });
 
+        rad_HetHangTrongKho.setBackground(new java.awt.Color(199, 210, 213));
         rad_HetHangTrongKho.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_HetHangTrongKho.setText("Hết hàng trong kho");
         rad_HetHangTrongKho.addItemListener(new java.awt.event.ItemListener() {
@@ -454,8 +891,8 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
                 .addGap(100, 100, 100)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_TopSPBanChạm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_TopSPBanChay, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(btn_TopSPBanChay, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         pnl_ThongTinLayout.setVerticalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,16 +905,16 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_KichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rad_HangMoiNhap)
-                            .addComponent(btn_TopSPBanChay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_TopSPBanChay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnl_ThongTinLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(15, 15, 15)
+                                .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                                         .addComponent(lbl_MauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cmb_MauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btn_TopSPBanChạm, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btn_TopSPBanChạm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbl_PhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -490,7 +927,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(pnl_TongSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
@@ -505,6 +942,11 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_XuatThongKeMouseExited(evt);
+            }
+        });
+        btn_XuatThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XuatThongKeActionPerformed(evt);
             }
         });
 
@@ -531,7 +973,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(pnl_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -551,7 +993,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
 
     private void btn_XuatThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XuatThongKeMouseEntered
         btn_XuatThongKe.setBackground(new Color(0x9EDDFF));
-       btn_XuatThongKe.setForeground(new Color(0x141E46));
+        btn_XuatThongKe.setForeground(new Color(0x141E46));
     }//GEN-LAST:event_btn_XuatThongKeMouseEntered
 
     private void btn_XuatThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XuatThongKeMouseExited
@@ -562,58 +1004,114 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
     private void btn_TopSPBanChayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TopSPBanChayActionPerformed
         thongKeSanPhamBanChay();
         chk_TatCa.setSelected(false);
+
+        activeTatCa = false;
+        activeHangMoiNhap = false;
+        activeHetHang = false;
+        activeBanChay = true;
+        activeBanCham = false;
     }//GEN-LAST:event_btn_TopSPBanChayActionPerformed
 
     private void btn_TopSPBanChạmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TopSPBanChạmActionPerformed
-        // TODO add your handling code here:
+        thongKeSanPhamBanCham();
+        chk_TatCa.setSelected(false);
+
+        activeTatCa = false;
+        activeHangMoiNhap = false;
+        activeHetHang = false;
+        activeBanChay = false;
+        activeBanCham = true;
+
     }//GEN-LAST:event_btn_TopSPBanChạmActionPerformed
 
     private void cmb_KichThuocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_KichThuocItemStateChanged
-        if(rad_HetHangTrongKho.isSelected()) {
+        if (rad_HetHangTrongKho.isSelected()) {
             thongKeDsSanPhamHetHang();
         } else {
             thongKeDsSanPhamTheoTieuChi();
         }
+        
+        activeTatCa = true;
+        activeHangMoiNhap = false;
+        activeHetHang = false;
+        activeBanChay = false;
+        activeBanCham = false;
     }//GEN-LAST:event_cmb_KichThuocItemStateChanged
 
     private void cmb_MauSacItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_MauSacItemStateChanged
-        if(rad_HetHangTrongKho.isSelected()) {
+        if (rad_HetHangTrongKho.isSelected()) {
             thongKeDsSanPhamHetHang();
         } else {
             thongKeDsSanPhamTheoTieuChi();
         }
+        activeTatCa = true;
+        activeHangMoiNhap = false;
+        activeHetHang = false;
+        activeBanChay = false;
+        activeBanCham = false;
     }//GEN-LAST:event_cmb_MauSacItemStateChanged
 
     private void cmb_PhanLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_PhanLoaiItemStateChanged
-        if(rad_HetHangTrongKho.isSelected()) {
+        if (rad_HetHangTrongKho.isSelected()) {
             thongKeDsSanPhamHetHang();
         } else {
             thongKeDsSanPhamTheoTieuChi();
         }
+        activeTatCa = true;
+        activeHangMoiNhap = false;
+        activeHetHang = false;
+        activeBanChay = false;
+        activeBanCham = false;
     }//GEN-LAST:event_cmb_PhanLoaiItemStateChanged
 
     private void chk_TatCaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chk_TatCaItemStateChanged
-        if(chk_TatCa.isSelected()) {
+        if (chk_TatCa.isSelected()) {
             rad_HangMoiNhap.setSelected(false);
             rad_HetHangTrongKho.setSelected(false);
             thongKeDsSanPhamTheoTieuChi();
         }
+        activeTatCa = true;
+        activeHangMoiNhap = false;
+        activeHetHang = false;
+        activeBanChay = false;
+        activeBanCham = false;
     }//GEN-LAST:event_chk_TatCaItemStateChanged
 
     private void rad_HetHangTrongKhoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rad_HetHangTrongKhoItemStateChanged
-        if(rad_HetHangTrongKho.isSelected()) {
+        if (rad_HetHangTrongKho.isSelected()) {
             rad_HangMoiNhap.setSelected(false);
             chk_TatCa.setSelected(false);
         }
         thongKeDsSanPhamHetHang();
+        activeTatCa = false;
+        activeHangMoiNhap = false;
+        activeHetHang = true;
+        activeBanChay = false;
+        activeBanCham = false;
     }//GEN-LAST:event_rad_HetHangTrongKhoItemStateChanged
 
     private void rad_HangMoiNhapItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rad_HangMoiNhapItemStateChanged
-        if(rad_HangMoiNhap.isSelected()) {
+        if (rad_HangMoiNhap.isSelected()) {
             rad_HetHangTrongKho.setSelected(false);
             chk_TatCa.setSelected(false);
         }
+        thongKeDsSanPhamMoiNhap();
+        activeTatCa = false;
+        activeHangMoiNhap = true;
+        activeHetHang = false;
+        activeBanChay = false;
+        activeBanCham = false;
     }//GEN-LAST:event_rad_HangMoiNhapItemStateChanged
+
+    private void btn_XuatThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XuatThongKeActionPerformed
+        try {
+            ArrayList<SanPham> listSP = getGiaTriTrongBang();
+            xuatBaoCaoThongKe(listSP);
+        } catch (ParseException ex) {
+            Logger.getLogger(ManHinh_NV_ThongKeSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btn_XuatThongKeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

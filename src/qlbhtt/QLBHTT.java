@@ -4,6 +4,8 @@
  */
 package qlbhtt;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author DMX
@@ -13,7 +15,7 @@ public class QLBHTT {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         new Login().setVisible(true);
     }
     

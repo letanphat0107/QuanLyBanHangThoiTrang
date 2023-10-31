@@ -18,7 +18,10 @@ import java.sql.PreparedStatement;
  * @author phant
  */
 public class Dao_ChatLieu {
-    
+    /**
+     * Lấy tất cả chất liệu trong database
+     * @return 
+     */
     public ArrayList<ChatLieu> getAllChatLieu() {
         ArrayList<ChatLieu> listChatLieu = new ArrayList<>();
         Connect.getInstance();
@@ -36,6 +39,10 @@ public class Dao_ChatLieu {
         return listChatLieu;
     }
     
+    /**
+     * Thêm chất liệu vào database
+     * @param chatLieu 
+     */
     public void themDLChatLieu(ChatLieu chatLieu) {
         Connection con = Connect.getInstance().getConnection();
         PreparedStatement prestmt = null;
@@ -127,7 +134,11 @@ public class Dao_ChatLieu {
         }
         return null;
     }
-    
+    /**
+     * Lấy dữ liệu Chất liệu theo tên
+     * @param tenChatLieu
+     * @return 
+     */
     public ChatLieu getChatLieuTheoTen(String tenChatLieu){
         Connect.getInstance();
         Connection con = Connect.getConnection();
@@ -142,6 +153,36 @@ public class Dao_ChatLieu {
                 chatLieu.setMaChatLieu(rs.getString(1));
                 chatLieu.setChatLieu(rs.getString(2));
                 return chatLieu;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    /**
+     * Tạo tự động mã
+     * @return 
+     */
+    public String taoMaChatLieu() {
+        Connection con = Connect.getInstance().getConnection();
+        String url = "select top 1 maChatLieu from PhanLoai order by maChatLieu desc";
+        
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            if(rs.next()) {
+                String maChatLieu = rs.getString(1);
+                int so = Integer.parseInt(maChatLieu.substring(4));
+                so++;
+                String maChatLieuMoi = so + "";
+                while(maChatLieuMoi.length() < 4) {
+                    maChatLieuMoi = "0" +maChatLieuMoi;
+                    
+                }
+                return "CL" + maChatLieuMoi;
+            } else {
+                return "CL0001";
             }
         } catch (SQLException e) {
             e.printStackTrace();

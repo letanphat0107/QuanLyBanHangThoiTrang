@@ -9,10 +9,8 @@ public class PhanLoai {
 
     private String auto_ID(){
         Dao_PhanLoai daoPhanLoai = new Dao_PhanLoai();
-        String idPrefix = "PL";
-        int length = daoPhanLoai.getAllPhanLoai().size();
-        String finalId = idPrefix + String.format("%04d", length + 1);
-        return finalId;
+        String idPrefix = daoPhanLoai.taoMaPhanLoai();
+        return idPrefix;
     }
     
     public PhanLoai() {

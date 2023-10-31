@@ -37,6 +37,11 @@ public class Dao_KichThuoc {
         return listKichThuoc;
     }
     
+    /**
+     * Lấy dữ liệu kích thước theo mã
+     * @param maKT
+     * @return 
+     */
     public KichThuoc getDLKichThuocTheoMa(String maKT) {
         Connect.getInstance();
         Connection con = Connect.getConnection();
@@ -58,6 +63,11 @@ public class Dao_KichThuoc {
         return null;
     }
     
+    /**
+     * Lấy dữ liệu kích thước theo tên
+     * @param tenKichThuoc
+     * @return 
+     */
     public KichThuoc getKichThuocTheoTen(String tenKichThuoc){
         Connect.getInstance();
         Connection con = Connect.getConnection();
@@ -70,6 +80,107 @@ public class Dao_KichThuoc {
             while(rs.next()){
                 KichThuoc kichThuoc = new KichThuoc(rs.getString(1), rs.getString(2));
                 return kichThuoc;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    /**
+     * Them Kichs thuoc
+     * @param kichThuoc 
+     */
+    public void themDLKichThuoc(KichThuoc kichThuoc) {
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "insert into KichThuoc values (?, ?)";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, kichThuoc.getMaKichThuoc());
+            prestmt.setString(2, kichThuoc.getKichThuoc());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Xóa dữ liệu Kich Thuoc trên database
+     * @param chatLieu 
+     */
+    public void xoaDLKichThuoc(String maKichThuoc) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "delete from KichThuoc where maKichThuoc = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maKichThuoc);
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Cập nhật dữ liệu  Kich Thuoc trên database
+     * @param chatLieu 
+     */
+    public void catNhatDLKichThuoc(KichThuoc kichThuoc) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "Update KichThuoc set tenKichThuoc = ? where maKichThuoc = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, kichThuoc.getKichThuoc());
+            prestmt.setString(2, kichThuoc.getMaKichThuoc());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Tạo tự động mã
+     * @return 
+     */
+    public String taoMaKichThuoc() {
+        Connection con = Connect.getInstance().getConnection();
+        String url = "select top 1 maKichThuoc from KichThuoc order by maKichThuoc desc";
+        
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            if(rs.next()) {
+                String maKichThuoc = rs.getString(1);
+                int so = Integer.parseInt(maKichThuoc.substring(4));
+                so++;
+                String maKichThuocMoi = so + "";
+                while(maKichThuocMoi.length() < 4) {
+                    maKichThuocMoi = "0" +maKichThuocMoi;
+                    
+                }
+                return "KT" + maKichThuocMoi;
+            } else {
+                return "KT0001";
             }
         } catch (SQLException e) {
             e.printStackTrace();

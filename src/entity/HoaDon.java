@@ -1,5 +1,6 @@
 package entity;
 
+import dao.Dao_HoaDon;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +14,20 @@ public class HoaDon {
 		// TODO Auto-generated constructor stub
 	}
 
+        public String auto_ID() {
+            Dao_HoaDon daoHoaDon = new Dao_HoaDon();
+            String idPrefix = daoHoaDon.taoMaHoaDon();
+            return idPrefix;
+        }
+        
+        public HoaDon( KhachHang khachHang, NhanVien nhanVien, Date ngayNhap) {
+		
+		this.maHoaDon = auto_ID();
+		this.khachHang = khachHang;
+		this.nhanVien = nhanVien;
+		this.ngayNhap = ngayNhap;
+	}
+        
 	public HoaDon(String maHoaDon, KhachHang khachHang, NhanVien nhanVien, Date ngayNhap) {
 		
 		this.maHoaDon = maHoaDon;

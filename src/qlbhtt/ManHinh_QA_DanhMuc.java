@@ -78,6 +78,97 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
             modelPhanLoai.addRow(o);
         }
     }
+    
+    /**
+     * Xử lý thêm Chất Liệu
+     */
+    public void xuLyThemDanhMuc() {
+        String tenChatLieu = txt_TenDanhMuc.getText();
+
+        PhanLoai phanLoai = new PhanLoai(tenChatLieu);
+        dao_PhanLoai.themLoaiSanPham(phanLoai);
+
+        modelPhanLoai = (DefaultTableModel) tbl_DanhMuc.getModel();
+        Object[] object = new Object[2];
+        object[0] = phanLoai.getMaPhanLoai();
+        object[1] = phanLoai.getLoaiSanPham();
+
+        modelPhanLoai.addRow(object);
+        xoaTrang();
+        JOptionPane.showMessageDialog(this, "Thêm thành công");
+    }
+    
+    /**
+     * Xử lý xóa Chất Liệu
+     */
+    public void xuLyXoaChatLieu() {
+        int row = tbl_DanhMuc.getSelectedRow();
+        if (row != -1) {
+            if (JOptionPane.showConfirmDialog(this, "Bạn có chắc là xóa dòng này không?", "Cảnh Báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                String maPhanLoai = txt_MaDanhMuc.getText();
+                dao_PhanLoai.xoaPhanLoaiSanPham(maPhanLoai);
+                modelPhanLoai.removeRow(row);
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                xoaTrang();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+        }
+    }
+    
+    /**
+     * Xử lý cập nhật danh mục
+     */
+    public void xuLyCapNhatChatLieu() {
+        String maDanhMuc = txt_MaDanhMuc.getText();
+        String tenDanhMuc  = txt_TenDanhMuc.getText();
+
+        PhanLoai phanLoai = new PhanLoai(maDanhMuc,tenDanhMuc);
+        int row = tbl_DanhMuc.getSelectedRow();
+        if (row != -1) {
+            dao_PhanLoai.catNhatLoaiSanPham(phanLoai);
+            for (int i = 0; i < tbl_DanhMuc.getRowCount(); i++) {
+                String maPLTable = tbl_DanhMuc.getValueAt(row, 0).toString();
+                if (maPLTable.equalsIgnoreCase(maDanhMuc)) {
+                    tbl_DanhMuc.setValueAt(tenDanhMuc, row, 1);
+                }
+
+            }
+            xoaTrang();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
+        }
+
+    }
+    
+     public void xuLyTimKiemChatLieu() {
+        String tuKhoaMaPhanLoai= txt_MaDanhMuc.getText();
+        String tuKhoaTenPhanLoai= txt_TenDanhMuc.getText();
+
+        modelPhanLoai = (DefaultTableModel) tbl_DanhMuc.getModel();
+        if (tuKhoaTenPhanLoai.equals("")) {
+            PhanLoai chatLieu = dao_PhanLoai.getDLPhanLoaiSPTheoMa(tuKhoaMaPhanLoai);
+            if (chatLieu != null) {
+                modelPhanLoai.setRowCount(0);
+                Object[] object = new Object[2];
+                object[0] = chatLieu.getMaPhanLoai();
+                object[1] = chatLieu.getLoaiSanPham();
+                modelPhanLoai.addRow(object);
+                xoaTrang();
+            }
+        } else if (tuKhoaMaPhanLoai.equals("")) {
+            PhanLoai chatLieu = dao_PhanLoai.getPhanLoaiTheoTen(tuKhoaTenPhanLoai);
+            if (chatLieu != null) {
+                modelPhanLoai.setRowCount(0);
+                Object[] object = new Object[2];
+                object[0] = chatLieu.getMaPhanLoai();
+                object[1] = chatLieu.getLoaiSanPham();
+                modelPhanLoai.addRow(object);
+                xoaTrang();
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -314,6 +405,11 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
         btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-search-30.png"))); // NOI18N
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setBorder(null);
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -386,7 +482,12 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_LuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuActionPerformed
-        
+        if(kiemTraThem) {
+            xuLyThemDanhMuc();
+        } else if(kiemTraCapNhat){
+            xuLyCapNhatChatLieu();
+        }
+            
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void txt_TenDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TenDanhMucActionPerformed
@@ -408,11 +509,15 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_DanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_DanhMucMouseClicked
-        
+         int row = tbl_DanhMuc.getSelectedRow();
+        if (row != -1) {
+            txt_MaDanhMuc.setText(tbl_DanhMuc.getValueAt(row, 0).toString());
+            txt_TenDanhMuc.setText(tbl_DanhMuc.getValueAt(row, 1).toString());
+        }
     }//GEN-LAST:event_tbl_DanhMucMouseClicked
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
-        // TODO add your handling code here:
+        xuLyXoaChatLieu();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     private void btn_ThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseEntered
@@ -470,6 +575,10 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
         btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
         btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
     }//GEN-LAST:event_btn_XoaTrangMouseExited
+
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        xuLyTimKiemChatLieu();
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

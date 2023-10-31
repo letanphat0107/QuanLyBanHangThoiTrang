@@ -148,6 +148,11 @@ public class Dao_NhaCungCap {
         return ncc;
     }
     
+    /**
+     * Lấy dữ liệu nhà cung cấp theo tên nhà cung cấp
+     * @param tenNhaCungCap
+     * @return 
+     */
     public NhaCungCap getNhaCungCapTheoTen(String tenNhaCungCap){
         Connect.getInstance();
         Connection con = Connect.getConnection();
@@ -195,5 +200,35 @@ public class Dao_NhaCungCap {
             }
         }
         return ncc;
+    }
+    
+    /**
+     * Tạo tự động mã
+     * @return 
+     */
+    public String taoMaNhaCungCap() {
+        Connection con = Connect.getInstance().getConnection();
+        String url = "select top 1 maNCC from NhaCungCap order by maNCC desc";
+        
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            if(rs.next()) {
+                String maNCC = rs.getString(1);
+                int so = Integer.parseInt(maNCC.substring(3));
+                so++;
+                String maNCCMoi = so + "";
+                while(maNCCMoi.length() < 3) {
+                    maNCCMoi = "0" +maNCCMoi;
+                    
+                }
+                return "NCC" + maNCCMoi;
+            } else {
+                return "NCC001";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

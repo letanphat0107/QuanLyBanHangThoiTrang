@@ -4,19 +4,149 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_CTHD;
+import dao.Dao_HoaDon;
+import entity.CTHD;
+import entity.HoaDon;
+import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DMX
  */
 public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
 
+    private Dao_HoaDon daoHoaDon;
+    private Dao_CTHD daoCTHD;
+    private Connect connect;
+    private DefaultTableModel modelHoaDon;
+    private DefaultTableModel modelCTHD;
+
     /**
      * Creates new form quanly
      */
-    public ManHinh_NV_XemDSHoaDon() {
+    public ManHinh_NV_XemDSHoaDon() throws SQLException {
+        daoHoaDon = new Dao_HoaDon();
+        daoCTHD = new Dao_CTHD();
+        connect = new Connect();
+
+        connect.connect();
         initComponents();
+
+        modelHoaDon = (DefaultTableModel) tbl_HoaDon.getModel();
+        modelCTHD = (DefaultTableModel) tbl_CTHD.getModel();
+
+        khoiTaoNgayHienTai();
+        docDuLieuLenBangDsHoaDon();
     }
 
+    //Setup ngày hiện tại khi load lên
+    public void khoiTaoNgayHienTai() {
+        dch_TuNgay.setDate(new Date());
+        dch_DenNgay.setDate(new Date());
+    }
+
+    /**
+     * Điều kiện từ ngày
+     */
+    public boolean dieuKienTuNgay() {
+        Date ngayHienTai = new Date();
+        Date tuNgay = dch_TuNgay.getDate();
+               
+        if (tuNgay.after(ngayHienTai)) {
+            JOptionPane.showMessageDialog(this, "Ngày phải trước ngày hiện tại!");
+            dch_TuNgay.setDate(new Date());
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Điều kiện đến ngày
+     */
+    public boolean dieuKienDenNgay() {
+        Date ngayHienTai = new Date();
+        Date tuNgay = dch_TuNgay.getDate();
+        Date denNgay = dch_DenNgay.getDate();
+               
+        if (tuNgay.after(denNgay)) {
+            JOptionPane.showMessageDialog(this, "Từ ngày phải trước ngày đến!");            
+            return false;
+        }
+
+        if (denNgay.after(ngayHienTai)) {
+            JOptionPane.showMessageDialog(this, "Ngày phải trước ngày hiện tại!");
+            dch_TuNgay.setDate(new Date());
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Đọc dữ liệu lên bảng danh sách hóa đơn
+     */
+    public void docDuLieuLenBangDsHoaDon() {
+        modelHoaDon.setRowCount(0);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        for (HoaDon hd : daoHoaDon.getAllHoaDon()) {
+            Double tongTien = daoHoaDon.tongTienHoaDon(hd.getMaHoaDon());
+            String ngayLap = formatter.format(hd.getNgayNhap());
+            Object o[] = new Object[5];
+            o[0] = hd.getMaHoaDon();
+            o[1] = hd.getKhachHang().getHoTen();
+            o[2] = hd.getNhanVien().getHoTen();
+            o[3] = ngayLap;
+            o[4] = NumberFormat.getInstance().format(tongTien);
+            modelHoaDon.addRow(o);
+        }
+    }
+
+    /**
+     * Đọc dữ liệu lên bảng chi tiết hóa đơn
+     */
+    public void docDuLieuLenBangCTHD(String maHD) {
+        modelCTHD.setRowCount(0);
+        for (CTHD cthd : daoCTHD.getAllCTHD(maHD)) {
+            Double thanhTien = daoCTHD.tinhThanhTienSanPham(cthd.getHoaDon().getMaHoaDon(), cthd.getSanPham().getMaSP());
+            Object[] o = new Object[4];
+            o[0] = cthd.getSanPham().getMaSP();
+            o[1] = cthd.getSanPham().getTenSP();
+            o[2] = cthd.getSoLuong();
+            o[3] = NumberFormat.getInstance().format(thanhTien);
+            modelCTHD.addRow(o);
+        }
+    }
+
+    /**
+     * Đọc dữ liệu lên bảng danh sách hóa đơn
+     */
+    public void docDuLieuDanhSachHoaDonTheoNgay() {
+        modelHoaDon.setRowCount(0);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String tuNgay = formatter.format(dch_TuNgay.getDate());
+        String denNgay = formatter.format(dch_DenNgay.getDate());
+        for (HoaDon hd : daoHoaDon.getAllHoaDonTheoNgay(tuNgay, denNgay)) {
+            Double tongTien = daoHoaDon.tongTienHoaDon(hd.getMaHoaDon());
+            String ngayLap = formatter.format(hd.getNgayNhap());
+            Object o[] = new Object[5];
+            o[0] = hd.getMaHoaDon();
+            o[1] = hd.getKhachHang().getHoTen();
+            o[2] = hd.getNhanVien().getHoTen();
+            o[3] = ngayLap;
+            o[4] = NumberFormat.getInstance().format(tongTien);
+            modelHoaDon.addRow(o);
+        }
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +167,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         pnl_ThongTin = new javax.swing.JPanel();
         lbl_TuNgay = new javax.swing.JLabel();
         lbl_DenNgay = new javax.swing.JLabel();
-        cmb_TatCa = new javax.swing.JCheckBox();
+        chk_TatCa = new javax.swing.JCheckBox();
         dch_TuNgay = new com.toedter.calendar.JDateChooser();
         dch_DenNgay = new com.toedter.calendar.JDateChooser();
 
@@ -45,14 +175,12 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
+        scr_DanhSachHoaDon.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
         tbl_HoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {"", null, null, null, null}
+
             },
             new String [] {
                 "Mã hóa đơn", "Tên khách hàng", "Tên nhân viên", "Ngày lập", "Tổng tiền"
@@ -68,6 +196,11 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         });
         tbl_HoaDon.setRowHeight(35);
         tbl_HoaDon.setShowGrid(true);
+        tbl_HoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_HoaDonMousePressed(evt);
+            }
+        });
         scr_DanhSachHoaDon.setViewportView(tbl_HoaDon);
 
         pnl_DanhSachCTHD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết hóa đơn tương ứng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -75,11 +208,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         tbl_CTHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_CTHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {"", null, null, null}
+
             },
             new String [] {
                 "Mã SP", "Tên sản phẩm", "Số lượng", "Thành tiền"
@@ -159,23 +288,35 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         lbl_DenNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_DenNgay.setText("Đến ngày:");
 
-        cmb_TatCa.setBackground(new java.awt.Color(199, 210, 213));
-        cmb_TatCa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmb_TatCa.setSelected(true);
-        cmb_TatCa.setText("Tất cả");
-        cmb_TatCa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_TatCaActionPerformed(evt);
+        chk_TatCa.setBackground(new java.awt.Color(199, 210, 213));
+        chk_TatCa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        chk_TatCa.setSelected(true);
+        chk_TatCa.setText("Tất cả");
+        chk_TatCa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chk_TatCaItemStateChanged(evt);
             }
         });
 
+        dch_TuNgay.setDateFormatString("dd-MM-yyyy");
         dch_TuNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dch_TuNgay.setMinimumSize(new java.awt.Dimension(64, 22));
         dch_TuNgay.setPreferredSize(new java.awt.Dimension(64, 22));
+        dch_TuNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dch_TuNgayPropertyChange(evt);
+            }
+        });
 
+        dch_DenNgay.setDateFormatString("dd-MM-yyyy");
         dch_DenNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dch_DenNgay.setMinimumSize(new java.awt.Dimension(64, 22));
         dch_DenNgay.setPreferredSize(new java.awt.Dimension(64, 22));
+        dch_DenNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dch_DenNgayPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);
         pnl_ThongTin.setLayout(pnl_ThongTinLayout);
@@ -184,7 +325,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ThongTinLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cmb_TatCa)
+                    .addComponent(chk_TatCa)
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_TuNgay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +348,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
                     .addComponent(lbl_DenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dch_DenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(cmb_TatCa)
+                .addComponent(chk_TatCa)
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
@@ -229,13 +370,48 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmb_TatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_TatCaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmb_TatCaActionPerformed
+    private void tbl_HoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_HoaDonMousePressed
+        int row = tbl_HoaDon.getSelectedRow();
+        if (row != -1) {
+            String maHD = tbl_HoaDon.getValueAt(row, 0).toString();
+            docDuLieuLenBangCTHD(maHD);
+
+        }
+    }//GEN-LAST:event_tbl_HoaDonMousePressed
+
+    private void dch_TuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_TuNgayPropertyChange
+        if(!dieuKienTuNgay()){
+            return;
+        }
+        if (chk_TatCa.isSelected()) {
+            docDuLieuLenBangDsHoaDon();
+        } else if (!chk_TatCa.isSelected()) {
+            docDuLieuDanhSachHoaDonTheoNgay();
+        }
+    }//GEN-LAST:event_dch_TuNgayPropertyChange
+
+    private void chk_TatCaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chk_TatCaItemStateChanged
+        if (chk_TatCa.isSelected()) {
+            docDuLieuLenBangDsHoaDon();
+        } else if (!chk_TatCa.isSelected()) {
+            docDuLieuDanhSachHoaDonTheoNgay();
+        }
+    }//GEN-LAST:event_chk_TatCaItemStateChanged
+
+    private void dch_DenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_DenNgayPropertyChange
+        if(!dieuKienDenNgay()){
+            return;
+        }
+        if (chk_TatCa.isSelected()) {
+            docDuLieuLenBangDsHoaDon();
+        } else if (!chk_TatCa.isSelected()) {
+            docDuLieuDanhSachHoaDonTheoNgay();
+        }
+    }//GEN-LAST:event_dch_DenNgayPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox cmb_TatCa;
+    private javax.swing.JCheckBox chk_TatCa;
     private com.toedter.calendar.JDateChooser dch_DenNgay;
     private com.toedter.calendar.JDateChooser dch_TuNgay;
     private javax.swing.JLabel lbl_DenNgay;

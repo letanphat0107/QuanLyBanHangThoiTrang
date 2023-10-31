@@ -93,6 +93,7 @@ public class Dao_KhachHang {
        return kq;
               
    }
+   
      public ArrayList<KhachHang> timKiemKhachHang(String maKhachHang,String tenKhachHang,String soDienThoai, String email){
        ArrayList<KhachHang> listKhachHang =new ArrayList<>(); 
        Connect.getInstance();
@@ -126,5 +127,58 @@ public class Dao_KhachHang {
         }
         return listKhachHang;
    }
-      
+     
+     /**
+      * Lấy thông tin khách hàng theo mã
+      * @param maKH
+      * @return 
+      */
+    public KhachHang getKhachHangTheoMa(String maKH) {
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "Select * from KhachHang where maKH = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maKH);
+            
+            ResultSet rs = prestmt.executeQuery();
+            while(rs.next()) {
+                KhachHang khachHang = new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                return khachHang;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+        return null;
+    }
+    
+    /**
+     * Tạo tự động mã
+     * @return 
+     */
+    public String taoMaKhachHang() {
+        Connection con = Connect.getInstance().getConnection();
+        String url = "select top 1 maKH from KhachHang order by maKH desc";
+        
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            if(rs.next()) {
+                String maKH = rs.getString(1);
+                int so = Integer.parseInt(maKH.substring(4));
+                so++;
+                String maKHMoi = so + "";
+                while(maKHMoi.length() < 4) {
+                    maKHMoi = "0" +maKHMoi;
+                    
+                }
+                return "KH" + maKHMoi;
+            } else {
+                return "KH0001";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
