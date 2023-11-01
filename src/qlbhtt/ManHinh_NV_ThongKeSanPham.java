@@ -50,6 +50,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -95,7 +96,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         model_SP = (DefaultTableModel) tbl_SanPham.getModel();
         docDuLieuSanPham();
         khoiTaoGiaTriCombobox();
-
+        activeTatCa = true;
     }
 
     /**
@@ -160,7 +161,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         if (ktPhanLoai.equalsIgnoreCase("Tất cả")) {
             phanLoai = "";
         }
-
+        
         String mauSac = cmb_MauSac.getSelectedItem().toString();
         String ktMauSac = cmb_MauSac.getSelectedItem().toString();
         if (ktMauSac.equalsIgnoreCase("Tất cả")) {
@@ -371,8 +372,8 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             String maSP = tbl_SanPham.getValueAt(i, 0).toString();
             String tenSP = tbl_SanPham.getValueAt(i, 1).toString();
             PhanLoai phanLoai = daoPhanLoai.getPhanLoaiTheoTen(tbl_SanPham.getValueAt(i, 2).toString());
-            Double giaBan = Double.parseDouble(tbl_SanPham.getValueAt(i, 3).toString());
-            Double giaNhap = Double.parseDouble(tbl_SanPham.getValueAt(i, 4).toString());
+            Double giaBan = Double.parseDouble(tbl_SanPham.getValueAt(i, 3).toString().replace(",", ""));
+            Double giaNhap = Double.parseDouble(tbl_SanPham.getValueAt(i, 4).toString().replace(",", ""));
 
             Date ngayNhap = formatter.parse(tbl_SanPham.getValueAt(i, 5).toString());
 
@@ -401,19 +402,35 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             Font fontTD = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             fontTD.setSize(22);
             fontTD.setFamily(Font.BOLD + "");
+            
+            // Tạo một đối tượng Random
+            Random random = new Random();
 
+            // Sinh dãy số tự nhiên ngẫu nhiên gồm 3 ký tự (bao gồm chữ cái và số từ 0 đến 9)
+            StringBuilder randomNumber = new StringBuilder(3);
+            for (int i = 0; i < 3; i++) {
+                char randomChar;
+                if (random.nextBoolean()) {
+                    // Sinh ra một chữ cái ngẫu nhiên
+                    randomChar = (char) (random.nextInt(26) + 'A');
+                } else {
+                    // Sinh ra một số ngẫu nhiên từ 0 đến 9
+                    randomChar = (char) (random.nextInt(10) + '0');
+                }
+                randomNumber.append(randomChar);
+            }
             String pathFull = null;
 
             if (activeTatCa) {
-                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPham" + ".pdf";
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPham" +randomNumber+ ".pdf";
             } else if (activeBanCham) {
-                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamBanCham" + ".pdf";
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamBanCham"+randomNumber + ".pdf";
             } else if (activeBanChay) {
-                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamBanChay" + ".pdf";
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamBanChay"+randomNumber + ".pdf";
             } else if (activeHangMoiNhap) {
-                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamHangMoiNhap" + ".pdf";
+                pathFull = "data/BaoCaoTKSP/" + "BaoCaoSanPhamHangMoiNhap"+randomNumber + ".pdf";
             } else if (activeHetHang) {
-                pathFull = "data/BaoCaoTKSP/" + "TBaoCaoSanPhamHetHang" + ".pdf";
+                pathFull = "data/BaoCaoTKSP/" + "TBaoCaoSanPhamHetHang"+randomNumber + ".pdf";
             }
 
             Document document = new Document(PageSize.A4.rotate()); //Add page khổ ngang

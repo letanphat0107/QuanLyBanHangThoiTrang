@@ -26,11 +26,13 @@ import java.sql.PreparedStatement;
  */
 public class Dao_SanPham {
 
-    private Dao_ChatLieu daoChatLieu;
-    private Dao_KichThuoc daoKichThuoc;
-    private Dao_MauSac daoMauSac;
-    private Dao_PhanLoai daoPhanLoai;
-    private Dao_NhaCungCap daoNhaCungCap;
+    private Dao_ChatLieu daoChatLieu = new Dao_ChatLieu();
+    private Dao_KichThuoc daoKichThuoc = new Dao_KichThuoc();
+    private Dao_MauSac daoMauSac = new Dao_MauSac();
+    private Dao_PhanLoai daoPhanLoai = new Dao_PhanLoai();
+    private Dao_NhaCungCap daoNhaCungCap = new Dao_NhaCungCap();
+    private Dao_NhanVien dao_NhanVien = new Dao_NhanVien();
+    private Dao_KhachHang dao_KhachHang = new Dao_KhachHang();
     
     /**
      * 
@@ -334,11 +336,7 @@ public class Dao_SanPham {
      * @return 
      */
     public ArrayList<SanPham> getAllSanPhamTheoTieuChi(String maPhanLoai, String maMauSac, String maKichThuoc) {
-        daoChatLieu = new Dao_ChatLieu();
-        daoKichThuoc = new Dao_KichThuoc();
-        daoMauSac = new Dao_MauSac();
-        daoPhanLoai = new Dao_PhanLoai();
-        daoNhaCungCap = new Dao_NhaCungCap();
+        
         
         ArrayList<SanPham> listSanPham = new ArrayList<>();
         Connect.getInstance();
@@ -388,11 +386,7 @@ public class Dao_SanPham {
      * @return 
      */
     public  ArrayList<SanPham> getAllSanPhamHetHang(String maPhanLoai, String maMauSac, String maKichThuoc) {
-        daoChatLieu = new Dao_ChatLieu();
-        daoKichThuoc = new Dao_KichThuoc();
-        daoMauSac = new Dao_MauSac();
-        daoPhanLoai = new Dao_PhanLoai();
-        daoNhaCungCap = new Dao_NhaCungCap();
+        
         
         ArrayList<SanPham> listSanPham = new ArrayList<>();
         Connect.getInstance();
@@ -490,4 +484,7 @@ public class Dao_SanPham {
         return listSanPham;
     }
     
+
+    
+
 }

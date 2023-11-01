@@ -594,7 +594,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_NV_LapHoaDonActionPerformed
 
     private void mni_NV_ThongKeDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_ThongKeDoanhThuActionPerformed
-        ManHinh_NV_ThongKeDoanhThu pnl_NV_ThongKeDoanhThu = new ManHinh_NV_ThongKeDoanhThu();
+        ManHinh_NV_ThongKeDoanhThu pnl_NV_ThongKeDoanhThu = null;
+        try {
+            pnl_NV_ThongKeDoanhThu = new ManHinh_NV_ThongKeDoanhThu();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NV_ThongKeDoanhThu);
         pnl_GiaoDienChucNang.revalidate();
@@ -615,7 +620,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_NV_ThongKeSanPhamActionPerformed
 
     private void mni_NV_ThongKeThongTinKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_ThongKeThongTinKHActionPerformed
-        ManHinh_NV_ThongKeThongTinKhachHang pnl_NV_ThongKeThongTinKhachHang = new ManHinh_NV_ThongKeThongTinKhachHang();
+        ManHinh_NV_ThongKeThongTinKhachHang pnl_NV_ThongKeThongTinKhachHang = null;
+        try {
+            pnl_NV_ThongKeThongTinKhachHang = new ManHinh_NV_ThongKeThongTinKhachHang();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_NV_ThongKeThongTinKhachHang);
         pnl_GiaoDienChucNang.revalidate();

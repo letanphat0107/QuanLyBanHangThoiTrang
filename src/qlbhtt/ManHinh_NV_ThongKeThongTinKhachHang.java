@@ -4,8 +4,17 @@
  */
 package qlbhtt;
 
+import connectDB.Connect;
+import dao.Dao_CTHD;
+import dao.Dao_HoaDon;
+import dao.Dao_KhachHang;
+import entity.KhachHang;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +22,65 @@ import javax.swing.UIManager;
  */
 public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
+    private Connect connect = new Connect();
+    private Dao_CTHD dao_CTHD = new Dao_CTHD();
+    private Dao_KhachHang dao_KhachHang = new Dao_KhachHang();
+    private Dao_HoaDon dao_HoaDon = new Dao_HoaDon();
+    private DefaultTableModel dtm;
+    private KhachHang kh = new KhachHang();
+
     /**
      * Creates new form quanly
      */
-    public ManHinh_NV_ThongKeThongTinKhachHang() {
+    public ManHinh_NV_ThongKeThongTinKhachHang() throws SQLException {
+        connect.connect();
         initComponents();
+
+        dtm = new DefaultTableModel();
+        tblThongKeKhachHang();
+    }
+
+    /**
+     * Load dữ liệu lên bảng
+     */
+    private void tblThongKeKhachHang() {
+        dtm.setRowCount(0);
+        ArrayList<KhachHang> listKH = dao_HoaDon.thongKeThongTinKhachHangDaMuaHang();
+        DefaultTableModel dtm = (DefaultTableModel) tbl_ThongKe.getModel();
+        int soLuongKH = listKH.size();
+        for (KhachHang dskh : listKH) {
+            int tongSL = dao_HoaDon.getSoLuongKhachHangMua(dskh.getMaKH());
+            double tongTien = dao_HoaDon.getThanhTienKhachHangMua(dskh.getMaKH());
+            Object[] rowdata = {dskh.getMaKH(), dskh.getHoTen(), dskh.getSdt(), tongSL, NumberFormat.getInstance().format(tongTien)};
+            dtm.addRow(rowdata);
+        }
+        txt_TongSanPhamBan.setText(soLuongKH + "");
+    }
+
+    /**
+     * Thống kê top 5 khách hàng mua nhiều
+     */
+    private void tblThongKeTop5KhachHang() {
+        dtm.setRowCount(0);
+        ArrayList<KhachHang> listKH = dao_HoaDon.thongKeThongTinTop5KhachHangDaMuaHang();
+        dtm = (DefaultTableModel) tbl_ThongKe.getModel();
+        int soLuongKH = listKH.size();
+        for (KhachHang dskh : listKH) {
+            int tongSL = dao_HoaDon.getSoLuongKhachHangMua(dskh.getMaKH());
+            double tongTien = dao_HoaDon.getThanhTienKhachHangMua(dskh.getMaKH());
+
+            Object[] rowdata = {dskh.getMaKH(), dskh.getHoTen(), dskh.getSdt(), tongSL, NumberFormat.getInstance().format(tongTien)};
+            dtm.addRow(rowdata);
+        }
+        txt_TongSanPhamBan.setText(soLuongKH + "");
+    }
+
+    private void lamMoi() {
+        txt_MaKH.setText("");
+        txt_TenKH.setText("");
+        txt_SoLuongSPMua.setText("");
+        txt_SoDienThoai.setText("");
+        txt_ThanhTien.setText("");
     }
 
     /**
@@ -62,13 +125,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         tbl_ThongKe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_ThongKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"KH0001", "Nguyễn Văn B", "0367494954", "9", "600000"},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {"", null, null, null, null}
+
             },
             new String [] {
                 "Mã khách hàng", "Họ tên", "SDT", "Số lượng sản phẩm đã mua", "Thành tiền"
@@ -84,6 +141,11 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         });
         tbl_ThongKe.setRowHeight(35);
         tbl_ThongKe.setShowGrid(true);
+        tbl_ThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ThongKeMouseClicked(evt);
+            }
+        });
         scr_DanhSachThongKe.setViewportView(tbl_ThongKe);
 
         lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
@@ -128,11 +190,6 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         lbl_TenKH.setText("Tên khách hàng");
 
         txt_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_TenKHActionPerformed(evt);
-            }
-        });
 
         pnl_TongKHDaMua.setBackground(new java.awt.Color(255, 255, 255));
         pnl_TongKHDaMua.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -174,37 +231,16 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         lbl_MaKH.setText("Mã khách hàng");
 
         txt_MaKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_MaKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_MaKHActionPerformed(evt);
-            }
-        });
 
         lbl_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoDienThoai.setText("SDT");
-
-        txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_SoDienThoaiActionPerformed(evt);
-            }
-        });
 
         lbl_SoLuongSPMua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoLuongSPMua.setText("Số lượng sản phẩm đã mua");
 
         txt_SoLuongSPMua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_SoLuongSPMua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_SoLuongSPMuaActionPerformed(evt);
-            }
-        });
 
         txt_ThanhTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ThanhTien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ThanhTienActionPerformed(evt);
-            }
-        });
 
         lbl_ThanhTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_ThanhTien.setText("Thành tiền");
@@ -368,33 +404,13 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_TenKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TenKHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_TenKHActionPerformed
-
     private void txt_TongSanPhamBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TongSanPhamBanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_TongSanPhamBanActionPerformed
 
-    private void txt_MaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_MaKHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_MaKHActionPerformed
-
-    private void txt_SoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoDienThoaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_SoDienThoaiActionPerformed
-
-    private void txt_SoLuongSPMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoLuongSPMuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_SoLuongSPMuaActionPerformed
-
-    private void txt_ThanhTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ThanhTienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_ThanhTienActionPerformed
-
     private void btn_XuatThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XuatThongKeMouseEntered
         btn_XuatThongKe.setBackground(new Color(0x9EDDFF));
-       btn_XuatThongKe.setForeground(new Color(0x141E46));
+        btn_XuatThongKe.setForeground(new Color(0x141E46));
     }//GEN-LAST:event_btn_XuatThongKeMouseEntered
 
     private void btn_XuatThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XuatThongKeMouseExited
@@ -404,7 +420,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
     private void btn_Top5KHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Top5KHMouseEntered
         btn_Top5KH.setBackground(new Color(0x9EDDFF));
-       btn_Top5KH.setForeground(new Color(0x141E46));
+        btn_Top5KH.setForeground(new Color(0x141E46));
     }//GEN-LAST:event_btn_Top5KHMouseEntered
 
     private void btn_Top5KHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Top5KHMouseExited
@@ -414,13 +430,24 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
     private void btn_LamMoiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LamMoiMouseEntered
         btn_LamMoi.setBackground(new Color(0x9EDDFF));
-       btn_LamMoi.setForeground(new Color(0x141E46));
+        btn_LamMoi.setForeground(new Color(0x141E46));
     }//GEN-LAST:event_btn_LamMoiMouseEntered
 
     private void btn_LamMoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LamMoiMouseExited
         btn_LamMoi.setBackground(UIManager.getColor("Menu.background"));
         btn_LamMoi.setForeground(UIManager.getColor("Menu.foreground"));
     }//GEN-LAST:event_btn_LamMoiMouseExited
+
+    private void tbl_ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ThongKeMouseClicked
+        int row = tbl_ThongKe.getSelectedRow();
+        if (row != -1) {
+            txt_MaKH.setText(tbl_ThongKe.getValueAt(row, 0).toString());
+            txt_TenKH.setText(tbl_ThongKe.getValueAt(row, 1).toString());
+            txt_SoDienThoai.setText(tbl_ThongKe.getValueAt(row, 2).toString());
+            txt_SoLuongSPMua.setText(tbl_ThongKe.getValueAt(row, 3).toString());
+            txt_ThanhTien.setText(tbl_ThongKe.getValueAt(row, 4).toString());
+        }
+    }//GEN-LAST:event_tbl_ThongKeMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

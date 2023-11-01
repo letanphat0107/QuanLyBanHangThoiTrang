@@ -96,52 +96,12 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="7">
-                    <Column editable="true" title="M&#xe3; kh&#xe1;ch h&#xe0;ng" type="java.lang.String">
-                      <Data value="KH0001"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value=""/>
-                    </Column>
-                    <Column editable="true" title="H&#x1ecd; t&#xea;n" type="java.lang.String">
-                      <Data value="Nguy&#x1ec5;n V&#x103;n B"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="SDT" type="java.lang.String">
-                      <Data value="0367494954"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng s&#x1ea3;n ph&#x1ea9;m &#x111;&#xe3; mua" type="java.lang.String">
-                      <Data value="9"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.String">
-                      <Data value="600000"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
+                  <Table columnCount="5" rowCount="0">
+                    <Column editable="true" title="M&#xe3; kh&#xe1;ch h&#xe0;ng" type="java.lang.String"/>
+                    <Column editable="true" title="H&#x1ecd; t&#xea;n" type="java.lang.String"/>
+                    <Column editable="true" title="SDT" type="java.lang.String"/>
+                    <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng s&#x1ea3;n ph&#x1ea9;m &#x111;&#xe3; mua" type="java.lang.String"/>
+                    <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -179,6 +139,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_ThongKeMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -330,9 +293,6 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_TenKHActionPerformed"/>
-          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="pnl_TongKHDaMua">
           <Properties>
@@ -409,9 +369,6 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_MaKHActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_SoDienThoai">
           <Properties>
@@ -422,9 +379,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_SoDienThoai">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_SoDienThoaiActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_SoLuongSPMua">
           <Properties>
@@ -440,9 +394,6 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_SoLuongSPMuaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_ThanhTien">
           <Properties>
@@ -450,9 +401,6 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_ThanhTienActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_ThanhTien">
           <Properties>
