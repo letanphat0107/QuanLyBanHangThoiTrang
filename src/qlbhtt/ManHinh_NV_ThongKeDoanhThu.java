@@ -139,6 +139,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         int tongSoSanPhamBanDuoc = listSanPham.size();
         double tongDoanhThu = dao_CTHD.getTongDoanhThu();
         for (SanPham sp : listSanPham) {
+            System.out.println("qlbhtt.ManHinh_NV_ThongKeDoanhThu.tblDanhSachSanPham()"+sp.getMaSP());
             int soLuongBanDuoc = dao_CTHD.getSoLuongSanPhamBanDuoc(sp.getMaSP());
             double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
             double tiLeDoanhThu = (sp.getGiaBan() / tongDoanhThu) * 100;
@@ -246,7 +247,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
                 }
                 randomNumber.append(randomChar);
             }
-            String pathFull = pathFull = "data/BaoCaoTKDT/" + "BaoCaoDoanhThu" + randomNumber + ".pdf";
+            String pathFull = "data/BaoCaoTKDT/" + "BaoCaoDoanhThu" + randomNumber + ".pdf";
 
             Document document = new Document(PageSize.A4.rotate()); //Add page khổ ngang
             PdfWriter.getInstance(document, new FileOutputStream(pathFull)); //Tạo ra đối tượng ghi dữ liệu vào tài liệu PDF
@@ -301,7 +302,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
             tableDsSP.setSpacingAfter(10f);
 
             //Tiêu đề bảng
-            float[] chieuRongCotSP = {2f, 4f, 2f, 3f, 3f, 3f, 2f, 2f, 2f, 4f, 2f, 2f};
+            float[] chieuRongCotSP = {2f, 4f, 2f, 2f, 2f, 2f, 2f, 2f, 4f, 2f, 2f, 2f};
             tableDsSP.setWidths(chieuRongCotSP);
 
             //Mã sản phẩm
@@ -461,7 +462,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
                 double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
                 
                         //Doanh Thu
-                        PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(doanhThu+"", fontMain));
+                        PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(doanhThu+""), fontMain));
                         cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
                         cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
                         cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -532,6 +533,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         chk_TatCa = new javax.swing.JCheckBox();
         pnl_NutChucNang = new javax.swing.JPanel();
         btn_XuatThongKe = new javax.swing.JButton();
+        btn_BieuDo = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(199, 210, 213));
         setMinimumSize(new java.awt.Dimension(1000, 550));
@@ -614,6 +616,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         lbl_TuNgay.setText("Từ ngày:");
 
         dch_TuNgay.setDateFormatString("dd-MM-yyyy");
+        dch_TuNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dch_TuNgay.setMinimumSize(new java.awt.Dimension(64, 22));
         dch_TuNgay.setPreferredSize(new java.awt.Dimension(64, 22));
         dch_TuNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -838,21 +841,43 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
             }
         });
 
+        btn_BieuDo.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btn_BieuDo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-analytics-30.png"))); // NOI18N
+        btn_BieuDo.setText("Xem biểu đồ");
+        btn_BieuDo.setBorder(null);
+        btn_BieuDo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_BieuDoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_BieuDoMouseExited(evt);
+            }
+        });
+        btn_BieuDo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BieuDoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
         pnl_NutChucNangLayout.setHorizontalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NutChucNangLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_BieuDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
                 .addGap(60, 60, 60))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btn_BieuDo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -954,8 +979,27 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_XuatThongKeActionPerformed
 
+    private void btn_BieuDoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_BieuDoMouseEntered
+        btn_BieuDo.setBackground(new Color(0x9EDDFF));
+        btn_BieuDo.setForeground(new Color(0x141E46));
+    }//GEN-LAST:event_btn_BieuDoMouseEntered
+
+    private void btn_BieuDoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_BieuDoMouseExited
+        btn_BieuDo.setBackground(UIManager.getColor("Menu.background"));
+        btn_BieuDo.setForeground(UIManager.getColor("Menu.foreground"));
+    }//GEN-LAST:event_btn_BieuDoMouseExited
+
+    private void btn_BieuDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BieuDoActionPerformed
+        try {
+            new ManHinh_NV_BieuDoThongKeDoanhThu().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManHinh_NV_ThongKeSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_BieuDoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_BieuDo;
     private javax.swing.JButton btn_XuatThongKe;
     private javax.swing.JCheckBox chk_TatCa;
     private javax.swing.JComboBox<String> cmb_KichThuoc;

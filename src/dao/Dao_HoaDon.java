@@ -183,21 +183,18 @@ public class Dao_HoaDon {
         Connect.getInstance();
         Connection conn = Connect.getConnection();
         try {
-            String sql = "select cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kt.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
-                    + "						join SanPham sp on cthd.maSP=sp.maSP\n"
-                    + "						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n"
-                    + "						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc\n"
-                    + "						join MauSac ms on ms.maMauSac=sp.maMauSac\n"
-                    + "						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n"
-                    + "						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n"
-                    + "			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kt.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong";
+            String sql = "select sp.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
+"                   				join SanPham sp on cthd.maSP=sp.maSP                    			\n" +
+"               		group by sp.maSP";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                SanPham sp = dao_SanPham.getSanPhamTheoMa(rs.getString(1));
-                //System.out.println(sp.toString());
-                listSanPham.add(sp);
+                
+                String maSP = rs.getString(1);
+                System.out.println("SSSS" + maSP.toString());
+//                SanPham sp = dao_SanPham.getSanPhamTheoMa(maSP);
+//                listSanPham.add(sp);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -216,7 +213,7 @@ public class Dao_HoaDon {
         Connection conn = Connect.getConnection();
         PreparedStatement stmt = null;
         try {
-            String sql = "select cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kt.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
+            String sql = "select sp.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
                     + "						join SanPham sp on cthd.maSP=sp.maSP\n"
                     + "						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n"
                     + "						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc\n"
@@ -224,11 +221,11 @@ public class Dao_HoaDon {
                     + "						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n"
                     + "						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n"
                     + "	where ms.tenMauSac like ? and kt.tenKichThuoc like ? and pl.tenPhanLoai like ?\n"
-                    + "			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kt.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong";
+                    + "			group by sp.maSP";
 
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, "%" + mauSac + "%");
-            stmt.setString(2, "%" + kichThuoc+ "%");
+            stmt.setString(2, "%" + kichThuoc + "%");
             stmt.setString(3, "%" + phanLoai + "%");
             ResultSet rs = stmt.executeQuery();
 
@@ -255,19 +252,19 @@ public class Dao_HoaDon {
         Connection conn = Connect.getConnection();
         PreparedStatement stmt = null;
         try {
-            String sql = "select cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kt.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
-                    + "						join SanPham sp on cthd.maSP=sp.maSP\n"
-                    + "						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n"
-                    + "						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc\n"
-                    + "						join MauSac ms on ms.maMauSac=sp.maMauSac\n"
-                    + "						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n"
-                    + "						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n"
-                    + "	where ms.tenMauSac like ? and kt.tenKichThuoc like ? and pl.tenPhanLoai like ? and hd.ngayLap >= ? and  hd.ngayLap <= ?\n"
-                    + "			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kt.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong";
+            String sql = "select cthd.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
+"                   						join SanPham sp on cthd.maSP=sp.maSP\n" +
+"                   						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
+"                   						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc\n" +
+"                    					join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
+"                    					join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
+"                    					join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
+"      	where ms.tenMauSac like ? and kt.tenKichThuoc like ? and pl.tenPhanLoai like ? and hd.ngayLap >= ? and  hd.ngayLap <= ?\n" +
+"		group by cthd.maSP;";
 
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, "%" + mauSac + "%");
-            stmt.setString(2, "%" + kichThuoc+ "%");
+            stmt.setString(2, "%" + kichThuoc + "%");
             stmt.setString(3, "%" + phanLoai + "%");
             stmt.setString(4, tuNgay);
             stmt.setString(5, denNgay);
@@ -286,10 +283,10 @@ public class Dao_HoaDon {
     /**
      * ==================THỐNG KÊ KHÁCH HÀNG===============
      */
-
     /**
      * Thống kê thông tin khách hãng đã mua
-     * @return 
+     *
+     * @return
      */
     public ArrayList<KhachHang> thongKeThongTinKhachHangDaMuaHang() {
         ArrayList<KhachHang> listKhachHang = new ArrayList<>();
@@ -312,11 +309,12 @@ public class Dao_HoaDon {
         }
         return listKhachHang;
     }
-    
+
     /**
      * Lấy thành tiền khách hàng mua
+     *
      * @param maKH
-     * @return 
+     * @return
      */
     public double getThanhTienKhachHangMua(String maKH) {
 
@@ -342,8 +340,9 @@ public class Dao_HoaDon {
 
     /**
      * lấy số lượng khách hàng mua tại cửa hàng
+     *
      * @param maKH
-     * @return 
+     * @return
      */
     public int getSoLuongKhachHangMua(String maKH) {
 
@@ -369,7 +368,8 @@ public class Dao_HoaDon {
 
     /**
      * lấy số lượng khách hàng
-     * @return 
+     *
+     * @return
      */
     public int getSoLuongKhachHang() {
         Connect.getConnection();
@@ -389,7 +389,8 @@ public class Dao_HoaDon {
 
     /**
      * Thống kê top 5 khách hàng đã mua nhiều nhất
-     * @return 
+     *
+     * @return
      */
     public ArrayList<KhachHang> thongKeThongTinTop5KhachHangDaMuaHang() {
         ArrayList<KhachHang> listKhachHang = new ArrayList<>();

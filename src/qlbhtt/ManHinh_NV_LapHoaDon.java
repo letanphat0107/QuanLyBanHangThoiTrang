@@ -85,6 +85,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
 
         scr_DanhSachSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
+        tbl_SanPham.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"SP0001", "Áo thun", "Áo", "250000", "L", "Trắng", "Cotton", "CT TNHH Hades", "10"},
@@ -97,7 +98,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Phân loại", "Giá bán ", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
+                "Mã quần áo", "Tên quần áo", "Phân loại", "Giá bán ", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
             }
         ) {
             Class[] types = new Class [] {
@@ -152,11 +153,12 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         });
 
         txt_TongTienGioHang.setEditable(false);
-        txt_TongTienGioHang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        txt_TongTienGioHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TongTienGioHang.setText("250000");
 
         lbl_DonViGia.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        lbl_DonViGia.setText("vnd");
+        lbl_DonViGia.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_DonViGia.setText("VND");
         lbl_DonViGia.setPreferredSize(new java.awt.Dimension(21, 30));
 
         javax.swing.GroupLayout pnl_DieuChinhGioHangLayout = new javax.swing.GroupLayout(pnl_DieuChinhGioHang);
@@ -267,7 +269,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         pnl_DanhSachSanPhamLayout.setHorizontalGroup(
             pnl_DanhSachSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scr_DanhSachSanPham)
-            .addComponent(pnl_DieuChinhGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
+            .addComponent(pnl_DieuChinhGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 1174, Short.MAX_VALUE)
             .addComponent(pnl_GioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -546,28 +548,32 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         lbl_TongTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TongTien.setText("Tổng tiền:");
 
-        lbl_SoTienTong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_SoTienTong.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbl_SoTienTong.setForeground(new java.awt.Color(255, 0, 0));
         lbl_SoTienTong.setText("1000000");
 
         lbl_TongTien1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txt_TienKHDua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_TienKHDua.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txt_TienKHDua.setText("11000000");
         txt_TienKHDua.setToolTipText("Tiền khách đưa");
 
         lbl_TienTra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TienTra.setText("Tiền trả lại:");
 
-        lbl_SoTienTra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_SoTienTra.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbl_SoTienTra.setForeground(new java.awt.Color(255, 0, 0));
         lbl_SoTienTra.setText("100000");
 
         lbl_TongTien2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TongTien2.setText("Tiền khách đưa:");
 
-        lbl_DonViTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_DonViTien.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbl_DonViTien.setForeground(new java.awt.Color(255, 0, 0));
         lbl_DonViTien.setText("VND");
 
-        lbl_DonViTien1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_DonViTien1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbl_DonViTien1.setForeground(new java.awt.Color(255, 0, 0));
         lbl_DonViTien1.setText("VND");
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);

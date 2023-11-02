@@ -95,7 +95,7 @@ public class Dao_CTHD {
         Connect.getConnection();
         Connection conn = Connect.getConnection();
         String sql = "SELECT  SUM(cthd.soLuong*sp.giaBan) as DoanhThu\n"
-                + "FROM            CTHD cthd join SanPham sp on sp.maSP=cthd.maSP";
+                + "FROM  CTHD cthd join SanPham sp on sp.maSP=cthd.maSP";
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -111,24 +111,19 @@ public class Dao_CTHD {
 //   ====================THỐNG KÊ DOANH THU==================
     //so luong ban duoc cua tung san pham
     public int getSoLuongSanPhamBanDuoc(String maSP) {
-        Connect.getConnection();
-        Connection conn = Connect.getConnection();
+        Connection conn = Connect.getInstance().getConnection();
         PreparedStatement pre=null;
-        String sql = "select cthd.soLuong as soLuongBanDuoc from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
-"						join SanPham sp on cthd.maSP=sp.maSP\n" +
-"						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
-"						join KichThuoc kc on kc.maKichThuoc=sp.maKichThuoc\n" +
-"						join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
-"						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
-"						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
-"		where cthd.maSP=?\n" +
-"			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong";
+        String sql = "select sp.maSP, SUM(cthd.soLuong) as tongSoLuongBan from SanPham sp \n" +
+"                                     JOIN CTHD cthd ON sp.maSP = cthd.maSP\n" +
+"                                      JOIN HoaDon hd ON cthd.maHD = hd.maHD\n" +
+"where sp.maSP = ?\n" +
+"                    group by sp.maSP";
         try {
              pre = conn.prepareStatement(sql);
              pre.setString(1, maSP);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt(2);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -141,14 +136,9 @@ public class Dao_CTHD {
         Connection conn = Connect.getConnection();
         PreparedStatement pre=null;
         String sql = "select sum(cthd.soLuong*sp.giaBan) as doanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
-"						join SanPham sp on cthd.maSP=sp.maSP\n" +
-"						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
-"						join KichThuoc kc on kc.maKichThuoc=sp.maKichThuoc\n" +
-"						join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
-"						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
-"						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
-"		where cthd.maSP=?\n" +
-"			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong";
+"						join SanPham sp on cthd.maSP=sp.maSP\n" +				
+"		where sp.maSP=?\n" +
+"			group by sp.maSP";
         try {
              pre = conn.prepareStatement(sql);
              pre.setString(1, maSP);

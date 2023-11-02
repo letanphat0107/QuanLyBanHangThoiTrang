@@ -484,7 +484,28 @@ public class Dao_SanPham {
         return listSanPham;
     }
     
-
+    public ArrayList<SanPham> getSoLuongSPTheoMaPL() {
+        ArrayList<SanPham> listSP = new ArrayList<>();
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        String url = "SELECT maPhanLoai, COUNT(*) AS SoLuongSanPham\n" +
+                            "FROM sanPham\n" +
+                            "GROUP BY maPhanLoai\n" +
+                            "ORDER BY maPhanLoai;";
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(url);
+            while(rs.next()) {
+                PhanLoai phanLoai = daoPhanLoai.getDLPhanLoaiSPTheoMa(rs.getString(1));
+                listSP.add(new SanPham(rs.getInt(2), phanLoai));                      
+                        
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+      return listSP;
+              
+    }
     
 
 }

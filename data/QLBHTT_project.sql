@@ -244,7 +244,7 @@ insert into sanPham values ('SP0007',N'Áo khoác gió chống nước Unisex',2
 insert into sanPham values ('SP0008',N'Giày thể thao vải',16,100000,110000,'2023-10-15','SP0008.jpg','CL0006','KT0005','MS0004','PL0004','NCC001');
 insert into sanPham values ('SP0009',N'Áo khoác Kaki Nam ',10,200000,170000,'2023-9-29','SP0009.jpg','CL0001','KT0005','MS0002','PL0001','NCC005');
 insert into sanPham values ('SP0010',N'Nón Lưỡi chai nike',10,70000,650000,'2023-10-12','SP0010.jpg','CL0002','KT0004','MS0003','PL0003','NCC002');
-insert into sanPham values ('SP0011',N'Thắt lưng vải dù',13,65000,60000,'2023-10-12','SP00011.jpg','CL0003','KT0003','MS0002','PL0004','NCC001');
+insert into sanPham values ('SP0011',N'Thắt lưng vải dù',13,65000,60000,'2023-10-12','SP00011.jpg','CL0003','KT0003','MS0002','PL0005','NCC001');
 insert into sanPham values ('SP0012',N'Quần short nam lưng thun',15,95000,93000,'2023-10-01','SP0012.jpg','CL0005','KT0003','MS0007','PL0002','NCC005');
 insert into sanPham values ('SP0013',N'Á Thun Cotton K1',17,130000,140000,'2023-10-16','SP0013.jpg','CL0001','KT0003','MS0002','PL0001','NCC006');
 insert into sanPham values ('SP0014',N'Quần Jean Nam trơn cá tính',10,220000,210000,'2023-10-10','SP0014.jpg','CL0006','KT0002','MS0004','PL0002','NCC005');
@@ -307,9 +307,10 @@ select * from SanPham sp JOIN PhanLoai pl ON sp.maPhanLoai = pl.maPhanLoai
 where pl.maPhanLoai like '%PL0003%' or pl.maPhanLoai like '%PL0004%' or pl.maPhanLoai like '%PL0005%'
 
 --Lấy top 5 sản phẩm bán cháyt gửi
-select top 5 sp.maSP, SUM(cthd.soLuong) as tongSoLuongBan from SanPham sp 
+select sp.maSP, SUM(cthd.soLuong) as tongSoLuongBan from SanPham sp 
                                      JOIN CTHD cthd ON sp.maSP = cthd.maSP
                                       JOIN HoaDon hd ON cthd.maHD = hd.maHD
+where sp.maSP = 'SP0004'
                     group by sp.maSP
                     order by tongSoLuongBan desc
 --Lấy hóa đơn theo mã
@@ -321,13 +322,79 @@ select sp.maSP, sp.tenSP, cthd.soLuong, cthd.soLuong*sp.giaBan as thanhTien from
 where cthd.maHD = 'HD00003' and cthd.maSP = 'SP0001'
 
 --Tính tổng tiền của hóa đơn 
-select hd.maHD, SUM( cthd.soLuong*sp.giaBan) as tongTien from HoaDon hd 
+select cthd.maSP,sp.tenSP,hd.maHD, SUM( cthd.soLuong*sp.giaBan) as tongTien from HoaDon hd 
 				JOIN  CTHD cthd ON hd.maHD = cthd.maHD 
 				JOIN SanPham sp ON cthd.maSP = sp.maSP
 where hd.maHD = 'HD00001'
-group by hd.maHD
+group by hd.maHD,cthd.maSP,sp.tenSP
 
 --lấy danh sách hóa đơn từ ngày này đến ngày kia
 Select * from HoaDon where ngayLap >='04-04-2023' and ngayLap <= '05-04-2023'
 
-select * from TaiKhoan
+select * from PhanLoai
+
+SELECT COUNT(CASE WHEN pl.tenPhanLoai = N'Áo' THEN 1 END) AS SoLuongAo, 
+                    COUNT(CASE WHEN pl.tenPhanLoai = N'Quần' THEN 1 END) AS SoLuongQuan, 
+                    COUNT(CASE WHEN pl.tenPhanLoai = N'Nón' THEN 1 END) AS SoLuongNon, 
+					COUNT(CASE WHEN pl.tenPhanLoai = N'Giày' THEN 1 END) AS SoLuongGiay, 
+					COUNT(CASE WHEN pl.tenPhanLoai = N'Thắt Lưng' THEN 1 END) AS SoLuongThatLung
+                    FROM SanPham sp JOIN PhanLoai pl ON sp.maPhanLoai = pl.maPhanLoai 
+					group by pl.maPhanLoai
+
+SELECT maPhanLoai, COUNT(*) AS SoLuongSanPham
+FROM sanPham
+GROUP BY maPhanLoai
+ORDER BY maPhanLoai;
+
+select  sum(cthd.soLuong) as soLuongBanDuoc from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD
+					join SanPham sp on cthd.maSP=sp.maSP
+						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai 
+						join KichThuoc kc on kc.maKichThuoc=sp.maKichThuoc
+						join MauSac ms on ms.maMauSac=sp.maMauSac
+						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu
+						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap
+	where cthd.maSP= 'SP0004'
+	group by cthd.maSP
+
+select sp.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD
+                   				join SanPham sp on cthd.maSP=sp.maSP                    			
+               		group by sp.maSP
+
+select cthd.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD
+                   						join SanPham sp on cthd.maSP=sp.maSP
+                   						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai 
+                   						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc
+                    					join MauSac ms on ms.maMauSac=sp.maMauSac
+                    					join ChatLieu cl on cl.maChatLieu=sp.maChatLieu
+                    					join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap
+      	where ms.tenMauSac like '%%' and kt.tenKichThuoc like '%%' and pl.tenPhanLoai like '%%' and hd.ngayLap >= '2023-9-10' and  hd.ngayLap <= '2023-10-15'
+		group by cthd.maSP;
+-- Lấy doanh thu theo tháng
+select  MONTH(hd.ngayLap) as thang, sum(sp.giaBan*cthd.soLuong) as doanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD
+                   						join SanPham sp on cthd.maSP=sp.maSP
+		group by MONTH(hd.ngayLap);
+
+--Lấy dữ liệu doanh thu theo tháng
+-- Dùng With để tạo ra bảng dữ liệu tạm thời, dùng UNION để lưu dữ liệu tạm thời
+WITH AllMonths AS (
+    SELECT 1 AS thang
+    UNION SELECT 2
+    UNION SELECT 3
+    UNION SELECT 4
+    UNION SELECT 5
+    UNION SELECT 6
+    UNION SELECT 7
+    UNION SELECT 8
+    UNION SELECT 9
+    UNION SELECT 10
+    UNION SELECT 11
+    UNION SELECT 12
+)
+SELECT allM.thang, SUM(sp.giaBan*cthd.soLuong) AS doanhThu
+FROM AllMonths allM
+LEFT JOIN HoaDon hd ON MONTH(hd.ngayLap) = allM.thang
+LEFT JOIN CTHD cthd ON hd.maHD = cthd.maHD
+LEFT JOIN SanPham sp ON cthd.maSP = sp.maSP
+GROUP BY allM.thang
+
+

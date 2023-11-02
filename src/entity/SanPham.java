@@ -62,6 +62,12 @@ public class SanPham {
 		this.nhaCungCap = nhaCungCap;
     }
 
+    public SanPham(int soLuong, PhanLoai phanLoai) {
+        this.soLuong = soLuong;
+        this.phanLoai = phanLoai;
+    }
+
+    
     public String getMaSP() {
         return maSP;
     }
