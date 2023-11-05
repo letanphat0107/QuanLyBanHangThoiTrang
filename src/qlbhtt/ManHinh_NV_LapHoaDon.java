@@ -1178,7 +1178,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         xuLyGiamSLSanPhamTrongKho();
 
         xuatHoaDon(hd);
-
+        resetPanel();
         if (maPDH != null) {
             //Xoa CTPhieuDatHang
             dao_CTPhieuDatHang.xoaCTPhieuDatHang(maPDH);
@@ -1245,21 +1245,24 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             cellChucVu.setBorderColor(BaseColor.WHITE);
             tableMuc.addCell(cellChucVu);
 
+            document.add(tableMuc);
             //Tạo Mục
             PdfPTable tableKH = new PdfPTable(1);
             tableKH.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
             tableKH.setSpacingBefore(10f); //Đặt khoảng cách là 10
             tableKH.setSpacingAfter(10f);
+            
+            
 
             float[] chieuRongCot_KH = {1f};
             tableKH.setWidths(chieuRongCot_KH);
 
-            //Mục mã hóa đơn
+            //Mục khách hàng
             PdfPCell celltenKH = new PdfPCell(new Paragraph("Tên khách hàng: " + hd.getKhachHang().getHoTen(), fontMain));
             celltenKH.setBorderColor(        BaseColor.WHITE);
             tableKH.addCell(celltenKH);
             
-            document.add(tableMuc);
+            document.add(tableKH);
 
             //Tạo bảng sản phẩm
             PdfPTable tableDsSP = new PdfPTable(5);
@@ -1431,6 +1434,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         txt_TenKH.setText("");
         txt_SoDienThoai.setText("");
         txt_TienKHDua.setText("");
+        lbl_SoTienTra.setText("");
         lbl_HinhAnhSanPham.setIcon(null);
         cmb_KichThuoc.setSelectedIndex(0);
         cmb_MauSac.setSelectedIndex(0);
