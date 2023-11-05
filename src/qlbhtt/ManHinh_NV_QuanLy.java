@@ -43,7 +43,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         
         loadDuLieuChucVu();
         docDuLieuNhanVien();
-//        setGiaTriTxt(); 
+        setGiaTriTxt(); 
     }
 
     /**
@@ -211,7 +211,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         } else {
             trangThai_insert = "Nghỉ làm";
         }
-        object[7] = trangThai;
+        object[7] = trangThai_insert;
         modelNhanVien.addRow(object);
         xoaTrangTxt();
 

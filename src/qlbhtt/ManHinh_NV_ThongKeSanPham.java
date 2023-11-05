@@ -391,7 +391,6 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
      */
     public void thongKeSanPhamBanCham() {
         model_SP.setRowCount(0);
-        System.out.println("ss");
         for (SanPham sp : daoSanPham.getSanPhamBanCham()) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             String ngayNhapForMat = formatter.format(sp.getNgayNhap());
@@ -481,9 +480,9 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
     public void xuatBaoCaoThongKe(ArrayList<SanPham> listSP) {
         try {
 
-            Font fontMain = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontMain = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
-            Font fontTD = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontTD = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             fontTD.setSize(22);
             fontTD.setFamily(Font.BOLD + "");
 

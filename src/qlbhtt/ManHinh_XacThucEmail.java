@@ -88,7 +88,7 @@ public class ManHinh_XacThucEmail extends javax.swing.JFrame {
         emailAdd = txt_Email.getText();
         dao_sendmail.sendEmail(emailAdd, "Email Verification", "Mã code của bạn: " + Integer.toString(otp));
         JOptionPane.showMessageDialog(this, "Mã đã được gửi qua email, vui lòng kiểm tra");
-        txt_Email.setText("");
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.

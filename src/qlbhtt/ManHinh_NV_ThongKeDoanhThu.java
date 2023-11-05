@@ -229,9 +229,9 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
     public void xuatBaoCaoThongKe(ArrayList<SanPham> listSP) {
         try {
 
-            Font fontMain = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontMain = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
-            Font fontTD = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontTD = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             fontTD.setSize(22);
             fontTD.setFamily(Font.BOLD + "");
 
@@ -254,7 +254,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
             String pathFull = null;
             if (activeTatCa) {
                 pathFull = "data/BaoCaoTKDT/" + "BaoCaoDoanhThu" + randomNumber + ".pdf";
-            } else if (activeTatCa) {
+            } else if (activeTKTheoNgay) {
                 pathFull = "data/BaoCaoTKDT/" + "BaoCaoDoanhThuTheoNgay" + randomNumber + ".pdf";
             }
 
@@ -266,7 +266,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
             Paragraph paragraph = null;
             if (activeTatCa) {
                 paragraph  = new Paragraph("Thống Kê Doanh Thu", fontTD);
-            } else if (activeTatCa) {
+            } else if (activeTKTheoNgay) {
                 paragraph  = new Paragraph("Thống Kê Doanh Thu Theo Ngày", fontTD);
             }
             
@@ -856,6 +856,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
+        btn_XuatThongKe.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_XuatThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-analytics-30.png"))); // NOI18N
         btn_XuatThongKe.setText("Xuất thống kê");
         btn_XuatThongKe.setBorder(null);
@@ -909,7 +910,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
                 .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btn_BieuDo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

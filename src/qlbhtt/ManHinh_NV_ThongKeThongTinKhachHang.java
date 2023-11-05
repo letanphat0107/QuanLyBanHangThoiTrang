@@ -140,9 +140,9 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
     public void xuatBaoCaoThongKe(ArrayList<KhachHang> listKH) {
         try {
 
-            Font fontMain = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontMain = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
-            Font fontTD = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontTD = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             fontTD.setSize(22);
             fontTD.setFamily(Font.BOLD + "");
 

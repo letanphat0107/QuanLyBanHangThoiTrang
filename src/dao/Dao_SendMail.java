@@ -25,12 +25,12 @@ public class Dao_SendMail {
     public void sendEmail(String toEmail, String tieuDe, String noiDung) {
         //Khai báo các thuộc tính
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "smtp.gmail.com");// thông tin đầu là gửi từ đâu -> gửi từ gmail,
         props.put("mail.smtp.port", "587"); //tls 587 ssl 465
-        props.put("mail.smtp.auth", "true"); //Đăng nhập thành công
+        props.put("mail.smtp.auth", "true"); //Dùng để đăng nhập vào gmail
         props.put("mail.smtp.starttls.enable", "true"); //khơi tạo giao thức
         
-        //Tạo Authenticator: lấy ra phiên làm việc để gửi mail
+        //Tạo Authenticator:tạo ra tài khoản để đăng nhập 
         Authenticator auth = new Authenticator() {
             //Nhập mật khẩu và tài khoản -> để đăng nhập vào gmail
             @Override
@@ -40,10 +40,10 @@ public class Dao_SendMail {
 
         };
         
-        //Phiên làm việc
+        //Cấu hình phiên làm việc liên kết với auth thông qua tài khoản đăng nhập để khi quản lý gmail
         Session session = Session.getInstance(props, auth);
         
-        //Tạo tin nhắn gửi
+        //Tạo hộp thoại tin nhắn gửi
         MimeMessage msg = new MimeMessage(session);
         try {
             msg.addHeader("Conten-type", "text;charset=UTF-8"); // Kiểu nội dung
@@ -61,7 +61,7 @@ public class Dao_SendMail {
             //Nội dung gửi
             msg.setText(noiDung,"UTF-8");
             
-            //Gui mail
+            //Gui mail thông qua giao thức
             Transport.send(msg);
         } catch (Exception e) {
             e.printStackTrace();
