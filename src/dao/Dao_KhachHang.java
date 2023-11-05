@@ -66,8 +66,7 @@ public class Dao_KhachHang {
         }
   
    }
-   public int capNhatKhachHang(KhachHang kh){
-       int kq=0;
+   public void capNhatKhachHang(KhachHang kh){
        Connect.getInstance();
        Connection con=Connect.getConnection();
        String sql = "update KhachHang set hoTen = ?,"+" sdt = ?,"+" email = ?,"+" gioiTinh = ?"+" where maKH = ?";
@@ -80,7 +79,7 @@ public class Dao_KhachHang {
             stm.setString(3, kh.getEmail());
             stm.setString(4, kh.getGioiTinh());
             stm.setString(5, kh.getMaKH());
-            kq=stm.executeUpdate();
+            stm.executeUpdate();
        } catch (SQLException e) {
            e.printStackTrace();
        } finally {
@@ -89,9 +88,7 @@ public class Dao_KhachHang {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-       return kq;
-              
+        }     
    }
    
      public ArrayList<KhachHang> timKiemKhachHang(String maKhachHang,String tenKhachHang,String soDienThoai, String email){
