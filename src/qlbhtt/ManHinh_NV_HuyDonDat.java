@@ -37,6 +37,13 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_PhieuDatHang.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_PhieuDatHang.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
+        tbl_CTPhieuDatHang.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_CTPhieuDatHang.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
 //      Lần đầu chạy chương trình, load dữ liệu vào bảng
         docDuLieuPhieuDatHang();
     }
