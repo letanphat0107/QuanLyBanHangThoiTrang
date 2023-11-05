@@ -60,7 +60,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="scr_DanhSachSanPham" max="32767" attributes="0"/>
-              <Component id="pnl_DieuChinhGioHang" alignment="0" pref="1177" max="32767" attributes="0"/>
+              <Component id="pnl_DieuChinhGioHang" alignment="0" pref="1174" max="32767" attributes="0"/>
               <Component id="pnl_GioHang" alignment="0" max="32767" attributes="0"/>
               <Component id="pnl_NV_TieuDe" alignment="0" max="32767" attributes="0"/>
           </Group>

@@ -63,13 +63,13 @@ import javax.swing.table.TableCellEditor;
 import static qlbhtt.HomePage.pnl_GiaoDienChucNang;
 import qlbhtt.Login;
 
-
 /**
  *
  * @author DMX
  */
 public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
-    private DefaultTableModel modelSanPham;    
+
+    private DefaultTableModel modelSanPham;
     private DefaultTableModel modelGioHang;
     private Dao_SanPham dao_SanPham;
     private Dao_ChatLieu dao_ChatLieu;
@@ -84,6 +84,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     private Connect connect;
     KhachHang khachHang = null;
     ArrayList<SanPham> gioHang;
+
     /**
      * Creates new form quanly
      */
@@ -105,7 +106,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         docDuLieuSanPham();
         docDuLieuCMB();
         capNhatTongTienGioHang();
-        
+
         //Tự động tính tiền giỏ hàng
         FocusAdapter focusListener = new FocusAdapter() {
             @Override
@@ -852,7 +853,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         btn_LapHoaDon.setForeground(new Color(0x141E46));
     }//GEN-LAST:event_btn_LapHoaDonMouseEntered
 
-    public ImageIcon ResizeImage(String imgPath, String desc){
+    public ImageIcon ResizeImage(String imgPath, String desc) {
         ImageIcon myImage = new ImageIcon(imgPath);
         Image img = myImage.getImage();
         Image newImg = img.getScaledInstance(pnl_HinhAnhSanPham.getWidth(), pnl_HinhAnhSanPham.getHeight(), Image.SCALE_SMOOTH);
@@ -860,76 +861,74 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         image.setDescription(desc);
         return image;
     }
-    
+
     private void tbl_SanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_SanPhamMouseClicked
-        int row =  tbl_SanPham.getSelectedRow();
-        if(row!=-1) {
-           //Load thong tin vao txt, combobox                 
-           String maSanPham = tbl_SanPham.getValueAt(row, 0).toString();
-           SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
-           
-           txt_MaSP.setText(tbl_SanPham.getValueAt(row, 0).toString());
-           txt_TenSP.setText(tbl_SanPham.getValueAt(row, 1).toString());
-           cmb_PhanLoai.setSelectedItem(tbl_SanPham.getValueAt(row, 2).toString());
-           txt_GiaBan.setText(tbl_SanPham.getValueAt(row, 3).toString());
-           cmb_KichThuoc.setSelectedItem(tbl_SanPham.getValueAt(row, 4).toString());
-           cmb_MauSac.setSelectedItem(tbl_SanPham.getValueAt(row, 5).toString());
-           //Load hinh anh       
-           File file = new File("");
-           String path= file.getAbsolutePath();
-           String imagePath = path + "/data/" + sanPham.getHinhAnh();
-           File imageFile = new File(imagePath);
+        int row = tbl_SanPham.getSelectedRow();
+        if (row != -1) {
+            //Load thong tin vao txt, combobox                 
+            String maSanPham = tbl_SanPham.getValueAt(row, 0).toString();
+            SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
 
-           //ImageIcon imageIcon = new ImageIcon(imagePath);
-           //imageIcon.setDescription("" + sanPham.getHinhAnh()); // Đặt mô tả cho ImageIcon
+            txt_MaSP.setText(tbl_SanPham.getValueAt(row, 0).toString());
+            txt_TenSP.setText(tbl_SanPham.getValueAt(row, 1).toString());
+            cmb_PhanLoai.setSelectedItem(tbl_SanPham.getValueAt(row, 2).toString());
+            txt_GiaBan.setText(tbl_SanPham.getValueAt(row, 3).toString());
+            cmb_KichThuoc.setSelectedItem(tbl_SanPham.getValueAt(row, 4).toString());
+            cmb_MauSac.setSelectedItem(tbl_SanPham.getValueAt(row, 5).toString());
+            //Load hinh anh       
+            File file = new File("");
+            String path = file.getAbsolutePath();
+            String imagePath = path + "/data/" + sanPham.getHinhAnh();
+            File imageFile = new File(imagePath);
 
+            //ImageIcon imageIcon = new ImageIcon(imagePath);
+            //imageIcon.setDescription("" + sanPham.getHinhAnh()); // Đặt mô tả cho ImageIcon
             lbl_HinhAnhSanPham.setIcon(ResizeImage(imagePath, sanPham.getHinhAnh()));
-           //System.out.println("Path: " + path);
-           //lbl_HinhAnhSP.setIcon(ResizeImage(path + "/data/"+sanPham.getHinhAnh()));
-       }
+            //System.out.println("Path: " + path);
+            //lbl_HinhAnhSP.setIcon(ResizeImage(path + "/data/"+sanPham.getHinhAnh()));
+        }
     }//GEN-LAST:event_tbl_SanPhamMouseClicked
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         if (kiemTraThongTinKH()) {
             txt_TienKHDua.setEditable(true);
             xuLyThemVaoGioHang();
-        }else
+        } else
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin khách hàng để dùng các thao tác");
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_GioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_GioHangMouseClicked
-        int row =  tbl_GioHang.getSelectedRow();
-        if(row!=-1) {
-           //Load thong tin vao txt, combobox                 
-           String maSanPham = tbl_GioHang.getValueAt(row, 0).toString();
-           SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
-           
-           txt_MaSP.setText(tbl_GioHang.getValueAt(row, 0).toString());
-           txt_TenSP.setText(tbl_GioHang.getValueAt(row, 1).toString());
-           cmb_PhanLoai.setSelectedItem(tbl_GioHang.getValueAt(row, 2).toString());
-           txt_GiaBan.setText(tbl_GioHang.getValueAt(row, 3).toString());
-           cmb_KichThuoc.setSelectedItem(tbl_GioHang.getValueAt(row, 4).toString());
-           cmb_MauSac.setSelectedItem(tbl_GioHang.getValueAt(row, 5).toString());
-           //Load hinh anh
-           File file = new File("");
-           String path= file.getAbsolutePath();
-           String imagePath = path + "/data/" + sanPham.getHinhAnh();
-           File imageFile = new File(imagePath);
+        int row = tbl_GioHang.getSelectedRow();
+        if (row != -1) {
+            //Load thong tin vao txt, combobox                 
+            String maSanPham = tbl_GioHang.getValueAt(row, 0).toString();
+            SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
 
-           //ImageIcon imageIcon = new ImageIcon(imagePath);
-           //imageIcon.setDescription("" + sanPham.getHinhAnh()); // Đặt mô tả cho ImageIcon
+            txt_MaSP.setText(tbl_GioHang.getValueAt(row, 0).toString());
+            txt_TenSP.setText(tbl_GioHang.getValueAt(row, 1).toString());
+            cmb_PhanLoai.setSelectedItem(tbl_GioHang.getValueAt(row, 2).toString());
+            txt_GiaBan.setText(tbl_GioHang.getValueAt(row, 3).toString());
+            cmb_KichThuoc.setSelectedItem(tbl_GioHang.getValueAt(row, 4).toString());
+            cmb_MauSac.setSelectedItem(tbl_GioHang.getValueAt(row, 5).toString());
+            //Load hinh anh
+            File file = new File("");
+            String path = file.getAbsolutePath();
+            String imagePath = path + "/data/" + sanPham.getHinhAnh();
+            File imageFile = new File(imagePath);
 
+            //ImageIcon imageIcon = new ImageIcon(imagePath);
+            //imageIcon.setDescription("" + sanPham.getHinhAnh()); // Đặt mô tả cho ImageIcon
             lbl_HinhAnhSanPham.setIcon(ResizeImage(imagePath, sanPham.getHinhAnh()));
-           //System.out.println("Path: " + path);
-           //lbl_HinhAnhSP.setIcon(ResizeImage(path + "/data/"+sanPham.getHinhAnh()));
-       }
+            //System.out.println("Path: " + path);
+            //lbl_HinhAnhSP.setIcon(ResizeImage(path + "/data/"+sanPham.getHinhAnh()));
+        }
     }//GEN-LAST:event_tbl_GioHangMouseClicked
 
-    
+
     private void btn_GiamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GiamActionPerformed
         if (kiemTraThongTinKH()) {
             xuLyGiamGioHang();
-        }else
+        } else
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin khách hàng để dùng các thao tác");
     }//GEN-LAST:event_btn_GiamActionPerformed
 
@@ -938,21 +937,21 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             if (kiemTraTienKHDua()) {
                 xulyLapHoaDon();
             }
-        }else
+        } else
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin khách hàng để dùng các thao tác");
     }//GEN-LAST:event_btn_LapHoaDonActionPerformed
-    
-    public void xuLyThemVaoGioHang(){
+
+    public void xuLyThemVaoGioHang() {
         int row = tbl_SanPham.getSelectedRow();
         if (row != -1) {
             String soLuongMuaString = txt_SoLuongNhap.getText().trim();
             if (soLuongMuaString.length() > 0) { // So luong mua khong duoc rong 
-                try { 
+                try {
                     int soLuongMua = Integer.parseInt(soLuongMuaString);
-                    if (soLuongMua <= 0) { 
+                    if (soLuongMua <= 0) {
                         JOptionPane.showMessageDialog(this, "Số lượng mua phải lớn hơn 0");
                         txt_SoLuongNhap.requestFocus();
-                    }else{
+                    } else {
                         //Lay thong tin san pham can them vao gio hang
                         String maSanPham = tbl_SanPham.getValueAt(row, 0).toString();
                         SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSanPham);
@@ -978,7 +977,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                                     //Thong bao nguoi dung
                                     JOptionPane.showMessageDialog(this, "Thêm thành công vào giỏ hàng(Tăng số lượng)");
                                     capNhatTongTienGioHang();
-                                }else{
+                                } else {
                                     JOptionPane.showMessageDialog(this, "Sản phẩm đã có trong giỏ hàng, kho không đủ hàng cho số lượng tăng thêm");
                                 }
                             }
@@ -999,7 +998,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                                 object[0] = sanPham.getMaSP();
                                 object[1] = sanPham.getTenSP();
                                 object[2] = sanPham.getPhanLoai().getLoaiSanPham();
-                                object[3] = NumberFormat.getInstance().format( sanPham.getGiaBan());
+                                object[3] = NumberFormat.getInstance().format(sanPham.getGiaBan());
                                 object[4] = sanPham.getKichThuoc().getKichThuoc();
                                 object[5] = sanPham.getMauSac().getMauSac();
                                 object[6] = sanPham.getChatLieu().getChatLieu();
@@ -1011,55 +1010,55 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                                 txt_SoLuongNhap.setText("");
                                 JOptionPane.showMessageDialog(this, "Thêm thành công vào giỏ hàng(Thêm mới)");
                                 capNhatTongTienGioHang();
-                            }else{
+                            } else {
                                 JOptionPane.showMessageDialog(this, "Hàng tồn kho không đủ số lượng để đáp ứng!");
                             }
                         }
                     }
                 } catch (NumberFormatException ex) { // phai la ky tu so 
-                    JOptionPane.showMessageDialog(this, "Số lượng mua phải là số"); 
-                } 
-            } else { 
-                JOptionPane.showMessageDialog(this, "Số lượng mua không được rỗng"); 
-                txt_SoLuongNhap.requestFocus(); 
+                    JOptionPane.showMessageDialog(this, "Số lượng mua phải là số");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Số lượng mua không được rỗng");
+                txt_SoLuongNhap.requestFocus();
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm trong danh sách sản phẩm!");
         }
     }
-    
-    public void xuLyGiamGioHang(){
+
+    public void xuLyGiamGioHang() {
         int row = tbl_GioHang.getSelectedRow();
         if (row != -1) {
             String soLuongGiamString = txt_SoLuongNhap.getText().trim();
             if (soLuongGiamString.length() > 0) { // So luong mua khong duoc rong 
-                try { 
+                try {
                     int soLuongGiam = Integer.parseInt(soLuongGiamString);
-                    if (soLuongGiam <= 0) { 
+                    if (soLuongGiam <= 0) {
                         JOptionPane.showMessageDialog(this, "Số lượng giảm phải lớn hơn 0");
                         txt_SoLuongNhap.requestFocus();
-                    }else{
+                    } else {
                         //Lay thong tin san pham can giam so luong
                         String maSanPham = tbl_GioHang.getValueAt(row, 0).toString();
                         for (SanPham sanPham : gioHang) {
                             if (sanPham.getMaSP().equals(maSanPham)) {
                                 //Hai trường hợp: 1 là giảm số lượng nhưng số lượng mua vẫn > 0
                                 //                2 là giảm số lượng mua đến 0, tiến hành xóa sản phẩm ra khỏi giỏ hàng
-                                if(sanPham.getSoLuong() < soLuongGiam) {
+                                if (sanPham.getSoLuong() < soLuongGiam) {
                                     JOptionPane.showMessageDialog(this, "Số lượng giảm vượt quá số lượng mua trong giỏ hàng");
-                                }else if (sanPham.getSoLuong() > soLuongGiam) {
+                                } else if (sanPham.getSoLuong() > soLuongGiam) {
                                     //Cap nhat gio hang: giam so luong mua cua san pham
-                                    sanPham.setSoLuong(sanPham.getSoLuong()- soLuongGiam);
+                                    sanPham.setSoLuong(sanPham.getSoLuong() - soLuongGiam);
                                     //Cap nhat model gio hang
                                     modelGioHang.setValueAt(sanPham.getSoLuong(), row, 8);
                                     //Xoa trang txt_SoLuongNhap
                                     txt_SoLuongNhap.setText("");
                                     xoaTrang();
                                     //Thong bao nguoi dung
-                                    JOptionPane.showMessageDialog(this, "Giảm số lượng mua  của "+ sanPham.getMaSP()+" thành công!");
+                                    JOptionPane.showMessageDialog(this, "Giảm số lượng mua  của " + sanPham.getMaSP() + " thành công!");
                                     capNhatTongTienGioHang();
                                     tbl_GioHang.clearSelection();
-                                }else {
+                                } else {
                                     //Cap nhat gio hang: xoa san pham
                                     gioHang.remove(sanPham);
                                     //Cap nhat model
@@ -1068,7 +1067,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                                     txt_SoLuongNhap.setText("");
                                     xoaTrang();
                                     //Thong bao nguoi dung
-                                    JOptionPane.showMessageDialog(this, "Xoa san pham "+ sanPham.getMaSP()+" ra khỏi giỏ hàng thành công!");
+                                    JOptionPane.showMessageDialog(this, "Xoa san pham " + sanPham.getMaSP() + " ra khỏi giỏ hàng thành công!");
                                     capNhatTongTienGioHang();
                                     tbl_GioHang.clearSelection();
                                 }
@@ -1076,46 +1075,46 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                         }
                     }
                 } catch (NumberFormatException ex) { // phai la ky tu so 
-                    JOptionPane.showMessageDialog(this, "Số lượng giảm phải là số"); 
-                } 
-            } else { 
-                JOptionPane.showMessageDialog(this, "Số lượng giảm không được rỗng"); 
-                txt_SoLuongNhap.requestFocus(); 
+                    JOptionPane.showMessageDialog(this, "Số lượng giảm phải là số");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Số lượng giảm không được rỗng");
+                txt_SoLuongNhap.requestFocus();
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm trong danh sách giỏ hàng!");
         }
     }
-    
+
     private void xuLyTimKiemKhachHang() {
         String tenKhachHang = txt_TenKH.getText().trim();
         String soDienThoai = txt_SoDienThoai.getText().trim();
-        
-        if (tenKhachHang.equals("") && soDienThoai.equals(""))  {
+
+        if (tenKhachHang.equals("") && soDienThoai.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin khách hàng");
-        }else{
+        } else {
             ArrayList<KhachHang> listKhachHang = dao_KhachHang.timKiemKhachHang("", tenKhachHang, soDienThoai, "");
 
-            if(listKhachHang!=null){
+            if (listKhachHang != null) {
                 for (KhachHang kh : listKhachHang) {
                     txt_TenKH.setText(kh.getHoTen());
                     txt_SoDienThoai.setText(kh.getSdt());
                     khachHang = kh;
                     JOptionPane.showMessageDialog(this, "Tìm thấy thông tin khách hàng");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy thông tin khách hàng");
             }
         }
     }
-    
-    public void xuLyGiamSLSanPhamTrongKho(){
+
+    public void xuLyGiamSLSanPhamTrongKho() {
         for (SanPham sanPham : gioHang) {
             dao_SanPham.giamSoLuongSanPham(sanPham);
         }
     }
-    
-    public void xulyLapHoaDon(){
+
+    public void xulyLapHoaDon() {
         HoaDon hd = new HoaDon(khachHang, Login.nhanVien, new Date());
         //Them vao csdl HoaDon
         dao_HoaDon.themHoaDon(hd);
@@ -1125,12 +1124,12 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             dao_CTHD.themCTHD(cthd);
         }
         xuLyGiamSLSanPhamTrongKho();
-//        xuatHoaDon(hd);
+        xuatHoaDon(hd);
         resetPanel();
         JOptionPane.showMessageDialog(this, "Lập hóa đơn thành công");
     }
-    
-    public void xuatHoaDon(HoaDon hd){
+
+    public void xuatHoaDon(HoaDon hd) {
         try {
 
             Font fontMain = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
@@ -1139,25 +1138,9 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             fontTD.setSize(22);
             fontTD.setFamily(Font.BOLD + "");
 
-            // Tạo một đối tượng Random
-            //Random random = new Random();
-
-            // Sinh dãy số tự nhiên ngẫu nhiên gồm 3 ký tự (bao gồm chữ cái và số từ 0 đến 9)
-            //StringBuilder randomNumber = new StringBuilder(3);
-            //for (int i = 0; i < 3; i++) {
-                //char randomChar;
-                //if (random.nextBoolean()) {
-                    // Sinh ra một chữ cái ngẫu nhiên
-                    //randomChar = (char) (random.nextInt(26) + 'A');
-                //} else {
-                    // Sinh ra một số ngẫu nhiên từ 0 đến 9
-                    //randomChar = (char) (random.nextInt(10) + '0');
-                //}
-                //randomNumber.append(randomChar);
-            //}
             String pathFull = "data/HoaDon/" + "HoaDon" + hd.getMaHoaDon() + ".pdf";
 
-            Document document = new Document(PageSize.A4.rotate()); //Add page khổ ngang
+            Document document = new Document(); 
             PdfWriter.getInstance(document, new FileOutputStream(pathFull)); //Tạo ra đối tượng ghi dữ liệu vào tài liệu PDF
             document.open();
 
@@ -1178,20 +1161,19 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             float[] chieuRongCot = {1f, 1f};
             tableMuc.setWidths(chieuRongCot);
 
-            //Mục mã nhân viên
-            PdfPCell cellMaNV = new PdfPCell(new Paragraph("Mã nhân viên: " + Login.nhanVien.getMaNV(), fontMain));
-            cellMaNV.setBorderColor(BaseColor.WHITE);
-            tableMuc.addCell(cellMaNV);
+            //Mục mã hóa đơn
+            PdfPCell cellMaHD = new PdfPCell(new Paragraph("Mã hóa đơn: " + hd.getMaHoaDon(), fontMain));
+            cellMaHD.setBorderColor(        BaseColor.WHITE);
+            tableMuc.addCell(cellMaHD);
 
-            //Mục ngày in
-            Date ngayIn = new Date();
-            SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy");
-            String ngayInformat = fomatter.format(ngayIn);
+            //Mục ngày lập
+            SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            String ngayInformat = fomatter.format(hd.getNgayNhap());
             PdfPCell cellNgayIn = new PdfPCell(new Paragraph("Ngày in: " + ngayInformat, fontMain));
             cellNgayIn.setBorderColor(BaseColor.WHITE);
             tableMuc.addCell(cellNgayIn);
 
-            //Mục ngày in
+            //Mục ten nhan vien
             PdfPCell cellTenNV = new PdfPCell(new Paragraph("Tên Nhân viên: " + Login.nhanVien.getHoTen(), fontMain));
             cellTenNV.setBorderColor(BaseColor.WHITE);
             tableMuc.addCell(cellTenNV);
@@ -1201,24 +1183,38 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             cellChucVu.setBorderColor(BaseColor.WHITE);
             tableMuc.addCell(cellChucVu);
 
+            //Tạo Mục
+            PdfPTable tableKH = new PdfPTable(1);
+            tableKH.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
+            tableKH.setSpacingBefore(10f); //Đặt khoảng cách là 10
+            tableKH.setSpacingAfter(10f);
+
+            float[] chieuRongCot_KH = {1f};
+            tableKH.setWidths(chieuRongCot_KH);
+
+            //Mục mã hóa đơn
+            PdfPCell celltenKH = new PdfPCell(new Paragraph("Tên khách hàng: " + hd.getKhachHang().getHoTen(), fontMain));
+            celltenKH.setBorderColor(        BaseColor.WHITE);
+            tableKH.addCell(celltenKH);
+            
             document.add(tableMuc);
 
             //Tạo bảng sản phẩm
-            PdfPTable tableDsSP = new PdfPTable(12);
+            PdfPTable tableDsSP = new PdfPTable(5);
             tableDsSP.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
             tableDsSP.setSpacingBefore(10f); //Đặt khoảng cách là 10
             tableDsSP.setSpacingAfter(10f);
 
             //Tiêu đề bảng
-            float[] chieuRongCotSP = {2f, 4f, 2f, 2f, 2f, 2f, 2f, 2f, 4f, 2f, 2f, 2f};
+            float[] chieuRongCotSP = {2f, 4f, 2f, 2f, 2f};
             tableDsSP.setWidths(chieuRongCotSP);
 
-            //Mã sản phẩm
-            PdfPCell cellTblSP_maSP = new PdfPCell(new Paragraph("Mã sản phẩm ", fontMain));
-            cellTblSP_maSP.setBorderColor(BaseColor.BLACK);
-            cellTblSP_maSP.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
-            cellTblSP_maSP.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
-            tableDsSP.addCell(cellTblSP_maSP);
+            //STT
+            PdfPCell cellTblSP_STT = new PdfPCell(new Paragraph("STT ", fontMain));
+            cellTblSP_STT.setBorderColor(BaseColor.BLACK);
+            cellTblSP_STT.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
+            cellTblSP_STT.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
+            tableDsSP.addCell(cellTblSP_STT);
 
             //Tên sản phẩm
             PdfPCell cellTblSP_tenSP = new PdfPCell(new Paragraph("Tên sản phẩm ", fontMain));
@@ -1227,54 +1223,12 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             cellTblSP_tenSP.setHorizontalAlignment(Element.ALIGN_CENTER);
             tableDsSP.addCell(cellTblSP_tenSP);
 
-            //Phân loại
-            PdfPCell cellTblSP_PL = new PdfPCell(new Paragraph("Phân loại ", fontMain));
-            cellTblSP_PL.setBorderColor(BaseColor.BLACK);
-            cellTblSP_PL.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTblSP_PL.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tableDsSP.addCell(cellTblSP_PL);
-
             //Giá bán
             PdfPCell cellTblSP_giaBan = new PdfPCell(new Paragraph("Giá bán ", fontMain));
             cellTblSP_giaBan.setBorderColor(BaseColor.BLACK);
             cellTblSP_giaBan.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cellTblSP_giaBan.setHorizontalAlignment(Element.ALIGN_CENTER);
             tableDsSP.addCell(cellTblSP_giaBan);
-
-            //Giá nhập
-            PdfPCell cellTblSP_giaNhap = new PdfPCell(new Paragraph("Giá nhập ", fontMain));
-            cellTblSP_giaNhap.setBorderColor(BaseColor.BLACK);
-            cellTblSP_giaNhap.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTblSP_giaNhap.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tableDsSP.addCell(cellTblSP_giaNhap);
-
-            //Kích thước
-            PdfPCell cellTblSP_KT = new PdfPCell(new Paragraph("Kích cỡ ", fontMain));
-            cellTblSP_KT.setBorderColor(BaseColor.BLACK);
-            cellTblSP_KT.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTblSP_KT.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tableDsSP.addCell(cellTblSP_KT);
-
-            //Màu sắc
-            PdfPCell cellTblSP_MS = new PdfPCell(new Paragraph("Màu sắc", fontMain));
-            cellTblSP_MS.setBorderColor(BaseColor.BLACK);
-            cellTblSP_MS.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTblSP_MS.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tableDsSP.addCell(cellTblSP_MS);
-
-            //Chất liệu
-            PdfPCell cellTblSP_CL = new PdfPCell(new Paragraph("Chất liệu ", fontMain));
-            cellTblSP_CL.setBorderColor(BaseColor.BLACK);
-            cellTblSP_CL.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTblSP_CL.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tableDsSP.addCell(cellTblSP_CL);
-
-            // Nhà cung cấp
-            PdfPCell cellTblSP_NCC = new PdfPCell(new Paragraph("Nhà cung cấp ", fontMain));
-            cellTblSP_NCC.setBorderColor(BaseColor.BLACK);
-            cellTblSP_NCC.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTblSP_NCC.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tableDsSP.addCell(cellTblSP_NCC);
 
             //Số lượng
             PdfPCell cellTblSP_SL = new PdfPCell(new Paragraph("Số lượng bán", fontMain));
@@ -1283,27 +1237,22 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             cellTblSP_SL.setHorizontalAlignment(Element.ALIGN_CENTER);
             tableDsSP.addCell(cellTblSP_SL);
 
-//            //Doanh Thu
-//            PdfPCell cellTblSP_doanhThu = new PdfPCell(new Paragraph("Doanh thu ", fontMain));
-//            cellTblSP_doanhThu.setBorderColor(BaseColor.BLACK);
-//            cellTblSP_doanhThu.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//            cellTblSP_doanhThu.setHorizontalAlignment(Element.ALIGN_CENTER);
-//            tableDsSP.addCell(cellTblSP_doanhThu);
-//
-//            //Doanh Thu
-//            PdfPCell cellTblSP_tiLeDoanhThu = new PdfPCell(new Paragraph("Tỉ lệ doanh thu ", fontMain));
-//            cellTblSP_tiLeDoanhThu.setBorderColor(BaseColor.BLACK);
-//            cellTblSP_tiLeDoanhThu.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//            cellTblSP_tiLeDoanhThu.setHorizontalAlignment(Element.ALIGN_CENTER);
-//            tableDsSP.addCell(cellTblSP_tiLeDoanhThu);
+            //Thành tiền
+            PdfPCell cellTblSP_thanhTien = new PdfPCell(new Paragraph("Thành tiền ", fontMain));
+            cellTblSP_thanhTien.setBorderColor(BaseColor.BLACK);
+            cellTblSP_thanhTien.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_thanhTien.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_thanhTien);
 
+            int stt = 1;
             //Thong tin san pham
             for (SanPham sp : gioHang) {
-                //Mã sản phẩm
-                PdfPCell cellTblSP_maSP_giaTri = new PdfPCell(new Paragraph(sp.getMaSP(), fontMain));
-                cellTblSP_maSP_giaTri.setBorderColor(BaseColor.BLACK);
-                cellTblSP_maSP_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                tableDsSP.addCell(cellTblSP_maSP_giaTri);
+                //STT
+                PdfPCell cellTblSP_STT_giaTri = new PdfPCell(new Paragraph(stt+"", fontMain));
+                cellTblSP_STT_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_STT_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
+                cellTblSP_STT_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
+                tableDsSP.addCell(cellTblSP_STT_giaTri);
 
                 //Tên sản phẩm
                 PdfPCell cellTblSP_tenSP_giaTri = new PdfPCell(new Paragraph(sp.getTenSP(), fontMain));
@@ -1311,13 +1260,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 cellTblSP_tenSP_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tableDsSP.addCell(cellTblSP_tenSP_giaTri);
 
-                //Phân loại
-                PdfPCell cellTblSP_PL_giaTri = new PdfPCell(new Paragraph(sp.getPhanLoai().getLoaiSanPham(), fontMain));
-                cellTblSP_PL_giaTri.setBorderColor(BaseColor.BLACK);
-                cellTblSP_PL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblSP_PL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblSP_PL_giaTri);
-
+               
                 //Giá bán
                 PdfPCell cellTblSP_giaBan_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(sp.getGiaBan()) + "", fontMain));
                 cellTblSP_giaBan_giaTri.setBorderColor(BaseColor.BLACK);
@@ -1325,39 +1268,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 cellTblSP_giaBan_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableDsSP.addCell(cellTblSP_giaBan_giaTri);
 
-                //Giá nhập
-                PdfPCell cellTblSP_giaNhap_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format((long) sp.getGiaNhap()) + "", fontMain));
-                cellTblSP_giaNhap_giaTri.setBorderColor(BaseColor.BLACK);
-                cellTblSP_giaNhap_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblSP_giaNhap_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblSP_giaNhap_giaTri);
-
-                //Kích thước
-                PdfPCell cellTblSP_KT_giaTri = new PdfPCell(new Paragraph(sp.getKichThuoc().getKichThuoc(), fontMain));
-                cellTblSP_KT_giaTri.setBorderColor(BaseColor.BLACK);
-                cellTblSP_KT_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblSP_KT_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblSP_KT_giaTri);
-
-                //Màu sắc
-                PdfPCell cellTblSP_MS_giaTri = new PdfPCell(new Paragraph(sp.getMauSac().getMauSac(), fontMain));
-                cellTblSP_MS_giaTri.setBorderColor(BaseColor.BLACK);
-                cellTblSP_MS_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblSP_MS_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblSP_MS_giaTri);
-
-                //Chất liệu
-                PdfPCell cellTblSP_CL_giaTri = new PdfPCell(new Paragraph(sp.getChatLieu().getChatLieu(), fontMain));
-                cellTblSP_CL_giaTri.setBorderColor(BaseColor.BLACK);
-                cellTblSP_CL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblSP_CL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblSP_CL_giaTri);
-
-                // Nhà cung cấp
-                PdfPCell cellTblSP_NCC_giaTri = new PdfPCell(new Paragraph(sp.getNhaCungCap().getTenNCC(), fontMain));
-                cellTblSP_NCC_giaTri.setBorderColor(BaseColor.BLACK);
-                cellTblSP_NCC_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                tableDsSP.addCell(cellTblSP_NCC_giaTri);
+                
 
                 //Số lượng
                 PdfPCell cellTblSP_SL_giaTri = new PdfPCell(new Paragraph(sp.getSoLuong() + "", fontMain));
@@ -1365,29 +1276,46 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 cellTblSP_SL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cellTblSP_SL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableDsSP.addCell(cellTblSP_SL_giaTri);
+
+                double thanhTien = dao_CTHD.tinhThanhTienSanPham(hd.getMaHoaDon(),sp.getMaSP());
                 
-                
-//                double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
-//                
-//                        //Doanh Thu
-//                        PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(doanhThu+""), fontMain));
-//                        cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
-//                        cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//                        cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-//                        tableDsSP.addCell(cellTblSP_doanhThu_giaTri);
-//
-//                        //Tỉ Lệ doanh THu
-//                        PdfPCell cellTblSP_tiLeDoanhThu_giaTri = new PdfPCell(new Paragraph(sp.getHinhAnh(), fontMain));
-//                        cellTblSP_tiLeDoanhThu_giaTri.setBorderColor(BaseColor.BLACK);
-//                        cellTblSP_tiLeDoanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//                        cellTblSP_tiLeDoanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-//                        tableDsSP.addCell(cellTblSP_tiLeDoanhThu_giaTri);
-                    
-                
+                        //Doanh Thu
+                        PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(thanhTien), fontMain));
+                        cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
+                        cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                        cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                        tableDsSP.addCell(cellTblSP_doanhThu_giaTri);
+                        
+                 stt++;
             }
 
             document.add(tableDsSP);
 
+            //Tạo Mục
+            PdfPTable tableTien = new PdfPTable(1);
+            tableTien.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
+            tableTien.setSpacingBefore(10f); //Đặt khoảng cách là 10
+            tableTien.setSpacingAfter(10f);
+
+            float[] chieuRongCot_Tien = {1f};
+            tableMuc.setWidths(chieuRongCot);
+
+            //tổng tiền
+            PdfPCell celltongTien = new PdfPCell(new Paragraph("Tổng tiền: " + NumberFormat.getInstance().format(Double.parseDouble(lbl_SoTienTong.getText().replace(",", "")))+" VND", fontMain));
+            celltongTien.setBorderColor(        BaseColor.WHITE);
+            tableTien.addCell(celltongTien);
+
+            //Mục khách đưa
+            PdfPCell cellTienKHDua = new PdfPCell(new Paragraph("Tiền khách đưa: " + NumberFormat.getInstance().format(Double.parseDouble(txt_TienKHDua.getText().replace(",", "")))+" VND", fontMain));
+            cellTienKHDua.setBorderColor(BaseColor.WHITE);
+            tableTien.addCell(cellTienKHDua);
+            
+            //Mục tiền trả
+            PdfPCell cellTienTra = new PdfPCell(new Paragraph("Tiền trả: " + NumberFormat.getInstance().format(Double.parseDouble(lbl_SoTienTra.getText().replace(",", "")))+" VND", fontMain));
+            cellTienTra.setBorderColor(BaseColor.WHITE);
+            tableTien.addCell(cellTienTra);
+            
+            document.add(tableTien);
             document.close();
 
             // mở file pdf
@@ -1406,23 +1334,23 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
-    public void resetPanel(){
+
+    public void resetPanel() {
         modelGioHang = (DefaultTableModel) tbl_GioHang.getModel();
         modelGioHang.setRowCount(0);
         modelSanPham = (DefaultTableModel) tbl_SanPham.getModel();
         modelSanPham.setRowCount(0);
         docDuLieuSanPham();
         gioHang.clear();
-        
+
         capNhatTongTienGioHang();
         xoaTrang();
-        
+
         khachHang = null;
         txt_TenKH.setText("");
         txt_SoDienThoai.setText("");
     }
-    
+
     public void xoaTrang() {
         txt_MaSP.setText("");
         txt_TenSP.setText("");
@@ -1433,87 +1361,89 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         cmb_PhanLoai.setSelectedIndex(0);
         file = null;
     }
-    
-    public void capNhatTongTienGioHang(){
+
+    public void capNhatTongTienGioHang() {
         if (gioHang.size() != 0) {
             double tongTien = 0;
             for (SanPham sanPham : gioHang) {
-                tongTien += sanPham.getGiaBan()*sanPham.getSoLuong();
+                tongTien += sanPham.getGiaBan() * sanPham.getSoLuong();
             }
-            lbl_SoTienTong.setText(tongTien + "");
-            txt_TongTienGioHang.setText(tongTien+ "");
-        }else{
+            lbl_SoTienTong.setText(NumberFormat.getInstance().format(tongTien) + "");
+            txt_TongTienGioHang.setText(NumberFormat.getInstance().format(tongTien) + "");
+        } else {
             lbl_SoTienTong.setText("0");
             txt_TongTienGioHang.setText("0");
         }
     }
-    
-    public boolean kiemTraThongTinKH(){
-        if(khachHang != null)
+
+    public boolean kiemTraThongTinKH() {
+        if (khachHang != null) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
-    
-    public boolean kiemTraTienKHDua(){
+
+    public boolean kiemTraTienKHDua() {
         String tienKhachDua = txt_TienKHDua.getText().trim();
-        
+
         if (gioHang.size() == 0) {
             JOptionPane.showMessageDialog(this, "Giỏ hàng rỗng, không thể lập hóa đơn");
             return false;
-        }else if(tienKhachDua.equals("0")){
+        } else if (tienKhachDua.equals("0")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập số tiền khách đưa");
             txt_TienKHDua.requestFocus();
             return false;
-        }else if (tienKhachDua.length() <= 0) {
+        } else if (tienKhachDua.length() <= 0) {
             JOptionPane.showMessageDialog(this, "Số tiền khách đưa không được rỗng");
-            txt_TienKHDua.requestFocus(); 
-            return false; 
-        } 
-        try { 
-                int tienKHDua = Integer.parseInt(tienKhachDua);
-                if (tienKHDua < 0) { 
-                    JOptionPane.showMessageDialog(this, "Số tiền khách đưa phải lớn hơn 0");
-                    txt_TienKHDua.requestFocus(); 
-                    return false; 
-                } 
+            txt_TienKHDua.requestFocus();
+            return false;
+        }
+        try {
+            int tienKHDua = Integer.parseInt(tienKhachDua);
+            if (tienKHDua < 0) {
+                JOptionPane.showMessageDialog(this, "Số tiền khách đưa phải lớn hơn 0");
+                txt_TienKHDua.requestFocus();
+                return false;
+            }
         } catch (NumberFormatException ex) { // phai la ky tu so 
-            JOptionPane.showMessageDialog(this, "Số tiền khách đưa phải là số"); 
-            txt_TienKHDua.requestFocus(); 
-            return false; 
-        } 
+            JOptionPane.showMessageDialog(this, "Số tiền khách đưa phải là số");
+            txt_TienKHDua.requestFocus();
+            return false;
+        }
         return true;
     }
-    
-    public void tinhToanTienTra(){
-        String tongTienString = lbl_SoTienTong.getText().trim();
-        String tienKHDuaString = txt_TienKHDua.getText().trim();
+
+    public void tinhToanTienTra() {
+        String tongTienString = lbl_SoTienTong.getText().replace(",", "").trim();
+        String tienKHDuaString = txt_TienKHDua.getText().replace(",", "").trim();
         double tienTra;
         if (kiemTraTienKHDua()) {
-            try { 
+            try {
                 double tienKHDua = Double.parseDouble(tienKHDuaString);
                 double tongTien = Double.parseDouble(tongTienString);
-  
+
                 tienTra = tienKHDua - tongTien;
                 if (tienTra >= 0) {
-                    lbl_SoTienTra.setText(tienTra + "");
-                }else
+                    lbl_SoTienTra.setText(NumberFormat.getInstance().format(tienTra)+ "");
+                } else {
                     JOptionPane.showMessageDialog(this, "Tiền khách đưa ít hơn tổng tiền hàng");
-                
-            } catch (NumberFormatException ex) {  
+                }
+
+            } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Lỗi hệ thống giao dịch");
-            } 
+            }
         }
     }
-    
+
     public void docDuLieuSanPham() {
         modelSanPham = (DefaultTableModel) tbl_SanPham.getModel();
-        for(SanPham qa: dao_SanPham.getAllSanPham()) {
+        for (SanPham qa : dao_SanPham.getAllSanPham()) {
             Object[] object = new Object[9];
             object[0] = qa.getMaSP();
             object[1] = qa.getTenSP();
             object[2] = qa.getPhanLoai().getLoaiSanPham();
-            object[3] = NumberFormat.getInstance().format( qa.getGiaBan());
+            object[3] = NumberFormat.getInstance().format(qa.getGiaBan());
             object[4] = qa.getKichThuoc().getKichThuoc();
             object[5] = qa.getMauSac().getMauSac();
             object[6] = qa.getChatLieu().getChatLieu();
@@ -1522,35 +1452,34 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             modelSanPham.addRow(object);
         }
     }
-    
-    public void docDuLieuCMB(){
+
+    public void docDuLieuCMB() {
         //Doc du lieu ComboBox chat lieu
         //ArrayList<ChatLieu> ds_ChatLieu = new ArrayList<>();
         //ds_ChatLieu = dao_ChatLieu.getAllChatLieu();
-        
+
         //cmb_ChatLieu.removeAllItems();
         //for (ChatLieu chatLieu : ds_ChatLieu) {
         //    cmb_ChatLieu.addItem(chatLieu.getChatLieu());
         //}
-        
         //Doc du lieu ComboBox kich thuoc
         ArrayList<KichThuoc> ds_KichThuoc = new ArrayList<>();
         ds_KichThuoc = dao_KichThuoc.getAllKichThuoc();
-        
+
         cmb_KichThuoc.removeAllItems();
         for (KichThuoc kichThuoc : ds_KichThuoc) {
             cmb_KichThuoc.addItem(kichThuoc.getKichThuoc());
         }
-        
+
         //Doc du lieu ComboBox mau sac
         ArrayList<MauSac> ds_MauSac = new ArrayList<>();
         ds_MauSac = dao_MauSac.getAllMauSac();
-        
+
         cmb_MauSac.removeAllItems();
         for (MauSac mauSac : ds_MauSac) {
             cmb_MauSac.addItem(mauSac.getMauSac());
         }
-        
+
         //Doc du lieu ComboBox phan loai
         ArrayList<PhanLoai> ds_PhanLoai = new ArrayList<>();
         ds_PhanLoai = dao_PhanLoai.getAllPhanLoai();
@@ -1559,18 +1488,17 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         for (PhanLoai phanLoai : ds_PhanLoai) {
             cmb_PhanLoai.addItem(phanLoai.getLoaiSanPham());
         }
-        
+
         //Doc du lieu ComboBox nha cung cap
         //ArrayList<NhaCungCap> ds_NhaCungCap = new ArrayList<>();
         //ds_NhaCungCap = dao_NhaCungCap.getAllNhaCungCap();
-        
         //cmb_NCC.removeAllItems();
         //for (NhaCungCap nhaCungCap : ds_NhaCungCap) {
         //    cmb_NCC.addItem(nhaCungCap.getTenNCC());
         //}
     }
-    
-    public void khoaChinhSuaTable(){
+
+    public void khoaChinhSuaTable() {
         // Tạo một TableCellEditor tùy chỉnh để không cho phép chỉnh sửa
         TableCellEditor nonEditableEditor = new TableCellEditor() {
             @Override
@@ -1613,11 +1541,11 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
 
         modelGioHang = (DefaultTableModel) tbl_GioHang.getModel();
         modelSanPham = (DefaultTableModel) tbl_SanPham.getModel();
-        
+
         for (int i = 0; i < modelGioHang.getColumnCount(); i++) {
             tbl_GioHang.getColumnModel().getColumn(i).setCellEditor(nonEditableEditor);
         }
-        
+
         for (int i = 0; i < modelSanPham.getColumnCount(); i++) {
             tbl_SanPham.getColumnModel().getColumn(i).setCellEditor(nonEditableEditor);
         }

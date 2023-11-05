@@ -991,8 +991,8 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
             object[0] = sanPham.getMaSP();
             object[1] = sanPham.getTenSP();
             object[2] = sanPham.getPhanLoai().getLoaiSanPham();
-            object[3] = sanPham.getGiaBan();
-            object[4] = sanPham.getGiaNhap();
+            object[3] = NumberFormat.getInstance().format(sanPham.getGiaBan()) ;
+            object[4] = NumberFormat.getInstance().format(sanPham.getGiaNhap()) ;
             object[5] = ngayNhapString;
             object[6] = sanPham.getKichThuoc().getKichThuoc();
             object[7] = sanPham.getMauSac().getMauSac();
@@ -1031,8 +1031,8 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
             //Chỉnh sửa trên model
             tbl_QuanAo.setValueAt(sanPham.getTenSP(), row, 1);
             tbl_QuanAo.setValueAt(phanLoai.getLoaiSanPham(), row, 2);
-            tbl_QuanAo.setValueAt(sanPham.getGiaBan(), row, 3);
-            tbl_QuanAo.setValueAt(sanPham.getGiaNhap(), row, 4);
+            tbl_QuanAo.setValueAt(NumberFormat.getInstance().format(sanPham.getGiaBan()), row, 3);
+            tbl_QuanAo.setValueAt(NumberFormat.getInstance().format(sanPham.getGiaNhap()), row, 4);
             tbl_QuanAo.setValueAt(ngayNhapString, row, 5);
             tbl_QuanAo.setValueAt(kichThuoc.getKichThuoc(), row, 6);
             tbl_QuanAo.setValueAt(mauSac.getMauSac(), row, 7);

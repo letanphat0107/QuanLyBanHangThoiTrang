@@ -27,6 +27,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
     private Connect connect;
     public static NhanVien nhanVien = null;
     private final NhanVien nhanVien_Login = Login.nhanVien;
+
     /**
      * Creates new form quanly
      */
@@ -35,24 +36,24 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
-        
+
         tbl_NhanVien.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_NhanVien.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
-        
+
         docDuLieuNhanVien();
         loadDuLieuChucVu();
         setRole();
     }
-    
+
     /**
-      * Cài đặt role khi nhân viên đăng nhập
+     * Cài đặt role khi nhân viên đăng nhập
      */
     public void setRole() {
         if (nhanVien_Login.getChuVu().equalsIgnoreCase("Nhân Viên")) {
             btn_CapNhat.setEnabled(false);
         }
     }
-    
+
     /**
      * Load dữ liệu comboBox chức vụ
      */
@@ -112,6 +113,8 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
      * Xử lý tìm kiếm nhân viên
      */
     public void xuLyTimKiemNhanVien() {
+        xoaDongBang();
+
         String tuKhoaMaNV = txt_MaNV.getText();
         String tuKhoaTenNV = txt_TenNV.getText();
         String tuKhoaChucVu = cmb_ChucVu.getSelectedItem().toString();
@@ -125,7 +128,6 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         modelNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
         ArrayList<NhanVien> listNhanVien = daoNhanVien.timKiemNhanVien(tuKhoaMaNV, tuKhoaTenNV, tuKhoaSdt, tuKhoaEmail, tuKhoaChucVu, tuKhoaDiaChi, tuKhoaTrangThai);
         if (listNhanVien != null) {
-            xoaDongBang();
             for (NhanVien nv : listNhanVien) {
                 Object[] object = new Object[8];
                 object[0] = nv.getMaNV();
@@ -137,7 +139,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
                 object[6] = nv.getEmail();
                 object[7] = nv.isTrangThai() ? "Còn hoạt động" : "Nghỉ làm";
                 modelNhanVien.addRow(object);
-
+                System.out.println(nv.toString());
             }
 
         }
@@ -540,11 +542,11 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
             txt_DiaChi.setText(tbl_NhanVien.getValueAt(row, 4).toString());
             txt_SoDienThoai.setText(tbl_NhanVien.getValueAt(row, 5).toString());
             txt_Email.setText(tbl_NhanVien.getValueAt(row, 6).toString());
-            if(tbl_NhanVien.getValueAt(row, 7).toString().equalsIgnoreCase("Đang làm")) {
+            if (tbl_NhanVien.getValueAt(row, 7).toString().equalsIgnoreCase("Đang làm")) {
                 rad_TrangThai.setSelected(true);
-            } else if(tbl_NhanVien.getValueAt(row, 7).toString().equalsIgnoreCase("Nghỉ làm")) {
+            } else if (tbl_NhanVien.getValueAt(row, 7).toString().equalsIgnoreCase("Nghỉ làm")) {
                 rad_TrangThai.setSelected(false);
-            } 
+            }
         }
     }//GEN-LAST:event_tbl_NhanVienMouseClicked
 
@@ -568,7 +570,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
             String maNV = tbl_NhanVien.getValueAt(row, 0).toString();
             String TenNV = tbl_NhanVien.getValueAt(row, 1).toString();
             String gioiTinh = tbl_NhanVien.getValueAt(row, 2).toString();
-          
+
             String chucVu = tbl_NhanVien.getValueAt(row, 3).toString();
             String diaChi = tbl_NhanVien.getValueAt(row, 4).toString();
             String sdt = tbl_NhanVien.getValueAt(row, 5).toString();

@@ -22,13 +22,16 @@ import javax.swing.JOptionPane;
  * @author DMX
  */
 public class Login extends javax.swing.JFrame {
+
     private Dao_TaiKhoan daoTaiKhoan;
     private Dao_NhanVien daoNhanVien;
     private Connect connect;
     private Boolean hoatDongIconShow = true;
     private Boolean hoatDongIconClose = true;
     public static NhanVien nhanVien = null;
-    
+            
+    public static boolean ngonNgu = true;
+
     /**
      * Creates new form Login
      */
@@ -37,12 +40,28 @@ public class Login extends javax.swing.JFrame {
         daoTaiKhoan = new Dao_TaiKhoan();
         connect = new Connect();
         connect.connect();
-        
+
         setTitle("Quản Lý Bán Quần Áo Thời Trang");
         initComponents();
         setLocationRelativeTo(null);
+
     }
 
+    public void chuyenDoiNN_English() {
+        btn_Login.setText("Login");
+        lbl_Password.setText("Passowrd");
+        lbl_TaiKhoan.setText("User");
+        lbl_QuenMatKhau.setText("Forgot password?");
+        lbl_Title.setText("Login");        
+    }
+    
+    public void chuyenDoiNN_TV() {
+        btn_Login.setText("Đăng nhập"); 
+        lbl_Password.setText("Mật khẩu");
+        lbl_TaiKhoan.setText("Người dùng");
+        lbl_QuenMatKhau.setText("Quên mật khẩu?"); 
+        lbl_Title.setText("Đăng nhập");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +83,7 @@ public class Login extends javax.swing.JFrame {
         lbl_IconPWClose = new javax.swing.JLabel();
         lbl_IconUser = new javax.swing.JLabel();
         lbl_QuenMatKhau = new javax.swing.JLabel();
+        cmb_NgonNgu = new javax.swing.JComboBox<>();
         lbl_ImageLogin = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -155,6 +175,15 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        cmb_NgonNgu.setBackground(new java.awt.Color(204, 255, 255));
+        cmb_NgonNgu.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        cmb_NgonNgu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiếng Việt", "English" }));
+        cmb_NgonNgu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_NgonNguItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_FormDangNhapLayout = new javax.swing.GroupLayout(pnl_FormDangNhap);
         pnl_FormDangNhap.setLayout(pnl_FormDangNhapLayout);
         pnl_FormDangNhapLayout.setHorizontalGroup(
@@ -183,7 +212,10 @@ public class Login extends javax.swing.JFrame {
                         .addGap(135, 135, 135))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FormDangNhapLayout.createSequentialGroup()
                         .addComponent(lbl_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(121, 121, 121))))
+                        .addGap(121, 121, 121))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FormDangNhapLayout.createSequentialGroup()
+                        .addComponent(cmb_NgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112))))
         );
         pnl_FormDangNhapLayout.setVerticalGroup(
             pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +238,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(lbl_QuenMatKhau)
                 .addGap(17, 17, 17)
                 .addComponent(btn_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                .addGap(32, 32, 32)
+                .addComponent(cmb_NgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         lbl_ImageLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Login1.jpg"))); // NOI18N
@@ -247,19 +281,19 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
         String user = txt_Username.getText();
-        String pass = String.valueOf(pwd_MatKhau.getText());        
+        String pass = String.valueOf(pwd_MatKhau.getText());
         TaiKhoan taiKhoan = daoTaiKhoan.dangNhapTaiKhoan(user, pass);
-        
-        if(taiKhoan!=null) {
+
+        if (taiKhoan != null) {
             nhanVien = daoNhanVien.getNhanVienTheoMa(taiKhoan.getNhanVien().getMaNV());
             try {
-                HomePage homePage  = new HomePage();
+                HomePage homePage = new HomePage();
                 homePage.setVisible(true);
                 this.setVisible(false);
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Tài khoản này không tồn tại");
         }
@@ -302,8 +336,18 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_lbl_QuenMatKhauMouseClicked
+
+    private void cmb_NgonNguItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_NgonNguItemStateChanged
+        if (cmb_NgonNgu.getSelectedItem().equals("English")) {
+            ngonNgu = false;
+            chuyenDoiNN_English();
+        } else {
+            ngonNgu = true;
+            chuyenDoiNN_TV();
+        }
+    }//GEN-LAST:event_cmb_NgonNguItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -346,6 +390,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Login;
+    private javax.swing.JComboBox<String> cmb_NgonNgu;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel lbl_IconPWClose;
     private javax.swing.JLabel lbl_IconUser;

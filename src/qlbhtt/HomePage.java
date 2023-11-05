@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 public class HomePage extends javax.swing.JFrame {
 
     private final NhanVien nhanVien = Login.nhanVien;
-
+    private boolean ngonNgu = Login.ngonNgu;
     private Connect connect;
 
     /**
@@ -32,8 +32,59 @@ public class HomePage extends javax.swing.JFrame {
         initComponents();
         setTitle("Nhóm 10 - Quản Lý Bán Quần Áo Thời Trang");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+      
+
+        if (!ngonNgu) {
+            chuyenDoiNgonNgu();
+            if(nhanVien.getChuVu().equals("Nhân Viên")) {
+               String chucVu = nhanVien.getChuVu().replace("Nhân Viên", "Staff");
+                mnu_TenNVDangNhap.setText(chucVu + ": " + nhanVien.getHoTen());
+            } else {
+                String chucVu = nhanVien.getChuVu().replace("Quản lý", "Manager");
+                mnu_TenNVDangNhap.setText(chucVu + ": " + nhanVien.getHoTen());
+            }     
+        } else {
+            mnu_TenNVDangNhap.setText(nhanVien.getChuVu() + ": " + nhanVien.getHoTen());
+        }
         setRole();
-        mnu_TenNVDangNhap.setText(nhanVien.getChuVu() +": "+ nhanVien.getHoTen());
+    }
+
+    public void chuyenDoiNgonNgu() {
+        mnu_SanPham.setText("Clothes");
+        mni_SP_QuanLy.setText("Management");
+        mni_SP_TimKiem.setText("Search");
+        mni_SP_ChatLieu.setText("Fabric");
+        mni_SP_MauSac.setText("Color");
+        mni_SP_KichThuoc.setText("Size");
+        mni_SP_DanhMuc.setText("Category");
+
+        mnu_PhuKien.setText("Accessory");
+        mni_PK_QuanLy.setText("Management");
+        mni_PK_TimKiem.setText("Search");
+
+        mnu_NhanVien.setText("Staff");
+        mni_NV_DatHang.setText("Order");
+        mni_NV_LapHoaDon.setText("Make an invoice");
+        mni_NV_HuyDonDat.setText("Cancel Order");
+        mni_NV_ThongKeDoanhThu.setText("Revenue Statistics");
+        mni_NV_ThongKeSanPham.setText("Product Statistics");
+        mni_NV_ThongKeThongTinKH.setText("Customer Statistics");
+        mni_NV_XemDSHoaDon.setText("View invoice list");
+        mni_NV_QuanLy.setText("Management");
+        mni_NV_TimKiem.setText("Search");
+
+        mnu_KhachHang.setText("Customer");
+        mni_KH_QuanLy.setText("Management");
+        mni_KH_TimKiem.setText("Search");
+
+        mnu_TaiKhoan.setText("Account");
+        mni_TK_QuanLy.setText("Management");
+        mnu_NhaCungCap.setText("Supplier");
+        mni_NCC_QuanLy.setText("Management");
+        mni_NCC_TimKiem.setText("Search");
+
+        mnu_DangXuat.setText("Log out");
+
     }
 
     /**
@@ -43,7 +94,7 @@ public class HomePage extends javax.swing.JFrame {
         if (nhanVien.getChuVu().equalsIgnoreCase("Nhân Viên")) {
             //mni_SP_ChatLieu.setVisible(false);
             //mni_SP_MauSac.setVisible(false);
-           // mni_SP_KichThuoc.setVisible(false);
+            // mni_SP_KichThuoc.setVisible(false);
             //mni_SP_DanhMuc.setVisible(false);
             mni_NV_QuanLy.setVisible(false);
             //mni_NV_TimKiem.setVisible(false);
@@ -68,8 +119,8 @@ public class HomePage extends javax.swing.JFrame {
 
     }
 
-   //tạo hàm mở tab quản lý nhân viên
-    public static void activeQLNVForm(){
+    //tạo hàm mở tab quản lý nhân viên
+    public static void activeQLNVForm() {
         ManHinh_NV_QuanLy pnl_NV_QuanLy = null;
         try {
             pnl_NV_QuanLy = new ManHinh_NV_QuanLy();
@@ -81,7 +132,7 @@ public class HomePage extends javax.swing.JFrame {
         pnl_GiaoDienChucNang.revalidate();
         pnl_GiaoDienChucNang.repaint();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -311,6 +362,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.add(mni_NV_LapHoaDon);
         mnu_NhanVien.add(spr_NV_ThanhNgang2);
 
+        mni_NV_HuyDonDat.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_HuyDonDat.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_HuyDonDat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
         mni_NV_HuyDonDat.setText("Hủy đơn đặt");
@@ -534,11 +586,11 @@ public class HomePage extends javax.swing.JFrame {
     private void mni_SP_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_QuanLyActionPerformed
         // TODO add your handling code here:
         ManHinh_QA_QuanLy pnl_QuanLySP = null;
-       try {
-           pnl_QuanLySP = new ManHinh_QA_QuanLy();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_QuanLySP = new ManHinh_QA_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_QuanLySP);
         pnl_GiaoDienChucNang.revalidate();
@@ -586,11 +638,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_SP_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SP_TimKiemActionPerformed
         ManHinh_QA_TimKiem pnl_TimKiemSP = null;
-       try {
-           pnl_TimKiemSP = new ManHinh_QA_TimKiem();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_TimKiemSP = new ManHinh_QA_TimKiem();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_TimKiemSP);
         pnl_GiaoDienChucNang.revalidate();
@@ -782,11 +834,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_PK_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_PK_QuanLyActionPerformed
         ManHinh_PK_QuanLy pnl_PK_QuanLy = null;
-       try {
-           pnl_PK_QuanLy = new ManHinh_PK_QuanLy();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_PK_QuanLy = new ManHinh_PK_QuanLy();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_PK_QuanLy);
         pnl_GiaoDienChucNang.revalidate();
@@ -795,11 +847,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void mni_PK_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_PK_TimKiemActionPerformed
         ManHinh_PK_TimKiem pnl_PK_TimKiem = null;
-       try {
-           pnl_PK_TimKiem = new ManHinh_PK_TimKiem();
-       } catch (SQLException ex) {
-           Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            pnl_PK_TimKiem = new ManHinh_PK_TimKiem();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pnl_GiaoDienChucNang.removeAll();
         pnl_GiaoDienChucNang.add(pnl_PK_TimKiem);
         pnl_GiaoDienChucNang.revalidate();
@@ -834,7 +886,6 @@ public class HomePage extends javax.swing.JFrame {
         pnl_GiaoDienChucNang.repaint();
     }//GEN-LAST:event_mni_NV_HuyDonDatActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

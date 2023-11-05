@@ -166,7 +166,7 @@ public class Dao_ChatLieu {
      */
     public String taoMaChatLieu() {
         Connection con = Connect.getInstance().getConnection();
-        String url = "select top 1 maChatLieu from PhanLoai order by maChatLieu desc";
+        String url = "select top 1 maChatLieu from ChatLieu order by maChatLieu desc";
         
         try {
             Statement stmt = con.createStatement();

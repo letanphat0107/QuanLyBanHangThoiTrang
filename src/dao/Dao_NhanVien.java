@@ -143,38 +143,16 @@ public class Dao_NhanVien {
     }
 
     /**
-     * Tìm kiếm nhà cung cấp
+     * Tìm kiếm nhân viên
+     * @param maNV
+     * @param tenNV
+     * @param sdt
+     * @param email
+     * @param chucVu
+     * @param diaChi
+     * @param trangThai
+     * @return 
      */
-//    public ArrayList<NhanVien> timKiemNhanVien(String maNV, String tenNV, String sdt, String email, String chucVu, String diaChi, boolean trangThai) {
-//        ArrayList<NhanVien> listNhanVienTim = new ArrayList<>();
-//        Connection con = Connect.getInstance().getConnection();
-//        PreparedStatement prestmt = null;
-//        String url = "Select * from NhanVien where maNV like ? and hoTen like ? and sdt like ? and email like ? and chucVu like ? and diaChi like ? and trangThai = ?";
-//        try {
-//            prestmt = con.prepareStatement(url);
-//            prestmt.setString(1, "%" + maNV + "%");
-//            prestmt.setString(2, "%" + tenNV + "%");
-//            prestmt.setString(3, "%" + sdt + "%");
-//            prestmt.setString(4, "%" + email + "%");
-//            prestmt.setString(5, "%" + chucVu + "%");
-//            prestmt.setString(6, "%" + diaChi + "%");
-//            prestmt.setBoolean(7, trangThai);
-//            ResultSet rs = prestmt.executeQuery();
-//            while (rs.next()) {
-//                listNhanVienTim.add(new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getBoolean(8)));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                prestmt.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return listNhanVienTim;
-//    }
-
     public ArrayList<NhanVien> timKiemNhanVien(String maNV, String tenNV, String sdt, String email, String chucVu, String diaChi, boolean trangThai) {
         ArrayList<NhanVien> listNhanVienTim = new ArrayList<>();
         Connection con = Connect.getInstance().getConnection();
