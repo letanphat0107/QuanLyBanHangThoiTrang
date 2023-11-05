@@ -111,9 +111,9 @@ public class Dao_KhachHang {
                 KhachHang kh=new KhachHang();
                 kh.setMaKH(rs.getString(1));
                 kh.setHoTen(rs.getString(2));
-                kh.setGioiTinh(rs.getString(3));
+                kh.setGioiTinh(rs.getString(5));
                 kh.setEmail(rs.getString(4));
-                kh.setSdt(rs.getString(5));
+                kh.setSdt(rs.getString(3));
                 listKhachHang.add(kh);
              }
         }catch (SQLException e) {

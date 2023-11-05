@@ -21,13 +21,7 @@ import java.util.ArrayList;
  */
 public class Dao_CTHD {
     private Dao_SanPham dao_SanPham = new dao.Dao_SanPham();
-    private Dao_KhachHang dao_KhachHang = new Dao_KhachHang();
     private Dao_HoaDon dao_HoaDon = new Dao_HoaDon();
-    private Dao_PhanLoai dao_PhanLoai = new Dao_PhanLoai();
-    private Dao_ChatLieu dao_ChatLieu = new Dao_ChatLieu();
-    private Dao_KichThuoc dao_KichThuoc = new Dao_KichThuoc();
-    private Dao_MauSac dao_MauSac = new Dao_MauSac();
-    private Dao_NhaCungCap dao_NhaCungCap = new Dao_NhaCungCap();
     
     /**
      * Lấy Chi tiết hóa đơn theo mã hóa đơn
@@ -56,6 +50,27 @@ public class Dao_CTHD {
             e.printStackTrace();
         }
         return listCTHD;
+    }
+    
+    public void themCTHD(CTHD cthd) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "insert into CTHD values(?, ?, ?)";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, cthd.getHoaDon().getMaHoaDon());
+            prestmt.setString(2, cthd.getSanPham().getMaSP());
+            prestmt.setInt(3, cthd.getSoLuong());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     /**

@@ -9,7 +9,7 @@ public class CTPhieuDatHang {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CTPhieuDatHang(PhieuDatHang phieuDatHang, SanPham sanPham, int soLuong) {
+	public CTPhieuDatHang(SanPham sanPham, PhieuDatHang phieuDatHang, int soLuong) {
 		this.phieuDatHang = phieuDatHang;
 		this.sanPham = sanPham;
 		this.soLuong = soLuong;
