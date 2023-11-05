@@ -37,6 +37,7 @@ public class ManHinh_NV_BieuDoThongKeDoanhThu extends javax.swing.JFrame {
         connect = new Connect();
         connect.connect();
         initComponents();
+        setLocationRelativeTo(null);
         veBieuDoNV();
     }
 
@@ -77,7 +78,7 @@ public class ManHinh_NV_BieuDoThongKeDoanhThu extends javax.swing.JFrame {
                 int maPL = rs.getInt(1);
                 double doanhThu = rs.getDouble(2);
                 dataset.addValue(doanhThu, "Tháng", "Tháng " + maPL);
-//                }
+
 
                 //Tạo biểu đồ
                 JFreeChart barChart = ChartFactory.createBarChart(
@@ -100,7 +101,7 @@ public class ManHinh_NV_BieuDoThongKeDoanhThu extends javax.swing.JFrame {
 
                 // Cấu hình trục tung (cột Y)
                 NumberAxis yAxis = (NumberAxis) categoryPlot.getRangeAxis();
-                yAxis.setRange(1000, 5000000); // Đặt giới hạn cho trục tung
+                yAxis.setRange(10000, 10000000); // Đặt giới hạn cho trục tung
 
                 ChartPanel barpChartPanel = new ChartPanel(barChart); // Hiển thị biểu đồ lên Jframe
                 jPanel1.add(barpChartPanel, BorderLayout.CENTER);

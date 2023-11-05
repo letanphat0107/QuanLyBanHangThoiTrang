@@ -206,14 +206,14 @@ public class Dao_HoaDon {
         Connect.getInstance();
         Connection conn = Connect.getConnection();
         try {
-            String sql = "select sp.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
-"                   				join SanPham sp on cthd.maSP=sp.maSP                    			\n" +
-"               		group by sp.maSP";
+            String sql = "select sp.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
+                    + "                   				join SanPham sp on cthd.maSP=sp.maSP                    			\n"
+                    + "               		group by sp.maSP";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                
+
                 String maSP = rs.getString(1);
                 System.out.println("SSSS" + maSP.toString());
 //                SanPham sp = dao_SanPham.getSanPhamTheoMa(maSP);
@@ -275,15 +275,15 @@ public class Dao_HoaDon {
         Connection conn = Connect.getConnection();
         PreparedStatement stmt = null;
         try {
-            String sql = "select cthd.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
-"                   						join SanPham sp on cthd.maSP=sp.maSP\n" +
-"                   						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
-"                   						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc\n" +
-"                    					join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
-"                    					join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
-"                    					join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
-"      	where ms.tenMauSac like ? and kt.tenKichThuoc like ? and pl.tenPhanLoai like ? and hd.ngayLap >= ? and  hd.ngayLap <= ?\n" +
-"		group by cthd.maSP;";
+            String sql = "select cthd.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
+                    + "                   						join SanPham sp on cthd.maSP=sp.maSP\n"
+                    + "                   						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n"
+                    + "                   						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc\n"
+                    + "                    					join MauSac ms on ms.maMauSac=sp.maMauSac\n"
+                    + "                    					join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n"
+                    + "                    					join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n"
+                    + "      	where ms.tenMauSac like ? and kt.tenKichThuoc like ? and pl.tenPhanLoai like ? and hd.ngayLap >= ? and  hd.ngayLap <= ?\n"
+                    + "		group by cthd.maSP;";
 
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, "%" + mauSac + "%");
@@ -395,8 +395,8 @@ public class Dao_HoaDon {
      * @return
      */
     public int getSoLuongKhachHang() {
-        Connect.getConnection();
-        Connection conn = Connect.getConnection();
+        Connection conn = Connect.getInstance().getConnection();
+
         String sql = "select COUNT(*) as tongKH from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD ";
         try {
             Statement stmt = conn.createStatement();
@@ -436,5 +436,24 @@ public class Dao_HoaDon {
             ex.printStackTrace();
         }
         return listKhachHang;
+    }
+
+    public int getSoLuongHoaDonKhachHangMua(String maKH) {
+        Connection conn = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String sql = "select maKH , COUNT(*) as tongHD from HoaDon\n"
+                + "where maKH = ?\n"
+                + "group by maKH";
+        try {
+            prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1, maKH);
+            ResultSet rs = prestmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(2);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 }

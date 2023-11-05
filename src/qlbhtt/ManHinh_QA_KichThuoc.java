@@ -34,6 +34,10 @@ public class ManHinh_QA_KichThuoc extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_KichThuoc.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_KichThuoc.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         docDuLieuLenBang();
     }
 

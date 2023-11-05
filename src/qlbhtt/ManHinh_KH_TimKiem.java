@@ -31,6 +31,8 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        tbl_KhachHang.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_KhachHang.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
         docDuLieuKhachHang();
     }
 

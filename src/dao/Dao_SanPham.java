@@ -547,5 +547,50 @@ public class Dao_SanPham {
               
     }
     
-
+    /**
+     * Lấy danh sách sản phẩm theo ngày nhập
+     * @param maPhanLoai
+     * @param maMauSac
+     * @param maKichThuoc
+     * @return 
+     */
+    public  ArrayList<SanPham> getAllSanPhamTheoNgay(String tuNgay, String denNgay) {
+        
+        
+        ArrayList<SanPham> listSanPham = new ArrayList<>();
+        Connect.getInstance();
+        Connection con = Connect.getConnection();
+        PreparedStatement prestmt = null;
+        String url = "select * from SanPham sp "+
+                        "where sp.ngayNhap >= ? and sp.ngayNhap <= ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, tuNgay);
+            prestmt.setString(2, denNgay);
+            ResultSet rs = prestmt.executeQuery();
+            
+            while (rs.next()) {                
+                String maCL = rs.getString(8);
+                ChatLieu chatLieu  = daoChatLieu.getDLChatLieuTheoMa(maCL);
+                
+                String maKT = rs.getString(9);
+                KichThuoc kichThuoc = daoKichThuoc.getDLKichThuocTheoMa(maKT);
+                
+                String maMS = rs.getString(10);
+                MauSac mauSac = daoMauSac.getDLMauSacTheoMa(maMS);
+                
+                String maPL = rs.getString(11);
+                PhanLoai phanLoaiSP = daoPhanLoai.getDLPhanLoaiSPTheoMa(maPL);
+                
+                String maNCC = rs.getString(12);
+                NhaCungCap nhaCungCap = daoNhaCungCap.getNhaCungCapTheoMa(maNCC);
+                
+                SanPham sanPham = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getDouble(5), rs.getDate(6),rs.getString(7),chatLieu , kichThuoc, mauSac, phanLoaiSP, nhaCungCap);
+                listSanPham.add(sanPham);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
 }

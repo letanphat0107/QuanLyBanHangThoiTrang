@@ -42,6 +42,10 @@ public class Dao_TaiKhoan {
         return listTK;
     }
     
+    /**
+     * Lấy tài khoản còn hoạt đông
+     * @return 
+     */
     public ArrayList<TaiKhoan> getAllTaiKhoanConHoatDong() {
         daoNhanVien = new Dao_NhanVien();
         ArrayList<TaiKhoan> listTK= new ArrayList<>();
@@ -172,7 +176,7 @@ public class Dao_TaiKhoan {
         
         Connection con = Connect.getInstance().getConnection();
         PreparedStatement prestmt = null;
-        String url = "select * from TaiKhoan where tenTaiKhoan = ? and matKhau = ?";
+        String url = "select * from TaiKhoan where tenTaiKhoan = ? and matKhau = ? and trangThai = 1";
         try {
             prestmt = con.prepareStatement(url);
             prestmt.setString(1, tenTaiKhoan);
@@ -189,5 +193,76 @@ public class Dao_TaiKhoan {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    /**
+     * Lấy mật khẩu theo tài khoản
+     * @param tenTK
+     * @return 
+     */
+    public String getMatKhau(String tenTK) {
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "select matKhau from TaiKhoan where tenTaiKhoan = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, tenTK);
+            ResultSet rs = prestmt.executeQuery();
+            while(rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public TaiKhoan getTaiKhoanNV(String maNVTim) {
+        daoNhanVien = new Dao_NhanVien();
+        
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "select * from TaiKhoan where maNV = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maNVTim);
+            
+            ResultSet rs = prestmt.executeQuery();
+            while(rs.next()) {
+                String maNV = rs.getString(4);                
+                NhanVien nhanVien = daoNhanVien.getNhanVienTheoMa(maNV);
+                
+                TaiKhoan taiKhoan = new TaiKhoan(rs.getString(1), rs.getString(2), rs.getString(3), nhanVien, rs.getBoolean(5));
+                return taiKhoan;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+ 
+    /**
+     * Đặt lại mật khẩu tài khoản
+     * @param taiKhoan 
+     */
+    public void datLaiMatKhau(TaiKhoan taiKhoan, String matKhau) {
+       Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "update TaiKhoan set matKhau = ? where tenTaiKhoan = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            
+            prestmt.setString(1, matKhau);
+            prestmt.setString(2, taiKhoan.getTenTaiKhoan());
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            try {
+                 prestmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -36,6 +36,10 @@ public class ManHinh_QA_MauSac extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_MauSac.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_MauSac.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         docDuLieuLenBang();
     }
 

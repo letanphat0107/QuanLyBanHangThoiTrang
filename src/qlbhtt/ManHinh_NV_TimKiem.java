@@ -26,7 +26,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
     private Dao_NhanVien daoNhanVien;
     private Connect connect;
     public static NhanVien nhanVien = null;
-
+    private final NhanVien nhanVien_Login = Login.nhanVien;
     /**
      * Creates new form quanly
      */
@@ -35,10 +35,24 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_NhanVien.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_NhanVien.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         docDuLieuNhanVien();
         loadDuLieuChucVu();
+        setRole();
     }
-
+    
+    /**
+      * Cài đặt role khi nhân viên đăng nhập
+     */
+    public void setRole() {
+        if (nhanVien_Login.getChuVu().equalsIgnoreCase("Nhân Viên")) {
+            btn_CapNhat.setEnabled(false);
+        }
+    }
+    
     /**
      * Load dữ liệu comboBox chức vụ
      */
@@ -571,7 +585,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_CapNhat;
+    public static javax.swing.JButton btn_CapNhat;
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_XoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;

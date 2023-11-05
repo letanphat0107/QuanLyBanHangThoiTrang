@@ -45,6 +45,12 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         modelHoaDon = (DefaultTableModel) tbl_HoaDon.getModel();
         modelCTHD = (DefaultTableModel) tbl_CTHD.getModel();
 
+        tbl_HoaDon.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_HoaDon.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
+        tbl_CTHD.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_CTHD.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         khoiTaoNgayHienTai();
         docDuLieuLenBangDsHoaDon();
     }
@@ -61,7 +67,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
     public boolean dieuKienTuNgay() {
         Date ngayHienTai = new Date();
         Date tuNgay = dch_TuNgay.getDate();
-               
+
         if (tuNgay.after(ngayHienTai)) {
             JOptionPane.showMessageDialog(this, "Ngày phải trước ngày hiện tại!");
             dch_TuNgay.setDate(new Date());
@@ -69,7 +75,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         }
         return true;
     }
-    
+
     /**
      * Điều kiện đến ngày
      */
@@ -77,9 +83,9 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         Date ngayHienTai = new Date();
         Date tuNgay = dch_TuNgay.getDate();
         Date denNgay = dch_DenNgay.getDate();
-               
+
         if (tuNgay.after(denNgay)) {
-            JOptionPane.showMessageDialog(this, "Từ ngày phải trước ngày đến!");            
+            JOptionPane.showMessageDialog(this, "Từ ngày phải trước ngày đến!");
             return false;
         }
 
@@ -94,7 +100,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
     /**
      * Đọc dữ liệu lên bảng danh sách hóa đơn
      */
-    public void docDuLieuLenBangDsHoaDon() {
+    public void docDuLieuLenBangDsHoaDon()  {
         modelHoaDon.setRowCount(0);
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         for (HoaDon hd : daoHoaDon.getAllHoaDon()) {
@@ -102,8 +108,13 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
             String ngayLap = formatter.format(hd.getNgayNhap());
             Object o[] = new Object[5];
             o[0] = hd.getMaHoaDon();
-            o[1] = hd.getKhachHang().getHoTen();
+            try {
+                o[1] = hd.getKhachHang().getHoTen();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
             o[2] = hd.getNhanVien().getHoTen();
+
             o[3] = ngayLap;
             o[4] = NumberFormat.getInstance().format(tongTien);
             modelHoaDon.addRow(o);
@@ -148,7 +159,6 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -325,7 +335,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
         pnl_ThongTinLayout.setHorizontalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ThongTinLayout.createSequentialGroup()
-                .addContainerGap(293, Short.MAX_VALUE)
+                .addContainerGap(369, Short.MAX_VALUE)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(chk_TatCa)
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
@@ -336,7 +346,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dch_TuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dch_DenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(357, 357, 357))
+                .addGap(281, 281, 281))
         );
         pnl_ThongTinLayout.setVerticalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +392,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_HoaDonMousePressed
 
     private void dch_TuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_TuNgayPropertyChange
-        if(!dieuKienTuNgay()){
+        if (!dieuKienTuNgay()) {
             return;
         }
         if (chk_TatCa.isSelected()) {
@@ -395,7 +405,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
     private void chk_TatCaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chk_TatCaItemStateChanged
         if (chk_TatCa.isSelected()) {
             docDuLieuLenBangDsHoaDon();
-            
+
         } else if (!chk_TatCa.isSelected()) {
             docDuLieuDanhSachHoaDonTheoNgay();
         }
@@ -404,7 +414,7 @@ public class ManHinh_NV_XemDSHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_chk_TatCaItemStateChanged
 
     private void dch_DenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_DenNgayPropertyChange
-        if(!dieuKienDenNgay()){
+        if (!dieuKienDenNgay()) {
             return;
         }
         if (chk_TatCa.isSelected()) {

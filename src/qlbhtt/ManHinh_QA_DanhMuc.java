@@ -30,6 +30,10 @@ public class ManHinh_QA_DanhMuc extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_DanhMuc.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_DanhMuc.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         docDuLieuLenBang();
     }   
     

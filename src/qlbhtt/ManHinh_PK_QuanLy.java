@@ -70,6 +70,10 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_PhuKien.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_PhuKien.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         docDuLieuPhuKien();
         docDuLieuCMB();
     }

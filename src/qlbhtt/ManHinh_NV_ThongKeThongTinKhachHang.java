@@ -53,8 +53,8 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
     private DefaultTableModel dtm;
     private KhachHang kh = new KhachHang();
 
-    private static Boolean activeTatCa = false;
-    private static Boolean activeTop5KhachHang = false;
+    private boolean activeTatCa = false;
+    private boolean activeTop5KhachHang = false;   
 
     private final NhanVien nhanVien = Login.nhanVien;
 
@@ -65,7 +65,11 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         connect.connect();
         initComponents();
 
-        dtm = new DefaultTableModel();
+        dtm = (DefaultTableModel) tbl_ThongKe.getModel();
+
+        tbl_ThongKe.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_ThongKe.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         tblThongKeKhachHang();
         activeTatCa = true;
     }
@@ -76,12 +80,12 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
     private void tblThongKeKhachHang() {
         dtm.setRowCount(0);
         ArrayList<KhachHang> listKH = dao_HoaDon.thongKeThongTinKhachHangDaMuaHang();
-        DefaultTableModel dtm = (DefaultTableModel) tbl_ThongKe.getModel();
         int soLuongKH = listKH.size();
         for (KhachHang dskh : listKH) {
             int tongSL = dao_HoaDon.getSoLuongKhachHangMua(dskh.getMaKH());
             double tongTien = dao_HoaDon.getThanhTienKhachHangMua(dskh.getMaKH());
-            Object[] rowdata = {dskh.getMaKH(), dskh.getHoTen(), dskh.getSdt(), tongSL, NumberFormat.getInstance().format(tongTien)};
+            int tongHD = dao_HoaDon.getSoLuongHoaDonKhachHangMua(dskh.getMaKH());
+            Object[] rowdata = {dskh.getMaKH(), dskh.getHoTen(), dskh.getSdt(), tongSL, tongHD,NumberFormat.getInstance().format(tongTien)};
             dtm.addRow(rowdata);
         }
         txt_TongSanPhamBan.setText(soLuongKH + "");
@@ -93,13 +97,12 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
     private void tblThongKeTop5KhachHang() {
         dtm.setRowCount(0);
         ArrayList<KhachHang> listKH = dao_HoaDon.thongKeThongTinTop5KhachHangDaMuaHang();
-        dtm = (DefaultTableModel) tbl_ThongKe.getModel();
         int soLuongKH = listKH.size();
         for (KhachHang dskh : listKH) {
             int tongSL = dao_HoaDon.getSoLuongKhachHangMua(dskh.getMaKH());
             double tongTien = dao_HoaDon.getThanhTienKhachHangMua(dskh.getMaKH());
-
-            Object[] rowdata = {dskh.getMaKH(), dskh.getHoTen(), dskh.getSdt(), tongSL, NumberFormat.getInstance().format(tongTien)};
+            int tongHD = dao_HoaDon.getSoLuongHoaDonKhachHangMua(dskh.getMaKH());
+            Object[] rowdata = {dskh.getMaKH(), dskh.getHoTen(), dskh.getSdt(), tongSL, tongHD ,NumberFormat.getInstance().format(tongTien)};
             dtm.addRow(rowdata);
         }
         txt_TongSanPhamBan.setText(soLuongKH + "");
@@ -188,134 +191,147 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
             tableMuc.setSpacingBefore(10f); //Đặt khoảng cách là 10
             tableMuc.setSpacingAfter(10f);
 
-                float[] chieuRongCot = {1f, 1f};
-                tableMuc.setWidths(chieuRongCot);
+            float[] chieuRongCot = {1f, 1f};
+            tableMuc.setWidths(chieuRongCot);
 
-                //Mục mã nhân viên
-                PdfPCell cellMaNV = new PdfPCell(new Paragraph("Mã nhân viên: " + nhanVien.getMaNV(), fontMain));
-                cellMaNV.setBorderColor(BaseColor.WHITE);
-                tableMuc.addCell(cellMaNV);
+            //Mục mã nhân viên
+            PdfPCell cellMaNV = new PdfPCell(new Paragraph("Mã nhân viên: " + nhanVien.getMaNV(), fontMain));
+            cellMaNV.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellMaNV);
 
-                //Mục ngày in
-                Date ngayIn = new Date();
-                SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy");
-                String ngayInformat = fomatter.format(ngayIn);
-                PdfPCell cellNgayIn = new PdfPCell(new Paragraph("Ngày in: " + ngayInformat, fontMain));
-                cellNgayIn.setBorderColor(BaseColor.WHITE);
-                tableMuc.addCell(cellNgayIn);
+            //Mục ngày in
+            Date ngayIn = new Date();
+            SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy");
+            String ngayInformat = fomatter.format(ngayIn);
+            PdfPCell cellNgayIn = new PdfPCell(new Paragraph("Ngày in: " + ngayInformat, fontMain));
+            cellNgayIn.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellNgayIn);
 
-                //Mục ngày in
-                PdfPCell cellTenNV = new PdfPCell(new Paragraph("Tên Nhân viên: " + nhanVien.getHoTen(), fontMain));
-                cellTenNV.setBorderColor(BaseColor.WHITE);
-                tableMuc.addCell(cellTenNV);
+            //Mục ngày in
+            PdfPCell cellTenNV = new PdfPCell(new Paragraph("Tên Nhân viên: " + nhanVien.getHoTen(), fontMain));
+            cellTenNV.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellTenNV);
 
-                //Mục chức vụ
-                PdfPCell cellChucVu = new PdfPCell(new Paragraph("Chức vụ: " + nhanVien.getChuVu(), fontMain));
-                cellChucVu.setBorderColor(BaseColor.WHITE);
-                tableMuc.addCell(cellChucVu);
-            
+            //Mục chức vụ
+            PdfPCell cellChucVu = new PdfPCell(new Paragraph("Chức vụ: " + nhanVien.getChuVu(), fontMain));
+            cellChucVu.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellChucVu);
+
             //Mục tổng khách hàng
             PdfPTable tableTongKH = new PdfPTable(1);
             tableTongKH.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
             tableTongKH.setSpacingBefore(10f); //Đặt khoảng cách là 10
             tableTongKH.setSpacingAfter(10f);
 
-                float[] chieuRongCotTongKH = {1f};
-                tableTongKH.setWidths(chieuRongCotTongKH);
+            float[] chieuRongCotTongKH = {1f};
+            tableTongKH.setWidths(chieuRongCotTongKH);
 
+            PdfPCell cellTongKH = new PdfPCell(new Paragraph("Tổng Khách hàng đã mua: " + txt_TongSanPhamBan.getText(), fontMain));
+            cellTongKH.setBorderColor(BaseColor.WHITE);
+            tableTongKH.addCell(cellTongKH);
 
-                PdfPCell cellTongKH = new PdfPCell(new Paragraph("Tổng Khách hàng đã mua: " + txt_TongSanPhamBan.getText(), fontMain));
-                cellTongKH.setBorderColor(BaseColor.WHITE);
-                tableTongKH.addCell(cellTongKH);
-            
             document.add(tableMuc);
             document.add(tableTongKH);
-            
+
             //Tạo bảng sản phẩm
-            PdfPTable tableDsSP = new PdfPTable(5);
+            PdfPTable tableDsSP = new PdfPTable(6);
             tableDsSP.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
             tableDsSP.setSpacingBefore(10f); //Đặt khoảng cách là 10
             tableDsSP.setSpacingAfter(10f);
 
-                //Tiêu đề bảng
-                float[] chieuRongCotSP = {1f,1f,1f,1f,1f};
-                tableDsSP.setWidths(chieuRongCotSP);
+            //Tiêu đề bảng
+            float[] chieuRongCotSP = {1f, 1f, 1f, 1f, 1f, 1f};
+            tableDsSP.setWidths(chieuRongCotSP);
 
-                //Mã khách hàng
-                PdfPCell cellTblKH_maKH = new PdfPCell(new Paragraph("Mã khách hàng ", fontMain));
-                cellTblKH_maKH.setBorderColor(BaseColor.BLACK);
-                cellTblKH_maKH.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
-                cellTblKH_maKH.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
-                tableDsSP.addCell(cellTblKH_maKH);
+            //Mã khách hàng
+            PdfPCell cellTblKH_maKH = new PdfPCell(new Paragraph("Mã khách hàng ", fontMain));
+            cellTblKH_maKH.setBorderColor(BaseColor.BLACK);
+            cellTblKH_maKH.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
+            cellTblKH_maKH.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
+            tableDsSP.addCell(cellTblKH_maKH);
 
-                //Tên khách hàng
-                PdfPCell cellTblKH_tenKH = new PdfPCell(new Paragraph("Tên khách hàng ", fontMain));
-                cellTblKH_tenKH.setBorderColor(BaseColor.BLACK);
-                cellTblKH_tenKH.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblKH_tenKH.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblKH_tenKH);
+            //Tên khách hàng
+            PdfPCell cellTblKH_tenKH = new PdfPCell(new Paragraph("Tên khách hàng ", fontMain));
+            cellTblKH_tenKH.setBorderColor(BaseColor.BLACK);
+            cellTblKH_tenKH.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblKH_tenKH.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblKH_tenKH);
 
-                //SĐT
-                PdfPCell cellTblKH_SDT = new PdfPCell(new Paragraph("SĐT ", fontMain));
-                cellTblKH_SDT.setBorderColor(BaseColor.BLACK);
-                cellTblKH_SDT.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblKH_SDT.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblKH_SDT);
+            //SĐT
+            PdfPCell cellTblKH_SDT = new PdfPCell(new Paragraph("SĐT ", fontMain));
+            cellTblKH_SDT.setBorderColor(BaseColor.BLACK);
+            cellTblKH_SDT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblKH_SDT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblKH_SDT);
 
-                //Số lượng sản phảm đã m
-                PdfPCell cellTblKH_SLM = new PdfPCell(new Paragraph("Số lượng sản phảm đã mua ", fontMain));
-                cellTblKH_SLM.setBorderColor(BaseColor.BLACK);
-                cellTblKH_SLM.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblKH_SLM.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblKH_SLM);
+            //Số lượng sản phảm đã mua
+            PdfPCell cellTblKH_SLM = new PdfPCell(new Paragraph("Số lượng sản phảm đã mua ", fontMain));
+            cellTblKH_SLM.setBorderColor(BaseColor.BLACK);
+            cellTblKH_SLM.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblKH_SLM.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblKH_SLM);
+            
+            //Số lượng hóa đơn đã mua
+            PdfPCell cellTblKH_SLHD = new PdfPCell(new Paragraph("Số lượng hóa đơn", fontMain));
+            cellTblKH_SLHD.setBorderColor(BaseColor.BLACK);
+            cellTblKH_SLHD.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblKH_SLHD.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblKH_SLHD);
 
-                //Thành Tiền
-                PdfPCell cellTblKH_ThanhTien = new PdfPCell(new Paragraph("Thành tiền ", fontMain));
-                cellTblKH_ThanhTien.setBorderColor(BaseColor.BLACK);
-                cellTblKH_ThanhTien.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTblKH_ThanhTien.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tableDsSP.addCell(cellTblKH_ThanhTien);
+            //Thành Tiền
+            PdfPCell cellTblKH_ThanhTien = new PdfPCell(new Paragraph("Thành tiền ", fontMain));
+            cellTblKH_ThanhTien.setBorderColor(BaseColor.BLACK);
+            cellTblKH_ThanhTien.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblKH_ThanhTien.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblKH_ThanhTien);
 
+            //Thong tin san pham
+            for (KhachHang kh : listKH) {
+                //Mã kháchhàng 
+                PdfPCell cellTblKH_maKH_giaTri = new PdfPCell(new Paragraph(kh.getMaKH(), fontMain));
+                cellTblKH_maKH_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblKH_maKH_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblKH_maKH_giaTri);
 
-                //Thong tin san pham
-                for (KhachHang kh : listKH) {
-                    //Mã kháchhàng 
-                    PdfPCell cellTblKH_maKH_giaTri = new PdfPCell(new Paragraph(kh.getMaKH(), fontMain));
-                    cellTblKH_maKH_giaTri.setBorderColor(BaseColor.BLACK);
-                    cellTblKH_maKH_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    tableDsSP.addCell(cellTblKH_maKH_giaTri);
+                //Tên kháchhàng 
+                PdfPCell cellTblKH_tenKH_giaTri = new PdfPCell(new Paragraph(kh.getHoTen(), fontMain));
+                cellTblKH_tenKH_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblKH_tenKH_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblKH_tenKH_giaTri);
 
-                    //Tên kháchhàng 
-                    PdfPCell cellTblKH_tenKH_giaTri = new PdfPCell(new Paragraph(kh.getHoTen(), fontMain));
-                    cellTblKH_tenKH_giaTri.setBorderColor(BaseColor.BLACK);
-                    cellTblKH_tenKH_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    tableDsSP.addCell(cellTblKH_tenKH_giaTri);
+                //SDT
+                PdfPCell cellTblKH_SDT_giaTri = new PdfPCell(new Paragraph(kh.getSdt(), fontMain));
+                cellTblKH_SDT_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblKH_SDT_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblKH_SDT_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblKH_SDT_giaTri);
 
-                    //SDT
-                    PdfPCell cellTblKH_SDT_giaTri = new PdfPCell(new Paragraph(kh.getSdt(), fontMain));
-                    cellTblKH_SDT_giaTri.setBorderColor(BaseColor.BLACK);
-                    cellTblKH_SDT_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    cellTblKH_SDT_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    tableDsSP.addCell(cellTblKH_SDT_giaTri);
+                //Số lượng kh mua
+                int tongSL = dao_HoaDon.getSoLuongKhachHangMua(kh.getMaKH());
 
-                    //Số lượng kh mua
-                    int tongSL = dao_HoaDon.getSoLuongKhachHangMua(kh.getMaKH());
+                PdfPCell cellTblKH_SLM_giaTri = new PdfPCell(new Paragraph(tongSL + "", fontMain));
+                cellTblKH_SLM_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblKH_SLM_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblKH_SLM_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblKH_SLM_giaTri);
+                
+                //Số lượng hóa đơn đã mua
+                int tongHD = dao_HoaDon.getSoLuongHoaDonKhachHangMua(kh.getMaKH());
+                PdfPCell cellTblKH_SLHD_giaTri = new PdfPCell(new Paragraph(tongHD+"", fontMain));
+                cellTblKH_SLHD_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblKH_SLHD_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblKH_SLHD_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblKH_SLHD_giaTri);
 
-                    PdfPCell cellTblKH_SLM_giaTri = new PdfPCell(new Paragraph(tongSL + "", fontMain));
-                    cellTblKH_SLM_giaTri.setBorderColor(BaseColor.BLACK);
-                    cellTblKH_SLM_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    cellTblKH_SLM_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    tableDsSP.addCell(cellTblKH_SLM_giaTri);
+                //Thành tiền
+                double tongTien = dao_HoaDon.getThanhTienKhachHangMua(kh.getMaKH());
+                PdfPCell cellTblKH_thanhTien_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format((long) tongTien) + "", fontMain));
+                cellTblKH_thanhTien_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblKH_thanhTien_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblKH_thanhTien_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblKH_thanhTien_giaTri);
 
-                    //Thành tiền
-                    double tongTien = dao_HoaDon.getThanhTienKhachHangMua(kh.getMaKH());
-                    PdfPCell cellTblKH_thanhTien_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format((long) tongTien) + "", fontMain));
-                    cellTblKH_thanhTien_giaTri.setBorderColor(BaseColor.BLACK);
-                    cellTblKH_thanhTien_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                    cellTblKH_thanhTien_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    tableDsSP.addCell(cellTblKH_thanhTien_giaTri);               
-
-                }
+            }
 
             document.add(tableDsSP);
 
@@ -383,11 +399,11 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã khách hàng", "Họ tên", "SDT", "Số lượng sản phẩm đã mua", "Thành tiền"
+                "Mã khách hàng", "Họ tên", "SDT", "Số lượng sản phẩm đã mua", "Số lượn hóa đơn", "Thành tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -619,6 +635,11 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
                 btn_LamMoiMouseExited(evt);
             }
         });
+        btn_LamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LamMoiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -715,7 +736,9 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_ThongKeMouseClicked
 
     private void btn_Top5KHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Top5KHActionPerformed
-        // TODO add your handling code here:
+        activeTatCa = false;
+        activeTop5KhachHang = true;
+        tblThongKeTop5KhachHang();
     }//GEN-LAST:event_btn_Top5KHActionPerformed
 
     private void btn_XuatThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XuatThongKeActionPerformed
@@ -727,6 +750,12 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         }
         xuatBaoCaoThongKe(listKH);
     }//GEN-LAST:event_btn_XuatThongKeActionPerformed
+
+    private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
+        activeTatCa = true;
+        activeTop5KhachHang = false;
+        tblThongKeKhachHang();
+    }//GEN-LAST:event_btn_LamMoiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

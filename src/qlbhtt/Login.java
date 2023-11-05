@@ -9,6 +9,7 @@ import dao.Dao_NhanVien;
 import dao.Dao_TaiKhoan;
 import entity.NhanVien;
 import entity.TaiKhoan;
+import java.awt.Cursor;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +63,7 @@ public class Login extends javax.swing.JFrame {
         pwd_MatKhau = new javax.swing.JPasswordField();
         lbl_IconPWClose = new javax.swing.JLabel();
         lbl_IconUser = new javax.swing.JLabel();
+        lbl_QuenMatKhau = new javax.swing.JLabel();
         lbl_ImageLogin = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -137,6 +139,22 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        lbl_QuenMatKhau.setBackground(new java.awt.Color(208, 212, 202));
+        lbl_QuenMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_QuenMatKhau.setForeground(new java.awt.Color(51, 0, 51));
+        lbl_QuenMatKhau.setText("Quên mật khẩu?");
+        lbl_QuenMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_QuenMatKhauMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_QuenMatKhauMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_QuenMatKhauMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_FormDangNhapLayout = new javax.swing.GroupLayout(pnl_FormDangNhap);
         pnl_FormDangNhap.setLayout(pnl_FormDangNhapLayout);
         pnl_FormDangNhapLayout.setHorizontalGroup(
@@ -144,16 +162,18 @@ public class Login extends javax.swing.JFrame {
             .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
-                        .addComponent(pwd_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_IconPWClose))
                     .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
                         .addComponent(txt_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_IconUser))
-                    .addComponent(lbl_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
+                        .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_QuenMatKhau)
+                            .addComponent(pwd_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_IconPWClose)))
                 .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FormDangNhapLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,7 +202,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pwd_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_IconPWClose))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_QuenMatKhau)
+                .addGap(17, 17, 17)
                 .addComponent(btn_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
@@ -231,14 +253,6 @@ public class Login extends javax.swing.JFrame {
         if(taiKhoan!=null) {
             nhanVien = daoNhanVien.getNhanVienTheoMa(taiKhoan.getNhanVien().getMaNV());
             try {
-                //            HomePage home =null;
-//            try {
-//                home = new HomePage();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            home.setVisible(true);
-//            this.setVisible(false);
                 HomePage homePage  = new HomePage();
                 homePage.setVisible(true);
                 this.setVisible(false);
@@ -247,7 +261,7 @@ public class Login extends javax.swing.JFrame {
             }
             
         } else {
-            JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu sai!");
+            JOptionPane.showMessageDialog(this, "Tài khoản này không tồn tại");
         }
 
     }//GEN-LAST:event_btn_LoginActionPerformed
@@ -272,6 +286,24 @@ public class Login extends javax.swing.JFrame {
     private void lbl_IconUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_IconUserMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_lbl_IconUserMouseClicked
+
+    private void lbl_QuenMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_QuenMatKhauMouseEntered
+        lbl_QuenMatKhau.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lbl_QuenMatKhauMouseEntered
+
+    private void lbl_QuenMatKhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_QuenMatKhauMouseExited
+        lbl_QuenMatKhau.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_lbl_QuenMatKhauMouseExited
+
+    private void lbl_QuenMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_QuenMatKhauMouseClicked
+        try {
+            new ManHinh_TimTaiKhoan().setVisible(true);
+            this.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_lbl_QuenMatKhauMouseClicked
 
     /**
      * @param args the command line arguments
@@ -319,6 +351,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_IconUser;
     private javax.swing.JLabel lbl_ImageLogin;
     private javax.swing.JLabel lbl_Password;
+    private javax.swing.JLabel lbl_QuenMatKhau;
     private javax.swing.JLabel lbl_TaiKhoan;
     private javax.swing.JLabel lbl_Title;
     private javax.swing.JPanel pnl_FormDangNhap;

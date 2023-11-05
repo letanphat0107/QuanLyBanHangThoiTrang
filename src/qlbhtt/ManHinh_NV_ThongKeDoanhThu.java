@@ -67,13 +67,12 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
     private Dao_SanPham dao_SanPham = new Dao_SanPham();
     private Dao_HoaDon dao_HoaDon = new Dao_HoaDon();
 
-    private static Boolean activeTatCa = false;
-    private static Boolean activeHangMoiNhap = false;
-    private static Boolean activeHetHang = false;
-    private static Boolean activeBanChay = false;
-    private static Boolean activeBanCham = false;
+    private boolean activeTatCa = false;
+    private boolean activeTKTheoNgay = false;
 
     private final NhanVien nhanVien = Login.nhanVien;
+    private int tongSoSanPhamBanDuoc;
+    private double tongDoanhThu;
 
     /**
      * Creates new form quanly
@@ -81,6 +80,11 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
     public ManHinh_NV_ThongKeDoanhThu() throws SQLException {
         connect.connect();
         initComponents();
+        
+        tbl_SanPham.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_SanPham.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
+        activeTatCa = true;
         khoiTaoGiaTri();
         tblDanhSachSanPham();
     }
@@ -136,12 +140,12 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
 
         ArrayList<SanPham> listSanPham = dao_HoaDon.thongKeDanhSachSanPhamVoiSoLuongBanDuoc(mauSac, phanLoai, kichThuoc);
         DefaultTableModel dtm = (DefaultTableModel) tbl_SanPham.getModel();
-        int tongSoSanPhamBanDuoc = listSanPham.size();
-        double tongDoanhThu = dao_CTHD.getTongDoanhThu();
+        tongSoSanPhamBanDuoc = listSanPham.size();
+        double tongDoanhThu = 0;
         for (SanPham sp : listSanPham) {
-            System.out.println("qlbhtt.ManHinh_NV_ThongKeDoanhThu.tblDanhSachSanPham()"+sp.getMaSP());
             int soLuongBanDuoc = dao_CTHD.getSoLuongSanPhamBanDuoc(sp.getMaSP());
             double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
+            tongDoanhThu += dao_CTHD.getTongDoanhThu(sp.getMaSP());
             double tiLeDoanhThu = (sp.getGiaBan() / tongDoanhThu) * 100;
             Object[] rowData = {sp.getMaSP(), sp.getTenSP(), sp.getPhanLoai().getLoaiSanPham(), NumberFormat.getInstance().format(sp.getGiaBan()), NumberFormat.getInstance().format(sp.getGiaNhap()), sp.getKichThuoc().getKichThuoc(),
                 sp.getMauSac().getMauSac(), sp.getChatLieu().getChatLieu(), sp.getNhaCungCap().getTenNCC(), soLuongBanDuoc, NumberFormat.getInstance().format(doanhThu), String.format("%.2f", tiLeDoanhThu)};
@@ -176,11 +180,12 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         String denNgay = new SimpleDateFormat("yyyy-MM-dd").format(dch_DenNgay.getDate());
         ArrayList<SanPham> listSanPham = dao_HoaDon.thongKeDanhSachSanPhamVoiSoLuongBanDuoc(mauSac, phanLoai, kichThuoc, tuNgay, denNgay);
         DefaultTableModel dtm = (DefaultTableModel) tbl_SanPham.getModel();
-        int tongSoSanPhamBanDuoc = listSanPham.size();
-        double tongDoanhThu = dao_CTHD.getTongDoanhThu();
+        tongSoSanPhamBanDuoc = listSanPham.size();
+        tongDoanhThu = 0;
         for (SanPham sp : listSanPham) {
             int soLuongBanDuoc = dao_CTHD.getSoLuongSanPhamBanDuoc(sp.getMaSP());
             double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
+            tongDoanhThu += dao_CTHD.getTongDoanhThu(sp.getMaSP());
             double tiLeDoanhThu = (sp.getGiaBan() / tongDoanhThu) * 100;
             Object[] rowData = {sp.getMaSP(), sp.getTenSP(), sp.getPhanLoai().getLoaiSanPham(), NumberFormat.getInstance().format(sp.getGiaBan()), NumberFormat.getInstance().format(sp.getGiaNhap()), sp.getKichThuoc().getKichThuoc(),
                 sp.getMauSac().getMauSac(), sp.getChatLieu().getChatLieu(), sp.getNhaCungCap().getTenNCC(), soLuongBanDuoc, NumberFormat.getInstance().format(doanhThu), String.format("%.2f", tiLeDoanhThu)};
@@ -210,7 +215,6 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
             NhaCungCap nhaCungCap = dao_NhaCungCap.getNhaCungCapTheoTen(tbl_SanPham.getValueAt(i, 8).toString());
             int soLuong = Integer.parseInt(tbl_SanPham.getValueAt(i, 9).toString());
             String tiLeDoanhThu = tbl_SanPham.getValueAt(i, 11).toString();
-            System.out.println("qlbhtt.ManHinh_NV_ThongKeDoanhThu.getGiaTriTrongBang()" + tiLeDoanhThu.toString());
             SanPham sp = new SanPham(maSP, tenSP, soLuong, giaNhap, giaBan, new Date(), tiLeDoanhThu, chatLieu, kichThuoc, mauSac, phanLoai, nhaCungCap);
             listSanPham.add(sp);
         }
@@ -247,14 +251,25 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
                 }
                 randomNumber.append(randomChar);
             }
-            String pathFull = "data/BaoCaoTKDT/" + "BaoCaoDoanhThu" + randomNumber + ".pdf";
+            String pathFull = null;
+            if (activeTatCa) {
+                pathFull = "data/BaoCaoTKDT/" + "BaoCaoDoanhThu" + randomNumber + ".pdf";
+            } else if (activeTatCa) {
+                pathFull = "data/BaoCaoTKDT/" + "BaoCaoDoanhThuTheoNgay" + randomNumber + ".pdf";
+            }
 
             Document document = new Document(PageSize.A4.rotate()); //Add page khổ ngang
             PdfWriter.getInstance(document, new FileOutputStream(pathFull)); //Tạo ra đối tượng ghi dữ liệu vào tài liệu PDF
             document.open();
 
             //Tiêu đề 
-            Paragraph paragraph = new Paragraph("Thống Kê Doanh Thu", fontTD);
+            Paragraph paragraph = null;
+            if (activeTatCa) {
+                paragraph  = new Paragraph("Thống Kê Doanh Thu", fontTD);
+            } else if (activeTatCa) {
+                paragraph  = new Paragraph("Thống Kê Doanh Thu Theo Ngày", fontTD);
+            }
+            
 
             paragraph.setAlignment(Element.ALIGN_CENTER);
             document.add(paragraph);
@@ -293,7 +308,26 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
             cellChucVu.setBorderColor(BaseColor.WHITE);
             tableMuc.addCell(cellChucVu);
 
+            //Tạo Mục
+            PdfPTable tableTong = new PdfPTable(1);
+            tableTong.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
+            tableTong.setSpacingBefore(10f); //Đặt khoảng cách là 10
+            tableTong.setSpacingAfter(10f);
+
+            float[] chieuRongCot_Tong = {1f};
+            tableMuc.setWidths(chieuRongCot);
+            //Mục ngày in
+            PdfPCell cellTongSPBan = new PdfPCell(new Paragraph("Tổng sản phẩm bán được: " + tongSoSanPhamBanDuoc, fontMain));
+            cellTongSPBan.setBorderColor(BaseColor.WHITE);
+            tableTong.addCell(cellTongSPBan);
+
+            //Mục chức vụ
+            PdfPCell cellTongDoanhThu = new PdfPCell(new Paragraph("Tổng doanh thu: " + txt_TongDoanhThu.getText(), fontMain));
+            cellTongDoanhThu.setBorderColor(BaseColor.WHITE);
+            tableTong.addCell(cellTongDoanhThu);
+
             document.add(tableMuc);
+            document.add(tableTong);
 
             //Tạo bảng sản phẩm
             PdfPTable tableDsSP = new PdfPTable(12);
@@ -457,25 +491,23 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
                 cellTblSP_SL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cellTblSP_SL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableDsSP.addCell(cellTblSP_SL_giaTri);
-                
-                
-                double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
-                
-                        //Doanh Thu
-                        PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(doanhThu+""), fontMain));
-                        cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
-                        cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                        cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                        tableDsSP.addCell(cellTblSP_doanhThu_giaTri);
 
-                        //Tỉ Lệ doanh THu
-                        PdfPCell cellTblSP_tiLeDoanhThu_giaTri = new PdfPCell(new Paragraph(sp.getHinhAnh(), fontMain));
-                        cellTblSP_tiLeDoanhThu_giaTri.setBorderColor(BaseColor.BLACK);
-                        cellTblSP_tiLeDoanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                        cellTblSP_tiLeDoanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                        tableDsSP.addCell(cellTblSP_tiLeDoanhThu_giaTri);
-                    
-                
+                double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
+
+                //Doanh Thu
+                PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(doanhThu), fontMain));
+                cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_doanhThu_giaTri);
+
+                //Tỉ Lệ doanh THu
+                PdfPCell cellTblSP_tiLeDoanhThu_giaTri = new PdfPCell(new Paragraph(sp.getHinhAnh(), fontMain));
+                cellTblSP_tiLeDoanhThu_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_tiLeDoanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_tiLeDoanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_tiLeDoanhThu_giaTri);
+
             }
 
             document.add(tableDsSP);
@@ -951,6 +983,8 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         } else if (!chk_TatCa.isSelected()) {
             tblDanhSachSanPhamTheoThoiGian();
         }
+        activeTatCa = false;
+        activeTKTheoNgay = true;
     }//GEN-LAST:event_dch_TuNgayPropertyChange
 
     private void dch_DenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_DenNgayPropertyChange
@@ -959,6 +993,8 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         } else if (!chk_TatCa.isSelected()) {
             tblDanhSachSanPhamTheoThoiGian();
         }
+        activeTatCa = false;
+        activeTKTheoNgay = true;
     }//GEN-LAST:event_dch_DenNgayPropertyChange
 
     private void chk_TatCaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chk_TatCaItemStateChanged
@@ -967,6 +1003,8 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         } else if (!chk_TatCa.isSelected()) {
             tblDanhSachSanPhamTheoThoiGian();
         }
+        activeTatCa = true;
+        activeTKTheoNgay = false;
     }//GEN-LAST:event_chk_TatCaItemStateChanged
 
     private void btn_XuatThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XuatThongKeActionPerformed
