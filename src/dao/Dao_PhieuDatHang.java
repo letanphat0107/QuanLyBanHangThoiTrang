@@ -77,6 +77,27 @@ public class Dao_PhieuDatHang {
             }
         }
     }
+    /*
+    *@param tham số: mã phieu dat hang
+    */
+    public void xoaPhieuDatHang(String maPhieuDatHang) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "DELETE FROM PhieuDatHang WHERE maPhieuDatHang = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maPhieuDatHang);
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * Lấy thông tin phiếu đặt hàng theo mã

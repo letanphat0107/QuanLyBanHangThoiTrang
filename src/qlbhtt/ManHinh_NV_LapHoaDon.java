@@ -4,6 +4,18 @@
  */
 package qlbhtt;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import connectDB.Connect;
 import dao.Dao_SanPham;
 import dao.Dao_ChatLieu;
@@ -37,9 +49,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.EventObject;
+import java.util.Random;
 import javax.swing.JTable;
 import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
@@ -158,7 +175,8 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         lbl_SoTienTra = new javax.swing.JLabel();
         lbl_TienKHDua = new javax.swing.JLabel();
         lbl_DonViTien = new javax.swing.JLabel();
-        lbl_DonViTien1 = new javax.swing.JLabel();
+        lbl_DonViTienTra = new javax.swing.JLabel();
+        btn_TaiLaiTinhToan = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(199, 210, 213));
         setMinimumSize(new java.awt.Dimension(1000, 550));
@@ -614,7 +632,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_PhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
@@ -662,9 +680,11 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         lbl_DonViTien.setForeground(new java.awt.Color(255, 0, 0));
         lbl_DonViTien.setText("VND");
 
-        lbl_DonViTien1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lbl_DonViTien1.setForeground(new java.awt.Color(255, 0, 0));
-        lbl_DonViTien1.setText("VND");
+        lbl_DonViTienTra.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbl_DonViTienTra.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_DonViTienTra.setText("VND");
+
+        btn_TaiLaiTinhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-reset-30.png"))); // NOI18N
 
         javax.swing.GroupLayout pnl_NutChucNangLayout = new javax.swing.GroupLayout(pnl_NutChucNang);
         pnl_NutChucNang.setLayout(pnl_NutChucNangLayout);
@@ -686,18 +706,20 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_SoTienTra)
                                 .addGap(18, 18, 18)
-                                .addComponent(lbl_DonViTien1)))
+                                .addComponent(lbl_DonViTienTra)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NutChucNangLayout.createSequentialGroup()
                         .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NutChucNangLayout.createSequentialGroup()
+                            .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btn_LapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NutChucNangLayout.createSequentialGroup()
+                            .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                                 .addComponent(lbl_TienKHDua)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_TienKHDua, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
-                        .addGap(50, 50, 50))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_TaiLaiTinhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,14 +730,16 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                     .addComponent(lbl_SoTienTong)
                     .addComponent(lbl_DonViTien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_TienKHDua, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_TienKHDua))
+                .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_TienKHDua, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_TienKHDua))
+                    .addComponent(btn_TaiLaiTinhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(12, 12, 12)
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_TienTra)
                     .addComponent(lbl_SoTienTra)
-                    .addComponent(lbl_DonViTien1))
+                    .addComponent(lbl_DonViTienTra))
                 .addGap(35, 35, 35)
                 .addComponent(btn_LapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1101,8 +1125,286 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             dao_CTHD.themCTHD(cthd);
         }
         xuLyGiamSLSanPhamTrongKho();
+//        xuatHoaDon(hd);
         resetPanel();
         JOptionPane.showMessageDialog(this, "Lập hóa đơn thành công");
+    }
+    
+    public void xuatHoaDon(HoaDon hd){
+        try {
+
+            Font fontMain = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
+            Font fontTD = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            fontTD.setSize(22);
+            fontTD.setFamily(Font.BOLD + "");
+
+            // Tạo một đối tượng Random
+            //Random random = new Random();
+
+            // Sinh dãy số tự nhiên ngẫu nhiên gồm 3 ký tự (bao gồm chữ cái và số từ 0 đến 9)
+            //StringBuilder randomNumber = new StringBuilder(3);
+            //for (int i = 0; i < 3; i++) {
+                //char randomChar;
+                //if (random.nextBoolean()) {
+                    // Sinh ra một chữ cái ngẫu nhiên
+                    //randomChar = (char) (random.nextInt(26) + 'A');
+                //} else {
+                    // Sinh ra một số ngẫu nhiên từ 0 đến 9
+                    //randomChar = (char) (random.nextInt(10) + '0');
+                //}
+                //randomNumber.append(randomChar);
+            //}
+            String pathFull = "data/HoaDon/" + "HoaDon" + hd.getMaHoaDon() + ".pdf";
+
+            Document document = new Document(PageSize.A4.rotate()); //Add page khổ ngang
+            PdfWriter.getInstance(document, new FileOutputStream(pathFull)); //Tạo ra đối tượng ghi dữ liệu vào tài liệu PDF
+            document.open();
+
+            //Tiêu đề 
+            Paragraph paragraph = new Paragraph("Hóa đơn bán hàng", fontTD);
+
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph);
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph(" "));
+
+            //Tạo Mục
+            PdfPTable tableMuc = new PdfPTable(2);
+            tableMuc.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
+            tableMuc.setSpacingBefore(10f); //Đặt khoảng cách là 10
+            tableMuc.setSpacingAfter(10f);
+
+            float[] chieuRongCot = {1f, 1f};
+            tableMuc.setWidths(chieuRongCot);
+
+            //Mục mã nhân viên
+            PdfPCell cellMaNV = new PdfPCell(new Paragraph("Mã nhân viên: " + Login.nhanVien.getMaNV(), fontMain));
+            cellMaNV.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellMaNV);
+
+            //Mục ngày in
+            Date ngayIn = new Date();
+            SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy");
+            String ngayInformat = fomatter.format(ngayIn);
+            PdfPCell cellNgayIn = new PdfPCell(new Paragraph("Ngày in: " + ngayInformat, fontMain));
+            cellNgayIn.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellNgayIn);
+
+            //Mục ngày in
+            PdfPCell cellTenNV = new PdfPCell(new Paragraph("Tên Nhân viên: " + Login.nhanVien.getHoTen(), fontMain));
+            cellTenNV.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellTenNV);
+
+            //Mục chức vụ
+            PdfPCell cellChucVu = new PdfPCell(new Paragraph("Chức vụ: " + Login.nhanVien.getChuVu(), fontMain));
+            cellChucVu.setBorderColor(BaseColor.WHITE);
+            tableMuc.addCell(cellChucVu);
+
+            document.add(tableMuc);
+
+            //Tạo bảng sản phẩm
+            PdfPTable tableDsSP = new PdfPTable(12);
+            tableDsSP.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
+            tableDsSP.setSpacingBefore(10f); //Đặt khoảng cách là 10
+            tableDsSP.setSpacingAfter(10f);
+
+            //Tiêu đề bảng
+            float[] chieuRongCotSP = {2f, 4f, 2f, 2f, 2f, 2f, 2f, 2f, 4f, 2f, 2f, 2f};
+            tableDsSP.setWidths(chieuRongCotSP);
+
+            //Mã sản phẩm
+            PdfPCell cellTblSP_maSP = new PdfPCell(new Paragraph("Mã sản phẩm ", fontMain));
+            cellTblSP_maSP.setBorderColor(BaseColor.BLACK);
+            cellTblSP_maSP.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
+            cellTblSP_maSP.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
+            tableDsSP.addCell(cellTblSP_maSP);
+
+            //Tên sản phẩm
+            PdfPCell cellTblSP_tenSP = new PdfPCell(new Paragraph("Tên sản phẩm ", fontMain));
+            cellTblSP_tenSP.setBorderColor(BaseColor.BLACK);
+            cellTblSP_tenSP.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_tenSP.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_tenSP);
+
+            //Phân loại
+            PdfPCell cellTblSP_PL = new PdfPCell(new Paragraph("Phân loại ", fontMain));
+            cellTblSP_PL.setBorderColor(BaseColor.BLACK);
+            cellTblSP_PL.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_PL.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_PL);
+
+            //Giá bán
+            PdfPCell cellTblSP_giaBan = new PdfPCell(new Paragraph("Giá bán ", fontMain));
+            cellTblSP_giaBan.setBorderColor(BaseColor.BLACK);
+            cellTblSP_giaBan.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_giaBan.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_giaBan);
+
+            //Giá nhập
+            PdfPCell cellTblSP_giaNhap = new PdfPCell(new Paragraph("Giá nhập ", fontMain));
+            cellTblSP_giaNhap.setBorderColor(BaseColor.BLACK);
+            cellTblSP_giaNhap.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_giaNhap.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_giaNhap);
+
+            //Kích thước
+            PdfPCell cellTblSP_KT = new PdfPCell(new Paragraph("Kích cỡ ", fontMain));
+            cellTblSP_KT.setBorderColor(BaseColor.BLACK);
+            cellTblSP_KT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_KT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_KT);
+
+            //Màu sắc
+            PdfPCell cellTblSP_MS = new PdfPCell(new Paragraph("Màu sắc", fontMain));
+            cellTblSP_MS.setBorderColor(BaseColor.BLACK);
+            cellTblSP_MS.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_MS.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_MS);
+
+            //Chất liệu
+            PdfPCell cellTblSP_CL = new PdfPCell(new Paragraph("Chất liệu ", fontMain));
+            cellTblSP_CL.setBorderColor(BaseColor.BLACK);
+            cellTblSP_CL.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_CL.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_CL);
+
+            // Nhà cung cấp
+            PdfPCell cellTblSP_NCC = new PdfPCell(new Paragraph("Nhà cung cấp ", fontMain));
+            cellTblSP_NCC.setBorderColor(BaseColor.BLACK);
+            cellTblSP_NCC.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_NCC.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_NCC);
+
+            //Số lượng
+            PdfPCell cellTblSP_SL = new PdfPCell(new Paragraph("Số lượng bán", fontMain));
+            cellTblSP_SL.setBorderColor(BaseColor.BLACK);
+            cellTblSP_SL.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTblSP_SL.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableDsSP.addCell(cellTblSP_SL);
+
+//            //Doanh Thu
+//            PdfPCell cellTblSP_doanhThu = new PdfPCell(new Paragraph("Doanh thu ", fontMain));
+//            cellTblSP_doanhThu.setBorderColor(BaseColor.BLACK);
+//            cellTblSP_doanhThu.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//            cellTblSP_doanhThu.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            tableDsSP.addCell(cellTblSP_doanhThu);
+//
+//            //Doanh Thu
+//            PdfPCell cellTblSP_tiLeDoanhThu = new PdfPCell(new Paragraph("Tỉ lệ doanh thu ", fontMain));
+//            cellTblSP_tiLeDoanhThu.setBorderColor(BaseColor.BLACK);
+//            cellTblSP_tiLeDoanhThu.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//            cellTblSP_tiLeDoanhThu.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            tableDsSP.addCell(cellTblSP_tiLeDoanhThu);
+
+            //Thong tin san pham
+            for (SanPham sp : gioHang) {
+                //Mã sản phẩm
+                PdfPCell cellTblSP_maSP_giaTri = new PdfPCell(new Paragraph(sp.getMaSP(), fontMain));
+                cellTblSP_maSP_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_maSP_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblSP_maSP_giaTri);
+
+                //Tên sản phẩm
+                PdfPCell cellTblSP_tenSP_giaTri = new PdfPCell(new Paragraph(sp.getTenSP(), fontMain));
+                cellTblSP_tenSP_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_tenSP_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblSP_tenSP_giaTri);
+
+                //Phân loại
+                PdfPCell cellTblSP_PL_giaTri = new PdfPCell(new Paragraph(sp.getPhanLoai().getLoaiSanPham(), fontMain));
+                cellTblSP_PL_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_PL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_PL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_PL_giaTri);
+
+                //Giá bán
+                PdfPCell cellTblSP_giaBan_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(sp.getGiaBan()) + "", fontMain));
+                cellTblSP_giaBan_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_giaBan_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_giaBan_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_giaBan_giaTri);
+
+                //Giá nhập
+                PdfPCell cellTblSP_giaNhap_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format((long) sp.getGiaNhap()) + "", fontMain));
+                cellTblSP_giaNhap_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_giaNhap_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_giaNhap_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_giaNhap_giaTri);
+
+                //Kích thước
+                PdfPCell cellTblSP_KT_giaTri = new PdfPCell(new Paragraph(sp.getKichThuoc().getKichThuoc(), fontMain));
+                cellTblSP_KT_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_KT_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_KT_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_KT_giaTri);
+
+                //Màu sắc
+                PdfPCell cellTblSP_MS_giaTri = new PdfPCell(new Paragraph(sp.getMauSac().getMauSac(), fontMain));
+                cellTblSP_MS_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_MS_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_MS_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_MS_giaTri);
+
+                //Chất liệu
+                PdfPCell cellTblSP_CL_giaTri = new PdfPCell(new Paragraph(sp.getChatLieu().getChatLieu(), fontMain));
+                cellTblSP_CL_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_CL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_CL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_CL_giaTri);
+
+                // Nhà cung cấp
+                PdfPCell cellTblSP_NCC_giaTri = new PdfPCell(new Paragraph(sp.getNhaCungCap().getTenNCC(), fontMain));
+                cellTblSP_NCC_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_NCC_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDsSP.addCell(cellTblSP_NCC_giaTri);
+
+                //Số lượng
+                PdfPCell cellTblSP_SL_giaTri = new PdfPCell(new Paragraph(sp.getSoLuong() + "", fontMain));
+                cellTblSP_SL_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_SL_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_SL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_SL_giaTri);
+                
+                
+//                double doanhThu = dao_CTHD.getDoanhThuSanPhamBanDuoc(sp.getMaSP());
+//                
+//                        //Doanh Thu
+//                        PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(doanhThu+""), fontMain));
+//                        cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
+//                        cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                        cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+//                        tableDsSP.addCell(cellTblSP_doanhThu_giaTri);
+//
+//                        //Tỉ Lệ doanh THu
+//                        PdfPCell cellTblSP_tiLeDoanhThu_giaTri = new PdfPCell(new Paragraph(sp.getHinhAnh(), fontMain));
+//                        cellTblSP_tiLeDoanhThu_giaTri.setBorderColor(BaseColor.BLACK);
+//                        cellTblSP_tiLeDoanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                        cellTblSP_tiLeDoanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+//                        tableDsSP.addCell(cellTblSP_tiLeDoanhThu_giaTri);
+                    
+                
+            }
+
+            document.add(tableDsSP);
+
+            document.close();
+
+            // mở file pdf
+            try {
+                File file = new File(pathFull);
+                //Kiểm tra xem tệp có tồn tại hay không
+                if (file.exists()) {
+                    Desktop.getDesktop().open(file); //Mở file trên ứng dụng mặc định của tệp                
+                } else {
+                    System.out.println("File này không tồn tại!");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException | DocumentException e) {
+            e.printStackTrace();
+        }
     }
     
     public void resetPanel(){
@@ -1324,6 +1626,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Giam;
     private javax.swing.JButton btn_LapHoaDon;
+    private javax.swing.JButton btn_TaiLaiTinhToan;
     private javax.swing.JButton btn_Them;
     private javax.swing.JButton btn_ThemKhachHang;
     private javax.swing.JButton btn_TimKH;
@@ -1332,7 +1635,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmb_PhanLoai;
     private javax.swing.JLabel lbl_DonViGia;
     private javax.swing.JLabel lbl_DonViTien;
-    private javax.swing.JLabel lbl_DonViTien1;
+    private javax.swing.JLabel lbl_DonViTienTra;
     private javax.swing.JLabel lbl_GiaBan;
     private javax.swing.JLabel lbl_HinhAnhSanPham;
     private javax.swing.JLabel lbl_KichThuoc;

@@ -72,4 +72,23 @@ public class Dao_CTPhieuDatHang {
             }
         }
     }
+    
+    public void xoaCTPhieuDatHang(String maPhieuDatHang) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "DELETE FROM CTPhieuDatHang WHERE maPhieuDatHang = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maPhieuDatHang);
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

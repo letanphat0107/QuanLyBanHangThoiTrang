@@ -114,6 +114,8 @@ public class HomePage extends javax.swing.JFrame {
         spr_NV_ThanhNgang1 = new javax.swing.JPopupMenu.Separator();
         mni_NV_LapHoaDon = new javax.swing.JMenuItem();
         spr_NV_ThanhNgang2 = new javax.swing.JPopupMenu.Separator();
+        mni_NV_HuyDonDat = new javax.swing.JMenuItem();
+        spr_NV_ThanhNgang8 = new javax.swing.JPopupMenu.Separator();
         mni_NV_ThongKeDoanhThu = new javax.swing.JMenuItem();
         spr_NV_ThanhNgang3 = new javax.swing.JPopupMenu.Separator();
         mni_NV_ThongKeSanPham = new javax.swing.JMenuItem();
@@ -306,6 +308,17 @@ public class HomePage extends javax.swing.JFrame {
         });
         mnu_NhanVien.add(mni_NV_LapHoaDon);
         mnu_NhanVien.add(spr_NV_ThanhNgang2);
+
+        mni_NV_HuyDonDat.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        mni_NV_HuyDonDat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
+        mni_NV_HuyDonDat.setText("Hủy đơn đặt");
+        mni_NV_HuyDonDat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_NV_HuyDonDatActionPerformed(evt);
+            }
+        });
+        mnu_NhanVien.add(mni_NV_HuyDonDat);
+        mnu_NhanVien.add(spr_NV_ThanhNgang8);
 
         mni_NV_ThongKeDoanhThu.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_ThongKeDoanhThu.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -801,6 +814,19 @@ public class HomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnu_DangXuatMouseClicked
 
+    private void mni_NV_HuyDonDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_NV_HuyDonDatActionPerformed
+        ManHinh_NV_HuyDonDat pnlHinh_NV_HuyDonDat = null;
+        try {
+            pnlHinh_NV_HuyDonDat = new ManHinh_NV_HuyDonDat();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pnl_GiaoDienChucNang.removeAll();
+        pnl_GiaoDienChucNang.add(pnlHinh_NV_HuyDonDat);
+        pnl_GiaoDienChucNang.revalidate();
+        pnl_GiaoDienChucNang.repaint();
+    }//GEN-LAST:event_mni_NV_HuyDonDatActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -848,6 +874,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem mni_NCC_QuanLy;
     private javax.swing.JMenuItem mni_NCC_TimKiem;
     private javax.swing.JMenuItem mni_NV_DatHang;
+    private javax.swing.JMenuItem mni_NV_HuyDonDat;
     private javax.swing.JMenuItem mni_NV_LapHoaDon;
     private javax.swing.JMenuItem mni_NV_QuanLy;
     private javax.swing.JMenuItem mni_NV_ThongKeDoanhThu;
@@ -880,6 +907,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang5;
     private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang6;
     private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang7;
+    private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang8;
     private javax.swing.JPopupMenu.Separator spr_PK_ThanhNgang;
     private javax.swing.JPopupMenu.Separator spr_SP_ThanhNgang;
     private javax.swing.JPopupMenu.Separator spr_SP_ThanhNgang1;

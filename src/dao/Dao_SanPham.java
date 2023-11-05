@@ -222,6 +222,26 @@ public class Dao_SanPham {
         }
     }
     
+    public void tangSoLuongSanPham(String maSP, int soLuong) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "UPDATE SanPham SET soLuong = soLuong + ? WHERE maSP = ?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setInt(1, soLuong);
+            prestmt.setString(2, maSP);
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     public ArrayList<SanPham> timKiemQuanAo(String maSP, String tenSP, String tenPhanLoai, String tenNCC, String tenMauSac, String tenChatLieu, String tenKichThuoc) {
         ArrayList<SanPham> listQuanAo = new ArrayList<>();
         ChatLieu chatLieu;
