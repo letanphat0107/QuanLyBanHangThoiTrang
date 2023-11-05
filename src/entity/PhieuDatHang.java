@@ -1,5 +1,6 @@
 package entity;
 
+import dao.Dao_PhieuDatHang;
 import java.util.Date;
 
 public class PhieuDatHang {
@@ -10,6 +11,20 @@ public class PhieuDatHang {
 	
 	public PhieuDatHang() {
 		// TODO Auto-generated constructor stub
+	}
+        
+        public String auto_ID() {
+            Dao_PhieuDatHang daoPhieuDatHang = new Dao_PhieuDatHang();
+            String idPrefix = daoPhieuDatHang.taoMaPhieuDatHang();
+            return idPrefix;
+        }
+        
+        public PhieuDatHang( KhachHang khachHang, NhanVien nhanVien, Date ngayLap) {
+		
+		this.maPhieuDat = auto_ID();
+		this.khachHang = khachHang;
+		this.nhanVien = nhanVien;
+		this.ngayLap = ngayLap;
 	}
 
 	public PhieuDatHang(String maPhieuDat, KhachHang khachHang, NhanVien nhanVien, Date ngayLap) {

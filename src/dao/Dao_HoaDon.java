@@ -11,6 +11,7 @@ import entity.NhanVien;
 import entity.SanPham;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,6 +54,28 @@ public class Dao_HoaDon {
             e.printStackTrace();
         }
         return listHoaDon;
+    }
+    
+    public void themHoaDon(HoaDon hd) {
+        Connection con  = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "insert into HoaDon values(?, ?, ?, ?)";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, hd.getMaHoaDon());
+            prestmt.setString(2, hd.getKhachHang().getMaKH());
+            prestmt.setString(3, hd.getNhanVien().getMaNV());
+            prestmt.setDate(4, new java.sql.Date(hd.getNgayNhap().getTime()));
+            prestmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prestmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
