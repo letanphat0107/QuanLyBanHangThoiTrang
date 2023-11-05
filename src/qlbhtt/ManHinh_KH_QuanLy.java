@@ -654,10 +654,10 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         String email=txt_Email.getText();
         String soDienThoai=txt_SoDienThoai.getText();
         
-        KhachHang kh=new KhachHang(maKH, hoTen, email,soDienThoai, gt);
+        KhachHang kh=new KhachHang(maKH, hoTen, soDienThoai,email, gt);
        
         int row=tbl_KhachHang.getSelectedRow();
-        if(row!=0){
+        if(row!=-1){
             dao_KhachHang.capNhatKhachHang(kh);
             for (int i = 0; i < tbl_KhachHang.getRowCount(); i++) {
                 String maKH_update=tbl_KhachHang.getValueAt(row, 0).toString();
