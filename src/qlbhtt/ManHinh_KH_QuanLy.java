@@ -564,8 +564,8 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
             object[0] = kh.getMaKH();
             object[1] = kh.getHoTen();
             object[2] = kh.getGioiTinh();
-            object[4] = kh.getEmail();
-            object[3] = kh.getSdt();
+            object[3] = kh.getEmail();
+            object[4] = kh.getSdt();
             
             modelKhachHang.addRow(object);
         }

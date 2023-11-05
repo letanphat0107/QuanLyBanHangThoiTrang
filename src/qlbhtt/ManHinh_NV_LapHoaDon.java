@@ -26,6 +26,8 @@ import dao.Dao_NhaCungCap;
 import dao.Dao_KhachHang;
 import dao.Dao_HoaDon;
 import dao.Dao_CTHD;
+import dao.Dao_CTPhieuDatHang;
+import dao.Dao_PhieuDatHang;
 import entity.HoaDon;
 import entity.CTHD;
 import entity.KhachHang;
@@ -34,6 +36,8 @@ import entity.KichThuoc;
 import entity.MauSac;
 import entity.NhaCungCap;
 import entity.PhanLoai;
+import entity.PhieuDatHang;
+import entity.CTPhieuDatHang;
 import entity.SanPham;
 import java.io.File;
 import java.sql.SQLException;
@@ -80,9 +84,12 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     private Dao_KhachHang dao_KhachHang;
     private Dao_HoaDon dao_HoaDon;
     private Dao_CTHD dao_CTHD;
+    private Dao_PhieuDatHang dao_PhieuDatHang;
+    private Dao_CTPhieuDatHang dao_CTPhieuDatHang;
     private File file = null;
     private Connect connect;
     KhachHang khachHang = null;
+    String maPDH = null;
     ArrayList<SanPham> gioHang;
 
     /**
@@ -98,6 +105,8 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         dao_KhachHang = new Dao_KhachHang();
         dao_HoaDon = new Dao_HoaDon();
         dao_CTHD = new Dao_CTHD();
+        dao_PhieuDatHang = new Dao_PhieuDatHang();
+        dao_CTPhieuDatHang = new Dao_CTPhieuDatHang();
         gioHang = new ArrayList<>();
 
         connect = new Connect();
@@ -184,6 +193,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
         scr_DanhSachSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        scr_DanhSachSanPham.setPreferredSize(new java.awt.Dimension(600, 427));
 
         tbl_SanPham.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
@@ -204,7 +214,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         });
         tbl_SanPham.setMinimumSize(new java.awt.Dimension(135, 300));
         tbl_SanPham.setPreferredSize(new java.awt.Dimension(675, 300));
-        tbl_SanPham.setRowHeight(30);
+        tbl_SanPham.setRowHeight(22);
         tbl_SanPham.setShowGrid(true);
         tbl_SanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -354,7 +364,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
 
         lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_TieuDe.setText("LẶP HÓA ĐƠN");
+        lbl_TieuDe.setText("LẬP HÓA ĐƠN");
         lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
         lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
 
@@ -376,7 +386,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         pnl_DanhSachSanPham.setLayout(pnl_DanhSachSanPhamLayout);
         pnl_DanhSachSanPhamLayout.setHorizontalGroup(
             pnl_DanhSachSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_DanhSachSanPham)
+            .addComponent(scr_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnl_DieuChinhGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
             .addComponent(pnl_GioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnl_NV_TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -934,7 +944,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
 
     private void btn_LapHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LapHoaDonActionPerformed
         if (kiemTraThongTinKH()) {
-            if (kiemTraTienKHDua()) {
+            if (kiemTraTienKHDua() && kiemTraSoLuongMua()) {
                 xulyLapHoaDon();
             }
         } else
@@ -1085,7 +1095,41 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm trong danh sách giỏ hàng!");
         }
     }
+<<<<<<< HEAD
 
+=======
+    
+    private void kiemTraDonDatCuaKH(KhachHang kh){
+        PhieuDatHang pdh = dao_PhieuDatHang.getPDTTheoMaKH(kh.getMaKH());
+        if (pdh != null) {
+            maPDH = pdh.getMaPhieuDat();
+            ArrayList<CTPhieuDatHang> ctpdh = dao_CTPhieuDatHang.getAllCTPhieuDatHang(pdh.getMaPhieuDat());
+            for (CTPhieuDatHang cTPhieuDatHang : ctpdh) {
+                //Them vao gio hang
+                gioHang.add(cTPhieuDatHang.getSanPham());
+                //Them vao model gio hang
+                modelGioHang = (DefaultTableModel) tbl_GioHang.getModel();
+                Object[] object = new Object[9];
+                object[0] = cTPhieuDatHang.getSanPham().getMaSP();
+                object[1] = cTPhieuDatHang.getSanPham().getTenSP();
+                object[2] = cTPhieuDatHang.getSanPham().getPhanLoai().getLoaiSanPham();
+                object[3] = NumberFormat.getInstance().format( cTPhieuDatHang.getSanPham().getGiaBan());
+                object[4] = cTPhieuDatHang.getSanPham().getKichThuoc().getKichThuoc();
+                object[5] = cTPhieuDatHang.getSanPham().getMauSac().getMauSac();
+                object[6] = cTPhieuDatHang.getSanPham().getChatLieu().getChatLieu();
+                object[7] = cTPhieuDatHang.getSanPham().getNhaCungCap().getTenNCC();
+                object[8] = cTPhieuDatHang.getSoLuong();
+                modelGioHang.addRow(object);
+
+                //Xoa trang txt_SoLuongNhap
+                txt_SoLuongNhap.setText("");
+            }
+            capNhatTongTienGioHang();
+            txt_TienKHDua.setEditable(true);
+        }
+    }
+    
+>>>>>>> dff902cceed32c3f9538889b7938fc078d0f8d24
     private void xuLyTimKiemKhachHang() {
         String tenKhachHang = txt_TenKH.getText().trim();
         String soDienThoai = txt_SoDienThoai.getText().trim();
@@ -1102,7 +1146,12 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                     khachHang = kh;
                     JOptionPane.showMessageDialog(this, "Tìm thấy thông tin khách hàng");
                 }
+<<<<<<< HEAD
             } else {
+=======
+                kiemTraDonDatCuaKH(khachHang);
+            }else{
+>>>>>>> dff902cceed32c3f9538889b7938fc078d0f8d24
                 JOptionPane.showMessageDialog(this, "Không tìm thấy thông tin khách hàng");
             }
         }
@@ -1124,7 +1173,17 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             dao_CTHD.themCTHD(cthd);
         }
         xuLyGiamSLSanPhamTrongKho();
+<<<<<<< HEAD
         xuatHoaDon(hd);
+=======
+        if (maPDH != null) {
+            //Xoa CTPhieuDatHang
+            dao_CTPhieuDatHang.xoaCTPhieuDatHang(maPDH);
+            //Xóa PhieuDatHang
+            dao_PhieuDatHang.xoaPhieuDatHang(maPDH);
+        }
+//        xuatHoaDon(hd);
+>>>>>>> dff902cceed32c3f9538889b7938fc078d0f8d24
         resetPanel();
         JOptionPane.showMessageDialog(this, "Lập hóa đơn thành công");
     }
@@ -1334,8 +1393,24 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
 
     public void resetPanel() {
+=======
+    
+    private boolean kiemTraSoLuongMua(){
+        for (SanPham sanPham : gioHang) {
+            int slTonDuKien = dao_SanPham.getSanPhamTheoMa(sanPham.getMaSP()).getSoLuong() - sanPham.getSoLuong();
+            if (sanPham.getSoLuong() > dao_SanPham.getSanPhamTheoMa(sanPham.getMaSP()).getSoLuong() || slTonDuKien < 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng mua của "+sanPham.getMaSP()+ "vượt quá số lượng tồn");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void resetPanel(){
+>>>>>>> dff902cceed32c3f9538889b7938fc078d0f8d24
         modelGioHang = (DefaultTableModel) tbl_GioHang.getModel();
         modelGioHang.setRowCount(0);
         modelSanPham = (DefaultTableModel) tbl_SanPham.getModel();
@@ -1347,14 +1422,15 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         xoaTrang();
 
         khachHang = null;
-        txt_TenKH.setText("");
-        txt_SoDienThoai.setText("");
     }
 
     public void xoaTrang() {
         txt_MaSP.setText("");
         txt_TenSP.setText("");
         txt_GiaBan.setText("");
+        txt_TenKH.setText("");
+        txt_SoDienThoai.setText("");
+        txt_TienKHDua.setText("");
         lbl_HinhAnhSanPham.setIcon(null);
         cmb_KichThuoc.setSelectedIndex(0);
         cmb_MauSac.setSelectedIndex(0);
@@ -1450,6 +1526,8 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             object[7] = qa.getNhaCungCap().getTenNCC();
             object[8] = qa.getSoLuong();
             modelSanPham.addRow(object);
+            System.out.println("sp: " + qa);
+            System.out.println("qlbhtt.ManHinh_NV_LapHoaDon.docDuLieuSanPham()"+  dao_SanPham.getAllSanPham().size());
         }
     }
 

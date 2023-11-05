@@ -1030,9 +1030,9 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
             CTPhieuDatHang ctpdt = new CTPhieuDatHang(sanPham, pdt, sanPham.getSoLuong());
             dao_CTPDT.themCTPDT(ctpdt);
         }
-        xuLyGiamSLSanPhamTrongKho();
+        //xuLyGiamSLSanPhamTrongKho();
         resetPanel();
-        JOptionPane.showMessageDialog(this, "Lập hóa đơn thành công");
+        JOptionPane.showMessageDialog(this, "Tạo đơn đặt thành công");
     }
     
     public void resetPanel(){
