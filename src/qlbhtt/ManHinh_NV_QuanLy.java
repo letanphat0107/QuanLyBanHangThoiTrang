@@ -37,30 +37,35 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_NhanVien.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_NhanVien.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         loadDuLieuChucVu();
         docDuLieuNhanVien();
 //        setGiaTriTxt(); 
-    }    
-    
+    }
+
     /**
      * Load dữ liệu comboBox chức vụ
-     */ 
+     */
     public void loadDuLieuChucVu() {
         String giaTriKiemTa = null;
-       for (NhanVien nv : daoNhanVien.getAllNhanVien()) {
-          if(giaTriKiemTa!=null && giaTriKiemTa.equals(nv.getChuVu())) {
-               continue;
-           }
-           giaTriKiemTa = nv.getChuVu();
-           cmb_ChucVu.addItem(nv.getChuVu());           
-        } 
-       
+        for (NhanVien nv : daoNhanVien.getAllNhanVien()) {
+            if (giaTriKiemTa != null && giaTriKiemTa.equals(nv.getChuVu())) {
+                continue;
+            }
+            giaTriKiemTa = nv.getChuVu();
+            cmb_ChucVu.addItem(nv.getChuVu());
+        }
+
     }
+
     /**
      * Load dữ liệu vào bảng
      */
-     public void docDuLieuNhanVien() {
-         
+    public void docDuLieuNhanVien() {
+
         modelNhanVien = (DefaultTableModel) tbl_NhanVien.getModel();
         modelNhanVien.setRowCount(0);
         for (NhanVien nv : daoNhanVien.getAllNhanVienConHoaDong()) {
@@ -73,10 +78,10 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
             object[5] = nv.getSdt();
             object[6] = nv.getEmail();
             String trangThai = "";
-            if(nv.isTrangThai()) {
+            if (nv.isTrangThai()) {
                 trangThai = "Đang làm";
             } else {
-                 trangThai = "Nghỉ làm";
+                trangThai = "Nghỉ làm";
             }
             object[7] = trangThai;
             modelNhanVien.addRow(object);
@@ -173,7 +178,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         if (!rangBuocDuLieuNhap()) {
             return;
         }
-        
+
         String maNV = txt_MaNV.getText();
         String tenNV = txt_TenNV.getText();
         String gioiTinh = "";
@@ -187,7 +192,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         String sdt = txt_SoDienThoai.getText();
         String email = txt_Email.getText();
         boolean trangThai = rad_TrangThai.isSelected();
-        NhanVien nv = new NhanVien(tenNV, chucVu, email, sdt, diaChi, gioiTinh,trangThai);
+        NhanVien nv = new NhanVien(tenNV, chucVu, email, sdt, diaChi, gioiTinh, trangThai);
 
         daoNhanVien.themNhanVien(nv);
 
@@ -200,23 +205,29 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         object[4] = nv.getDiaChi();
         object[5] = nv.getSdt();
         object[6] = nv.getEmail();
-        object[7] = nv.isTrangThai();
+        String trangThai_insert = "";
+        if (nv.isTrangThai()) {
+            trangThai_insert = "Đang làm";
+        } else {
+            trangThai_insert = "Nghỉ làm";
+        }
+        object[7] = trangThai;
         modelNhanVien.addRow(object);
         xoaTrangTxt();
-        
+
         //add tài khoản
         String matKhau = "", phanQuyen = "";
         TaiKhoan taiKhoan = null;
-        if(chucVu.equalsIgnoreCase("Quản Lý")) {
-            matKhau = "admin";            
-            taiKhoan  = new TaiKhoan("admin", matKhau, chucVu, nv,trangThai);
-        
-        } else if(chucVu.equalsIgnoreCase("Nhân Viên")) {
-            matKhau = "1111";            
-            taiKhoan  = new TaiKhoan(nv.getMaNV(), matKhau, chucVu, nv,trangThai);
-        }               
+        if (chucVu.equalsIgnoreCase("Quản Lý")) {
+            matKhau = "admin";
+            taiKhoan = new TaiKhoan("admin", matKhau, chucVu, nv, trangThai);
+
+        } else if (chucVu.equalsIgnoreCase("Nhân Viên")) {
+            matKhau = "1111";
+            taiKhoan = new TaiKhoan(nv.getMaNV(), matKhau, chucVu, nv, trangThai);
+        }
         daoTaiKhoan.themTaiKhoan(taiKhoan);
-        
+
         JOptionPane.showMessageDialog(this, "Thêm thành công");
     }
 
@@ -230,8 +241,8 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
                 String maNhanVien = txt_MaNV.getText();
                 daoTaiKhoan.xoaTaiKhoan(maNhanVien);
                 daoNhanVien.xoaNhanVien(maNhanVien);
-                
-                modelNhanVien.removeRow(row);                
+
+                modelNhanVien.removeRow(row);
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
                 xoaTrangTxt();
             }
@@ -261,38 +272,38 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         } else if (rad_Nu.isSelected()) {
             gioiTinh = "Nữ";
         }
-        boolean trangThai = rad_TrangThai.isSelected(); 
+        boolean trangThai = rad_TrangThai.isSelected();
         NhanVien nv = new NhanVien(maNV, tenNV, chucVu, email, sdt, diaChi, gioiTinh, trangThai);
 
         int row = tbl_NhanVien.getSelectedRow();
-        if(!maNV.isEmpty()) {
-            daoNhanVien.capNhatNhanVien(nv); 
+        if (!maNV.isEmpty()) {
+            daoNhanVien.capNhatNhanVien(nv);
             daoTaiKhoan.capNhatTaiKhoan(nv.getMaNV());
             JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             docDuLieuNhanVien();
             xoaTrangTxt();
         } else {
-             if (row != -1) {
-            daoNhanVien.capNhatNhanVien(nv);
-            for (int i = 0; i < tbl_NhanVien.getRowCount(); i++) {
-                String maNV_Update = tbl_NhanVien.getValueAt(row, 0).toString();
-                if (maNV_Update.equalsIgnoreCase(maNV)) {
-                    tbl_NhanVien.setValueAt(tenNV, row, 1);
-                    tbl_NhanVien.setValueAt(gioiTinh, row, 2);
-                    tbl_NhanVien.setValueAt(chucVu, row, 3);
-                    tbl_NhanVien.setValueAt(diaChi, row, 4);
-                    tbl_NhanVien.setValueAt(sdt, row, 5);
-                    tbl_NhanVien.setValueAt(email, row, 6);
-                    tbl_NhanVien.setValueAt(trangThai ? "Đang làm" : "Nghỉ làm", row, 7);
+            if (row != -1) {
+                daoNhanVien.capNhatNhanVien(nv);
+                for (int i = 0; i < tbl_NhanVien.getRowCount(); i++) {
+                    String maNV_Update = tbl_NhanVien.getValueAt(row, 0).toString();
+                    if (maNV_Update.equalsIgnoreCase(maNV)) {
+                        tbl_NhanVien.setValueAt(tenNV, row, 1);
+                        tbl_NhanVien.setValueAt(gioiTinh, row, 2);
+                        tbl_NhanVien.setValueAt(chucVu, row, 3);
+                        tbl_NhanVien.setValueAt(diaChi, row, 4);
+                        tbl_NhanVien.setValueAt(sdt, row, 5);
+                        tbl_NhanVien.setValueAt(email, row, 6);
+                        tbl_NhanVien.setValueAt(trangThai ? "Đang làm" : "Nghỉ làm", row, 7);
+                    }
                 }
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                xoaTrangTxt();
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
             }
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-            xoaTrangTxt();
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần cập nhật!");
         }
-        }
-       
+
     }
 
     /**
@@ -306,13 +317,14 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         txt_SoDienThoai.setText(nv.getSdt());
         txt_Email.setText(nv.getEmail());
         cmb_ChucVu.setSelectedItem(nv.getChuVu());
-        if(nv.getGioiTinh().equalsIgnoreCase("Nam")) {
+        if (nv.getGioiTinh().equalsIgnoreCase("Nam")) {
             rad_Nam.setSelected(true);
-        } else if(nv.getGioiTinh().equalsIgnoreCase("Nữ")) {
+        } else if (nv.getGioiTinh().equalsIgnoreCase("Nữ")) {
             rad_Nu.setSelected(true);
         }
         rad_TrangThai.setSelected(nv.isTrangThai());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

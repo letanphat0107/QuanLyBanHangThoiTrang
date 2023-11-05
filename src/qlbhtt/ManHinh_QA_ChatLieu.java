@@ -35,6 +35,10 @@ public class ManHinh_QA_ChatLieu extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_ChatLieu.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_ChatLieu.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         docDuLieuLenBang();
     }
 

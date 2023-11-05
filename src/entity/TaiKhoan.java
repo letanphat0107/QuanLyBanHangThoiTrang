@@ -61,4 +61,9 @@ public class TaiKhoan {
         this.trangThai = trangThai;
     }
 
+    @Override
+    public String toString() {
+        return "TaiKhoan{" + "tenTaiKhoan=" + tenTaiKhoan + ", matKhau=" + matKhau + ", phanQuyen=" + phanQuyen + ", nhanVien=" + nhanVien + ", trangThai=" + trangThai + '}';
+    }
+
 }

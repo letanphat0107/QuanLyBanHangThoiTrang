@@ -30,6 +30,9 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
         connect.connect();
         initComponents();
         
+        tbl_NhaCungCap.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_NhaCungCap.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
 //      Lần đầu chạy chương trình, load dữ liệu vào bảng
         docDuLieuNhaCungCap();
     }

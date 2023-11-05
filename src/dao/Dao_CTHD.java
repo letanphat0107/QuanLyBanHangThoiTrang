@@ -91,14 +91,15 @@ public class Dao_CTHD {
      * Lấy tổng doanh thu
      * @return 
      */
-    public double getTongDoanhThu() {
+    public double getTongDoanhThu(String maSP) {
         Connect.getConnection();
         Connection conn = Connect.getConnection();
         String sql = "SELECT  SUM(cthd.soLuong*sp.giaBan) as DoanhThu\n"
-                + "FROM  CTHD cthd join SanPham sp on sp.maSP=cthd.maSP";
+                + "FROM  CTHD cthd join SanPham sp on sp.maSP=cthd.maSP where cthd.maSP = ?";
         try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            PreparedStatement prestmt = conn.prepareStatement(sql);
+            prestmt.setString(1,maSP);
+            ResultSet rs = prestmt.executeQuery();
             while (rs.next()) {
                 return rs.getDouble(1);
             }

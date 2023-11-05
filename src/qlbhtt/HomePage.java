@@ -33,6 +33,7 @@ public class HomePage extends javax.swing.JFrame {
         setTitle("Nhóm 10 - Quản Lý Bán Quần Áo Thời Trang");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setRole();
+        mnu_TenNVDangNhap.setText(nhanVien.getChuVu() +": "+ nhanVien.getHoTen());
     }
 
     /**
@@ -136,6 +137,7 @@ public class HomePage extends javax.swing.JFrame {
         spr_ThanhNgang10 = new javax.swing.JPopupMenu.Separator();
         mni_NCC_TimKiem = new javax.swing.JMenuItem();
         mnu_DangXuat = new javax.swing.JMenu();
+        mnu_TenNVDangNhap = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -482,7 +484,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_DangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         mnu_DangXuat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mnu_DangXuat.setMinimumSize(new java.awt.Dimension(120, 22));
-        mnu_DangXuat.setPreferredSize(new java.awt.Dimension(250, 30));
+        mnu_DangXuat.setPreferredSize(new java.awt.Dimension(200, 30));
         mnu_DangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnu_DangXuatMouseClicked(evt);
@@ -494,6 +496,11 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         mnu_ManHinhChinh.add(mnu_DangXuat);
+
+        mnu_TenNVDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-user-30.png"))); // NOI18N
+        mnu_TenNVDangNhap.setText("Nhân Viên: ");
+        mnu_TenNVDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        mnu_ManHinhChinh.add(mnu_TenNVDangNhap);
 
         setJMenuBar(mnu_ManHinhChinh);
 
@@ -862,6 +869,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenu mnu_PhuKien;
     private javax.swing.JMenu mnu_SanPham;
     private javax.swing.JMenu mnu_TaiKhoan;
+    private javax.swing.JMenu mnu_TenNVDangNhap;
     public static javax.swing.JPanel pnl_GiaoDienChucNang;
     private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang1;
     private javax.swing.JPopupMenu.Separator spr_NV_ThanhNgang2;
