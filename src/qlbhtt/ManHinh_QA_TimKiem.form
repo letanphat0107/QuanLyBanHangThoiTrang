@@ -277,22 +277,12 @@
                       <Component id="txt_GiaNhap" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbl_SoLuong" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="pnl_HinhAnhSP" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="txt_SoLuong" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="pnl_HinhAnhSP" max="32767" attributes="0"/>
+                      <Component id="lbl_SoLuong" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="txt_SoLuong" alignment="0" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="dch_NgayNhap" alignment="0" min="-2" pref="186" max="-2" attributes="0"/>
                       <Component id="lbl_NgapNhap" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
@@ -347,13 +337,11 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lbl_MaQA" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                                      <Component id="lbl_SoLuong" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                       <Component id="lbl_NCC" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txt_MaQA" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="txt_SoLuong" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       <Component id="cmb_NCC" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -362,9 +350,15 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="dch_NgayNhap" max="32767" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_SoLuong" min="-2" pref="19" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_SoLuong" min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="pnl_HinhAnhSP" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>

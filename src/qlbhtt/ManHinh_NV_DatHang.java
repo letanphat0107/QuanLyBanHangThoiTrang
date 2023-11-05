@@ -86,6 +86,13 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        tbl_SanPham.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_SanPham.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
+        tbl_GioHang.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
+        tbl_GioHang.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
+        
         docDuLieuSanPham();
         docDuLieuCMB();
         capNhatTongTienGioHang();

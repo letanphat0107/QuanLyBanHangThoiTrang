@@ -424,7 +424,7 @@ public class Dao_HoaDon {
                     + "																	join KhachHang kh on kh.maKH=hd.maKH\n"
                     + "																	join SanPham sp on sp.maSP=cthd.maSP\n"
                     + "							group by hd.maKH,kh.hoTen,kh.sdt\n"
-                    + "							order by SUM(cthd.soLuong) desc";
+                    + "							order by SUM(cthd.soLuong*sp.giaBan) desc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
