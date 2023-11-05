@@ -100,7 +100,7 @@ public class Dao_PhieuDatHang {
     }
 
     /**
-     * Lấy thông tin phiếu đặt hàng theo mã
+     * Lấy thông tin phiếu đặt hàng theo mã phiếu đặt hàng
      */
     public PhieuDatHang getPDTTheoMa(String maPDT) {
         Connection con = Connect.getInstance().getConnection();
@@ -125,6 +125,31 @@ public class Dao_PhieuDatHang {
         return null;
     }
 
+    /**
+     * Lấy thông tin phiếu đặt hàng theo mã khách hàng
+     */
+    public PhieuDatHang getPDTTheoMaKH(String maKhachHang) {
+        Connection con = Connect.getInstance().getConnection();
+        PreparedStatement prestmt = null;
+        String url = "Select * from PhieuDatHang where maKH =?";
+        try {
+            prestmt = con.prepareStatement(url);
+            prestmt.setString(1, maKhachHang);
+            ResultSet rs = prestmt.executeQuery();
+            while (rs.next()) {
+                String maKH = rs.getString(2);
+                KhachHang khachHang = dao_KhachHang.getKhachHangTheoMa(maKH);
+
+                String maNV = rs.getString(3);
+                NhanVien nhanVien = dao_NhanVien.getNhanVienTheoMa(maNV);
+                PhieuDatHang pdt = new PhieuDatHang(rs.getString(1), khachHang, nhanVien, rs.getDate(4));
+                return pdt;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
    
     public String taoMaPhieuDatHang() {
         Connection con = Connect.getInstance().getConnection();

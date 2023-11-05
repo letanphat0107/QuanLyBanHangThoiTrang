@@ -41,7 +41,7 @@ public class Dao_CTPhieuDatHang {
             while(rs.next()){
                 String maSP = rs.getString(2);
                 SanPham sanPham = dao_SanPham.getSanPhamTheoMa(maSP);
-                
+                sanPham.setSoLuong(rs.getInt(3));
                 PhieuDatHang pdt = dao_PhieuDatHang.getPDTTheoMa(maPhieuDatHang);
                 listCTPhieuDatHang.add(new CTPhieuDatHang(sanPham, pdt, rs.getInt(3)));
                         
