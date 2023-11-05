@@ -56,7 +56,7 @@ public class ManHinh_TimTaiKhoan extends javax.swing.JFrame {
             }
         }
         if(count == 0) {
-            JOptionPane.showMessageDialog(this, "Tài khoản không được tìm thấy!");
+            JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại!");
         }
     }
     /**
