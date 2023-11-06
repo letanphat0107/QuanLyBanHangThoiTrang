@@ -586,6 +586,7 @@ public class ManHinh_PK_TimKiem extends javax.swing.JPanel {
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
         // TODO add your handling code here:
         xoaTrang();
+        docDuLieuQuanAo();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     public ImageIcon ResizeImage(String imgPath, String desc) {

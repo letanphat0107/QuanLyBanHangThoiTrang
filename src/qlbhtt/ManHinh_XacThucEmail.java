@@ -86,7 +86,7 @@ public class ManHinh_XacThucEmail extends javax.swing.JFrame {
         int max = 999999;
         otp = radom.nextInt(max-min)+min;
         emailAdd = txt_Email.getText();
-        dao_sendmail.sendEmail(emailAdd, "Email Verification", "Mã code của bạn: " + Integer.toString(otp));
+        dao_sendmail.sendEmailMa(emailAdd, "Email Verification", "Mã code của bạn: " + Integer.toString(otp));
         JOptionPane.showMessageDialog(this, "Mã đã được gửi qua email, vui lòng kiểm tra");
         
     }

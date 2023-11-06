@@ -80,7 +80,7 @@ create table KhachHang (
 	hoTen nvarchar(30) not null,
 	sdt nvarchar(12)  unique,
 	email nvarchar(40)  unique,
-	gioiTinh nvarchar(10) not null
+	gioiTinh nvarchar(10)
 
 	primary key (maKH)
 )
@@ -311,6 +311,8 @@ insert into CTHD values ('HD0010','SP0006',1);
 insert into CTHD values ('HD0011','SP0015',2);
 go
 
+
+-- xử lý dữ liệu trong database-----
 select * from SanPham
 select * from NhanVien
 select * from NhaCungCap

@@ -10,6 +10,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
@@ -28,6 +29,7 @@ import dao.Dao_HoaDon;
 import dao.Dao_CTHD;
 import dao.Dao_CTPhieuDatHang;
 import dao.Dao_PhieuDatHang;
+import dao.Dao_SendMail;
 import entity.HoaDon;
 import entity.CTHD;
 import entity.KhachHang;
@@ -38,6 +40,7 @@ import entity.NhaCungCap;
 import entity.PhanLoai;
 import entity.PhieuDatHang;
 import entity.CTPhieuDatHang;
+import entity.NhanVien;
 import entity.SanPham;
 import java.io.File;
 import java.sql.SQLException;
@@ -86,11 +89,14 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     private Dao_CTHD dao_CTHD;
     private Dao_PhieuDatHang dao_PhieuDatHang;
     private Dao_CTPhieuDatHang dao_CTPhieuDatHang;
+    private Dao_SendMail dao_sendEmail;
     private File file = null;
     private Connect connect;
     KhachHang khachHang = null;
     String maPDH = null;
     ArrayList<SanPham> gioHang;
+
+    public static NhanVien nhanVien = Login.nhanVien;
 
     /**
      * Creates new form quanly
@@ -107,18 +113,19 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         dao_CTHD = new Dao_CTHD();
         dao_PhieuDatHang = new Dao_PhieuDatHang();
         dao_CTPhieuDatHang = new Dao_CTPhieuDatHang();
+        dao_sendEmail = new Dao_SendMail();
         gioHang = new ArrayList<>();
 
         connect = new Connect();
         connect.connect();
         initComponents();
-        
+
         tbl_SanPham.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_SanPham.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
-        
+
         tbl_GioHang.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_GioHang.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
-        
+
         docDuLieuSanPham();
         docDuLieuCMB();
         capNhatTongTienGioHang();
@@ -1105,8 +1112,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         }
     }
 
-    
-    private void kiemTraDonDatCuaKH(KhachHang kh){
+    private void kiemTraDonDatCuaKH(KhachHang kh) {
         PhieuDatHang pdh = dao_PhieuDatHang.getPDTTheoMaKH(kh.getMaKH());
         if (pdh != null) {
             maPDH = pdh.getMaPhieuDat();
@@ -1120,7 +1126,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 object[0] = cTPhieuDatHang.getSanPham().getMaSP();
                 object[1] = cTPhieuDatHang.getSanPham().getTenSP();
                 object[2] = cTPhieuDatHang.getSanPham().getPhanLoai().getLoaiSanPham();
-                object[3] = NumberFormat.getInstance().format( cTPhieuDatHang.getSanPham().getGiaBan());
+                object[3] = NumberFormat.getInstance().format(cTPhieuDatHang.getSanPham().getGiaBan());
                 object[4] = cTPhieuDatHang.getSanPham().getKichThuoc().getKichThuoc();
                 object[5] = cTPhieuDatHang.getSanPham().getMauSac().getMauSac();
                 object[6] = cTPhieuDatHang.getSanPham().getChatLieu().getChatLieu();
@@ -1133,9 +1139,10 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             }
             capNhatTongTienGioHang();
             txt_TienKHDua.setEditable(true);
+            JOptionPane.showMessageDialog(this, "Khách hàng có một đơn đặt trước đó");
         }
     }
-    
+
     private void xuLyTimKiemKhachHang() {
         String tenKhachHang = txt_TenKH.getText().trim();
         String soDienThoai = txt_SoDienThoai.getText().trim();
@@ -1154,7 +1161,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 }
 
                 kiemTraDonDatCuaKH(khachHang);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy thông tin khách hàng");
             }
         }
@@ -1178,6 +1185,8 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         xuLyGiamSLSanPhamTrongKho();
 
         xuatHoaDon(hd);
+        JOptionPane.showMessageDialog(this, "Lập hóa đơn thành công");
+        guiHoaDonVeEmail(hd);
         resetPanel();
         if (maPDH != null) {
             //Xoa CTPhieuDatHang
@@ -1186,31 +1195,46 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             dao_PhieuDatHang.xoaPhieuDatHang(maPDH);
         }
 //        xuatHoaDon(hd);
+        JOptionPane.showMessageDialog(this, "Lập hóa đơn đã được gửi về gmail của khách hàng");
 
         resetPanel();
-        JOptionPane.showMessageDialog(this, "Lập hóa đơn thành công");
     }
 
     public void xuatHoaDon(HoaDon hd) {
         try {
 
-            Font fontMain = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontMain = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
-            Font fontTD = FontFactory.getFont("/Font/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontTD = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             fontTD.setSize(22);
             fontTD.setFamily(Font.BOLD + "");
 
+             Font fontCH = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            fontCH.setSize(12);
             String pathFull = "data/HoaDon/" + "HoaDon" + hd.getMaHoaDon() + ".pdf";
 
-            Document document = new Document(); 
+            Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(pathFull)); //Tạo ra đối tượng ghi dữ liệu vào tài liệu PDF
             document.open();
 
-            //Tiêu đề 
-            Paragraph paragraph = new Paragraph("Hóa đơn bán hàng", fontTD);
+            //Thông tin cửa hàng
+            Paragraph paragraphtenCH = new Paragraph("CLOTHING - CỬA HÀNG THỜI TRANG", fontCH);
+            paragraphtenCH.setAlignment(Element.ALIGN_CENTER);
+            Paragraph paragraphDiaChi = new Paragraph("Địa chỉ: 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, Thành phố Hồ Chí Minh", fontCH);
+            paragraphDiaChi.setAlignment(Element.ALIGN_CENTER);
+            Paragraph paragraphHotline = new Paragraph("Hotline: 036 7494 904", fontCH);
+            paragraphHotline.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraphtenCH);
+            document.add(paragraphDiaChi);
+            document.add(paragraphHotline);
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph(" "));
+            
+            //Tiêu đề Main
+            Paragraph paragraphMain = new Paragraph("Hóa đơn bán hàng", fontTD);
 
-            paragraph.setAlignment(Element.ALIGN_CENTER);
-            document.add(paragraph);
+            paragraphMain.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraphMain);
             document.add(new Paragraph(" "));
             document.add(new Paragraph(" "));
 
@@ -1225,11 +1249,11 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
 
             //Mục mã hóa đơn
             PdfPCell cellMaHD = new PdfPCell(new Paragraph("Mã hóa đơn: " + hd.getMaHoaDon(), fontMain));
-            cellMaHD.setBorderColor(        BaseColor.WHITE);
+            cellMaHD.setBorderColor(BaseColor.WHITE);
             tableMuc.addCell(cellMaHD);
 
             //Mục ngày lập
-            SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            SimpleDateFormat fomatter = new SimpleDateFormat("dd-MM-yyyy, HH:mm:ss");
             String ngayInformat = fomatter.format(hd.getNgayNhap());
             PdfPCell cellNgayIn = new PdfPCell(new Paragraph("Ngày in: " + ngayInformat, fontMain));
             cellNgayIn.setBorderColor(BaseColor.WHITE);
@@ -1251,17 +1275,15 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             tableKH.setWidthPercentage(100); //Đặt chiều rộng ứng với 100% trang
             tableKH.setSpacingBefore(10f); //Đặt khoảng cách là 10
             tableKH.setSpacingAfter(10f);
-            
-            
 
             float[] chieuRongCot_KH = {1f};
             tableKH.setWidths(chieuRongCot_KH);
 
             //Mục khách hàng
             PdfPCell celltenKH = new PdfPCell(new Paragraph("Tên khách hàng: " + hd.getKhachHang().getHoTen(), fontMain));
-            celltenKH.setBorderColor(        BaseColor.WHITE);
+            celltenKH.setBorderColor(BaseColor.WHITE);
             tableKH.addCell(celltenKH);
-            
+
             document.add(tableKH);
 
             //Tạo bảng sản phẩm
@@ -1313,7 +1335,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             //Thong tin san pham
             for (SanPham sp : gioHang) {
                 //STT
-                PdfPCell cellTblSP_STT_giaTri = new PdfPCell(new Paragraph(stt+"", fontMain));
+                PdfPCell cellTblSP_STT_giaTri = new PdfPCell(new Paragraph(stt + "", fontMain));
                 cellTblSP_STT_giaTri.setBorderColor(BaseColor.BLACK);
                 cellTblSP_STT_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);//Chỉnh text của cột theo chiều dọc
                 cellTblSP_STT_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);// Chỉnh text cửa cột theo chiều ngang
@@ -1325,15 +1347,12 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 cellTblSP_tenSP_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tableDsSP.addCell(cellTblSP_tenSP_giaTri);
 
-               
                 //Giá bán
                 PdfPCell cellTblSP_giaBan_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(sp.getGiaBan()) + "", fontMain));
                 cellTblSP_giaBan_giaTri.setBorderColor(BaseColor.BLACK);
                 cellTblSP_giaBan_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cellTblSP_giaBan_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableDsSP.addCell(cellTblSP_giaBan_giaTri);
-
-                
 
                 //Số lượng
                 PdfPCell cellTblSP_SL_giaTri = new PdfPCell(new Paragraph(sp.getSoLuong() + "", fontMain));
@@ -1342,16 +1361,16 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 cellTblSP_SL_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableDsSP.addCell(cellTblSP_SL_giaTri);
 
-                double thanhTien = dao_CTHD.tinhThanhTienSanPham(hd.getMaHoaDon(),sp.getMaSP());
-                
-                        //Doanh Thu
-                        PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(thanhTien), fontMain));
-                        cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
-                        cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                        cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
-                        tableDsSP.addCell(cellTblSP_doanhThu_giaTri);
-                        
-                 stt++;
+                double thanhTien = dao_CTHD.tinhThanhTienSanPham(hd.getMaHoaDon(), sp.getMaSP());
+
+                //Doanh Thu
+                PdfPCell cellTblSP_doanhThu_giaTri = new PdfPCell(new Paragraph(NumberFormat.getInstance().format(thanhTien), fontMain));
+                cellTblSP_doanhThu_giaTri.setBorderColor(BaseColor.BLACK);
+                cellTblSP_doanhThu_giaTri.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTblSP_doanhThu_giaTri.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tableDsSP.addCell(cellTblSP_doanhThu_giaTri);
+
+                stt++;
             }
 
             document.add(tableDsSP);
@@ -1366,20 +1385,20 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             tableMuc.setWidths(chieuRongCot);
 
             //tổng tiền
-            PdfPCell celltongTien = new PdfPCell(new Paragraph("Tổng tiền: " + NumberFormat.getInstance().format(Double.parseDouble(lbl_SoTienTong.getText().replace(",", "")))+" VND", fontMain));
-            celltongTien.setBorderColor(        BaseColor.WHITE);
+            PdfPCell celltongTien = new PdfPCell(new Paragraph("Tổng tiền: " + NumberFormat.getInstance().format(Double.parseDouble(lbl_SoTienTong.getText().replace(",", ""))) + " VND", fontMain));
+            celltongTien.setBorderColor(BaseColor.WHITE);
             tableTien.addCell(celltongTien);
 
             //Mục khách đưa
-            PdfPCell cellTienKHDua = new PdfPCell(new Paragraph("Tiền khách đưa: " + NumberFormat.getInstance().format(Double.parseDouble(txt_TienKHDua.getText().replace(",", "")))+" VND", fontMain));
+            PdfPCell cellTienKHDua = new PdfPCell(new Paragraph("Tiền khách đưa: " + NumberFormat.getInstance().format(Double.parseDouble(txt_TienKHDua.getText().replace(",", ""))) + " VND", fontMain));
             cellTienKHDua.setBorderColor(BaseColor.WHITE);
             tableTien.addCell(cellTienKHDua);
-            
+
             //Mục tiền trả
-            PdfPCell cellTienTra = new PdfPCell(new Paragraph("Tiền trả: " + NumberFormat.getInstance().format(Double.parseDouble(lbl_SoTienTra.getText().replace(",", "")))+" VND", fontMain));
+            PdfPCell cellTienTra = new PdfPCell(new Paragraph("Tiền trả: " + NumberFormat.getInstance().format(Double.parseDouble(lbl_SoTienTra.getText().replace(",", ""))) + " VND", fontMain));
             cellTienTra.setBorderColor(BaseColor.WHITE);
             tableTien.addCell(cellTienTra);
-            
+
             document.add(tableTien);
             document.close();
 
@@ -1400,20 +1419,18 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         }
     }
 
-
-    
-    private boolean kiemTraSoLuongMua(){
+    private boolean kiemTraSoLuongMua() {
         for (SanPham sanPham : gioHang) {
             int slTonDuKien = dao_SanPham.getSanPhamTheoMa(sanPham.getMaSP()).getSoLuong() - sanPham.getSoLuong();
             if (sanPham.getSoLuong() > dao_SanPham.getSanPhamTheoMa(sanPham.getMaSP()).getSoLuong() || slTonDuKien < 0) {
-                JOptionPane.showMessageDialog(this, "Số lượng mua của "+sanPham.getMaSP()+ "vượt quá số lượng tồn");
+                JOptionPane.showMessageDialog(this, "Số lượng mua của " + sanPham.getMaSP() + "vượt quá số lượng tồn");
                 return false;
             }
         }
         return true;
     }
-    
-    public void resetPanel(){
+
+    public void resetPanel() {
         modelGioHang = (DefaultTableModel) tbl_GioHang.getModel();
         modelGioHang.setRowCount(0);
         modelSanPham = (DefaultTableModel) tbl_SanPham.getModel();
@@ -1505,7 +1522,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
 
                 tienTra = tienKHDua - tongTien;
                 if (tienTra >= 0) {
-                    lbl_SoTienTra.setText(NumberFormat.getInstance().format(tienTra)+ "");
+                    lbl_SoTienTra.setText(NumberFormat.getInstance().format(tienTra) + "");
                 } else {
                     JOptionPane.showMessageDialog(this, "Tiền khách đưa ít hơn tổng tiền hàng");
                 }
@@ -1629,6 +1646,62 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         for (int i = 0; i < modelSanPham.getColumnCount(); i++) {
             tbl_SanPham.getColumnModel().getColumn(i).setCellEditor(nonEditableEditor);
         }
+    }
+
+    public void guiHoaDonVeEmail(HoaDon hd) {
+        String emailKhachHang = hd.getKhachHang().getEmail();
+        SimpleDateFormat fomtter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String noiDungHeader = "<!DOCTYPE html>\n"
+                + "<html>\n"
+                + "<head>\n"
+                + "     <style> body {\n"
+                + "            color: black;\n"
+                + "        }"
+                + "table { border-collapse: collapse; width: 100%; }"
+                + " th, td { border: 1px solid black; padding: 8px; text-align: left; }"
+                + "h3 {text-align: center} "
+                + "</style> "
+                + "</head>"
+                + "<body>\n"
+                + "    <p>Clothing, xin chào <strong>" + hd.getKhachHang().getHoTen() + "</strong></p>\n"
+                + "    <p>Cảm ơn Quý khách đã mua hàng tại của hàng chúng tôi. Cửa hàng xin thông báo hóa đơn của Quý khách như sau:</p>\n"
+                + "    <p>Ngày mua: " + fomtter.format(hd.getNgayNhap())+ " </p>\n"
+                + "    <table>\n"
+                + "        <thead>\n"
+                + "            <tr>\n"
+                + "                <th>Sản phẩm</th>\n"
+                + "                <th>Số lượng</th>\n"
+                + "                <th>Giá</th>\n"
+                + "            </tr>\n"
+                + "        </thead>\n"
+                + "        <tbody>\n";
+        String noiDungSP = "";
+        for (CTHD sp : dao_CTHD.getAllCTHD(hd.getMaHoaDon())) {
+            double thanhTien = dao_CTHD.tinhThanhTienSanPham(sp.getHoaDon().getMaHoaDon(), sp.getSanPham().getMaSP());
+
+            noiDungSP = "            <tr>"
+                    + "               <th>" + sp.getSanPham().getTenSP() + "</th>\n"
+                    + "               <th>" + sp.getSoLuong() + "</th>\n"
+                    + "               <th>" + NumberFormat.getInstance().format(thanhTien) + "</th>\n"
+                    + "            </tr>\n";
+
+        }
+        double tongTien = dao_HoaDon.tongTienHoaDon(hd.getMaHoaDon());
+        String noiDungPhanCuoi = " </tbody>\n"
+                + "    </table>\n"
+                + "    <p>Tổng tiền: " + NumberFormat.getInstance().format(tongTien) + " VND" + "</p>\n"
+                + "    <h3>CLOTHING XIN CẢM ƠN</h3>\n"
+                + "    <br>\n"
+                + "    <br>\n"
+                + "    <p style=\"font-style: italic;\">Nếu có góp ý hoặc  vấn đề cần khiếu nại thì liên hệ: (+84) 367494904</p>\n"
+                + "    <p>Địa chỉ: 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, Thành phố Hồ Chí Minh</p>"
+                + "</body>\n"
+                + "</html>";
+//        String emailContent = "<html> <head> <style> table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid black; padding: 8px; text-align: left; } </style> </head> <body><p>Xin chào <strong>" + "Sinh" + "</strong></p><p>Cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi. Dưới đây là chi tiết đơn hàng của bạn:</p><table><tr><th>Sản phẩm</th><th>Số lượng</th><th>Giá</th></tr></table><p>Tổng tiền: " + "22222" + "</p><p>Hãy liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi hoặc yêu cầu hỗ trợ nào khác.</p><p>Trân trọng,</p><p><b>Nhà Sách Thuận Lợi</b></p></body></html>";
+        String noiDungHoaDon = noiDungHeader + noiDungSP + noiDungPhanCuoi;
+//        System.out.println(noiDung.toString());
+        dao_sendEmail.guiHoaDonVeEmail(emailKhachHang, "Thông báo giao dịch thành công", noiDungHoaDon);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

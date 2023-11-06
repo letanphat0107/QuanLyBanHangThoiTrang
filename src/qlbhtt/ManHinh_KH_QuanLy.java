@@ -586,8 +586,8 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         String regexSDT = "^[0-9]{10}$"; //0367494954
         String regexEmail = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)$"; //vana@gmail.com
 
-        if (txt_TenKH.getText().equals("") || txt_Email.getText().equals("") || txt_SoDienThoai.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin.");
+        if (txt_TenKH.getText().equals("") ) {
+            JOptionPane.showMessageDialog(null, "Tên khách hàng không được để trống.");
             return false;
 
         }

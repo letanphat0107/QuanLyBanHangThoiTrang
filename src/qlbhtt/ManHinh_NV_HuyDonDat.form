@@ -193,7 +193,7 @@
                   <Font name="Segoe UI Variable" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="H&#x1ee7;y &#x110;&#x1a1;n &#x110;&#x1eb7;t"/>
+                <Property name="text" type="java.lang.String" value="H&#x1ee6;Y &#x110;&#x1a0;N &#x110;&#x1eb6;T"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[32767, 32767]"/>
                 </Property>

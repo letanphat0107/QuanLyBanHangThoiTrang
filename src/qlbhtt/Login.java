@@ -10,12 +10,16 @@ import dao.Dao_TaiKhoan;
 import entity.NhanVien;
 import entity.TaiKhoan;
 import java.awt.Cursor;
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -29,7 +33,7 @@ public class Login extends javax.swing.JFrame {
     private Boolean hoatDongIconShow = true;
     private Boolean hoatDongIconClose = true;
     public static NhanVien nhanVien = null;
-            
+
     public static boolean ngonNgu = true;
 
     /**
@@ -44,7 +48,18 @@ public class Login extends javax.swing.JFrame {
         setTitle("Quản Lý Bán Quần Áo Thời Trang");
         initComponents();
         setLocationRelativeTo(null);
-
+//        xuLyEnter();
+    this.getRootPane().setDefaultButton(btn_Login);
+    
+//        btn_Login.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+//                KeyStroke.getKeyStroke("ENTER"), "enterPressed");
+//        btn_Login.getActionMap().put("enterPressed", new AbstractAction() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                xuLyDangNhap();
+//            }
+//            
+//        });
     }
 
     public void chuyenDoiNN_English() {
@@ -52,16 +67,42 @@ public class Login extends javax.swing.JFrame {
         lbl_Password.setText("Passowrd");
         lbl_TaiKhoan.setText("User");
         lbl_QuenMatKhau.setText("Forgot password?");
-        lbl_Title.setText("Login");        
+        lbl_Title.setText("Login");
     }
-    
+
     public void chuyenDoiNN_TV() {
-        btn_Login.setText("Đăng nhập"); 
+        btn_Login.setText("Đăng nhập");
         lbl_Password.setText("Mật khẩu");
         lbl_TaiKhoan.setText("Người dùng");
-        lbl_QuenMatKhau.setText("Quên mật khẩu?"); 
+        lbl_QuenMatKhau.setText("Quên mật khẩu?");
         lbl_Title.setText("Đăng nhập");
     }
+
+    public void xuLyDangNhap() {
+        String user = txt_Username.getText();
+        String pass = String.valueOf(pwd_MatKhau.getText());
+        if (!user.trim().equals("") || !pass.trim().equals("")) {
+            TaiKhoan taiKhoan = daoTaiKhoan.dangNhapTaiKhoan(user, pass);
+
+            if (taiKhoan != null) {
+                nhanVien = daoNhanVien.getNhanVienTheoMa(taiKhoan.getNhanVien().getMaNV());
+                try {
+                    HomePage homePage = new HomePage();
+                    homePage.setVisible(true);
+                    this.setVisible(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Tài khoản này không tồn tại");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập dữ liệu bắt buộc!");
+
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,7 +147,6 @@ public class Login extends javax.swing.JFrame {
         pnl_FormDangNhap.setBackground(new java.awt.Color(208, 212, 202));
 
         txt_Username.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        txt_Username.setText("Admin");
         txt_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_UsernameActionPerformed(evt);
@@ -121,6 +161,11 @@ public class Login extends javax.swing.JFrame {
         btn_Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_LoginActionPerformed(evt);
+            }
+        });
+        btn_Login.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btn_LoginKeyPressed(evt);
             }
         });
 
@@ -138,7 +183,6 @@ public class Login extends javax.swing.JFrame {
         lbl_TaiKhoan.setForeground(new java.awt.Color(97, 103, 122));
         lbl_TaiKhoan.setText("Tài khoản");
 
-        pwd_MatKhau.setText("admin");
         pwd_MatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pwd_MatKhauActionPerformed(evt);
@@ -279,27 +323,6 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_UsernameActionPerformed
 
-    private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
-        String user = txt_Username.getText();
-        String pass = String.valueOf(pwd_MatKhau.getText());
-        TaiKhoan taiKhoan = daoTaiKhoan.dangNhapTaiKhoan(user, pass);
-
-        if (taiKhoan != null) {
-            nhanVien = daoNhanVien.getNhanVienTheoMa(taiKhoan.getNhanVien().getMaNV());
-            try {
-                HomePage homePage = new HomePage();
-                homePage.setVisible(true);
-                this.setVisible(false);
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Tài khoản này không tồn tại");
-        }
-
-    }//GEN-LAST:event_btn_LoginActionPerformed
-
     private void pwd_MatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwd_MatKhauActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pwd_MatKhauActionPerformed
@@ -348,6 +371,16 @@ public class Login extends javax.swing.JFrame {
             chuyenDoiNN_TV();
         }
     }//GEN-LAST:event_cmb_NgonNguItemStateChanged
+
+    private void btn_LoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_LoginKeyPressed
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            xuLyDangNhap();
+        }
+    }//GEN-LAST:event_btn_LoginKeyPressed
+
+    private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
+        xuLyDangNhap();
+    }//GEN-LAST:event_btn_LoginActionPerformed
 
     /**
      * @param args the command line arguments

@@ -590,6 +590,7 @@ public class ManHinh_QA_TimKiem extends javax.swing.JPanel {
 
     private void btn_XoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTrangActionPerformed
         xoaTrang();
+        docDuLieuQuanAo();
     }//GEN-LAST:event_btn_XoaTrangActionPerformed
 
     public void xoaTrang() {
@@ -645,6 +646,7 @@ public class ManHinh_QA_TimKiem extends javax.swing.JPanel {
 
     public void docDuLieuQuanAo() {
         modelSanPham = (DefaultTableModel) tbl_QuanAo.getModel();
+        modelSanPham.setRowCount(0);
         for (SanPham qa : dao_SanPham.getAllQuanAo()) {
             Object[] object = new Object[11];
             object[0] = qa.getMaSP();

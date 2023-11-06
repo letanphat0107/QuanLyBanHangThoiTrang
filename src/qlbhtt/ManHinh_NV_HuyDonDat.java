@@ -120,7 +120,7 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
 
         lbl_TieuDe.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
         lbl_TieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_TieuDe.setText("Hủy Đơn Đặt");
+        lbl_TieuDe.setText("HỦY ĐƠN ĐẶT");
         lbl_TieuDe.setMaximumSize(new java.awt.Dimension(32767, 32767));
         lbl_TieuDe.setPreferredSize(new java.awt.Dimension(181, 40));
 
@@ -186,8 +186,7 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
                         .addComponent(scr_DanhSachPhieuDatHang, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
                     .addGroup(pnl_DanhSachPhieuDatHangLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(scr_DanhSachCTPhieuDatHang, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))))
+                        .addComponent(scr_DanhSachCTPhieuDatHang, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));

@@ -335,6 +335,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.setMinimumSize(new java.awt.Dimension(250, 22));
         mnu_NhanVien.setPreferredSize(new java.awt.Dimension(250, 30));
 
+        mni_NV_DatHang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         mni_NV_DatHang.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_DatHang.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_DatHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/shop.png"))); // NOI18N
@@ -349,6 +350,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.add(mni_NV_DatHang);
         mnu_NhanVien.add(spr_NV_ThanhNgang1);
 
+        mni_NV_LapHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         mni_NV_LapHoaDon.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_LapHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_LapHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/copywriting-fax.png"))); // NOI18N
@@ -362,6 +364,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.add(mni_NV_LapHoaDon);
         mnu_NhanVien.add(spr_NV_ThanhNgang2);
 
+        mni_NV_HuyDonDat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         mni_NV_HuyDonDat.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_HuyDonDat.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_HuyDonDat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-document-30.png"))); // NOI18N
@@ -374,6 +377,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.add(mni_NV_HuyDonDat);
         mnu_NhanVien.add(spr_NV_ThanhNgang8);
 
+        mni_NV_ThongKeDoanhThu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         mni_NV_ThongKeDoanhThu.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_ThongKeDoanhThu.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_ThongKeDoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/monitoring-evaluation.png"))); // NOI18N
@@ -387,6 +391,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.add(mni_NV_ThongKeDoanhThu);
         mnu_NhanVien.add(spr_NV_ThanhNgang3);
 
+        mni_NV_ThongKeSanPham.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         mni_NV_ThongKeSanPham.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_ThongKeSanPham.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_ThongKeSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/board-analysis.png"))); // NOI18N
@@ -400,6 +405,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.add(mni_NV_ThongKeSanPham);
         mnu_NhanVien.add(spr_NV_ThanhNgang4);
 
+        mni_NV_ThongKeThongTinKH.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         mni_NV_ThongKeThongTinKH.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_ThongKeThongTinKH.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_ThongKeThongTinKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/document-business.png"))); // NOI18N
@@ -413,6 +419,7 @@ public class HomePage extends javax.swing.JFrame {
         mnu_NhanVien.add(mni_NV_ThongKeThongTinKH);
         mnu_NhanVien.add(spr_NV_ThanhNgang5);
 
+        mni_NV_XemDSHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
         mni_NV_XemDSHoaDon.setBackground(new java.awt.Color(224, 224, 222));
         mni_NV_XemDSHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         mni_NV_XemDSHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/shoping.png"))); // NOI18N

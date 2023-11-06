@@ -255,6 +255,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mni_NV_DatHang">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F1"/>
+                </Property>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="de" green="e0" red="e0" type="rgb"/>
                 </Property>
@@ -280,6 +283,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mni_NV_LapHoaDon">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F2"/>
+                </Property>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="de" green="e0" red="e0" type="rgb"/>
                 </Property>
@@ -302,6 +308,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mni_NV_HuyDonDat">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F3"/>
+                </Property>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="de" green="e0" red="e0" type="rgb"/>
                 </Property>
@@ -321,6 +330,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mni_NV_ThongKeDoanhThu">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F4"/>
+                </Property>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="de" green="e0" red="e0" type="rgb"/>
                 </Property>
@@ -343,6 +355,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mni_NV_ThongKeSanPham">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F5"/>
+                </Property>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="de" green="e0" red="e0" type="rgb"/>
                 </Property>
@@ -365,6 +380,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mni_NV_ThongKeThongTinKH">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F6"/>
+                </Property>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="de" green="e0" red="e0" type="rgb"/>
                 </Property>
@@ -387,6 +405,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mni_NV_XemDSHoaDon">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F7"/>
+                </Property>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="de" green="e0" red="e0" type="rgb"/>
                 </Property>
