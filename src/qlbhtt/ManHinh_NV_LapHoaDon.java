@@ -1185,7 +1185,6 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         xuLyGiamSLSanPhamTrongKho();
 
         xuatHoaDon(hd);
-        JOptionPane.showMessageDialog(this, "Lập hóa đơn thành công");
         guiHoaDonVeEmail(hd);
         resetPanel();
         if (maPDH != null) {
@@ -1195,7 +1194,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             dao_PhieuDatHang.xoaPhieuDatHang(maPDH);
         }
 //        xuatHoaDon(hd);
-        JOptionPane.showMessageDialog(this, "Lập hóa đơn đã được gửi về gmail của khách hàng");
+        JOptionPane.showMessageDialog(this, " Hóa đơn đã được gửi về gmail của khách hàng");
 
         resetPanel();
     }
@@ -1679,12 +1678,11 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         for (CTHD sp : dao_CTHD.getAllCTHD(hd.getMaHoaDon())) {
             double thanhTien = dao_CTHD.tinhThanhTienSanPham(sp.getHoaDon().getMaHoaDon(), sp.getSanPham().getMaSP());
 
-            noiDungSP = "            <tr>"
+            noiDungSP = noiDungSP + "            <tr>"
                     + "               <th>" + sp.getSanPham().getTenSP() + "</th>\n"
                     + "               <th>" + sp.getSoLuong() + "</th>\n"
                     + "               <th>" + NumberFormat.getInstance().format(thanhTien) + "</th>\n"
                     + "            </tr>\n";
-
         }
         double tongTien = dao_HoaDon.tongTienHoaDon(hd.getMaHoaDon());
         String noiDungPhanCuoi = " </tbody>\n"
@@ -1699,6 +1697,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 + "</html>";
 //        String emailContent = "<html> <head> <style> table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid black; padding: 8px; text-align: left; } </style> </head> <body><p>Xin chào <strong>" + "Sinh" + "</strong></p><p>Cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi. Dưới đây là chi tiết đơn hàng của bạn:</p><table><tr><th>Sản phẩm</th><th>Số lượng</th><th>Giá</th></tr></table><p>Tổng tiền: " + "22222" + "</p><p>Hãy liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi hoặc yêu cầu hỗ trợ nào khác.</p><p>Trân trọng,</p><p><b>Nhà Sách Thuận Lợi</b></p></body></html>";
         String noiDungHoaDon = noiDungHeader + noiDungSP + noiDungPhanCuoi;
+        
 //        System.out.println(noiDung.toString());
         dao_sendEmail.guiHoaDonVeEmail(emailKhachHang, "Thông báo giao dịch thành công", noiDungHoaDon);
 

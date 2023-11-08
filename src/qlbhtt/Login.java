@@ -48,18 +48,7 @@ public class Login extends javax.swing.JFrame {
         setTitle("Quản Lý Bán Quần Áo Thời Trang");
         initComponents();
         setLocationRelativeTo(null);
-//        xuLyEnter();
-    this.getRootPane().setDefaultButton(btn_Login);
-    
-//        btn_Login.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-//                KeyStroke.getKeyStroke("ENTER"), "enterPressed");
-//        btn_Login.getActionMap().put("enterPressed", new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                xuLyDangNhap();
-//            }
-//            
-//        });
+    this.getRootPane().setDefaultButton(btn_Login);  
     }
 
     public void chuyenDoiNN_English() {

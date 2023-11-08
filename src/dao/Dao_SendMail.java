@@ -60,7 +60,7 @@ public class Dao_SendMail {
             
             //Nội dung gửi
             msg.setText(noiDung,"UTF-8");
-            
+            System.out.println(noiDung.toString());
             //Gui mail thông qua giao thức
             Transport.send(msg);
         } catch (Exception e) {
