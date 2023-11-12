@@ -97,6 +97,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     ArrayList<SanPham> gioHang;
 
     public static NhanVien nhanVien = Login.nhanVien;
+    private boolean ngonNgu = Login.ngonNgu;
 
     /**
      * Creates new form quanly
@@ -119,7 +120,9 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
-
+        if (!ngonNgu) {
+            chuyenDoiNgonNgu();
+        }
         tbl_SanPham.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_SanPham.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
 
@@ -141,6 +144,35 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         txt_TienKHDua.addFocusListener(focusListener);
         //Không cho phép chỉnh sửa table
         khoaChinhSuaTable();
+    }
+
+    public void chuyenDoiNgonNgu() {
+        btn_LapHoaDon.setText("Make an Invoice");
+        btn_Them.setText("Insert");
+        btn_Giam.setText("Subtrac");
+        btn_ThemKhachHang.setText("Insert Cus");
+        btn_TimKH.setText("Search");
+        lbl_GiaBan.setText("Price");
+        lbl_HinhAnhSanPham.setText("Image");
+        lbl_KichThuoc.setText("Size");
+
+        lbl_MaSP.setText("Clothing ID");
+        lbl_MauSac.setText("Color");
+
+        lbl_PhanLoai.setText("Category");
+        lbl_NhapSoLuong.setText("Enter Quantity");
+        lbl_TenSP.setText("Accessories Name");
+
+        lbl_SoDienThoai.setText("Phone Number");
+        lbl_TenKH.setText("Customer Name");
+        lbl_TongTienGioHang.setText("Total cart amount: ");
+
+        lbl_TienKHDua.setText("Guest money: ");
+        lbl_TienTra.setText("Surplus money: ");
+        lbl_TongTien.setText("Total amount: ");
+
+        lbl_TieuDe.setText("MAKE AN INVOICE");
+
     }
 
     /**
@@ -206,27 +238,50 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        scr_DanhSachSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu){
+            scr_DanhSachSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            scr_DanhSachSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of products", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
         scr_DanhSachSanPham.setAutoscrolls(true);
         scr_DanhSachSanPham.setPreferredSize(new java.awt.Dimension(600, 427));
 
         tbl_SanPham.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        if(ngonNgu){
+            tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
 
-            },
-            new String [] {
-                "Mã quần áo", "Tên quần áo", "Phân loại", "Giá bán ", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+                },
+                new String [] {
+                    "Mã quần áo", "Tên quần áo", "Phân loại", "Giá bán ", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+            });
+        } else {
+            tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                    "Clothing ID", "Clothing name", "Catagory", "Price", "Size", "Color", "Fabric", "Supplier", "Quantity"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+            });
+        }
         tbl_SanPham.setAutoscrolls(false);
         tbl_SanPham.setMinimumSize(new java.awt.Dimension(135, 800));
         tbl_SanPham.setPreferredSize(new java.awt.Dimension(675, 800));
@@ -336,26 +391,49 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
 
         pnl_GioHang.setBackground(new java.awt.Color(255, 255, 255));
 
-        scr_GioHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giỏ Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu) {
+            scr_GioHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giỏ Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            scr_GioHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cart", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
         scr_GioHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         tbl_GioHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tbl_GioHang.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        if(ngonNgu){
+            tbl_GioHang.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
 
-            },
-            new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Phân loại", "Giá bán ", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+                },
+                new String [] {
+                    "Mã sản phẩm", "Tên sản phẩm", "Phân loại", "Giá bán ", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+            });
+        } else {
+            tbl_GioHang.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                    "Clothing ID", "Clothing name", "Catagory", "Price", "Size", "Color", "Fabric", "Supplier", "Quantity"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+            });
+        }
         tbl_GioHang.setRowHeight(30);
         tbl_GioHang.setShowGrid(true);
         tbl_GioHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -420,7 +498,11 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu) {
+            pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Information product", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
         pnl_ThongTin.setPreferredSize(new java.awt.Dimension(926, 300));
 
         txt_TenSP.setEditable(false);
@@ -502,7 +584,11 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         });
 
         pnl_KhuVucTTKhachHang.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_KhuVucTTKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu) {
+            pnl_KhuVucTTKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            pnl_KhuVucTTKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Information Customer", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
 
         lbl_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenKH.setText("Tên khách hàng");
@@ -561,16 +647,21 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             pnl_KhuVucTTKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_KhuVucTTKhachHangLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(pnl_KhuVucTTKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_SoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_TenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_TenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_KhuVucTTKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_KhuVucTTKhachHangLayout.createSequentialGroup()
+                        .addComponent(btn_TimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_ThemKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_KhuVucTTKhachHangLayout.createSequentialGroup()
-                        .addComponent(btn_TimKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_ThemKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbl_SoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(pnl_KhuVucTTKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_TenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_SoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(170, 170, 170))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_KhuVucTTKhachHangLayout.createSequentialGroup()
+                        .addGroup(pnl_KhuVucTTKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_SoDienThoai, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_TenKH))
+                        .addContainerGap())))
         );
         pnl_KhuVucTTKhachHangLayout.setVerticalGroup(
             pnl_KhuVucTTKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,9 +699,9 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_MaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_TenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmb_KichThuoc, 0, 210, Short.MAX_VALUE)
@@ -659,11 +750,15 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_PhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thanh Toán", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu) {
+            pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thanh Toán", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pay", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
 
         btn_LapHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_LapHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-bill-30.png"))); // NOI18N
@@ -736,16 +831,16 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                                 .addComponent(lbl_DonViTienTra)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NutChucNangLayout.createSequentialGroup()
-                        .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btn_LapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_LapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                                 .addComponent(lbl_TienKHDua)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_TienKHDua, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_TaiLaiTinhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_TienKHDua, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_TaiLaiTinhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(15, 15, 15))))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -1208,7 +1303,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             fontTD.setSize(22);
             fontTD.setFamily(Font.BOLD + "");
 
-             Font fontCH = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontCH = FontFactory.getFont("/fonts/vuArial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             fontCH.setSize(12);
             String pathFull = "data/HoaDon/" + "HoaDon" + hd.getMaHoaDon() + ".pdf";
 
@@ -1228,7 +1323,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             document.add(paragraphHotline);
             document.add(new Paragraph(" "));
             document.add(new Paragraph(" "));
-            
+
             //Tiêu đề Main
             Paragraph paragraphMain = new Paragraph("Hóa đơn bán hàng", fontTD);
 
@@ -1664,7 +1759,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 + "<body>\n"
                 + "    <p>Clothing, xin chào <strong>" + hd.getKhachHang().getHoTen() + "</strong></p>\n"
                 + "    <p>Cảm ơn Quý khách đã mua hàng tại của hàng chúng tôi. Cửa hàng xin thông báo hóa đơn của Quý khách như sau:</p>\n"
-                + "    <p>Ngày mua: " + fomtter.format(hd.getNgayNhap())+ " </p>\n"
+                + "    <p>Ngày mua: " + fomtter.format(hd.getNgayNhap()) + " </p>\n"
                 + "    <table>\n"
                 + "        <thead>\n"
                 + "            <tr>\n"
@@ -1697,7 +1792,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
                 + "</html>";
 //        String emailContent = "<html> <head> <style> table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid black; padding: 8px; text-align: left; } </style> </head> <body><p>Xin chào <strong>" + "Sinh" + "</strong></p><p>Cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi. Dưới đây là chi tiết đơn hàng của bạn:</p><table><tr><th>Sản phẩm</th><th>Số lượng</th><th>Giá</th></tr></table><p>Tổng tiền: " + "22222" + "</p><p>Hãy liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi hoặc yêu cầu hỗ trợ nào khác.</p><p>Trân trọng,</p><p><b>Nhà Sách Thuận Lợi</b></p></body></html>";
         String noiDungHoaDon = noiDungHeader + noiDungSP + noiDungPhanCuoi;
-        
+
 //        System.out.println(noiDung.toString());
         dao_sendEmail.guiHoaDonVeEmail(emailKhachHang, "Thông báo giao dịch thành công", noiDungHoaDon);
 

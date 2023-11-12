@@ -56,6 +56,8 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
     
     private boolean trangThaiThem = false;
     private boolean trangThaiSua = false;
+    
+    private boolean ngonNgu = Login.ngonNgu;
     /**
      * Creates new form quanly
      */
@@ -71,11 +73,41 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         connect.connect();
         initComponents();
         
+        if(!ngonNgu) {
+            chuyenDoiNgonNgu();
+        }
+        
         tbl_QuanAo.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_QuanAo.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
         
         docDuLieuQuanAo();
         docDuLieuCMB();
+    }
+    
+    public void chuyenDoiNgonNgu() {
+        
+        btn_CapNhat.setText("Updates");
+        btn_Luu.setText("Save");
+        btn_Them.setText("Insert");
+        btn_XoaTrang.setText("Erase white");
+        btn_ChonAnh.setText("Select photo");
+        
+        lbl_ChatLieu.setText("Fabric");
+        lbl_giaNhap.setText("Import price");
+        lbl_GiaBan.setText("Price");
+        lbl_HinhAnhSP.setText("Image");        
+        lbl_KichThuoc.setText("Size");
+        
+        lbl_MaQA.setText("Clothing ID");
+        lbl_MauSac.setText("Color");
+        lbl_NCC.setText("Supplier");
+
+        lbl_NgapNhap.setText("Date Added");
+        lbl_PhanLoai.setText("Category");
+        lbl_SoLuong.setText("Quantity");
+        lbl_TenQA.setText("Clothing Name");       
+        
+        lbl_TieuDe1.setText("CLOTHING MANAGEMENT");
     }
 
     /**
@@ -128,26 +160,49 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 550));
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
-        scr_DanhSachQuanAo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách quần áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu){
+            scr_DanhSachQuanAo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách quần áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            scr_DanhSachQuanAo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List of clothing", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
         scr_DanhSachQuanAo.setPreferredSize(new java.awt.Dimension(750, 196));
 
         tbl_QuanAo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tbl_QuanAo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        if(ngonNgu){
+            tbl_QuanAo.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
 
-            },
-            new String [] {
-                "Mã quần áo", "Tên quần áo", "Phân loại", "Giá bán ", "Giá nhập", "Ngày nhập", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+                },
+                new String [] {
+                    "Mã quần áo", "Tên quần áo", "Phân loại", "Giá bán ", "Giá nhập", "Ngày nhập", "Kích cỡ", "Màu sắc", "Chất liệu", "Nhà cung cấp", "Số lượng tồn"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+            });
+        } else {
+            tbl_QuanAo.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                    "Clothing ID", "Clothing name", "Catagory", "Price", "Import price", "Date added", "Size", "Color", "Fabric", "Supplier", "Quantity"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+            });
+        }
         tbl_QuanAo.setRowHeight(35);
         tbl_QuanAo.setShowGrid(true);
         tbl_QuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,7 +248,11 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         );
 
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin phụ kiện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu){
+            pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin quần áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clothing information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
         pnl_ThongTin.setPreferredSize(new java.awt.Dimension(1400, 300));
 
         txt_TenQA.setEditable(false);
@@ -445,7 +504,11 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         txt_MaQA.getAccessibleContext().setAccessibleName("");
 
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
-        pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        if(ngonNgu){
+            pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        } else {
+            pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Function", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        }
 
         btn_Them.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btn_Them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-add-30.png"))); // NOI18N

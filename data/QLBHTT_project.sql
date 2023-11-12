@@ -206,9 +206,9 @@ insert into ChatLieu values ('CL0006',N'Da');
 go
 
 --Khách hàng--
-insert into KhachHang values ('KH0001', N'Nguyễn Văn Anh', '0367494954', 'vananh@gmail.com','Nam');
-insert into KhachHang values ('KH0002', N'Bùi Thị Linh', '0775214548', 'thilinh123@gmail.com', N'Nữ');
-insert into KhachHang values ('KH0003', N'Trần Văn Tài', '0967494204', 'vantai22@gmail.com','Nam');
+insert into KhachHang values ('KH0001', N'Nguyễn Văn Anh', '0367494954', 'zkyeu1232@gmail.com','Nam');
+insert into KhachHang values ('KH0002', N'Bùi Thị Linh', '0775214548', 'phansinh0402@gmail.com', N'Nữ');
+insert into KhachHang values ('KH0003', N'Trần Văn Tài', '0967494204', 'sinhphan2003@gmail.com','Nam');
 insert into KhachHang values ('KH0004', N'Trần Thị Cẩm Sương', '0917458632', 'thicamsuong@gmail.com',N'Nữ');
 insert into KhachHang values ('KH0005', N'Bách Ngọc Luân', '0367852142', 'ngocluan@gmail.com','Nam');
 insert into KhachHang values ('KH0006', N'Đinh Thế Tài', '0364618255', 'thetai02@gmail.com','Nam');
@@ -254,10 +254,10 @@ insert into sanPham values ('SP0013',N'Á Thun Cotton K1',70,130000,140000,'2023
 insert into sanPham values ('SP0014',N'Quần Jean Nam trơn cá tính',15,220000,210000,'2023-11-03','SP0014.jpg','CL0006','KT0002','MS0004','PL0002','NCC005');
 insert into sanPham values ('SP0015',N'Áo sơ mi nam dài tay',50,200000,190000,'2023-11-04','SP0015.jpg','CL0004','KT0002','MS0002','PL0001','NCC001');
 insert into sanPham values ('SP0016',N'Áo sweater Nam',25,210000,180000,'2023-11-04','SP0016.jpg','CL0005','KT0001','MS0001','PL0001','NCC006');
-insert into sanPham values ('SP0017',N'Áo khoác Kaki Nam',25,200000,170000,'2023-11-05','SP0017.jpg','CL0001','KT0005','MS0005','PL0001','NCC003');
-insert into sanPham values ('SP0018',N'Áo polo thời trang Nam',15,185000,180000,'2023-11-05','SP0018.jpg','CL0001','KT0001','MS0001','PL0001','NCC002');
-insert into sanPham values ('SP0019',N'Quần thun Jean cá tính',15,150000,145000,'2023-11-05','SP0019.jpg','CL0006','KT0002','MS0002','PL0002','NCC006');
-insert into sanPham values ('SP0020',N'Quần thun Jean cá tính',20,150000,145000,'2023-11-05','SP0020.jpg','CL0006','KT0003','MS0003','PL0002','NCC006');
+insert into sanPham values ('SP0017',N'Áo khoác Kaki Nam',25,200000,170000,'2023-11-12','SP0017.jpg','CL0001','KT0005','MS0005','PL0001','NCC003');
+insert into sanPham values ('SP0018',N'Áo polo thời trang Nam',15,185000,180000,'2023-11-12','SP0018.jpg','CL0001','KT0001','MS0001','PL0001','NCC002');
+insert into sanPham values ('SP0019',N'Quần thun Jean cá tính',15,150000,145000,'2023-11-12','SP0019.jpg','CL0006','KT0002','MS0002','PL0002','NCC006');
+insert into sanPham values ('SP0020',N'Quần thun Jean cá tính',20,150000,145000,'2023-11-12','SP0020.jpg','CL0006','KT0003','MS0003','PL0002','NCC006');
 go
 ----Them gia tri vao table hoa don
 insert into HoaDon values ('HD0001','KH0001','NV001','2023-10-19');
@@ -270,7 +270,6 @@ insert into HoaDon values ('HD0007','KH0007','NV001','2023-11-03');
 insert into HoaDon values ('HD0008','KH0008','NV003','2023-11-03');
 insert into HoaDon values ('HD0009','KH0009','NV001','2023-11-04');
 insert into HoaDon values ('HD0010','KH0010','NV002','2023-11-04');
-insert into HoaDon values ('HD0011',null,'NV002','2023-11-05');
 
 go
 
@@ -308,7 +307,6 @@ insert into CTHD values ('HD0009','SP0007',1);
 insert into CTHD values ('HD0010','SP0004',2);
 insert into CTHD values ('HD0010','SP0006',1);
 
-insert into CTHD values ('HD0011','SP0015',2);
 go
 
 

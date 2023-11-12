@@ -101,7 +101,6 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbl_IconUser" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lbl_TaiKhoan" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lbl_QuenMatKhau" min="-2" max="-2" attributes="0"/>
@@ -110,6 +109,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbl_IconPWClose" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="lbl_TaiKhoan" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
@@ -168,6 +168,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Courier New" size="13" style="0"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="Admin"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_UsernameActionPerformed"/>
@@ -234,6 +235,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="pwd_MatKhau">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="admin"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwd_MatKhauActionPerformed"/>
               </Events>

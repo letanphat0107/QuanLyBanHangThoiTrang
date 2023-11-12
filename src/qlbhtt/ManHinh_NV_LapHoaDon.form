@@ -82,7 +82,7 @@
       <SubComponents>
         <Container class="javax.swing.JScrollPane" name="scr_DanhSachSanPham">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="} else {&#xa;scr_DanhSachSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;List of products&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Danh s&#xe1;ch s&#x1ea3;n ph&#x1ea9;m">
                   <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
@@ -95,6 +95,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(ngonNgu){"/>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
@@ -102,10 +103,10 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tbl_SanPham">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="if(ngonNgu){">
                   <Font name="Segoe UI" size="13" style="0"/>
                 </Property>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="} else {&#xa;tbl_SanPham.setModel(new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;         &#xa;    },&#xa;    new String [] {&#xa;        &quot;Clothing ID&quot;, &quot;Clothing name&quot;, &quot;Catagory&quot;, &quot;Price&quot;, &quot;Size&quot;, &quot;Color&quot;, &quot;Fabric&quot;, &quot;Supplier&quot;, &quot;Quantity&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;});&#xa;}">
                   <Table columnCount="9" rowCount="0">
                     <Column editable="true" title="M&#xe3; qu&#x1ea7;n &#xe1;o" type="java.lang.String"/>
                     <Column editable="true" title="T&#xea;n qu&#x1ea7;n &#xe1;o" type="java.lang.String"/>
@@ -353,7 +354,7 @@
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="scr_GioHang">
               <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="} else {&#xa;scr_GioHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Cart&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Gi&#x1ecf; H&#xe0;ng">
                       <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
@@ -365,6 +366,7 @@
                 </Property>
               </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(ngonNgu) {"/>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
@@ -372,10 +374,10 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tbl_GioHang">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="if(ngonNgu){">
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="} else {&#xa;tbl_GioHang.setModel(new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Clothing ID&quot;, &quot;Clothing name&quot;, &quot;Catagory&quot;, &quot;Price&quot;, &quot;Size&quot;, &quot;Color&quot;, &quot;Fabric&quot;, &quot;Supplier&quot;, &quot;Quantity&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;});&#xa;}">
                       <Table columnCount="9" rowCount="0">
                         <Column editable="true" title="M&#xe3; s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String"/>
                         <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String"/>
@@ -491,10 +493,10 @@
     </Container>
     <Container class="javax.swing.JPanel" name="pnl_ThongTin">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="if(ngonNgu) {">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="} else {&#xa;pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Information product&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Th&#xf4;ng tin s&#x1ea3;n ph&#x1ea9;m">
               <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
@@ -526,9 +528,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_MaSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="lbl_TenSP" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="txt_MaSP" min="-2" pref="210" max="-2" attributes="0"/>
                               <Component id="txt_TenSP" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
+                              <Component id="lbl_TenSP" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -595,7 +597,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -784,7 +786,7 @@
         </Component>
         <Container class="javax.swing.JPanel" name="pnl_KhuVucTTKhachHang">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="if(ngonNgu) {">
               <Color blue="d5" green="d2" red="c7" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -795,24 +797,36 @@
               </Border>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} else {&#xa;pnl_KhuVucTTKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Information Customer&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txt_SoDienThoai" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="txt_TenKH" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="lbl_TenKH" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btn_TimKH" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btn_ThemKhachHang" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btn_TimKH" min="-2" pref="136" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btn_ThemKhachHang" min="-2" pref="141" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lbl_SoDienThoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbl_TenKH" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="lbl_SoDienThoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txt_SoDienThoai" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_TenKH" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -915,7 +929,7 @@
     </Container>
     <Container class="javax.swing.JPanel" name="pnl_NutChucNang">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="if(ngonNgu) {">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -926,6 +940,9 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} else {&#xa;pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Pay&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -953,19 +970,19 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="btn_LapHoaDon" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btn_LapHoaDon" min="-2" pref="155" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <Component id="lbl_TienKHDua" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txt_TienKHDua" pref="113" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btn_TaiLaiTinhToan" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_TaiLaiTinhToan" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                   </Group>

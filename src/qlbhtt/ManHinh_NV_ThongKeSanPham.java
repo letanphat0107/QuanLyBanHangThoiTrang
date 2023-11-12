@@ -1354,6 +1354,8 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_BieuDoActionPerformed
 
     private void dch_TuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_TuNgayPropertyChange
+        rad_HangMoiNhap.setSelected(false);
+        rad_HetHangTrongKho.setSelected(false);
         if (!dieuKienTuNgay()) {
             return;
         }
@@ -1372,6 +1374,8 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_dch_TuNgayPropertyChange
 
     private void dch_DenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_DenNgayPropertyChange
+        rad_HangMoiNhap.setSelected(false);
+        rad_HetHangTrongKho.setSelected(false);
         if (!dieuKienDenNgay()) {
             return;
         }

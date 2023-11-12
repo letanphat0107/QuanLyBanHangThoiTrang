@@ -86,6 +86,8 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} else {&#xa;scr_DanhSachPhuKien.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Lists of Accessories&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(ngonNgu) {"/>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
@@ -93,23 +95,11 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tbl_PhuKien">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="if(ngonNgu){">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="11" rowCount="0">
-                    <Column editable="true" title="M&#xe3; ph&#x1ee5; ki&#x1ec7;n" type="java.lang.String"/>
-                    <Column editable="true" title="T&#xea;n ph&#x1ee5; ki&#x1ec7;n" type="java.lang.String"/>
-                    <Column editable="true" title="Ph&#xe2;n lo&#x1ea1;i" type="java.lang.String"/>
-                    <Column editable="true" title="Gi&#xe1; b&#xe1;n " type="java.lang.String"/>
-                    <Column editable="true" title="Gi&#xe1; nh&#x1ead;p" type="java.lang.String"/>
-                    <Column editable="true" title="Ng&#xe0;y nh&#x1ead;p" type="java.lang.String"/>
-                    <Column editable="true" title="K&#xed;ch c&#x1ee1;" type="java.lang.String"/>
-                    <Column editable="true" title="M&#xe0;u s&#x1eaf;c" type="java.lang.String"/>
-                    <Column editable="true" title="Ch&#x1ea5;t li&#x1ec7;u" type="java.lang.String"/>
-                    <Column editable="true" title="Nh&#xe0; cung c&#x1ea5;p" type="java.lang.String"/>
-                    <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n" type="java.lang.String"/>
-                  </Table>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="} else {&#xa;tbl_PhuKien.setModel(new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Accessories ID&quot;, &quot;Accessories name&quot;, &quot;Catagory&quot;, &quot;Price&quot;, &quot;Import price&quot;, &quot;Date added&quot;, &quot;Size&quot;, &quot;Color&quot;, &quot;Fabric&quot;, &quot;Supplier&quot;, &quot;Quantity&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;});&#xa;}">
+                  <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;M&#xe3; ph&#x1ee5; ki&#x1ec7;n&quot;, &quot;T&#xea;n ph&#x1ee5; ki&#x1ec7;n&quot;, &quot;Ph&#xe2;n lo&#x1ea1;i&quot;, &quot;Gi&#xe1; b&#xe1;n &quot;, &quot;Gi&#xe1; nh&#x1ead;p&quot;, &quot;Ng&#xe0;y nh&#x1ead;p&quot;, &quot;K&#xed;ch c&#x1ee1;&quot;, &quot;M&#xe0;u s&#x1eaf;c&quot;, &quot;Ch&#x1ea5;t li&#x1ec7;u&quot;, &quot;Nh&#xe0; cung c&#x1ea5;p&quot;, &quot;S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;}" type="code"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
@@ -222,10 +212,10 @@
     </Container>
     <Container class="javax.swing.JPanel" name="pnl_ThongTin">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="if(ngonNgu){">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="} else {&#xa;pnl_ThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Accessory informationn&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Th&#xf4;ng tin ph&#x1ee5; ki&#x1ec7;n">
               <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
@@ -645,7 +635,7 @@
     </Container>
     <Container class="javax.swing.JPanel" name="pnl_NutChucNang">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="if(ngonNgu){">
           <Color blue="d5" green="d2" red="c7" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -656,6 +646,9 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} else {&#xa;pnl_NutChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, &quot;Function&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Segoe UI&quot;, 1, 14))); // NOI18N&#xa;}"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

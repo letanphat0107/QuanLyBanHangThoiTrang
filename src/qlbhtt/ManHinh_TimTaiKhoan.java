@@ -24,6 +24,7 @@ public class ManHinh_TimTaiKhoan extends javax.swing.JFrame {
     private Connect connect;
     public static NhanVien nhanVien = null;
     public static TaiKhoan taiKhoan = null;
+    private boolean ngonNgu = Login.ngonNgu;
     /**
      * Creates new form ManHinh_TimTaiKhoan
      */
@@ -35,9 +36,17 @@ public class ManHinh_TimTaiKhoan extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(null);
-        
+        if(!ngonNgu){
+            chuyenDoiNN();
+        }
     }
-    
+    public void chuyenDoiNN() {
+        lbl_TieuDeChinh.setText("SEARCH ACCOUNT");
+        lbl_TieuDePhu.setText("Please enter email or phone number to find your account");
+        btn_Huy.setText("Cancel");
+        btn_TimKiem.setText("Search");
+    }
+   
     /**
      * Tìm kiếm tài khoản theo email hoặc sdt
      */

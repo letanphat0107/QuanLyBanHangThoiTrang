@@ -22,6 +22,7 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
     private Dao_TaiKhoan dao_TaiKhoan;
     private final TaiKhoan taiKhoan = ManHinh_TimTaiKhoan.taiKhoan;
     private Connect connect;
+    private boolean ngonNgu = Login.ngonNgu;
 
     /**
      * Creates new form ManHinh_DatLaiMatKhau
@@ -32,6 +33,17 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
         connect.connect();
         initComponents();
         setLocationRelativeTo(null);
+        if(!ngonNgu){
+            chuyenDoiNN();
+        }
+    }
+    public void chuyenDoiNN() {
+        lbl_MatKhau.setText("New Password:");
+        lbl_MatKhauCu.setText("Old Password:");
+        lbl_XacNhanMK.setText("Verify Password:");
+        lbl_TieuDe.setText("RESET PASSWORD");
+        btn_Huy.setText("Cancel");
+        btn_XacNhan.setText("Verify");
     }
 
     /**
@@ -69,7 +81,7 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
         lbl_MatKhau = new javax.swing.JLabel();
         txt_MatKhau = new javax.swing.JTextField();
         txt_XacNhanMK = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_TieuDe = new javax.swing.JLabel();
         btn_Huy = new javax.swing.JButton();
         btn_XacNhan = new javax.swing.JButton();
         lbl_MatKhauCu = new javax.swing.JLabel();
@@ -91,9 +103,9 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
 
         txt_XacNhanMK.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
 
-        jLabel1.setBackground(new java.awt.Color(208, 212, 202));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("ĐẶT LẠI MẬT KHẨU");
+        lbl_TieuDe.setBackground(new java.awt.Color(208, 212, 202));
+        lbl_TieuDe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_TieuDe.setText("ĐẶT LẠI MẬT KHẨU");
 
         btn_Huy.setBackground(new java.awt.Color(255, 153, 153));
         btn_Huy.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -127,7 +139,7 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
             pnl_pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_pnlChinhLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lbl_TieuDe)
                 .addGap(147, 147, 147))
             .addGroup(pnl_pnlChinhLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
@@ -155,7 +167,7 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
             pnl_pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_pnlChinhLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lbl_TieuDe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(pnl_pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_MatKhauCu, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,9 +264,9 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Huy;
     private javax.swing.JButton btn_XacNhan;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbl_MatKhau;
     private javax.swing.JLabel lbl_MatKhauCu;
+    private javax.swing.JLabel lbl_TieuDe;
     private javax.swing.JLabel lbl_XacNhanMK;
     private javax.swing.JPanel pnl_pnlChinh;
     private javax.swing.JTextField txt_MatKhau;

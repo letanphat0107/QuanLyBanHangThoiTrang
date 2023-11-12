@@ -62,7 +62,7 @@ public class Login extends javax.swing.JFrame {
     public void chuyenDoiNN_TV() {
         btn_Login.setText("Đăng nhập");
         lbl_Password.setText("Mật khẩu");
-        lbl_TaiKhoan.setText("Người dùng");
+        lbl_TaiKhoan.setText("Tài khoản");
         lbl_QuenMatKhau.setText("Quên mật khẩu?");
         lbl_Title.setText("Đăng nhập");
     }
@@ -136,6 +136,7 @@ public class Login extends javax.swing.JFrame {
         pnl_FormDangNhap.setBackground(new java.awt.Color(208, 212, 202));
 
         txt_Username.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        txt_Username.setText("Admin");
         txt_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_UsernameActionPerformed(evt);
@@ -172,6 +173,7 @@ public class Login extends javax.swing.JFrame {
         lbl_TaiKhoan.setForeground(new java.awt.Color(97, 103, 122));
         lbl_TaiKhoan.setText("Tài khoản");
 
+        pwd_MatKhau.setText("admin");
         pwd_MatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pwd_MatKhauActionPerformed(evt);
@@ -229,13 +231,13 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(txt_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_IconUser))
-                    .addComponent(lbl_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_FormDangNhapLayout.createSequentialGroup()
                         .addGroup(pnl_FormDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_QuenMatKhau)
                             .addComponent(pwd_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_IconPWClose)))
+                        .addComponent(lbl_IconPWClose))
+                    .addComponent(lbl_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FormDangNhapLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

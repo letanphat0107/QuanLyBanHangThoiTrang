@@ -28,6 +28,7 @@ public class ManHinh_XacThucEmail extends javax.swing.JFrame {
     private Dao_SendMail dao_sendmail;
     
      private final NhanVien nhanVien = ManHinh_TimTaiKhoan.nhanVien;
+    private boolean ngonNgu = Login.ngonNgu;
 
     /**
      * Creates new form ManHinh_XacThucEmail
@@ -36,7 +37,9 @@ public class ManHinh_XacThucEmail extends javax.swing.JFrame {
         dao_sendmail = new Dao_SendMail();
         initComponents();
         setLocationRelativeTo(null);
-        
+        if(!ngonNgu){
+            chuyenDoiNN();
+        }
         //Sự kiện lắng người người dùng nhập
         txt_nhapOTP.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -62,9 +65,25 @@ public class ManHinh_XacThucEmail extends javax.swing.JFrame {
         hienThiNhanVienNghi(); 
     }
 
+    public void chuyenDoiNN() {
+        lbl_TieuDeChinh.setText("SEARCH ACCOUNT");
+        btn_GuiMa.setText("Send Code");
+        btn_XacThuc.setText("Verify");
+        lbl_TenNV.setText("Employee name");
+        lbl_Email.setText("Email");
+        lbl_nhapOTP.setText("Enter OTP");
+        lbl_DangNhap.setText("<html><u>Log in with password</u></html>");
+    }
+    
     public void hienThiNhanVienNghi() {
         if(!nhanVien.isTrangThai()) {
-            lbl_thongBaoNghi.setText("Nhân viên này đã nghỉ, không được thực hiện xác thực");
+            if(ngonNgu){
+                            lbl_thongBaoNghi.setText("Nhân viên này đã nghỉ, không được thực hiện xác thực");
+
+            } else {
+                                                            lbl_thongBaoNghi.setText("This employee has retired and cannot be authenticatedc");
+
+            }
             btn_GuiMa.setEnabled(false);
         }
     }
