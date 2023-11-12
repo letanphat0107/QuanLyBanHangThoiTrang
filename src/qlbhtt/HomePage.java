@@ -197,7 +197,7 @@ public class HomePage extends javax.swing.JFrame {
         pnl_GiaoDienChucNang.setPreferredSize(new java.awt.Dimension(746, 423));
         pnl_GiaoDienChucNang.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Ảnh nền chính-sua1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/Ảnh nền chính.png"))); // NOI18N
         pnl_GiaoDienChucNang.add(jLabel1, java.awt.BorderLayout.LINE_START);
 
         mnu_ManHinhChinh.setBackground(new java.awt.Color(206, 230, 243));

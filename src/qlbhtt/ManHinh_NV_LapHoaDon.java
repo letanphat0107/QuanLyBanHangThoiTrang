@@ -70,11 +70,15 @@ import javax.swing.table.TableCellEditor;
 import static qlbhtt.HomePage.pnl_GiaoDienChucNang;
 import qlbhtt.Login;
 
+interface XyLyCloseFrame{
+    void xuLyFrameClose();
+}
+
 /**
  *
  * @author DMX
  */
-public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
+public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyCloseFrame{
 
     private DefaultTableModel modelSanPham;
     private DefaultTableModel modelGioHang;
@@ -593,6 +597,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         lbl_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenKH.setText("Tên khách hàng");
 
+        txt_TenKH.setEditable(false);
         txt_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -621,6 +626,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
         lbl_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoDienThoai.setText("Số điện thoại");
 
+        txt_SoDienThoai.setEditable(false);
         txt_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btn_ThemKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -873,7 +879,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(pnl_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 888, Short.MAX_VALUE)
+                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -908,7 +914,12 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_TenKHActionPerformed
 
     private void btn_TimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKHActionPerformed
-        xuLyTimKiemKhachHang();
+        try {
+            //xuLyTimKiemKhachHang();
+            xuLyChonKhachHang();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManHinh_NV_LapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_TimKHActionPerformed
 
     private void btn_ThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemKhachHangActionPerformed
@@ -1237,7 +1248,20 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Khách hàng có một đơn đặt trước đó");
         }
     }
-
+    @Override
+    public void xuLyFrameClose(){
+        if (Form_DanhSachKhachHang.khachHang_Form != null) {
+            khachHang = Form_DanhSachKhachHang.khachHang_Form;
+            txt_TenKH.setText(khachHang.getHoTen());
+            txt_SoDienThoai.setText(khachHang.getSdt());
+        }        
+    }
+    
+    private void xuLyChonKhachHang() throws SQLException{
+        Form_DanhSachKhachHang frm = new Form_DanhSachKhachHang(ManHinh_NV_LapHoaDon.this);
+        frm.setVisible(true);
+    }
+    
     private void xuLyTimKiemKhachHang() {
         String tenKhachHang = txt_TenKH.getText().trim();
         String soDienThoai = txt_SoDienThoai.getText().trim();

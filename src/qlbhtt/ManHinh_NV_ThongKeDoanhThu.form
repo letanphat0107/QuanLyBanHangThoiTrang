@@ -59,7 +59,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="scr_DanhSachSanPham" pref="1362" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachSanPham" pref="1708" max="32767" attributes="0"/>
               <Component id="pnl_NV_TieuDe" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -68,7 +68,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="pnl_NV_TieuDe" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scr_DanhSachSanPham" pref="204" max="32767" attributes="0"/>
+                  <Component id="scr_DanhSachSanPham" pref="182" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -251,20 +251,35 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="cmb_MauSac" max="32767" attributes="0"/>
-                                      <Component id="cmb_KichThuoc" min="-2" pref="242" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lbl_TuNgay" max="32767" attributes="0"/>
-                                      <Component id="lbl_DenNgay" pref="73" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Component id="lbl_KichThuoc" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="lbl_MauSac" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="cmb_PhanLoai" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="cmb_MauSac" max="32767" attributes="0"/>
+                                          <Component id="cmb_KichThuoc" min="-2" pref="242" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="cmb_PhanLoai" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="btn_Top5SPDTCN" max="32767" attributes="0"/>
+                                              <Component id="btn_Top5SPDTTN" pref="300" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lbl_TuNgay" max="32767" attributes="0"/>
+                                              <Component id="lbl_DenNgay" pref="73" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="btn_LamMoi" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -291,6 +306,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="cmb_KichThuoc" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                           <Component id="lbl_TuNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                          <Component id="btn_Top5SPDTCN" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="dch_TuNgay" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
@@ -303,6 +319,7 @@
                                           <Component id="lbl_DenNgay" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="dch_DenNgay" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="btn_Top5SPDTTN" min="-2" pref="46" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -310,7 +327,10 @@
                                       <Component id="chk_TatCa" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cmb_PhanLoai" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="cmb_PhanLoai" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="btn_LamMoi" min="-2" pref="46" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
@@ -323,7 +343,7 @@
                           <Component id="pnl_TongDoanhThu" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="77" max="32767" attributes="0"/>
+                  <EmptySpace pref="66" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -609,6 +629,48 @@
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chk_TatCaItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_Top5SPDTCN">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Top 5 S&#x1ea3;n ph&#x1ea9;m c&#xf3; doanh thu cao nh&#x1ea5;t"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Top5SPDTCNActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_Top5SPDTTN">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Top 5 s&#x1ea3;n ph&#x1ea9;m c&#xf3; doanh thu th&#x1ea5;p nh&#x1ea5;t"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Top5SPDTTNActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_LamMoi">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LamMoiActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

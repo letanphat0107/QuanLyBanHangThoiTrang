@@ -52,9 +52,12 @@ import javax.swing.UIManager;
  *
  * @author DMX
  */
+ 
 public class ManHinh_NV_DatHang extends javax.swing.JPanel {
 
     private DefaultTableModel modelSanPham;
+public class ManHinh_NV_DatHang extends javax.swing.JPanel implements Xu{
+    private DefaultTableModel modelSanPham;    
     private DefaultTableModel modelGioHang;
     private Dao_SanPham dao_SanPham;
     private Dao_ChatLieu dao_ChatLieu;
@@ -534,6 +537,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
         lbl_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenKH.setText("Tên khách hàng");
 
+        txt_TenKH.setEditable(false);
         txt_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -562,6 +566,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
         lbl_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoDienThoai.setText("Số điện thoại");
 
+        txt_SoDienThoai.setEditable(false);
         txt_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btn_ThemKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -776,7 +781,12 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_TenKHActionPerformed
 
     private void btn_TimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKHActionPerformed
-        xuLyTimKiemKhachHang();
+        try {
+            //xuLyTimKiemKhachHang();
+            xuLyChonKhachHang();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManHinh_NV_DatHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_TimKHActionPerformed
 
     private void btn_ThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemKhachHangActionPerformed
@@ -1087,6 +1097,20 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
         }
     }
 
+    @Override
+    public void xuLyFrameClose(){
+        if (Form_DanhSachKhachHang.khachHang_Form != null) {
+            khachHang = Form_DanhSachKhachHang.khachHang_Form;
+            txt_TenKH.setText(khachHang.getHoTen());
+            txt_SoDienThoai.setText(khachHang.getSdt());
+        }        
+    }
+    
+    private void xuLyChonKhachHang() throws SQLException{
+        Form_DanhSachKhachHang frm = new Form_DanhSachKhachHang(ManHinh_NV_DatHang.this);
+        frm.setVisible(true);
+    }
+    
     private void xuLyTimKiemKhachHang() {
         String tenKhachHang = txt_TenKH.getText().trim();
         String soDienThoai = txt_SoDienThoai.getText().trim();

@@ -471,10 +471,10 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
     }
      public void xuLyXoaCTPhieuDatHang(String maPDT){
          //Hoàn trả số lượng mua thành số lượng tồn
-         ArrayList<CTPhieuDatHang> list_CTPDT = dao_CTPhieuDatHang.getAllCTPhieuDatHang(maPDT);
-         for (CTPhieuDatHang cTPhieuDatHang : list_CTPDT) {
-             dao_SanPham.tangSoLuongSanPham(cTPhieuDatHang.getSanPham().getMaSP(), cTPhieuDatHang.getSoLuong());
-         }
+//         ArrayList<CTPhieuDatHang> list_CTPDT = dao_CTPhieuDatHang.getAllCTPhieuDatHang(maPDT);
+//         for (CTPhieuDatHang cTPhieuDatHang : list_CTPDT) {
+//             dao_SanPham.tangSoLuongSanPham(cTPhieuDatHang.getSanPham().getMaSP(), cTPhieuDatHang.getSoLuong());
+//         }
          //Xoa CTPhieuDatHang
          dao_CTPhieuDatHang.xoaCTPhieuDatHang(maPDT);
      }
