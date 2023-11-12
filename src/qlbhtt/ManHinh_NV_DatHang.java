@@ -51,13 +51,11 @@ import entity.XyLyCloseFrame;
 
 /**
  *
- * @author DMX
+ * @author DMXs
  */
  
-public class ManHinh_NV_DatHang extends javax.swing.JPanel {
+public class ManHinh_NV_DatHang extends javax.swing.JPanel implements XyLyCloseFrame{
 
-    private DefaultTableModel modelSanPham;
-public class ManHinh_NV_DatHang extends javax.swing.JPanel implements Xu{
     private DefaultTableModel modelSanPham;    
     private DefaultTableModel modelGioHang;
     private Dao_SanPham dao_SanPham;
@@ -450,8 +448,8 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements Xu{
         }
         pnl_ThongTin.setPreferredSize(new java.awt.Dimension(926, 300));
 
+        txt_TenSP.setEditable(false);
         txt_TenSP.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_TenSP.setText("Áo thun");
         txt_TenSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenSPActionPerformed(evt);
@@ -460,7 +458,6 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements Xu{
 
         txt_MaSP.setEditable(false);
         txt_MaSP.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_MaSP.setText("SP001");
         txt_MaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaSPActionPerformed(evt);
@@ -503,11 +500,11 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements Xu{
         );
 
         cmb_PhanLoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmb_PhanLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Áo" }));
+        cmb_PhanLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         cmb_KichThuoc.setEditable(true);
         cmb_KichThuoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmb_KichThuoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L" }));
+        cmb_KichThuoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         lbl_MauSac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_MauSac.setText("Màu sắc");
@@ -516,11 +513,10 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements Xu{
         lbl_GiaBan.setText("Giá bán");
 
         cmb_MauSac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmb_MauSac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trắng" }));
+        cmb_MauSac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         txt_GiaBan.setEditable(false);
         txt_GiaBan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_GiaBan.setText("SP001");
         txt_GiaBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_GiaBanActionPerformed(evt);

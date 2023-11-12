@@ -409,7 +409,6 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
             btn_Luu.setEnabled(true);
             kiemTraCapNhat=true;
             kiemTraTextNhap(true);
-            
         }else if(btn_CapNhat.getText().equalsIgnoreCase("Hủy")){
             btn_CapNhat.setText("Cập nhật");
             huyThaoTacNhap();
@@ -448,7 +447,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhachHangMouseClicked
-         int row = tbl_KhachHang.getSelectedRow();
+        int row = tbl_KhachHang.getSelectedRow();
         if (row != -1) {
             txt_MaKH.setText(tbl_KhachHang.getValueAt(row, 0).toString());
             txt_TenKH.setText(tbl_KhachHang.getValueAt(row, 1).toString());
@@ -555,6 +554,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         txt_SoDienThoai.setText("");
         rad_Nam.setSelected(false);
         rad_Nu.setSelected(false);
+        tbl_KhachHang.clearSelection();
     }
 
     public void docDuLieuKhachHang() {

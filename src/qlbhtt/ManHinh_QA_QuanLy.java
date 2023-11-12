@@ -389,6 +389,7 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
 
         dch_NgayNhap.setAutoscrolls(true);
         dch_NgayNhap.setDateFormatString("dd-MM-yyyy");
+        dch_NgayNhap.setEnabled(false);
         dch_NgayNhap.setMaxSelectableDate(new java.util.Date(253370743268000L));
         dch_NgayNhap.setMinSelectableDate(new java.util.Date(-62135791132000L));
 
@@ -1134,6 +1135,7 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         cmb_PhanLoai.setSelectedIndex(0);
         cmb_NCC.setSelectedIndex(0);
         file = null;
+        tbl_QuanAo.clearSelection();
     }
     
     public void docDuLieuQuanAo() {

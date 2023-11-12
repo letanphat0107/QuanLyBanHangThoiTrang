@@ -136,7 +136,6 @@ public class Login extends javax.swing.JFrame {
         pnl_FormDangNhap.setBackground(new java.awt.Color(208, 212, 202));
 
         txt_Username.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        txt_Username.setText("Admin");
         txt_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_UsernameActionPerformed(evt);
@@ -173,7 +172,6 @@ public class Login extends javax.swing.JFrame {
         lbl_TaiKhoan.setForeground(new java.awt.Color(97, 103, 122));
         lbl_TaiKhoan.setText("Tài khoản");
 
-        pwd_MatKhau.setText("admin");
         pwd_MatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pwd_MatKhauActionPerformed(evt);

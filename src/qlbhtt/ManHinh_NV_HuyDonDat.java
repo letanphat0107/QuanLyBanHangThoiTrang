@@ -22,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  * @author DMX
  */
 public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
-    private DefaultTableModel modelPhieuDatHang;    
+    private DefaultTableModel modelPhieuDatHang;
+    private DefaultTableModel modelCTPhieuDatHang;    
     private Dao_PhieuDatHang dao_PhieuDatHang;
     private Dao_CTPhieuDatHang dao_CTPhieuDatHang;
     private Dao_SanPham dao_SanPham;
@@ -37,6 +38,8 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
+        
+        modelCTPhieuDatHang = (DefaultTableModel) tbl_CTPhieuDatHang.getModel();
         
         tbl_PhieuDatHang.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_PhieuDatHang.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
@@ -393,6 +396,7 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
 
     private void btn_HuyDonDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HuyDonDatActionPerformed
         xuLyXoaPhieuDatHang();
+        
     }//GEN-LAST:event_btn_HuyDonDatActionPerformed
 
     private void tbl_PhieuDatHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_PhieuDatHangMouseClicked
@@ -477,6 +481,7 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
 //         }
          //Xoa CTPhieuDatHang
          dao_CTPhieuDatHang.xoaCTPhieuDatHang(maPDT);
+         modelPhieuDatHang.setRowCount(0);
      }
      /**
       * Xử lý xóa Nhà Cung Cấp

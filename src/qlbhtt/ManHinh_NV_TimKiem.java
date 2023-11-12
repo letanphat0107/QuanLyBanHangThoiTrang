@@ -308,7 +308,7 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         });
 
         lbl_TrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_TrangThai.setText("Trạng thái");
+        lbl_TrangThai.setText("Trạng thái làm việc");
 
         rad_TrangThai.setBackground(new java.awt.Color(199, 210, 213));
         rad_TrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -341,15 +341,15 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
                             .addComponent(lbl_SoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_SoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(60, 60, 60)
+                .addGap(52, 52, 52)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_TrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rad_TrangThai)
                     .addComponent(lbl_GioiTInh, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                         .addComponent(rad_Nam)
                         .addGap(18, 18, 18)
-                        .addComponent(rad_Nu)))
+                        .addComponent(rad_Nu))
+                    .addComponent(lbl_TrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_ThongTinLayout.setVerticalGroup(
@@ -430,8 +430,8 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         });
 
         btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btn_CapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-delete-30.png"))); // NOI18N
-        btn_CapNhat.setText("Cập nhật");
+        btn_CapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageGD/icons8-reset-30.png"))); // NOI18N
+        btn_CapNhat.setText("Thay đổi trạng thái");
         btn_CapNhat.setBorder(null);
         btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -453,9 +453,9 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
             pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(btn_XoaTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_TimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 60, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -559,7 +559,13 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_CapNhatMouseExited
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        HomePage.activeQLNVForm();
+        int row = tbl_NhanVien.getSelectedRow();
+        if (row != -1) {
+            HomePage.activeQLNVForm();
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần thay đổi trạng thái làm việc");
+        }
 
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 

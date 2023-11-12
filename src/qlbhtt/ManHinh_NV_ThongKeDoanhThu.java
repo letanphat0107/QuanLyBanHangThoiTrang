@@ -47,6 +47,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -86,9 +87,47 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         
         activeTatCa = true;
         khoiTaoGiaTri();
-        tblDanhSachSanPham();
+        loadDanhSachSanPham();
     }
 
+    /**
+     * Điều kiện từ ngày
+     */
+    public boolean dieuKienTuNgay() {
+        Date ngayHienTai = new Date();
+        Date tuNgay = dch_TuNgay.getDate();
+
+        if (tuNgay.after(ngayHienTai)) {
+            JOptionPane.showMessageDialog(this, "Ngày phải trước ngày hiện tại!");
+            dch_TuNgay.setDate(new Date());
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Điều kiện đến ngày
+     */
+    public boolean dieuKienDenNgay() {
+        Date ngayHienTai = new Date();
+        Date tuNgay = dch_TuNgay.getDate();
+        Date denNgay = dch_DenNgay.getDate();
+
+        if (tuNgay.after(denNgay)) {
+            JOptionPane.showMessageDialog(this, "Từ ngày phải trước ngày đến!");
+            dch_TuNgay.setDate(new Date());
+            dch_DenNgay.setDate(new Date());
+            return false;
+        }
+
+        if (denNgay.after(ngayHienTai)) {
+            JOptionPane.showMessageDialog(this, "Ngày phải trước ngày hiện tại!");
+            dch_DenNgay.setDate(new Date());
+            return false;
+        }
+        return true;
+    }
+    
     private void khoiTaoGiaTri() {
         //Doc du lieu cmb Phan loai
         ArrayList<PhanLoai> listPhanLoai = dao_PhanLoai.getAllPhanLoai();
@@ -118,7 +157,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         dtm.setRowCount(0);
     }
 
-    private void tblDanhSachSanPham() {
+    private void loadDanhSachSanPham() {
         clearTable();
         String phanLoai = cmb_PhanLoai.getSelectedItem().toString();
         String ktPhanLoai = cmb_PhanLoai.getSelectedItem().toString();
@@ -156,7 +195,7 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
         txt_TongDoanhThu.setText(NumberFormat.getInstance().format(tongDoanhThu));
     }
 
-    private void tblDanhSachSanPhamTheoThoiGian() {
+    private void loadDanhSachSanPhamTheoThoiGian() {
         clearTable();
         String phanLoai = cmb_PhanLoai.getSelectedItem().toString();
         String ktPhanLoai = cmb_PhanLoai.getSelectedItem().toString();
@@ -1038,44 +1077,50 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
 
     private void cmb_KichThuocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_KichThuocItemStateChanged
         if (chk_TatCa.isSelected()) {
-            tblDanhSachSanPham();
+            loadDanhSachSanPham();
 
         } else if (!chk_TatCa.isSelected()) {
-            tblDanhSachSanPhamTheoThoiGian();
+            loadDanhSachSanPhamTheoThoiGian();
         }
     }//GEN-LAST:event_cmb_KichThuocItemStateChanged
 
     private void cmb_MauSacItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_MauSacItemStateChanged
         if (chk_TatCa.isSelected()) {
-            tblDanhSachSanPham();
+            loadDanhSachSanPham();
         } else if (!chk_TatCa.isSelected()) {
-            tblDanhSachSanPhamTheoThoiGian();
+            loadDanhSachSanPhamTheoThoiGian();
         }
     }//GEN-LAST:event_cmb_MauSacItemStateChanged
 
     private void cmb_PhanLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_PhanLoaiItemStateChanged
         if (chk_TatCa.isSelected()) {
-            tblDanhSachSanPham();
+            loadDanhSachSanPham();
         } else if (!chk_TatCa.isSelected()) {
-            tblDanhSachSanPhamTheoThoiGian();
+            loadDanhSachSanPhamTheoThoiGian();
         }
     }//GEN-LAST:event_cmb_PhanLoaiItemStateChanged
 
     private void dch_TuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_TuNgayPropertyChange
+        if(!dieuKienTuNgay()){
+            return;
+        }
         if (chk_TatCa.isSelected()) {
-            tblDanhSachSanPham();
+            loadDanhSachSanPham();
         } else if (!chk_TatCa.isSelected()) {
-            tblDanhSachSanPhamTheoThoiGian();
+            loadDanhSachSanPhamTheoThoiGian();
         }
         activeTatCa = false;
         activeTKTheoNgay = true;
     }//GEN-LAST:event_dch_TuNgayPropertyChange
 
     private void dch_DenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dch_DenNgayPropertyChange
+        if(!dieuKienDenNgay()) {
+            return;
+        }
         if (chk_TatCa.isSelected()) {
-            tblDanhSachSanPham();
+            loadDanhSachSanPham();
         } else if (!chk_TatCa.isSelected()) {
-            tblDanhSachSanPhamTheoThoiGian();
+            loadDanhSachSanPhamTheoThoiGian();
         }
         activeTatCa = false;
         activeTKTheoNgay = true;
@@ -1083,9 +1128,9 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
 
     private void chk_TatCaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chk_TatCaItemStateChanged
         if (chk_TatCa.isSelected()) {
-            tblDanhSachSanPham();
+            loadDanhSachSanPham();
         } else if (!chk_TatCa.isSelected()) {
-            tblDanhSachSanPhamTheoThoiGian();
+            loadDanhSachSanPhamTheoThoiGian();
         }
         activeTatCa = true;
         activeTKTheoNgay = false;
@@ -1120,15 +1165,27 @@ public class ManHinh_NV_ThongKeDoanhThu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_BieuDoActionPerformed
 
     private void btn_Top5SPDTTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Top5SPDTTNActionPerformed
+        cmb_KichThuoc.setSelectedIndex(0);
+        cmb_MauSac.setSelectedIndex(0);
+        cmb_PhanLoai.setSelectedIndex(0);
         tblTop5SanPhamDoanhThuThapNhat();
+        
     }//GEN-LAST:event_btn_Top5SPDTTNActionPerformed
 
     private void btn_Top5SPDTCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Top5SPDTCNActionPerformed
+        cmb_KichThuoc.setSelectedIndex(0);
+        cmb_MauSac.setSelectedIndex(0);
+        cmb_PhanLoai.setSelectedIndex(0);
         tblTop5SanPhamDoanhThuCaoNhat();
+        
+        
     }//GEN-LAST:event_btn_Top5SPDTCNActionPerformed
 
     private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
-        tblDanhSachSanPham();
+        cmb_KichThuoc.setSelectedIndex(0);
+        cmb_MauSac.setSelectedIndex(0);
+        cmb_PhanLoai.setSelectedIndex(0);
+        loadDanhSachSanPham();
             
     }//GEN-LAST:event_btn_LamMoiActionPerformed
 

@@ -1,6 +1,6 @@
-﻿create database BanHangTT
+﻿create database QuanLyBanHangTT
 go
-use BanHangTT
+use QuanLyBanHangTT
 go
 
 create table NhanVien (

@@ -101,6 +101,11 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         });
         tbl_KhachHang.setRowHeight(35);
         tbl_KhachHang.setShowGrid(true);
+        tbl_KhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_KhachHangMouseClicked(evt);
+            }
+        });
         scr_DanhSachKhachHang.setViewportView(tbl_KhachHang);
 
         lbl_TieuDeTimKiem.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
@@ -174,11 +179,13 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         rad_Nam.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_Nam.setSelected(true);
         rad_Nam.setText("Nam");
+        rad_Nam.setEnabled(false);
 
         rad_Nu.setBackground(new java.awt.Color(199, 210, 213));
         buttonGroup1.add(rad_Nu);
         rad_Nu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_Nu.setText("Nữ");
+        rad_Nu.setEnabled(false);
 
         txt_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_SoDienThoai.addActionListener(new java.awt.event.ActionListener() {
@@ -376,6 +383,23 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         btn_XoaTrang.setBackground(UIManager.getColor("Menu.background"));
         btn_XoaTrang.setForeground(UIManager.getColor("Menu.foreground"));
     }//GEN-LAST:event_btn_XoaTrangMouseExited
+
+    private void tbl_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhachHangMouseClicked
+        int row = tbl_KhachHang.getSelectedRow();
+        if (row != -1) {
+            txt_MaKH.setText(tbl_KhachHang.getValueAt(row, 0).toString());
+            txt_TenKH.setText(tbl_KhachHang.getValueAt(row, 1).toString());
+            if (tbl_KhachHang.getValueAt(row, 2).toString().equalsIgnoreCase("Nam")) {
+                rad_Nam.setSelected(true);
+                rad_Nu.setSelected(false);
+            } else {
+                rad_Nam.setSelected(false);
+                rad_Nu.setSelected(true);
+            }
+            txt_Email.setText(tbl_KhachHang.getValueAt(row, 3).toString());
+            txt_SoDienThoai.setText(tbl_KhachHang.getValueAt(row, 4).toString());
+        }
+    }//GEN-LAST:event_tbl_KhachHangMouseClicked
     private void clearTable() {
         DefaultTableModel dtm = (DefaultTableModel) tbl_KhachHang.getModel();
         dtm.setRowCount(0);
@@ -410,12 +434,12 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
         String tenKhachHang = txt_TenKH.getText();
         String soDienThoai = txt_SoDienThoai.getText();
         String email = txt_Email.getText();
-        
+
         DefaultTableModel dtm = (DefaultTableModel) tbl_KhachHang.getModel();
-        
+
         ArrayList<KhachHang> listKhachHang = dao_KhachHang.timKiemKhachHang(maKhachHang, tenKhachHang, soDienThoai, email);
-        
-        if(listKhachHang!=null){
+
+        if (listKhachHang != null) {
             clearTable();
             for (KhachHang kh : listKhachHang) {
 
@@ -424,7 +448,7 @@ public class ManHinh_KH_TimKiem extends javax.swing.JPanel {
                 System.out.println(kh.toString());
             }
         }
-        
+
         xoaTrang();
     }
 

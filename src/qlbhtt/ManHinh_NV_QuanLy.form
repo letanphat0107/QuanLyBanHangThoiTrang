@@ -234,7 +234,10 @@
                   </Group>
                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txt_Email" min="-2" pref="242" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="txt_Email" min="-2" pref="242" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_DiaChi" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
@@ -243,7 +246,7 @@
                               <Component id="txt_DiaChi" min="-2" pref="242" max="-2" attributes="0"/>
                               <Component id="txt_SoDienThoai" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_GioiTinh" min="-2" pref="100" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -251,12 +254,14 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="rad_Nu" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="lbl_TrangThai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="rad_TrangThai" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbl_TrangThai" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -497,7 +502,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>
+            <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i l&#xe0;m vi&#x1ec7;c"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rad_TrangThai">

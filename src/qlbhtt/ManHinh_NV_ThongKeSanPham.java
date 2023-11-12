@@ -985,7 +985,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         });
 
         lbl_TuNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_TuNgay.setText("Từ ngày:");
+        lbl_TuNgay.setText("Nhập từ ngày:");
 
         lbl_DenNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_DenNgay.setText("Đến ngày:");
@@ -1190,7 +1190,9 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
 
     private void btn_TopSPBanChayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TopSPBanChayActionPerformed
         khoiTaoNgayHienTai();
-
+        cmb_KichThuoc.setSelectedItem(0);
+        cmb_MauSac.setSelectedItem(0);
+        cmb_PhanLoai.setSelectedItem(0);
         thongKeSanPhamBanChay();
         chk_TatCa.setSelected(false);
         rad_HangMoiNhap.setSelected(false);
@@ -1206,7 +1208,9 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
 
     private void btn_TopSPBanChạmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TopSPBanChạmActionPerformed
         khoiTaoNgayHienTai();
-
+        cmb_KichThuoc.setSelectedItem(0);
+        cmb_MauSac.setSelectedItem(0);
+        cmb_PhanLoai.setSelectedItem(0);
         thongKeSanPhamBanCham();
         chk_TatCa.setSelected(false);
         rad_HangMoiNhap.setSelected(false);
@@ -1311,7 +1315,9 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
 
     private void rad_HangMoiNhapItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rad_HangMoiNhapItemStateChanged
         khoiTaoNgayHienTai();
-
+        cmb_KichThuoc.setSelectedItem(0);
+        cmb_MauSac.setSelectedItem(0);
+        cmb_PhanLoai.setSelectedItem(0);
         if (rad_HangMoiNhap.isSelected()) {
             rad_HetHangTrongKho.setSelected(false);
             chk_TatCa.setSelected(false);

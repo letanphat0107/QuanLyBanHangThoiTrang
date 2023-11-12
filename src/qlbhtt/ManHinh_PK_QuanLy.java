@@ -387,6 +387,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         lbl_NgayNhap.setText("Ngày nhập");
 
         dch_NgayNhap.setDateFormatString("dd-MM-yyyy");
+        dch_NgayNhap.setEnabled(false);
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);
         pnl_ThongTin.setLayout(pnl_ThongTinLayout);
@@ -1124,6 +1125,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         cmb_PhanLoai.setSelectedIndex(0);
         cmb_NCC.setSelectedIndex(0);
         file = null;
+        tbl_PhuKien.clearSelection();
     }
     
     public void docDuLieuPhuKien() {

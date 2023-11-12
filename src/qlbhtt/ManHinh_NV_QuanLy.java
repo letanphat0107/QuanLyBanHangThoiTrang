@@ -37,13 +37,13 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         connect = new Connect();
         connect.connect();
         initComponents();
-        
+
         tbl_NhanVien.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_NhanVien.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
-        
+
         loadDuLieuChucVu();
         docDuLieuNhanVien();
-        setGiaTriTxt(); 
+        loadNVTuTacVuTimKiem();
     }
 
     /**
@@ -128,6 +128,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         txt_MaNV.setText("");
         rad_Nam.setSelected(false);
         rad_Nu.setSelected(false);
+        tbl_NhanVien.clearSelection();
     }
 
     /**
@@ -309,20 +310,24 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
     /**
      * Load giá trị txt từ class Tìm Kiếm nhân viên
      */
-    public void setGiaTriTxt() {
+    public void loadNVTuTacVuTimKiem() {
         NhanVien nv = ManHinh_NV_TimKiem.nhanVien;
-        txt_MaNV.setText(nv.getMaNV());
-        txt_TenNV.setText(nv.getHoTen());
-        txt_DiaChi.setText(nv.getDiaChi());
-        txt_SoDienThoai.setText(nv.getSdt());
-        txt_Email.setText(nv.getEmail());
-        cmb_ChucVu.setSelectedItem(nv.getChuVu());
-        if (nv.getGioiTinh().equalsIgnoreCase("Nam")) {
-            rad_Nam.setSelected(true);
-        } else if (nv.getGioiTinh().equalsIgnoreCase("Nữ")) {
-            rad_Nu.setSelected(true);
+
+        if (nv != null) {
+            txt_MaNV.setText(nv.getMaNV());
+            txt_TenNV.setText(nv.getHoTen());
+            txt_DiaChi.setText(nv.getDiaChi());
+            txt_SoDienThoai.setText(nv.getSdt());
+            txt_Email.setText(nv.getEmail());
+            cmb_ChucVu.setSelectedItem(nv.getChuVu());
+            if (nv.getGioiTinh().equalsIgnoreCase("Nam")) {
+                rad_Nam.setSelected(true);
+            } else if (nv.getGioiTinh().equalsIgnoreCase("Nữ")) {
+                rad_Nu.setSelected(true);
+            }
+            rad_TrangThai.setSelected(nv.isTrangThai());
         }
-        rad_TrangThai.setSelected(nv.isTrangThai());
+
     }
 
     /**
@@ -516,7 +521,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
         });
 
         lbl_TrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_TrangThai.setText("Trạng thái");
+        lbl_TrangThai.setText("Trạng thái làm việc");
 
         rad_TrangThai.setBackground(new java.awt.Color(199, 210, 213));
         rad_TrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -539,7 +544,9 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
                     .addComponent(cmb_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(70, 70, 70)
                 .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnl_ThongTinLayout.createSequentialGroup()
+                        .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_DiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -547,16 +554,17 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
                             .addComponent(lbl_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_DiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_SoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(70, 70, 70)
+                        .addGap(58, 58, 58)
                         .addGroup(pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_GioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnl_ThongTinLayout.createSequentialGroup()
                                 .addComponent(rad_Nam)
                                 .addGap(18, 18, 18)
                                 .addComponent(rad_Nu))
-                            .addComponent(lbl_TrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rad_TrangThai))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(rad_TrangThai)
+                            .addGroup(pnl_ThongTinLayout.createSequentialGroup()
+                                .addComponent(lbl_TrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         pnl_ThongTinLayout.setVerticalGroup(
             pnl_ThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,7 +753,7 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
             kiemTraHoaDongSua = true;
             kiemTraHoatDongTextNhap(true);
             xoaTrangTxt();
-            setGiaTriTxt();
+            loadNVTuTacVuTimKiem();
         } else if (btn_CapNhat.getText().equalsIgnoreCase("Hủy")) {
             btn_CapNhat.setText("Cập nhật");
             huyThaoTac();

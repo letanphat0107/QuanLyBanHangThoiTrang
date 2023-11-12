@@ -520,6 +520,7 @@ public class ManHinh_NCC_QuanLy extends javax.swing.JPanel {
         txt_SoDienThoai.setText("");
         txt_Email.setText("");
         txt_MaNCC.setText("");
+        tbl_NhaCungCap.clearSelection();
     }
     
     /**

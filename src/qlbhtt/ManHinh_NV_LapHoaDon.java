@@ -1251,6 +1251,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
             khachHang = Form_DanhSachKhachHang.khachHang_Form;
             txt_TenKH.setText(khachHang.getHoTen());
             txt_SoDienThoai.setText(khachHang.getSdt());
+            kiemTraDonDatCuaKH(khachHang);
         }        
     }
     
@@ -1538,7 +1539,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
         for (SanPham sanPham : gioHang) {
             int slTonDuKien = dao_SanPham.getSanPhamTheoMa(sanPham.getMaSP()).getSoLuong() - sanPham.getSoLuong();
             if (sanPham.getSoLuong() > dao_SanPham.getSanPhamTheoMa(sanPham.getMaSP()).getSoLuong() || slTonDuKien < 0) {
-                JOptionPane.showMessageDialog(this, "Số lượng mua của " + sanPham.getMaSP() + "vượt quá số lượng tồn");
+                JOptionPane.showMessageDialog(this, "Số lượng mua của " + sanPham.getMaSP() + " vượt quá số lượng tồn");
                 return false;
             }
         }

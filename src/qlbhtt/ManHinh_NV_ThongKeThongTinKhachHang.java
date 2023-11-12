@@ -54,7 +54,10 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
     private KhachHang kh = new KhachHang();
 
     private boolean activeTatCa = false;
-    private boolean activeTop5KhachHang = false;
+    private boolean activeTop5KhachHangChiTieuCao = false;
+    private boolean activeTop5KhachHangThuongXuyen = false;
+    private boolean activeTop5KhachHangSoLuongMuaNhieu = false;
+    
 
     private final NhanVien nhanVien = Login.nhanVien;
 
@@ -201,8 +204,12 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
             if (activeTatCa) {
                 pathFull = "data/BaoCaoTKKH/" + "BaoCaoKhachHang" + randomNumber + ".pdf";
-            } else if (activeTop5KhachHang) {
-                pathFull = "data/BaoCaoTKKH/" + "Top5KhachHang" + randomNumber + ".pdf";
+            } else if (activeTop5KhachHangChiTieuCao) {
+                pathFull = "data/BaoCaoTKKH/" + "Top5KhachHangChiTieuCao" + randomNumber + ".pdf";
+            } else  if(activeTop5KhachHangThuongXuyen) {
+                pathFull = "data/BaoCaoTKKH/" + "Top5KhachHangThuongXuyen" + randomNumber + ".pdf";
+            } else if(activeTop5KhachHangSoLuongMuaNhieu) {
+                pathFull = "data/BaoCaoTKKH/" + "Top5KhachHangSoLuongMuaNhieu" + randomNumber + ".pdf";
             }
             Document document = new Document(PageSize.A4.rotate()); //Add page khổ ngang
             PdfWriter.getInstance(document, new FileOutputStream(pathFull)); //Tạo ra đối tượng ghi dữ liệu vào tài liệu PDF
@@ -212,8 +219,12 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
             Paragraph paragraph = null;
             if (activeTatCa) {
                 paragraph = new Paragraph("Thống Kê Khách Hàng", fontTD);
-            } else if (activeTop5KhachHang) {
-                paragraph = new Paragraph("Top 5 Khách Hàng Tiềm Năng", fontTD);
+            } else if (activeTop5KhachHangChiTieuCao) {
+                paragraph = new Paragraph("Top 5 Khách Hàng Chi Tiêu Cao Nhất", fontTD);
+            } else if(activeTop5KhachHangThuongXuyen) {
+                paragraph = new Paragraph("Top 5 Khách Hàng Thường Xuyên Mua Hàng Nhất", fontTD);
+            } else if(activeTop5KhachHangSoLuongMuaNhieu) {
+                paragraph = new Paragraph("Top 5 Khách Hàng Có Số Lượng Mua Nhiều Nhất", fontTD);
             }
             paragraph.setAlignment(Element.ALIGN_CENTER);
             document.add(paragraph);
@@ -300,7 +311,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
             tableDsSP.addCell(cellTblKH_SDT);
 
             //Số lượng sản phảm đã mua
-            PdfPCell cellTblKH_SLM = new PdfPCell(new Paragraph("Số lượng sản phảm đã mua ", fontMain));
+            PdfPCell cellTblKH_SLM = new PdfPCell(new Paragraph("Số lượng sản phẩm đã mua ", fontMain));
             cellTblKH_SLM.setBorderColor(BaseColor.BLACK);
             cellTblKH_SLM.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cellTblKH_SLM.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -499,6 +510,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         lbl_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenKH.setText("Tên khách hàng");
 
+        txt_TenKH.setEditable(false);
         txt_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         pnl_TongKHDaMua.setBackground(new java.awt.Color(255, 255, 255));
@@ -540,16 +552,21 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         lbl_MaKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_MaKH.setText("Mã khách hàng");
 
+        txt_MaKH.setEditable(false);
         txt_MaKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbl_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoDienThoai.setText("SDT");
 
+        txt_SoDienThoai.setEditable(false);
+
         lbl_SoLuongSPMua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoLuongSPMua.setText("Số lượng sản phẩm đã mua");
 
+        txt_SoLuongSPMua.setEditable(false);
         txt_SoLuongSPMua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        txt_ThanhTien.setEditable(false);
         txt_ThanhTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbl_ThanhTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -558,6 +575,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         lbl_SoLuongHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoLuongHoaDon.setText("Số lượng hóa đơn");
 
+        txt_SoLuongHoaDon.setEditable(false);
         txt_SoLuongHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_SoLuongHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -638,7 +656,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
         btn_Top5KHDT.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btn_Top5KHDT.setText("Top 5 Khách hàng có doanh thu cao nhất");
+        btn_Top5KHDT.setText("Top 5 Khách hàng có chi tiêu cao nhất");
         btn_Top5KHDT.setBorder(null);
         btn_Top5KHDT.setMinimumSize(new java.awt.Dimension(107, 18));
         btn_Top5KHDT.setPreferredSize(new java.awt.Dimension(107, 18));
@@ -724,9 +742,8 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
                     .addComponent(btn_Top5KHDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Top5KHHD, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                     .addComponent(btn_Top5KHSL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btn_LamMoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                        .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btn_LamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                    .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -817,7 +834,9 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
     private void btn_Top5KHDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Top5KHDTActionPerformed
         activeTatCa = false;
-        activeTop5KhachHang = true;
+        activeTop5KhachHangChiTieuCao = true;
+        activeTop5KhachHangSoLuongMuaNhieu= false;
+        activeTop5KhachHangThuongXuyen= false;
         tblThongKeTop5KhachHangDoanhThu();
     }//GEN-LAST:event_btn_Top5KHDTActionPerformed
 
@@ -833,7 +852,9 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
     private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
         activeTatCa = true;
-        activeTop5KhachHang = false;
+        activeTop5KhachHangChiTieuCao = false;
+        activeTop5KhachHangSoLuongMuaNhieu= false;
+        activeTop5KhachHangThuongXuyen= false;
         tblThongKeKhachHang();
     }//GEN-LAST:event_btn_LamMoiActionPerformed
 
@@ -843,13 +864,17 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
 
     private void btn_Top5KHHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Top5KHHDActionPerformed
         activeTatCa = false;
-        activeTop5KhachHang = true;
+        activeTop5KhachHangChiTieuCao = false;
+        activeTop5KhachHangSoLuongMuaNhieu= false;
+        activeTop5KhachHangThuongXuyen= true;
         tblThongKeTop5KhachHangThuongXuyenMuaHang();
     }//GEN-LAST:event_btn_Top5KHHDActionPerformed
 
     private void btn_Top5KHSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Top5KHSLActionPerformed
         activeTatCa = false;
-        activeTop5KhachHang = true;
+        activeTop5KhachHangChiTieuCao = false;
+        activeTop5KhachHangSoLuongMuaNhieu= true;
+        activeTop5KhachHangThuongXuyen= false;
         tblThongKeTop5KhachHangCoSLMuaNhieuNhat();
     }//GEN-LAST:event_btn_Top5KHSLActionPerformed
 

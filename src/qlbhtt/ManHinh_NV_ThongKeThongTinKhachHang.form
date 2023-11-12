@@ -305,6 +305,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_TenKH">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
@@ -381,6 +382,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_MaKH">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
@@ -395,6 +397,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_SoDienThoai">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_SoLuongSPMua">
           <Properties>
@@ -406,6 +411,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_SoLuongSPMua">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
@@ -413,6 +419,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_ThanhTien">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
@@ -436,6 +443,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_SoLuongHoaDon">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
@@ -462,10 +470,8 @@
                       <Component id="btn_Top5KHDT" max="32767" attributes="0"/>
                       <Component id="btn_Top5KHHD" alignment="0" pref="301" max="32767" attributes="0"/>
                       <Component id="btn_Top5KHSL" alignment="0" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btn_LamMoi" alignment="0" pref="158" max="32767" attributes="0"/>
-                          <Component id="btn_XuatThongKe" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btn_LamMoi" alignment="0" pref="301" max="32767" attributes="0"/>
+                      <Component id="btn_XuatThongKe" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
@@ -495,7 +501,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="13" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Top 5 Kh&#xe1;ch h&#xe0;ng c&#xf3; doanh thu cao nh&#x1ea5;t"/>
+            <Property name="text" type="java.lang.String" value="Top 5 Kh&#xe1;ch h&#xe0;ng c&#xf3; chi ti&#xea;u cao nh&#x1ea5;t"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

@@ -39,7 +39,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
 
         tbl_TaiKhoan.setDefaultEditor(Object.class, null); //Không cho chỉnh sửa cột
         tbl_TaiKhoan.getTableHeader().setReorderingAllowed(false); //Không cho di chuyển cột
-        
+        modelTaiKhoan = (DefaultTableModel) tbl_TaiKhoan.getModel();
         loadDuLieuChucVu();
         docDuLieuLenBang();
     }
@@ -234,6 +234,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         pnl_ThongTin.setBackground(new java.awt.Color(199, 210, 213));
         pnl_ThongTin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        txt_MatKhau.setEditable(false);
         txt_MatKhau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_MatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,9 +368,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
             .addGroup(pnl_NutChucNangLayout.createSequentialGroup()
                 .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_XacNhan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_NutChucNangLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(btn_DoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_DoiMatKhau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
@@ -440,7 +439,11 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         int row = tbl_TaiKhoan.getSelectedRow();
         if (row != -1) {
             txt_TenTK.setText(tbl_TaiKhoan.getValueAt(row, 0).toString());
-            txt_MatKhau.setText(tbl_TaiKhoan.getValueAt(row, 1).toString());
+            if (btn_DoiMatKhau.getText().equals("Hủy")) {
+                txt_MatKhau.setText(daoTaiKhoan.getMatKhau(tbl_TaiKhoan.getValueAt(row, 0).toString()));
+            } else {
+                txt_MatKhau.setText(tbl_TaiKhoan.getValueAt(row, 1).toString());
+            }
             txt_TenNV.setText(tbl_TaiKhoan.getValueAt(row, 2).toString());
             cmb_ChucVu.setSelectedItem(tbl_TaiKhoan.getValueAt(row, 3).toString());
         }
@@ -455,12 +458,12 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
             btn_DoiMatKhau.setText("Hủy");
             btn_XacNhan.setEnabled(true);
 
-            System.out.println("qlbhtt.ManHinh_TaiKhoan_QuanLy.btn_DoiMatKhauActionPerformed()" + giaiMa.toString());
             txt_MatKhau.setText(giaiMa);
+            txt_MatKhau.setEditable(true);
         } else if (btn_DoiMatKhau.getText().equals("Hủy")) {
             btn_DoiMatKhau.setText("Đổi mật khẩu");
             btn_XacNhan.setEnabled(false);
-            txt_MatKhau.setText(maHoaMatKhau(giaiMa)); 
+            txt_MatKhau.setText(maHoaMatKhau(giaiMa));
         }
 
     }//GEN-LAST:event_btn_DoiMatKhauActionPerformed
@@ -484,7 +487,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         int row = tbl_TaiKhoan.getSelectedRow();
         String tenTK = tbl_TaiKhoan.getValueAt(row, 0).toString();
         String giaiMa = daoTaiKhoan.getMatKhau(tenTK);
-        txt_MatKhau.setText(maHoaMatKhau(giaiMa)); 
+        txt_MatKhau.setText(maHoaMatKhau(giaiMa));
     }//GEN-LAST:event_btn_XacNhanActionPerformed
 
 
