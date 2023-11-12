@@ -411,11 +411,11 @@ public class Dao_HoaDon {
     }
 
     /**
-     * Thống kê top 5 khách hàng đã mua nhiều nhất
+     * Thống kê top 5 khách hàng doanh thu cao nhat
      *
      * @return
      */
-    public ArrayList<KhachHang> thongKeThongTinTop5KhachHangDaMuaHang() {
+    public ArrayList<KhachHang> thongKeThongTinTop5KhachHangDTCaoNhat() {
         ArrayList<KhachHang> listKhachHang = new ArrayList<>();
         Connect.getInstance();
         Connection conn = Connect.getConnection();
@@ -437,6 +437,61 @@ public class Dao_HoaDon {
         }
         return listKhachHang;
     }
+      /**
+     * Thống kê top 5 khách hàng thuong xuyen mua hang nhat
+     *
+     * @return
+     */
+    public ArrayList<KhachHang> thongKeThongTinTop5KhachHangThuongXuyenMuaHang() {
+        ArrayList<KhachHang> listKhachHang = new ArrayList<>();
+        Connect.getInstance();
+        Connection conn = Connect.getConnection();
+        try {
+            String sql = "select top 5 hd.maKH,kh.hoTen,kh.sdt,SUM(cthd.soLuong) as SoLuongKHDaMua,SUM(cthd.soLuong*sp.giaBan) as thanhTien from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD \n"
+                    + "																	join KhachHang kh on kh.maKH=hd.maKH\n"
+                    + "																	join SanPham sp on sp.maSP=cthd.maSP\n"
+                    + "							group by hd.maKH,kh.hoTen,kh.sdt\n"
+                    + "							order by count(*) desc";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                KhachHang kh = dao_KhachHang.getKhachHangTheoMa(rs.getString(1));
+                listKhachHang.add(kh);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listKhachHang;
+    }
+      /**
+     * Thống kê top 5 khách hàng co so luong mua nhieu nhat
+     *
+     * @return
+     */
+    public ArrayList<KhachHang> thongKeThongTinTop5KhachHangSLNhieuNhat() {
+        ArrayList<KhachHang> listKhachHang = new ArrayList<>();
+        Connect.getInstance();
+        Connection conn = Connect.getConnection();
+        try {
+            String sql = "select top 5 hd.maKH,kh.hoTen,kh.sdt,SUM(cthd.soLuong) as SoLuongKHDaMua,SUM(cthd.soLuong*sp.giaBan) as thanhTien from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD \n"
+                    + "																	join KhachHang kh on kh.maKH=hd.maKH\n"
+                    + "																	join SanPham sp on sp.maSP=cthd.maSP\n"
+                    + "							group by hd.maKH,kh.hoTen,kh.sdt\n"
+                    + "							order by SUM(cthd.soLuong) desc";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                KhachHang kh = dao_KhachHang.getKhachHangTheoMa(rs.getString(1));
+                listKhachHang.add(kh);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listKhachHang;
+    }
+    
 
     public int getSoLuongHoaDonKhachHangMua(String maKH) {
         Connection conn = Connect.getInstance().getConnection();

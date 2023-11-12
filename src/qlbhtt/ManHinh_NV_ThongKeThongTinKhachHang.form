@@ -68,7 +68,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="pnl_NV_TieuDe" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scr_DanhSachThongKe" pref="204" max="32767" attributes="0"/>
+                  <Component id="scr_DanhSachThongKe" pref="203" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -205,37 +205,37 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="pnl_TongKHDaMua" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_MaKH" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="lbl_TenKH" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="txt_TenKH" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                      <Component id="txt_TenKH" min="-2" pref="242" max="-2" attributes="0"/>
                       <Component id="txt_MaKH" min="-2" pref="242" max="-2" attributes="0"/>
+                      <Component id="lbl_TenKH" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="lbl_MaKH" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_SoDienThoai" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_SoDienThoai" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Component id="txt_SoLuongSPMua" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Component id="lbl_SoLuongSPMua" min="-2" pref="210" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_ThanhTien" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txt_ThanhTien" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Component id="txt_SoLuongHoaDon" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Component id="lbl_SoLuongHoaDon" min="-2" pref="169" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_SoLuongSPMua" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
-                              <Component id="lbl_SoLuongSPMua" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
+                              <Component id="txt_SoDienThoai" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Component id="lbl_SoDienThoai" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_SoLuongHoaDon" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
-                              <Component id="lbl_SoLuongHoaDon" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
+                              <Component id="txt_ThanhTien" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Component id="lbl_ThanhTien" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -250,20 +250,19 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="pnl_TongKHDaMua" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="22" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_SoDienThoai" min="-2" pref="19" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_SoDienThoai" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_SoDienThoai" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Component id="lbl_ThanhTien" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_ThanhTien" min="-2" pref="19" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_ThanhTien" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txt_SoDienThoai" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="txt_ThanhTien" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -274,28 +273,26 @@
                           </Group>
                           <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_SoLuongSPMua" min="-2" pref="19" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txt_SoLuongSPMua" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_SoLuongSPMua" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Component id="lbl_SoLuongHoaDon" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_TenKH" min="-2" pref="19" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txt_TenKH" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txt_SoLuongSPMua" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="txt_SoLuongHoaDon" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="lbl_SoLuongHoaDon" min="-2" pref="19" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txt_SoLuongHoaDon" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_TenKH" min="-2" pref="19" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_TenKH" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
+                          <EmptySpace pref="98" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -464,38 +461,42 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btn_Top5KH" alignment="0" min="-2" pref="199" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btn_LamMoi" alignment="0" pref="129" max="32767" attributes="0"/>
-                          <Component id="btn_XuatThongKe" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btn_XuatThongKe" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="btn_LamMoi" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="btn_Top5KHHD" pref="278" max="32767" attributes="0"/>
+                      <Component id="btn_Top5KHDT" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btn_Top5KHSL" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace pref="91" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="btn_Top5KH" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_Top5KHDT" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btn_Top5KHHD" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btn_Top5KHSL" pref="45" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btn_XuatThongKe" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btn_LamMoi" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btn_Top5KH">
+        <Component class="javax.swing.JButton" name="btn_Top5KHDT">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="13" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Top 5 Kh&#xe1;ch h&#xe0;ng ti&#x1ec1;m n&#x103;ng"/>
+            <Property name="text" type="java.lang.String" value="Top 5 Kh&#xe1;ch h&#xe0;ng c&#xf3; doanh thu cao nh&#x1ea5;t"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -507,9 +508,9 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Top5KHMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Top5KHMouseExited"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Top5KHActionPerformed"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Top5KHDTMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Top5KHDTMouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Top5KHDTActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_XuatThongKe">
@@ -560,6 +561,34 @@
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LamMoiMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_LamMoiMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LamMoiActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_Top5KHHD">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Top 5 Kh&#xe1;ch h&#xe0;ng th&#x1b0;&#x1edd;ng xuy&#xea;n mua h&#xe0;ng nh&#x1ea5;t"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Top5KHHDActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_Top5KHSL">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Top 5 kh&#xe1;ch h&#xe0;ng c&#xf3; s&#x1ed1; l&#x1b0;&#x1ee3;ng mua nhi&#x1ec1;u nh&#x1ea5;t"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Top5KHSLActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
