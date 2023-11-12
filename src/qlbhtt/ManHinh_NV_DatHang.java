@@ -47,6 +47,7 @@ import static qlbhtt.HomePage.pnl_GiaoDienChucNang;
 import qlbhtt.Login;
 import java.awt.Color;
 import javax.swing.UIManager;
+import entity.XyLyCloseFrame;
 
 /**
  *
@@ -1107,7 +1108,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements Xu{
     }
     
     private void xuLyChonKhachHang() throws SQLException{
-        Form_DanhSachKhachHang frm = new Form_DanhSachKhachHang(ManHinh_NV_DatHang.this);
+        Form_DanhSachKhachHang frm = new Form_DanhSachKhachHang(this);
         frm.setVisible(true);
     }
     
