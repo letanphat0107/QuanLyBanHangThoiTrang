@@ -197,34 +197,67 @@ public class Dao_HoaDon {
      * ==============================Thống kê doanh thu=====================
      */
     /**
-     * Thống kê danh sách sản phẩm với số lượng bán được
+     * Thống kê Top 5 san pham doanh thu cao nhat
      *
      * @return
      */
-    public ArrayList<SanPham> thongKeDanhSachSanPhamVoiSoLuongBanDuoc() {
+    public ArrayList<SanPham> thongKeTop5SPDTCN() {
         ArrayList<SanPham> listSanPham = new ArrayList<>();
         Connect.getInstance();
         Connection conn = Connect.getConnection();
         try {
-            String sql = "select sp.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
-                    + "                   				join SanPham sp on cthd.maSP=sp.maSP                    			\n"
-                    + "               		group by sp.maSP";
+            String sql = "select  top 5 cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong,sum(sp.giaBan*cthd.soLuong) as DoanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
+"						join SanPham sp on cthd.maSP=sp.maSP\n" +
+"						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
+"						join KichThuoc kc on kc.maKichThuoc=sp.maKichThuoc\n" +
+"						join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
+"						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
+"						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
+"			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong\n" +
+"			order by sum(sp.giaBan*cthd.soLuong) desc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-
-                String maSP = rs.getString(1);
-                System.out.println("SSSS" + maSP.toString());
-//                SanPham sp = dao_SanPham.getSanPhamTheoMa(maSP);
-//                listSanPham.add(sp);
+                SanPham sp = dao_SanPham.getSanPhamTheoMa(rs.getString(1));
+                listSanPham.add(sp);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return listSanPham;
     }
+     /**
+     * Thống kê Top 5 san pham doanh thu cao nhat
+     *
+     * @return
+     */
+    public ArrayList<SanPham> thongKeTop5SPDTTN() {
+        ArrayList<SanPham> listSanPham = new ArrayList<>();
+        Connect.getInstance();
+        Connection conn = Connect.getConnection();
+        try {
+            String sql = "select  top 5 cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong,sum(sp.giaBan*cthd.soLuong) as DoanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
+"						join SanPham sp on cthd.maSP=sp.maSP\n" +
+"						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
+"						join KichThuoc kc on kc.maKichThuoc=sp.maKichThuoc\n" +
+"						join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
+"						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
+"						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
+"			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong\n" +
+"			order by sum(sp.giaBan*cthd.soLuong) asc";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 
+            while (rs.next()) {
+                SanPham sp = dao_SanPham.getSanPhamTheoMa(rs.getString(1));
+                listSanPham.add(sp);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listSanPham;
+    }
     /**
      * Thống kê danh sách sản phẩm với số lượng bán được theo các tiêu chí
      *
@@ -262,7 +295,7 @@ public class Dao_HoaDon {
         }
         return listSanPham;
     }
-
+    
     /**
      * Thống kê danh sách sản phẩm với số lượng bán được theo từ ngày và đến
      * ngày

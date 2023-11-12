@@ -248,11 +248,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="pnl_TongKHDaMua" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="pnl_TongKHDaMua" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -290,9 +287,9 @@
                                   <Component id="txt_TenKH" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="98" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace pref="98" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -462,13 +459,15 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_XuatThongKe" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="btn_LamMoi" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="btn_Top5KHHD" pref="278" max="32767" attributes="0"/>
-                      <Component id="btn_Top5KHDT" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btn_Top5KHDT" max="32767" attributes="0"/>
+                      <Component id="btn_Top5KHHD" alignment="0" pref="301" max="32767" attributes="0"/>
                       <Component id="btn_Top5KHSL" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="btn_LamMoi" alignment="0" pref="158" max="32767" attributes="0"/>
+                          <Component id="btn_XuatThongKe" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="91" max="32767" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
