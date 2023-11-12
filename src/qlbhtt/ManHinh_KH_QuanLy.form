@@ -35,11 +35,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="1" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="pnl_ThongTin" pref="880" max="32767" attributes="0"/>
+              <Component id="pnl_ThongTin" pref="984" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="pnl_NutChucNang" min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="pnl_DanhSachKhachHang" alignment="0" pref="1045" max="32767" attributes="0"/>
+          <Component id="pnl_DanhSachKhachHang" alignment="0" pref="1113" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -67,7 +67,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="pnl_KH_TieuDe" max="32767" attributes="0"/>
-              <Component id="scr_DanhSachKhachHang" alignment="0" max="32767" attributes="0"/>
+              <Component id="scr_DanhSachKhachHang" alignment="0" pref="1113" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -437,15 +437,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btn_CapNhat" max="32767" attributes="0"/>
                       <Component id="btn_Them" alignment="0" max="32767" attributes="0"/>
                       <Component id="btn_Luu" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btn_XoaTrang" alignment="0" pref="112" max="32767" attributes="0"/>
+                      <Component id="btn_XoaTrang" pref="104" max="32767" attributes="0"/>
+                      <Component id="btn_TaoNgauNhien" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="43" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -460,7 +460,9 @@
                   <Component id="btn_Luu" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btn_XoaTrang" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btn_TaoNgauNhien" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -543,6 +545,20 @@
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_XoaTrangMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_XoaTrangMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaTrangActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_TaoNgauNhien">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="T&#x1ea1;o ng&#x1eab;u nhi&#xea;n"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_TaoNgauNhienActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

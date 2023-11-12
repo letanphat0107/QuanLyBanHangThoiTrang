@@ -638,7 +638,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
         btn_Top5KHDT.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        btn_Top5KHDT.setText("Top 5 Khách hàng có doanh thu cao nhất");
+        btn_Top5KHDT.setText("Top 5 Khách hàng chi tiền nhiều nhất");
         btn_Top5KHDT.setBorder(null);
         btn_Top5KHDT.setMinimumSize(new java.awt.Dimension(107, 18));
         btn_Top5KHDT.setPreferredSize(new java.awt.Dimension(107, 18));
@@ -724,9 +724,8 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
                     .addComponent(btn_Top5KHDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Top5KHHD, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                     .addComponent(btn_Top5KHSL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnl_NutChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btn_LamMoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                        .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btn_LamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                    .addComponent(btn_XuatThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         pnl_NutChucNangLayout.setVerticalGroup(
