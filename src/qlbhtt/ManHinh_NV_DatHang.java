@@ -52,7 +52,7 @@ import javax.swing.UIManager;
  *
  * @author DMX
  */
-public class ManHinh_NV_DatHang extends javax.swing.JPanel {
+public class ManHinh_NV_DatHang extends javax.swing.JPanel implements XyLyCloseFrame{
     private DefaultTableModel modelSanPham;    
     private DefaultTableModel modelGioHang;
     private Dao_SanPham dao_SanPham;
@@ -266,9 +266,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NV_DatHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_NV_DatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnl_NV_DatHangLayout.createSequentialGroup()
-                        .addComponent(btn_Giam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))
+                    .addComponent(btn_Giam, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_NV_DatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbl_NhapSoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_TongTienGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -451,6 +449,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
         lbl_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TenKH.setText("Tên khách hàng");
 
+        txt_TenKH.setEditable(false);
         txt_TenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -479,6 +478,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
         lbl_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_SoDienThoai.setText("Số điện thoại");
 
+        txt_SoDienThoai.setEditable(false);
         txt_SoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btn_ThemKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -689,7 +689,12 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_TenKHActionPerformed
 
     private void btn_TimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKHActionPerformed
-        xuLyTimKiemKhachHang();
+        try {
+            //xuLyTimKiemKhachHang();
+            xuLyChonKhachHang();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManHinh_NV_DatHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_TimKHActionPerformed
 
     private void btn_ThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemKhachHangActionPerformed
@@ -999,6 +1004,19 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một sản phẩm trong danh sách giỏ hàng!");
         }
+    }
+    @Override
+    public void xuLyFrameClose(){
+        if (Form_DanhSachKhachHang.khachHang_Form != null) {
+            khachHang = Form_DanhSachKhachHang.khachHang_Form;
+            txt_TenKH.setText(khachHang.getHoTen());
+            txt_SoDienThoai.setText(khachHang.getSdt());
+        }        
+    }
+    
+    private void xuLyChonKhachHang() throws SQLException{
+        Form_DanhSachKhachHang frm = new Form_DanhSachKhachHang(ManHinh_NV_DatHang.this);
+        frm.setVisible(true);
     }
     
     private void xuLyTimKiemKhachHang() {
