@@ -7,6 +7,7 @@ package qlbhtt;
 import connectDB.Connect;
 import dao.Dao_KhachHang;
 import entity.KhachHang;
+import entity.XyLyCloseFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;

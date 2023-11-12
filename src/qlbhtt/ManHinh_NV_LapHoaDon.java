@@ -42,6 +42,7 @@ import entity.PhieuDatHang;
 import entity.CTPhieuDatHang;
 import entity.NhanVien;
 import entity.SanPham;
+import entity.XyLyCloseFrame;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -69,10 +70,6 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
 import static qlbhtt.HomePage.pnl_GiaoDienChucNang;
 import qlbhtt.Login;
-
-interface XyLyCloseFrame{
-    void xuLyFrameClose();
-}
 
 /**
  *
@@ -1163,7 +1160,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
     }
     
     private void xuLyChonKhachHang() throws SQLException{
-        Form_DanhSachKhachHang frm = new Form_DanhSachKhachHang(ManHinh_NV_LapHoaDon.this);
+        Form_DanhSachKhachHang frm = new Form_DanhSachKhachHang(this);
         frm.setVisible(true);
     }
     
