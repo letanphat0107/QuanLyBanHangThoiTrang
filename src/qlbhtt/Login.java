@@ -211,6 +211,7 @@ public class Login extends javax.swing.JFrame {
         cmb_NgonNgu.setBackground(new java.awt.Color(204, 255, 255));
         cmb_NgonNgu.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         cmb_NgonNgu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiếng Việt", "English" }));
+        cmb_NgonNgu.setBorder(null);
         cmb_NgonNgu.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmb_NgonNguItemStateChanged(evt);

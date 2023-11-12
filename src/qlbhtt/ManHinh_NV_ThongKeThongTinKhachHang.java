@@ -656,7 +656,11 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
         pnl_NutChucNang.setBackground(new java.awt.Color(199, 210, 213));
 
         btn_Top5KHDT.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+<<<<<<< HEAD
         btn_Top5KHDT.setText("Top 5 Khách hàng có chi tiêu cao nhất");
+=======
+        btn_Top5KHDT.setText("Top 5 Khách hàng chi tiền nhiều nhất");
+>>>>>>> 0b3a9eb1008bbcaf0a56c49459fcef7895994c6f
         btn_Top5KHDT.setBorder(null);
         btn_Top5KHDT.setMinimumSize(new java.awt.Dimension(107, 18));
         btn_Top5KHDT.setPreferredSize(new java.awt.Dimension(107, 18));

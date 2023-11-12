@@ -12,7 +12,11 @@ public class Connect {
 	}
 	
 	public void connect() throws SQLException {	
+<<<<<<< HEAD
 		String url = "jdbc:sqlserver://localhost:1433;databasename = BanHangTT";
+=======
+		String url = "jdbc:sqlserver://localhost:1433;databasename = QLBHTT";
+>>>>>>> 0b3a9eb1008bbcaf0a56c49459fcef7895994c6f
 		String user ="sa";
 		String password ="sapassword";
 		con = DriverManager.getConnection(url, user, password);

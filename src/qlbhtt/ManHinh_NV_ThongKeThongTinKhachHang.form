@@ -501,7 +501,11 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="13" style="0"/>
             </Property>
+<<<<<<< HEAD
             <Property name="text" type="java.lang.String" value="Top 5 Kh&#xe1;ch h&#xe0;ng c&#xf3; chi ti&#xea;u cao nh&#x1ea5;t"/>
+=======
+            <Property name="text" type="java.lang.String" value="Top 5 Kh&#xe1;ch h&#xe0;ng chi ti&#x1ec1;n nhi&#x1ec1;u nh&#x1ea5;t"/>
+>>>>>>> 0b3a9eb1008bbcaf0a56c49459fcef7895994c6f
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
