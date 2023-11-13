@@ -790,6 +790,11 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
         txt_TienKHDua.setEditable(false);
         txt_TienKHDua.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txt_TienKHDua.setToolTipText("Tiền khách đưa");
+        txt_TienKHDua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_TienKHDuaKeyReleased(evt);
+            }
+        });
 
         lbl_TienTra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_TienTra.setText("Tiền trả lại:");
@@ -875,7 +880,7 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(pnl_DanhSachSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 888, Short.MAX_VALUE)
+                .addComponent(pnl_ThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_NutChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1068,6 +1073,17 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
         } else
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin khách hàng để dùng các thao tác");
     }//GEN-LAST:event_btn_LapHoaDonActionPerformed
+
+    private void txt_TienKHDuaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienKHDuaKeyReleased
+        // TODO add your handling code here:
+        try {
+            Double.parseDouble(txt_TienKHDua.getText().replace(",", "").trim());
+            tinhToanTienTra();
+        } catch (NumberFormatException ex) {
+            
+        }
+            
+    }//GEN-LAST:event_txt_TienKHDuaKeyReleased
 
     public void xuLyThemVaoGioHang() {
         int row = tbl_SanPham.getSelectedRow();
@@ -1597,8 +1613,8 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
     }
 
     public boolean kiemTraTienKHDua() {
-        String tienKhachDua = txt_TienKHDua.getText().trim();
-
+        String tienKhachDua = txt_TienKHDua.getText().replace(",", "").trim();
+        
         if (gioHang.size() == 0) {
             JOptionPane.showMessageDialog(this, "Giỏ hàng rỗng, không thể lập hóa đơn");
             return false;
@@ -1613,8 +1629,13 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
         }
         try {
             int tienKHDua = Integer.parseInt(tienKhachDua);
+            Double tienTra = Double.parseDouble(lbl_SoTienTra.getText().replace(",", "").trim());
             if (tienKHDua < 0) {
                 JOptionPane.showMessageDialog(this, "Số tiền khách đưa phải lớn hơn 0");
+                txt_TienKHDua.requestFocus();
+                return false;
+            }else if (tienTra < 0) {
+                JOptionPane.showMessageDialog(this, "Số tiền khách ít hơn tổng tiền");
                 txt_TienKHDua.requestFocus();
                 return false;
             }
@@ -1630,22 +1651,22 @@ public class ManHinh_NV_LapHoaDon extends javax.swing.JPanel implements XyLyClos
         String tongTienString = lbl_SoTienTong.getText().replace(",", "").trim();
         String tienKHDuaString = txt_TienKHDua.getText().replace(",", "").trim();
         double tienTra;
-        if (kiemTraTienKHDua()) {
+        //if (kiemTraTienKHDua()) {
             try {
                 double tienKHDua = Double.parseDouble(tienKHDuaString);
                 double tongTien = Double.parseDouble(tongTienString);
 
                 tienTra = tienKHDua - tongTien;
-                if (tienTra >= 0) {
+                //if (tienTra >= 0) {
                     lbl_SoTienTra.setText(NumberFormat.getInstance().format(tienTra) + "");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Tiền khách đưa ít hơn tổng tiền hàng");
-                }
+                //} else {
+                    //JOptionPane.showMessageDialog(this, "Tiền khách đưa ít hơn tổng tiền hàng");
+                //}
 
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Lỗi hệ thống giao dịch");
+                JOptionPane.showMessageDialog(this, "Số tiền khách đưa phải là số");
             }
-        }
+        //}
     }
 
     public void docDuLieuSanPham() {

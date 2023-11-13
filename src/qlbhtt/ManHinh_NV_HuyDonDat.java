@@ -481,7 +481,7 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
 //         }
          //Xoa CTPhieuDatHang
          dao_CTPhieuDatHang.xoaCTPhieuDatHang(maPDT);
-         modelPhieuDatHang.setRowCount(0);
+         modelCTPhieuDatHang.setRowCount(0);
      }
      /**
       * Xử lý xóa Nhà Cung Cấp
@@ -494,7 +494,7 @@ public class ManHinh_NV_HuyDonDat extends javax.swing.JPanel {
                  xuLyXoaCTPhieuDatHang(maPhieuDatHang);
                  dao_PhieuDatHang.xoaPhieuDatHang(maPhieuDatHang);
                  modelPhieuDatHang.removeRow(row);
-                 JOptionPane.showMessageDialog(this, "Xóa đơn đặt thành công");
+                 JOptionPane.showMessageDialog(this, "Hủy đơn đặt thành công");
                  xoaTrangTxt();
              }
          } else {

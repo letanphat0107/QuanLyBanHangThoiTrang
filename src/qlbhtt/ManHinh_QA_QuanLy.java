@@ -714,6 +714,7 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         String soLuong = txt_SoLuong.getText().trim(); 
         String giaNhap = txt_GiaNhap.getText().trim();
         String giaBan = txt_GiaBan.getText().trim();
+        
         if (file == null) {
             if(trangThaiSua == false){                
                 // kiem tra da co anh chua 
@@ -779,6 +780,11 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
             txt_GiaBan.requestFocus(); 
             return false; 
         } 
+        if (dch_NgayNhap.getDate().after(new Date())) {
+            JOptionPane.showMessageDialog(this, "Ngày nhập hàng phải trước ngày hiện tại");
+            dch_NgayNhap.setDate(new Date());
+            return false;
+        }
         return true; 
     }
     
@@ -1205,6 +1211,8 @@ public class ManHinh_QA_QuanLy extends javax.swing.JPanel {
         for (NhaCungCap nhaCungCap : ds_NhaCungCap) {
             cmb_NCC.addItem(nhaCungCap.getTenNCC());
         }
+        
+        dch_NgayNhap.setDate(new Date());
     }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

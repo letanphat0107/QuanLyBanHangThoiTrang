@@ -769,6 +769,11 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
             txt_GiaBan.requestFocus(); 
             return false; 
         } 
+        if (dch_NgayNhap.getDate().after(new Date())) {
+            JOptionPane.showMessageDialog(this, "Ngày nhập hàng phải trước ngày hiện tại");
+            dch_NgayNhap.setDate(new Date());
+            return false;
+        }
         return true;
     }
     
@@ -1193,6 +1198,8 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
         for (NhaCungCap nhaCungCap : ds_NhaCungCap) {
             cmb_NCC.addItem(nhaCungCap.getTenNCC());
         }
+        
+        dch_NgayNhap.setDate(new Date());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -71,6 +71,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements XyLyCloseF
     private Connect connect;
     KhachHang khachHang = null;
     ArrayList<SanPham> gioHang;
+    String maPDH = null;
     private boolean ngonNgu = Login.ngonNgu;
 
     /**
@@ -1105,6 +1106,7 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements XyLyCloseF
             khachHang = Form_DanhSachKhachHang.khachHang_Form;
             txt_TenKH.setText(khachHang.getHoTen());
             txt_SoDienThoai.setText(khachHang.getSdt());
+            kiemTraDonDatCuaKH(khachHang);
         }        
     }
     
@@ -1144,7 +1146,13 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements XyLyCloseF
     public void xulyDatHang() {
         PhieuDatHang pdt = new PhieuDatHang(khachHang, Login.nhanVien, new Date());
         //Them vao csdl HoaDon
+        if (maPDH != null) {
+            pdt.setMaPhieuDat(maPDH);
+            dao_CTPDT.xoaCTPhieuDatHang(maPDH);
+            dao_PhieuDatHang.xoaPhieuDatHang(maPDH);
+        }
         dao_PhieuDatHang.themPhieuDatHang(pdt);
+        
         //Them vao csdl CTHD
         for (SanPham sanPham : gioHang) {
             CTPhieuDatHang ctpdt = new CTPhieuDatHang(sanPham, pdt, sanPham.getSoLuong());
@@ -1194,6 +1202,36 @@ public class ManHinh_NV_DatHang extends javax.swing.JPanel implements XyLyCloseF
         file = null;
     }
 
+    private void kiemTraDonDatCuaKH(KhachHang kh) {
+        PhieuDatHang pdh = dao_PhieuDatHang.getPDTTheoMaKH(kh.getMaKH());
+        if (pdh != null) {
+            maPDH = pdh.getMaPhieuDat();
+            ArrayList<CTPhieuDatHang> ctpdh = dao_CTPDT.getAllCTPhieuDatHang(pdh.getMaPhieuDat());
+            for (CTPhieuDatHang cTPhieuDatHang : ctpdh) {
+                //Them vao gio hang
+                gioHang.add(cTPhieuDatHang.getSanPham());
+                //Them vao model gio hang
+                modelGioHang = (DefaultTableModel) tbl_GioHang.getModel();
+                Object[] object = new Object[9];
+                object[0] = cTPhieuDatHang.getSanPham().getMaSP();
+                object[1] = cTPhieuDatHang.getSanPham().getTenSP();
+                object[2] = cTPhieuDatHang.getSanPham().getPhanLoai().getLoaiSanPham();
+                object[3] = NumberFormat.getInstance().format(cTPhieuDatHang.getSanPham().getGiaBan());
+                object[4] = cTPhieuDatHang.getSanPham().getKichThuoc().getKichThuoc();
+                object[5] = cTPhieuDatHang.getSanPham().getMauSac().getMauSac();
+                object[6] = cTPhieuDatHang.getSanPham().getChatLieu().getChatLieu();
+                object[7] = cTPhieuDatHang.getSanPham().getNhaCungCap().getTenNCC();
+                object[8] = cTPhieuDatHang.getSoLuong();
+                modelGioHang.addRow(object);
+
+                //Xoa trang txt_SoLuongNhap
+                txt_SoLuongNhap.setText("");
+            }
+            capNhatTongTienGioHang();
+            JOptionPane.showMessageDialog(this, "Khách hàng có một đơn đặt trước đó");
+        }
+    }
+    
     public boolean kiemTraThongTinKH() {
         if (khachHang != null) {
             return true;

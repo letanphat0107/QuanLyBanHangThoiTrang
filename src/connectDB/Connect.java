@@ -12,7 +12,7 @@ public class Connect {
 	}
 	
 	public void connect() throws SQLException {	
-		String url = "jdbc:sqlserver://localhost:1433;databasename = BanHangTT";
+		String url = "jdbc:sqlserver://localhost:1433;databasename = QuanLyBanHangTT";
 
 		String user ="sa";
 		String password ="sapassword";

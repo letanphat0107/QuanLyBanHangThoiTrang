@@ -104,8 +104,8 @@ public class ManHinh_NV_BieuDoThongKeDoanhThu extends javax.swing.JFrame {
                 yAxis.setRange(10000, 10000000); // Đặt giới hạn cho trục tung
 
                 ChartPanel barpChartPanel = new ChartPanel(barChart); // Hiển thị biểu đồ lên Jframe
-                jPanel1.add(barpChartPanel, BorderLayout.CENTER);
-                jPanel1.validate();
+                pnl_ManHinhChinh.add(barpChartPanel, BorderLayout.CENTER);
+                pnl_ManHinhChinh.validate();
 
             }
 
@@ -123,22 +123,22 @@ public class ManHinh_NV_BieuDoThongKeDoanhThu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnl_ManHinhChinh = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(1119, 603));
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        pnl_ManHinhChinh.setMinimumSize(new java.awt.Dimension(1119, 603));
+        pnl_ManHinhChinh.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_ManHinhChinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_ManHinhChinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -185,6 +185,6 @@ public class ManHinh_NV_BieuDoThongKeDoanhThu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnl_ManHinhChinh;
     // End of variables declaration//GEN-END:variables
 }
