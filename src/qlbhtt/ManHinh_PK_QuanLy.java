@@ -844,7 +844,7 @@ public class ManHinh_PK_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void btn_ChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonAnhActionPerformed
-        JFileChooser filechoose = new JFileChooser("data/picture");
+        JFileChooser filechoose = new JFileChooser("data/");
         FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("hinh anh", "jpg", "png");
         filechoose.setFileFilter(imageFilter);
         filechoose.setMultiSelectionEnabled(false);

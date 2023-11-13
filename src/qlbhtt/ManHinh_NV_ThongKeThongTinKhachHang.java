@@ -164,7 +164,7 @@ public class ManHinh_NV_ThongKeThongTinKhachHang extends javax.swing.JPanel {
             String tenKH = tbl_ThongKe.getValueAt(i, 1).toString();
             String sdt = tbl_ThongKe.getValueAt(i, 2).toString();
 
-            KhachHang khachHang = new KhachHang(maKH, tenKH, "", sdt, "");
+            KhachHang khachHang = new KhachHang(maKH, tenKH, sdt, "", "");
             listKH.add(khachHang);
         }
         return listKH;
