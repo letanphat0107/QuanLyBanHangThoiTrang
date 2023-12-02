@@ -622,7 +622,7 @@ public class ManHinh_KH_QuanLy extends javax.swing.JPanel {
         String maKH = "KH0000";
         String tenKhachHang = "Người mua";
         String email = "muahang@gmail.com";
-        String sdt = "0000000000";
+        String sdt = "0712345689";
         KhachHang kh = new KhachHang(tenKhachHang,sdt, email,  gt);
         dao_KhachHang.themKhachHang(kh);
 
