@@ -526,7 +526,7 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
             if (activeTatCa) {
                 paragraph = new Paragraph("Danh Sách Sản Phẩm", fontTD);
             } else if (activeBanCham) {
-                paragraph = new Paragraph("Top Sản Phẩm Bán Chạm", fontTD);
+                paragraph = new Paragraph("Top Sản Phẩm Bán Chậm", fontTD);
             } else if (activeBanChay) {
                 paragraph = new Paragraph("Top Sản Phẩm Bán Chạy", fontTD);
             } else if (activeHangMoiNhap) {
