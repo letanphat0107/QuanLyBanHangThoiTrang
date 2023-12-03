@@ -448,3 +448,23 @@ select top 5 hd.maKH,kh.hoTen,kh.sdt,SUM(cthd.soLuong) as SoLuongKHDaMua,SUM(cth
 select maKH , COUNT(*) as tongHD from HoaDon
 where maKH = 'KH0001'
 group by maKH
+
+select SUM(ct.soLuong*sp.giaBan) as thanhTien from HoaDon hd JOIN CTHD ct ON hd.maHD = ct.maHD
+						JOIN SanPham sp ON ct.maSP = sp.maSP
+						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai 
+                   		join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc
+                    	join MauSac ms on ms.maMauSac=sp.maMauSac
+                    	join ChatLieu cl on cl.maChatLieu=sp.maChatLieu
+                    	join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap
+						where MONTH(hd.ngayLap) like '10'
+	
+
+select sp.maSP, sp.tenSP, SUM(ct.soLuong*sp.giaBan) as thanhTien from HoaDon hd JOIN CTHD ct ON hd.maHD = ct.maHD
+						JOIN SanPham sp ON ct.maSP = sp.maSP
+						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai 
+                   		join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc
+                    	join MauSac ms on ms.maMauSac=sp.maMauSac
+                    	join ChatLieu cl on cl.maChatLieu=sp.maChatLieu
+                    	join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap
+						where MONTH(hd.ngayLap) like '%10%'
+						group by sp.maSP, sp.tenSP

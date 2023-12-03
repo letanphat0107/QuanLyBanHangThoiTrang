@@ -206,14 +206,14 @@ public class Dao_HoaDon {
         Connect.getInstance();
         Connection conn = Connect.getConnection();
         try {
-            String sql = "select  top 5 cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong,sum(sp.giaBan*cthd.soLuong) as DoanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
+            String sql = "select  top 5 sp.maSP,sum(sp.giaBan*cthd.soLuong) as DoanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
 "						join SanPham sp on cthd.maSP=sp.maSP\n" +
 "						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
 "						join KichThuoc kc on kc.maKichThuoc=sp.maKichThuoc\n" +
 "						join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
 "						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
 "						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
-"			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong\n" +
+"			group by sp.maSP\n" +
 "			order by sum(sp.giaBan*cthd.soLuong) desc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -237,14 +237,14 @@ public class Dao_HoaDon {
         Connect.getInstance();
         Connection conn = Connect.getConnection();
         try {
-            String sql = "select  top 5 cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong,sum(sp.giaBan*cthd.soLuong) as DoanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
+            String sql = "select  top 5 sp.maSP,sum(sp.giaBan*cthd.soLuong) as DoanhThu from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n" +
 "						join SanPham sp on cthd.maSP=sp.maSP\n" +
 "						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n" +
 "						join KichThuoc kc on kc.maKichThuoc=sp.maKichThuoc\n" +
 "						join MauSac ms on ms.maMauSac=sp.maMauSac\n" +
 "						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n" +
 "						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n" +
-"			group by cthd.maSP,sp.tenSP,pl.tenPhanLoai,sp.giaBan,sp.giaNhap,kc.tenKichThuoc,ms.tenMauSac,cl.tenChatLieu,ncc.tenNCC,cthd.soLuong\n" +
+"			group by sp.maSP\n" +
 "			order by sum(sp.giaBan*cthd.soLuong) asc";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -332,6 +332,43 @@ public class Dao_HoaDon {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+        return listSanPham;
+    }
+    
+     /**
+     * Thống kê danh sách sản phẩm đã bán theo tháng năm
+     *
+     * @return
+     */
+    public ArrayList<SanPham> thongKeDanhSachSanPhamTheoThangNam(String thangLap, String namLap) {
+        ArrayList<SanPham> listSanPham = new ArrayList<>();
+        Connect.getInstance();
+        Connection conn = Connect.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            String sql = "select sp.maSP from HoaDon hd join CTHD cthd on hd.maHD=cthd.maHD\n"
+                    + "						join SanPham sp on cthd.maSP=sp.maSP\n"
+                    + "						join PhanLoai pl on pl.maPhanLoai=sp.maPhanLoai \n"
+                    + "						join KichThuoc kt on kt.maKichThuoc=sp.maKichThuoc\n"
+                    + "						join MauSac ms on ms.maMauSac=sp.maMauSac\n"
+                    + "						join ChatLieu cl on cl.maChatLieu=sp.maChatLieu\n"
+                    + "						join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap\n"
+                    + "	where MONTH(hd.ngayLap) like ? and YEAR(hd.ngayLap) like ?\n"
+                    + "			group by sp.maSP";
+
+            stmt = conn.prepareStatement(sql);         
+            stmt.setString(1, "%" + thangLap + "%");
+            stmt.setString(2, "%" + namLap + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp = dao_SanPham.getSanPhamTheoMa(rs.getString(1));
+                listSanPham.add(sp);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
         }
         return listSanPham;
     }
