@@ -55,8 +55,16 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
         if (matKhau.equals(xacNhanMK)) {
             dao_TaiKhoan.datLaiMatKhau(taiKhoan, matKhau);
             JOptionPane.showMessageDialog(this, "Đăt lại mật khẩu thành công!");
+            try {
+                new Login().setVisible(true);
+                this.setVisible(false);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ManHinh_DatLaiMatKhau.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp!");
+            txt_XacNhanMK.requestFocus();
         }
 
     }
@@ -194,13 +202,6 @@ public class ManHinh_DatLaiMatKhau extends javax.swing.JFrame {
 
     private void btn_XacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XacNhanActionPerformed
         xuLyDoiMatKhau();
-        try {
-            new Login().setVisible(true);
-            this.setVisible(false);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ManHinh_DatLaiMatKhau.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }//GEN-LAST:event_btn_XacNhanActionPerformed
 

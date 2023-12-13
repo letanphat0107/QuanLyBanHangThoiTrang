@@ -11,6 +11,7 @@ import entity.NhanVien;
 import entity.TaiKhoan;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -55,12 +56,14 @@ public class ManHinh_NV_QuanLy extends javax.swing.JPanel {
      */
     public void loadDuLieuChucVu() {
         String giaTriKiemTa = null;
+        ArrayList<String> listCV = new ArrayList<>();
         for (NhanVien nv : daoNhanVien.getAllNhanVien()) {
-            if (giaTriKiemTa != null && giaTriKiemTa.equals(nv.getChuVu())) {
+            if (listCV.contains(nv.getChuVu())) {
                 continue;
             }
             giaTriKiemTa = nv.getChuVu();
             cmb_ChucVu.addItem(nv.getChuVu());
+            listCV.add(nv.getChuVu());
         }
 
     }

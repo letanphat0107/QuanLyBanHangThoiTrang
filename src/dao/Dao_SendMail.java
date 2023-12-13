@@ -37,7 +37,6 @@ public class Dao_SendMail {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
             }
-
         };
         
         //Cấu hình phiên làm việc liên kết với auth thông qua tài khoản đăng nhập để khi quản lý gmail

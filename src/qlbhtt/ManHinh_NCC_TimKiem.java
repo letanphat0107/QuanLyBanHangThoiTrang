@@ -358,6 +358,7 @@ public class ManHinh_NCC_TimKiem extends javax.swing.JPanel {
      * Load dữ liệu vào bảng
      */
     public void docDuLieuNhaCungCap() {
+        xoaDongBang();
         modelNhaCungCap = (DefaultTableModel) tbl_NhaCungCap.getModel();
         for(NhaCungCap ncc: daoNhaCungCap.getAllNhaCungCap()) {
             Object[] object = new Object[5];

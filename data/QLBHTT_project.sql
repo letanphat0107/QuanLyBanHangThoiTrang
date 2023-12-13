@@ -270,6 +270,8 @@ insert into HoaDon values ('HD0007','KH0007','NV001','2023-11-03');
 insert into HoaDon values ('HD0008','KH0008','NV003','2023-11-03');
 insert into HoaDon values ('HD0009','KH0009','NV001','2023-11-04');
 insert into HoaDon values ('HD0010','KH0010','NV002','2023-11-04');
+insert into HoaDon values ('HD0011','KH0010','NV002','2022-09-04');
+
 
 go
 
@@ -307,6 +309,9 @@ insert into CTHD values ('HD0009','SP0007',1);
 insert into CTHD values ('HD0010','SP0004',2);
 insert into CTHD values ('HD0010','SP0006',1);
 
+
+insert into CTHD values ('HD0011','SP0004',2);
+insert into CTHD values ('HD0011','SP0006',1);
 go
 
 
@@ -456,7 +461,7 @@ select SUM(ct.soLuong*sp.giaBan) as thanhTien from HoaDon hd JOIN CTHD ct ON hd.
                     	join MauSac ms on ms.maMauSac=sp.maMauSac
                     	join ChatLieu cl on cl.maChatLieu=sp.maChatLieu
                     	join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap
-						where MONTH(hd.ngayLap) like '10'
+						where MONTH(hd.ngayLap) like '10' 
 	
 
 select sp.maSP, sp.tenSP, SUM(ct.soLuong*sp.giaBan) as thanhTien from HoaDon hd JOIN CTHD ct ON hd.maHD = ct.maHD
@@ -466,5 +471,5 @@ select sp.maSP, sp.tenSP, SUM(ct.soLuong*sp.giaBan) as thanhTien from HoaDon hd 
                     	join MauSac ms on ms.maMauSac=sp.maMauSac
                     	join ChatLieu cl on cl.maChatLieu=sp.maChatLieu
                     	join NhaCungCap ncc on ncc.maNCC=sp.maNhaCungCap
-						where MONTH(hd.ngayLap) like '%10%'
+						where MONTH(hd.ngayLap) like '%10%' and YEAR(hd.ngayLap) like '%%'
 						group by sp.maSP, sp.tenSP

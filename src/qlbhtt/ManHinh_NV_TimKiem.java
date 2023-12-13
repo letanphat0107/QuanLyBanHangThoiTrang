@@ -314,7 +314,6 @@ public class ManHinh_NV_TimKiem extends javax.swing.JPanel {
         rad_TrangThai.setBackground(new java.awt.Color(199, 210, 213));
         rad_TrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rad_TrangThai.setText("Đang làm");
-        rad_TrangThai.setEnabled(false);
 
         javax.swing.GroupLayout pnl_ThongTinLayout = new javax.swing.GroupLayout(pnl_ThongTin);
         pnl_ThongTin.setLayout(pnl_ThongTinLayout);

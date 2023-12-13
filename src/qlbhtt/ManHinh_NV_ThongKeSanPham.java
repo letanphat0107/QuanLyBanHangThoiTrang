@@ -1296,7 +1296,6 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_chk_TatCaItemStateChanged
 
     private void rad_HetHangTrongKhoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rad_HetHangTrongKhoItemStateChanged
-        khoiTaoNgayHienTai();
 
         if (rad_HetHangTrongKho.isSelected()) {
             rad_HangMoiNhap.setSelected(false);
@@ -1309,11 +1308,11 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         activeBanChay = false;
         activeBanCham = false;
         activeNgay = false;
+        khoiTaoNgayHienTai();
 
     }//GEN-LAST:event_rad_HetHangTrongKhoItemStateChanged
 
     private void rad_HangMoiNhapItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rad_HangMoiNhapItemStateChanged
-        khoiTaoNgayHienTai();
         cmb_KichThuoc.setSelectedItem(0);
         cmb_MauSac.setSelectedItem(0);
         cmb_PhanLoai.setSelectedItem(0);
@@ -1328,6 +1327,8 @@ public class ManHinh_NV_ThongKeSanPham extends javax.swing.JPanel {
         activeBanChay = false;
         activeBanCham = false;
         activeNgay = false;
+                khoiTaoNgayHienTai();
+
     }//GEN-LAST:event_rad_HangMoiNhapItemStateChanged
 
     private void btn_XuatThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XuatThongKeActionPerformed

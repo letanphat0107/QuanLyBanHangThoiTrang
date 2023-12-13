@@ -73,7 +73,7 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         }
         return maHoa.toString();
     }
-  
+
     /**
      * Đọc dữ liệu và load dữ liệu lên table
      */
@@ -469,7 +469,13 @@ public class ManHinh_TaiKhoan_QuanLy extends javax.swing.JPanel {
         int row = tbl_TaiKhoan.getSelectedRow();
         String tenTK = tbl_TaiKhoan.getValueAt(row, 0).toString();
         String giaiMa = daoTaiKhoan.getMatKhau(tenTK);
-        txt_MatKhau.setText(maHoaMatKhau(giaiMa));
+        if (btn_DoiMatKhau.getText().equalsIgnoreCase("Hủy")) {
+            btn_DoiMatKhau.setText("Đổi mật khẩu");
+            txt_MatKhau.setText(maHoaMatKhau(giaiMa));
+            btn_XacNhan.setBackground(UIManager.getColor("Menu.background"));
+            btn_XacNhan.setForeground(UIManager.getColor("Menu.foreground"));
+            btn_XacNhan.setEnabled(false);
+        }
     }//GEN-LAST:event_btn_XacNhanActionPerformed
 
 
